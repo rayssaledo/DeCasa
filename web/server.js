@@ -2,8 +2,15 @@ var express = require("express");
 var app = express();
 var mongo = require("mongodb");
 var bodyParser = require("body-parser");
- 
- 
+var cons = require('consolidate');
+var path = require('path')
+
+
+app.engine('html', cons.swig);
+app.set('view engine','html');
+app.set('views',__dirname+'/views'); 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended:true
@@ -36,9 +43,8 @@ new mongo.Db("decasa", new mongo.Server(process.env.OPENSHIFT_MONGODB_DB_HOST ||
         });*/
     }
 });
- 
-app.get("/", function(req, res) {
-    res.send("Hello world with status: " + status);
-});
+
+app.get('/',function(req,res){
+    res.render('index')});
  
 app.listen(process.env.OPENSHIFT_NODEJS_PORT || 8080, process.env.OPENSHIFT_NODEJS_IP || "localhost");
