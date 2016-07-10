@@ -136,81 +136,81 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sentMessage" id="registerForm" novalidate>
+                    <form name="sendRegister" id="registerForm" novalidate method="post" action="/addProfessional">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3>Dados do serviço</h3>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Nome *" id="business-name" required data-validation-required-message="Por favor insira o nome.">
+                                    <input name="businessName"type="text" class="form-control" placeholder="Nome *" id="businessName" required data-validation-required-message="Por favor insira o nome.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Telefone *" id="phone" required data-validation-required-message="Por favor insira seu número de telefone.">
+                                    <input name="phone" type="tel" class="form-control" placeholder="Telefone *" id="phone" required data-validation-required-message="Por favor insira seu número de telefone.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="CNPJ/CPF *" id="cnpj" required data-validation-required-message="Por favor insira o CNPJ/CPF.">
+                                    <input name="cpf" type="text" class="form-control" placeholder="CNPJ/CPF *" id="cpf" required data-validation-required-message="Por favor insira o CNPJ/CPF.">
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <div class="form-group">
+                               <!-- <div class="form-group">
                                     <label for="service">Selecione um serviço:</label>
                                     <select class="form-control" id="service">
                                         <option>Encanador</option>
                                         <option>Ajustador</option>
                                         <option>Eletricista</option>
                                     </select>    
-                                </div>
+                                </div>-->
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Site *" id="site" required data-validation-required-message="Por favor insira o site.">
+                                    <input name="site" type="text" class="form-control" placeholder="Site *" id="site" required data-validation-required-message="Por favor insira o site.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Rede social *" id="social-network" required data-validation-required-message="Por favor insira a rede social.">
+                                    <input name="socialNetwork" type="text" class="form-control" placeholder="Rede social *" id="socialNetwork" required data-validation-required-message="Por favor insira a rede social.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="picture">Selecione uma foto do serviço:</label>
-                                    <input type="file" class="form-control" id="picture">
+                                    <input name="pictury" type="file" class="form-control" id="pictury">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h3>Dados do profissional</h3>
-                                <div class="form-group">
+                               <!-- <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Nome *" id="responsible" required data-validation-required-message="Por favor insira seu nome.">
                                     <p class="help-block text-danger"></p>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="E-mail *" id="email" required data-validation-required-message="Por favor insira seu endereço de e-mail.">
+                                    <input name="email" type="email" class="form-control" placeholder="E-mail *" id="email" required data-validation-required-message="Por favor insira seu endereço de e-mail.">
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <div class="form-group">
+                               <!-- <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Bairro *" id="neighborhood" required data-validation-required-message="Por favor insira seu bairro.">
                                     <p class="help-block text-danger"></p>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Rua *" id="street" required data-validation-required-message="Por favor insira sua rua.">
+                                    <input name="address" type="text" class="form-control" placeholder="Rua *" id="address" required data-validation-required-message="Por favor insira sua rua.">
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <input type="text" class="form-control" placeholder="Nº *" id="number" required data-validation-required-message="Por favor insira o número.">
                                     <p class="help-block text-danger"></p>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="col-md-6">
                                 <h3>Dados de acesso</h3>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Nome de usuário *" id="username" required data-validation-required-message="Por favor insira um nome de usuário.">
+                                    <input name="username" type="text" class="form-control" placeholder="Nome de usuário *" id="username" required data-validation-required-message="Por favor insira um nome de usuário.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Senha *" id="password" required data-validation-required-message="Por favor insira sua senha.">
+                                    <input name="password" type="password" class="form-control" placeholder="Senha *" id="password" required data-validation-required-message="Por favor insira sua senha.">
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <input type="password" class="form-control" placeholder="Confirme a senha *" id="conf-password" required data-validation-required-message="Por favor confirme sua senha.">
                                     <p class="help-block text-danger"></p>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
