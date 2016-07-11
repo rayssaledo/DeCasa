@@ -130,18 +130,22 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Cadastre seu serviço</h2>
                     <h3 class="section-subheading text-muted">Aumente o seu faturamento já!</h3>
-                    <h3 class="section-subheading">Preencha atentamente todos os dados, eles são obrigatórios
+                    <h3 class="section-subheading">Preencha atentamente todos os dados marcados com um *. Eles são obrigatórios
                     e essenciais para nosso primeiro contato.</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sendRegister" id="registerForm" novalidate method="post" action="/addProfessional">
+                    <form name="sendRegister" id="registerForm" novalidate method="post" action="/add-profissional" ajax="true">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3>Dados do serviço</h3>
                                 <div class="form-group">
-                                    <input name="businessName"type="text" class="form-control" placeholder="Nome *" id="businessName" required data-validation-required-message="Por favor insira o nome.">
+                                    <input name="businessName"  type="text" class="form-control" placeholder="Nome do seu negócio *" id="businessName" required>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+								<div class="form-group">
+                                    <input name="personalName"  type="text" class="form-control" placeholder="Seu nome *" id="personalName" required>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
@@ -161,11 +165,11 @@
                                     </select>    
                                 </div>-->
                                 <div class="form-group">
-                                    <input name="site" type="text" class="form-control" placeholder="Site *" id="site" required data-validation-required-message="Por favor insira o site.">
+                                    <input name="site" type="text" class="form-control" placeholder="Site" id="site" required data-validation-required-message="Por favor insira o site.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="socialNetwork" type="text" class="form-control" placeholder="Rede social *" id="socialNetwork" required data-validation-required-message="Por favor insira a rede social.">
+                                    <input name="socialNetwork" type="text" class="form-control" placeholder="Rede social" id="socialNetwork" required data-validation-required-message="Por favor insira a rede social.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
@@ -200,22 +204,22 @@
                             <div class="col-md-6">
                                 <h3>Dados de acesso</h3>
                                 <div class="form-group">
-                                    <input name="username" type="text" class="form-control" placeholder="Nome de usuário *" id="username" required data-validation-required-message="Por favor insira um nome de usuário.">
+                                    <input name="username" type="text" class="form-control" placeholder="Nome de usuário *" id="username" required="required" data-validation-required-message="Por favor insira um nome de usuário.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
                                     <input name="password" type="password" class="form-control" placeholder="Senha *" id="password" required data-validation-required-message="Por favor insira sua senha.">
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <!--<div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirme a senha *" id="conf-password" required data-validation-required-message="Por favor confirme sua senha.">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Confirme a senha *" id="passwordRepeat" required data-validation-required-message="Por favor confirme sua senha.">
                                     <p class="help-block text-danger"></p>
-                                </div>-->
+                                </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Enviar</button>
+                                <input id="btnSubmit" type="submit" class="btn btn-xl"  value="Enviar" />
                             </div>
                         </div>
                     </form>
@@ -700,6 +704,8 @@
 
     <!-- Theme JavaScript -->
     <script src="js/agency.min.js"></script>
+	
+	<script src="js/submit.js"></script>
 
 </body>
 
