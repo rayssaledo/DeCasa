@@ -136,40 +136,40 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sendRegister" id="registerForm" validate method="post" action="/add-profissional" ajax="true">
+                    <form name="sendRegister" id="registerForm" validate ajax="true">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3>Dados do serviço</h3>
                                 <div class="form-group">
-                                    <input name="businessName"  type="text" class="form-control" placeholder="Nome do seu negócio " id="businessName" required>
+                                    <input name="businessName"  type="text" class="form-control" placeholder="Nome do seu negócio " id="businessName" required/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="phone" type="tel" class="form-control" placeholder="Telefone " id="phone" required data-validation-required-message="Por favor insira seu número de telefone.">
+                                    <input name="phone" type="tel" class="form-control" maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$"  placeholder="Telefone Ex: (XX) XXXXX-XXXX "  mask="(00) 0000-0000" id="phone" required data-validation-required-message="Por favor insira seu número de telefone."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="cnpj" type="text" class="form-control" placeholder="CNPJ " id="cnpj">
+                                    <input name="cnpj" type="text" class="form-control" placeholder="CNPJ " id="cnpj"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="site" type="text" class="form-control" placeholder="Site" id="site">
+                                    <input name="site" type="text" class="form-control" placeholder="Site" id="site"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="socialNetwork" type="text" class="form-control" placeholder="Rede social" id="socialNetwork">
+                                    <input name="socialNetwork" type="text" class="form-control" placeholder="Rede social" id="socialNetwork"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="picture">Selecione uma foto do serviço:</label>
-                                    <input name="pictury" type="file" class="form-control" id="pictury">
+                                    <input name="pictury" type="file" class="form-control" id="pictury"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <label for="service">Escolha seus serviços: *</label>
-                                <div class="form-group">
-                                    <input name="plumber"  type="checkbox"  id="ServicePlumber"/>Encanador <br>
-                                    <input name="fitter"  type="checkbox"  id="ServiceFitter"/>Montador <br>
-                                    <input name="electrician"  type="checkbox"  id="ServiceElectrician"/>Eletricista
+                                <div class="checkbox-group options" id="check-services">
+                                    <input name="servico[]"  type="checkbox" value="Encanador" id="ServicePlumber"/> Encanador <br>
+                                    <input name="servico[]"  type="checkbox" value="Montador" id="ServiceFitter"/> Montador <br>
+                                    <input name="servico[]"  type="checkbox" value="Eletricista" id="ServiceElectrician"/> Eletricista
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -179,42 +179,42 @@
                                     <p class="help-block text-danger"></p>
                                 </div>-->
                                 <div class="form-group">
-                                    <input name="personalName"  type="text" class="form-control" placeholder="Seu nome " id="personalName" required>
+                                    <input name="personalName"  type="text" class="form-control" placeholder="Seu nome " id="personalName" required/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="cpf" type="text" class="form-control" placeholder="CPF " id="cpf" required>
+                                    <input name="cpf" type="text" class="form-control" placeholder="CPF " id="cpf" required/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control" placeholder="E-mail " id="email" required data-validation-required-message="Por favor insira seu endereço de e-mail.">
+                                    <input name="email" type="email" class="form-control"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="E-mail " id="email" required data-validation-required-message="Por favor insira seu endereço de e-mail."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Bairro " id="neighborhood" required data-validation-required-message="Por favor insira seu bairro.">
+                                    <input type="text" class="form-control" placeholder="Bairro " id="neighborhood" required data-validation-required-message="Por favor insira seu bairro."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="address" type="text" class="form-control" placeholder="Rua " id="address" required data-validation-required-message="Por favor insira sua rua.">
+                                    <input name="address" type="text" class="form-control" placeholder="Rua " id="address" required data-validation-required-message="Por favor insira sua rua."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Nº " id="number" required data-validation-required-message="Por favor insira o número.">
+                                    <input type="text" class="form-control" placeholder="Nº " id="number" required data-validation-required-message="Por favor insira o número."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <h3>Dados de acesso</h3>
                                 <div class="form-group">
-                                    <input name="username" type="text" class="form-control" placeholder="Nome de usuário " id="username" required data-validation-required-message="Por favor insira um nome de usuário.">
+                                    <input name="username" type="text" class="form-control" placeholder="Nome de usuário " id="username" required data-validation-required-message="Por favor insira um nome de usuário."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input name="password" type="password" class="form-control" placeholder="Senha " id="password" required data-validation-required-message="Por favor insira sua senha.">
+                                    <input name="password" type="password" class="form-control" placeholder="Senha " id="password" required data-validation-required-message="Por favor insira sua senha."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirme a senha " id="passwordRepeat" required data-validation-required-message="Por favor confirme sua senha.">
+                                    <input type="password" class="form-control" placeholder="Confirme a senha " id="passwordRepeat" required data-validation-required-message="Por favor confirme sua senha."/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -707,7 +707,7 @@
     <!-- Theme JavaScript -->
     <script src="js/agency.min.js"></script>
 	
-	<!--<script src="js/submit.js"></script>-->
+	<script src="js/submit.js"></script>
 
 </body>
 
