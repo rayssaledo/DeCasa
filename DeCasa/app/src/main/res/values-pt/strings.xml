@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_register">Cadastre-se</string>
+    <string name="text_welcome">Seja bem-vindo.\nEscolha aqui o serviço que deseja.</string>
+</resources>
