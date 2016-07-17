@@ -8,101 +8,147 @@
     android:fitsSystemWindows="true"
     tools:context="projeto1.ufcg.edu.decasa.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="16dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    </android.support.design.widget.AppBarLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/text_welcome"
-            android:layout_gravity="center_horizontal"
-            android:textSize="32sp"
-            android:paddingTop="?attr/actionBarSize"
-            android:layout_margin="20dp"
-            android:textAlignment="center" />
-
-       <!-- <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view1"
+            <TextView
+                android:id="@+id/welcome"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                card_view:cardCornerRadius="2dp"
-                card_view:contentPadding="10dp">
+                android:layout_height="wrap_content"
+                android:text="@string/text_welcome"
+                android:textSize="30sp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center" />
 
-                <ImageView
+           <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/iv_1"
-                    android:src="@drawable/btn_n_1"/>
-            </android.support.v7.widget.CardView>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    card_view:cardBackgroundColor="@android:color/transparent"
+                    card_view:cardElevation="0dp"
+                    card_view:cardCornerRadius="2dp"
+                    card_view:contentPadding="10dp">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view2"
-                android:layout_weight="0.3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                card_view:cardCornerRadius="2dp"
-                card_view:contentPadding="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                <ImageView
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/iv_1"
+                            android:src="@mipmap/light_blue_electrician_button"
+                            android:contentDescription="@string/desc_electrician"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAlignment="center"
+                            android:text="@string/text_electrician"
+                            android:textColor="@color/colorPrimaryDark"/>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+               <android.support.v7.widget.CardView
+                    android:id="@+id/card_view2"
+                    android:layout_weight="0.3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/iv_2"
-                    android:src="@drawable/btn_n_2"/>
+                    android:layout_height="wrap_content"
+                    card_view:cardBackgroundColor="@android:color/transparent"
+                    card_view:cardElevation="0dp"
+                    card_view:cardCornerRadius="2dp"
+                    card_view:contentPadding="10dp">
 
-            </android.support.v7.widget.CardView>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_view3"
-                android:layout_weight="0.3"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                card_view:cardCornerRadius="2dp"
-                card_view:contentPadding="10dp">
+                       <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/iv_2"
+                            android:src="@mipmap/light_blue_plumber_button"
+                            android:contentDescription="@string/desc_electrician"/>
 
-                <ImageView
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:textAlignment="center"
+                           android:text="@string/text_plumber"
+                           android:textColor="@color/colorPrimaryDark"/>
+
+                   </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view3"
+                    android:layout_weight="0.3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/iv_compatibility"
-                    android:src="@drawable/btn_n_3"/>
+                    android:layout_height="wrap_content"
+                    card_view:cardBackgroundColor="@android:color/transparent"
+                    card_view:cardElevation="0dp"
+                    card_view:cardCornerRadius="2dp"
+                    card_view:contentPadding="10dp">
 
-            </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-        </LinearLayout> -->
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/iv_compatibility"
+                            android:src="@mipmap/light_blue_fitter_button"
+                            android:contentDescription="@string/desc_fitter"/>
 
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/btn_register"
-            android:textAllCaps="false"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
-    </LinearLayout>
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:textAlignment="center"
+                           android:text="@string/text_fitter"
+                           android:textColor="@color/colorPrimaryDark"/>
 
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>-->
+
+            </LinearLayout>
+        </LinearLayout>
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_register"
+                android:textAllCaps="false"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

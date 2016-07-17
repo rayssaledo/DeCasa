@@ -3,4 +3,10 @@
     <string name="action_settings">Settings</string>
     <string name="btn_register">Register</string>
     <string name="text_welcome">Welcome.\nChoose here the service you want.</string>
+    <string name="text_electrician">Electrician</string>
+    <string name="text_plumber">Plumber</string>
+    <string name="text_fitter">Fitter</string>
+    <string name="desc_electrician">Icon electrician</string>
+    <string name="desc_plumber">Icon plumber</string>
+    <string name="desc_fitter">Icon fitter</string>
 </resources>

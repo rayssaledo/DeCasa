@@ -2,4 +2,10 @@
 <resources>
     <string name="btn_register">Cadastre-se</string>
     <string name="text_welcome">Seja bem-vindo.\nEscolha aqui o serviço que deseja.</string>
+    <string name="text_electrician">Eletricista</string>
+    <string name="text_plumber">Encanador</string>
+    <string name="text_fitter">Montador</string>
+    <string name="desc_electrician">ícone eletricista</string>
+    <string name="desc_plumber">ícone encanador</string>
+    <string name="desc_fitter">ícone montador</string>
 </resources>
