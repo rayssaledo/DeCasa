@@ -52,12 +52,15 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <ImageView
+                        <ImageButton
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/iv_1"
+                            android:id="@+id/ib_electrician"
                             android:src="@mipmap/light_blue_electrician_button"
+                            android:background="@null"
+
                             android:contentDescription="@string/desc_electrician"/>
+
 
                         <TextView
                             android:layout_width="match_parent"
@@ -84,12 +87,13 @@
                        android:layout_height="match_parent"
                        android:orientation="vertical">
 
-                       <ImageView
+                       <ImageButton
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/iv_2"
+                            android:id="@+id/ib_plumber"
                             android:src="@mipmap/light_blue_plumber_button"
-                            android:contentDescription="@string/desc_electrician"/>
+                           android:background="@null"
+                            android:contentDescription="@string/desc_plumber"/>
 
                        <TextView
                            android:layout_width="match_parent"
@@ -117,11 +121,12 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <ImageView
+                        <ImageButton
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/iv_compatibility"
+                            android:id="@+id/ib_fitter"
                             android:src="@mipmap/light_blue_fitter_button"
+                            android:background="@null"
                             android:contentDescription="@string/desc_fitter"/>
 
                        <TextView
@@ -133,7 +138,7 @@
 
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>-->
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
         </LinearLayout>

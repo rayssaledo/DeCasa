@@ -9,4 +9,5 @@
     <string name="desc_electrician">Icon electrician</string>
     <string name="desc_plumber">Icon plumber</string>
     <string name="desc_fitter">Icon fitter</string>
+    <string name="title_activity_professionals">ProfessionalsActivity</string>
 </resources>
