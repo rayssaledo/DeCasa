@@ -9,5 +9,7 @@
     <string name="desc_electrician">Icon electrician</string>
     <string name="desc_plumber">Icon plumber</string>
     <string name="desc_fitter">Icon fitter</string>
-    <string name="title_activity_professionals">ProfessionalsActivity</string>
+    <string name="title_activity_professionals">Professionals</string>
+    <string name="text_location_nearest">Find nearest</string>
+    <string name="btn_more_information">More information</string>
 </resources>

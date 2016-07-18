@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="projeto1.ufcg.edu.decasa.MainActivity">
+    tools:context=".views.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

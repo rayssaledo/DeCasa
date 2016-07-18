@@ -1,14 +1,15 @@
-package projeto1.ufcg.edu.decasa;
+package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+
+import projeto1.ufcg.edu.decasa.R;
 
 public class MainActivity extends AppCompatActivity {
 
