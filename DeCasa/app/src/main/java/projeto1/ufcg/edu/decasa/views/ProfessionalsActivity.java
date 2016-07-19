@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     private ProfessionalsAdapter professionalsAdapter;
     private ProfessionalController professionalController;
     private String service;
+    public static View mLoading;
 
     private Handler handler = new Handler() {
 
@@ -39,6 +41,8 @@ public class ProfessionalsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professionals);
+
+        //mLoading = findViewById(R.id.rl_loading);
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
         Intent it = getIntent();

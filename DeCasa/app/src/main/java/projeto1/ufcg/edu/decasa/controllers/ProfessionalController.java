@@ -16,9 +16,11 @@ import java.util.List;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
+import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
 
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 
 public class ProfessionalController {
 
@@ -35,8 +37,9 @@ public class ProfessionalController {
 
     public List<Professional> getProfessionalsByService(String service, final Handler handler) {
 
+        //ProfessionalsActivity.mLoading.setVisibility(View.VISIBLE);
         final List<Professional> professionals = new ArrayList<>();
-        String urlGetByService = "http://decasa-decasa.rhcloud.com/get-by-service?service=" + service;
+        String urlGetByService = url + "get-by-service?service=" + service;
         mHttp.get(urlGetByService, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
@@ -81,7 +84,7 @@ public class ProfessionalController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    // mLoading.setVisibility(View.GONE);
+                                     //ProfessionalsActivity.mLoading.setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -97,6 +100,7 @@ public class ProfessionalController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                //ProfessionalsActivity.mLoading.setVisibility(View.GONE);
                             }
                         })
                         .create().show();
@@ -105,6 +109,5 @@ public class ProfessionalController {
 
       return professionals;
     }
-
 
 }
