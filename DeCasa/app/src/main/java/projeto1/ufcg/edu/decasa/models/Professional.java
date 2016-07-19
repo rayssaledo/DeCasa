@@ -1,17 +1,18 @@
 package projeto1.ufcg.edu.decasa.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Professional implements Serializable {
 
     private String professionalName;
-    private String service;
+    private List<String> service;
 
-    public Professional(String professionalName, String service) throws Exception {
+    public Professional(String professionalName, List<String> service) throws Exception {
         if(professionalName == null || professionalName.equals("")){
             throw new Exception("Professional name is invalid.");
         }
-        if(service == null || service.equals("")){
+        if(service == null){
             throw new Exception("Service is invalid.");
         }
 
@@ -21,7 +22,7 @@ public class Professional implements Serializable {
 
     public String getProfessionalName() { return professionalName; }
 
-    public String getService() { return service; }
+    public List<String> getService() { return service; }
 
 
     public void setProfessionalName(String professionalName) throws Exception {
@@ -31,8 +32,8 @@ public class Professional implements Serializable {
         this.professionalName = professionalName;
     }
 
-    public void setService(String service) throws Exception {
-        if(service == null || service.equals("")){
+    public void setService(List<String> service) throws Exception {
+        if(service == null){
             throw new Exception("Service is invalid.");
         }
         this.service = service;

@@ -2,6 +2,7 @@ package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.DateFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,19 +18,24 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton ib_plumber;
     private ImageButton ib_fitter;
 
+    public static Boolean mFitter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         ib_electrician = (ImageButton) findViewById(R.id.ib_electrician);
         ib_plumber = (ImageButton) findViewById(R.id.ib_plumber);
         ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
 
+        mFitter = false;
+
         ib_electrician.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //Intent i = new Intent(MainActivity.this, ProfessionalsActivity.class);
+                //i.putExtra("SERVICE","Eletricista");
                 clickIbElectrician();
             }
         });
@@ -37,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         ib_plumber.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //Intent i = new Intent(MainActivity.this, ProfessionalsActivity.class);
+                //i.putExtra("SERVICE","Encanador");
                 clickIbPlumber();
             }
         });
@@ -44,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         ib_fitter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                mFitter = true;
+                //Intent i = new Intent(MainActivity.this, ProfessionalsActivity.class);
+                //i.putExtra("SERVICE","Montador");
                 clickIbFitter();
             }
         });
