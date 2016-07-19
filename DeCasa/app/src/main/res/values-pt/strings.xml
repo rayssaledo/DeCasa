@@ -11,4 +11,7 @@
     <string name="title_activity_professionals">Profissionais</string>
     <string name="text_location_nearest">Encontrar mais próximos</string>
     <string name="btn_more_information">Ver mais</string>
+    <string name="title_electricians">Eletricistas</string>
+    <string name="title_plumbers">Encanadores</string>
+    <string name="title_fitters">Montadores</string>
 </resources>

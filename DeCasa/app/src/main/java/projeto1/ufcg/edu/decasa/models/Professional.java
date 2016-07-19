@@ -8,6 +8,9 @@ public class Professional implements Serializable {
     private String professionalName;
     private List<String> service;
 
+    public Professional(String name){
+        this.professionalName = name;
+    }
     public Professional(String professionalName, List<String> service) throws Exception {
         if(professionalName == null || professionalName.equals("")){
             throw new Exception("Professional name is invalid.");

@@ -12,4 +12,7 @@
     <string name="title_activity_professionals">Professionals</string>
     <string name="text_location_nearest">Find nearest</string>
     <string name="btn_more_information">More information</string>
+    <string name="title_electricians">Electricians</string>
+    <string name="title_plumbers">Plumbers</string>
+    <string name="title_fitters">Fitters</string>
 </resources>

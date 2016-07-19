@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton ib_electrician;
     private ImageButton ib_plumber;
     private ImageButton ib_fitter;
+    private Intent it;
+    private String service;
 
     public static Boolean mFitter;
 
@@ -28,57 +30,34 @@ public class MainActivity extends AppCompatActivity {
         ib_electrician = (ImageButton) findViewById(R.id.ib_electrician);
         ib_plumber = (ImageButton) findViewById(R.id.ib_plumber);
         ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
-
-        mFitter = false;
+        it = new Intent(MainActivity.this, ProfessionalsActivity.class);
 
         ib_electrician.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //Intent i = new Intent(MainActivity.this, ProfessionalsActivity.class);
-                //i.putExtra("SERVICE","Eletricista");
-                clickIbElectrician();
+                service = getApplication().getString(R.string.title_electricians);
+                it.putExtra("SERVICE",service);
+                startActivity(it);
             }
         });
 
         ib_plumber.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //Intent i = new Intent(MainActivity.this, ProfessionalsActivity.class);
-                //i.putExtra("SERVICE","Encanador");
-                clickIbPlumber();
+                service = getApplication().getString(R.string.title_plumbers);
+                it.putExtra("SERVICE",service);
+                startActivity(it);
             }
         });
 
         ib_fitter.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                mFitter = true;
-                //Intent i = new Intent(MainActivity.this, ProfessionalsActivity.class);
-                //i.putExtra("SERVICE","Montador");
-                clickIbFitter();
+                service = getApplication().getString(R.string.title_fitters);
+                it.putExtra("SERVICE",service);
+                startActivity(it);
             }
         });
-    }
-
-    public void clickIbElectrician() {
-        if (ib_electrician.isPressed()) {
-            ib_electrician.setImageResource(R.mipmap.dark_blue_electrician_button);
-            setView(MainActivity.this, ProfessionalsActivity.class);
-        }
-    }
-
-    public void clickIbPlumber() {
-        if (ib_plumber.isPressed()) {
-            ib_plumber.setImageResource(R.mipmap.dark_blue_plumber_button);
-            setView(MainActivity.this, ProfessionalsActivity.class);
-        }
-    }
-
-    public void clickIbFitter() {
-        if (ib_fitter.isPressed()) {
-            ib_fitter.setImageResource(R.mipmap.dark_blue_fitter_button);
-            setView(MainActivity.this, ProfessionalsActivity.class);
-        }
     }
 
     @Override
