@@ -1,5 +1,6 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -53,9 +55,18 @@ public class ProfessionalsActivity extends AppCompatActivity {
 
         setList(service);
 
+        listViewProfessionals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                setView(ProfessionalsActivity.this, ProfileProfessionalActivity.class);
+
+            }
+        });
+
     }
 
-    void setList(String service){
+    public void setList(String service){
         listProfessionals = new ArrayList<>();
         if (service.equals("Eletricistas")){
             listProfessionals = professionalController.getProfessionalsByService("Eletricista", handler);
@@ -68,5 +79,10 @@ public class ProfessionalsActivity extends AppCompatActivity {
         listViewProfessionals.setAdapter(professionalsAdapter);
     }
 
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
+    }
 
 }
