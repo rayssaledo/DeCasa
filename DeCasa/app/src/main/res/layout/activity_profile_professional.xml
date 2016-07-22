@@ -4,123 +4,250 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="projeto1.ufcg.edu.decasa.views.ProfileProfessionalActivity">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@android:color/transparent"
-        card_view:cardElevation="0dp"
-        card_view:cardCornerRadius="2dp"
-        card_view:contentPadding="10dp">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llPlayersName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_professional"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/default_avatar"
-                android:contentDescription=""/>
-
-            <TextView
-                android:id="@+id/tv_professional_name"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_head"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome do profissional"
-                android:textSize="16sp"
-                android:layout_toEndOf="@+id/iv_professional" />
+                card_view:cardElevation="0dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
 
-            <ImageButton
-                android:id="@+id/ib_favorite"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:contentDescription=""
-                android:layout_alignBottom="@+id/iv_professional"
-                android:layout_alignParentEnd="true" />
-        </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical">
 
-    </android.support.v7.widget.CardView>
+                    <ImageView
+                        android:id="@+id/iv_professional"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/default_avatar"
+                        android:contentDescription="@string/desc_professional"/>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_weight="0.3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@android:color/transparent"
-        card_view:cardElevation="0dp"
-        card_view:cardCornerRadius="2dp"
-        card_view:contentPadding="10dp">
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tv_professional_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/iv_professional"
+                        android:hint="@string/hint_professional_name"
+                        android:textSize="24sp"
+                        android:maxLength="100" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/ib_favorite"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_alignBottom="@+id/iv_professional"
+                        android:layout_alignEnd="@+id/tv_professional_name"
+                        android:src="@mipmap/ic_favorite_border_black_24dp"
+                        android:background="@color/white"
+                        android:contentDescription="@string/desc_favorite" />
+                </RelativeLayout>
 
-        <RatingBar
-            android:id="@+id/rb_evaluation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/StarRatingBar"
-            android:isIndicator="true"
-            android:layout_alignBottom="@+id/iv_professional"
-            android:layout_alignStart="@+id/tv_professional_name" />
+            </android.support.v7.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Atendimento"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:layout_alignBottom="@+id/ib_favorite"
-            android:layout_toEndOf="@+id/iv_professional"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_evaluation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                card_view:cardElevation="0dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_alignParentEnd="true">
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_balao"
+                    <LinearLayout
+                        android:id="@+id/layout_ratingbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-            android:contentDescription=""/>
+                        <RatingBar
+                            android:id="@+id/rb_evaluation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/StarRatingBar"
+                            android:isIndicator="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2 Avaliações"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:layout_alignBottom="@+id/ib_favorite"
-            android:layout_toEndOf="@+id/iv_professional"
-            android:layout_gravity="center_horizontal" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_evaluation_type"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
 
-    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_toEndOf="@+id/layout_ratingbar"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true">
 
-</RelativeLayout>
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_person_black_24dp"
+                            android:background="@color/white"
+                            android:contentDescription="@string/desc_evaluators"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:hint="@string/text_number_evaluations"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:layout_gravity="center_horizontal" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                card_view:cardElevation="0dp"
+                card_view:cardCornerRadius="2dp"
+                card_view:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/text_services"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_services"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/hint_services"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/text_address_professional"
+                        android:layout_marginTop="20dp"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_address_professional"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/hint_address_professional"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/text_phone_professional"
+                        android:textSize="16sp"/>
 
 
-    </android.support.v7.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/tv_phone_professional"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="30dp"
+                            android:gravity="center"
+                            android:text="@string/hint_phone_professional"/>
 
+                        <ImageButton
+                            android:id="@+id/ib_phone_professional"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@mipmap/ic_favorite_border_black_24dp"
+                            android:contentDescription="@string/desc_phone_professional"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/text_social_network"/>
+
+                    <TextView
+                        android:id="@+id/tv_social_network"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        android:hint="@string/hint_social_network" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/text_website"/>
+
+                    <TextView
+                        android:id="@+id/tv_website"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        android:hint="@string/hint_website" />
+
+                </LinearLayout>
+                
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
