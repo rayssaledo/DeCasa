@@ -15,43 +15,32 @@
         android:src="@drawable/default_avatar"/>
 
     <TextView
-        android:id="@+id/tv_professional_name"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nome do profissional"
+        android:hint="@string/hint_professional_name"
         android:textSize="16sp"
         android:layout_toEndOf="@+id/iv_professional"
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:id="@+id/tv_service"
+        android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:hint="@string/hint_address_professional"
         android:textSize="14sp"
-        android:layout_below="@+id/tv_professional_name"
+        android:layout_below="@+id/tv_name"
         android:layout_toEndOf="@+id/iv_professional"
         android:layout_marginTop="2dp"/>
-
-    <Button
-        android:id="@+id/btn_more_information"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_more_information"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
-        android:layout_below="@+id/tv_service"/>
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rb_evaluation"
         style="@style/StarRatingBar"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/tv_service"
+        android:layout_below="@+id/tv_address"
         android:layout_alignParentRight="true"
         android:isIndicator="true"/>
 

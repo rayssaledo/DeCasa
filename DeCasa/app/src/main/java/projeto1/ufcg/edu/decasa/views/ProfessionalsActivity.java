@@ -1,19 +1,16 @@
 package projeto1.ufcg.edu.decasa.views;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.adapters.ProfessionalsAdapter;
@@ -59,18 +56,20 @@ public class ProfessionalsActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setView(ProfessionalsActivity.this, ProfileProfessionalActivity.class);
-
+                Professional professional = (Professional) professionalsAdapter.getItem(position);
+                Intent intent = new Intent(ProfessionalsActivity.this,
+                        ProfileProfessionalActivity.class);
+                intent.putExtra("PROFESSIONAL", professional);
+                startActivity(intent);
             }
         });
-
     }
 
     public void setList(String service){
         listProfessionals = new ArrayList<>();
-        if (service.equals("Eletricistas")){
+        if (service.equals(getApplication().getString(R.string.title_electricians))){
             listProfessionals = professionalController.getProfessionalsByService("Eletricista", handler);
-        } else  if (service.equals("Encanadores")){
+        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
             listProfessionals = professionalController.getProfessionalsByService("Encanador", handler);
         } else {
             listProfessionals = professionalController.getProfessionalsByService("Montador", handler);
@@ -78,11 +77,4 @@ public class ProfessionalsActivity extends AppCompatActivity {
         professionalsAdapter = new ProfessionalsAdapter(ProfessionalsActivity.this, listProfessionals);
         listViewProfessionals.setAdapter(professionalsAdapter);
     }
-
-    public void setView(Context context, Class classe){
-        Intent it = new Intent();
-        it.setClass(context, classe);
-        startActivity(it);
-    }
-
 }

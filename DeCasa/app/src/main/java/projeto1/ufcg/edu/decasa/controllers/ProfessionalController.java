@@ -45,28 +45,24 @@ public class ProfessionalController {
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
                     JSONArray jsonArray = response.getJSONArray("result");
-                  Log.d("JSON", jsonArray + "");
-
-                        Log.d("JSON_0", jsonArray.length() + "");
-
-
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonProfessional = jsonArray.getJSONObject(i);
                         String name = jsonProfessional.getString("name");
-                        Log.d("JSON_name", jsonProfessional + "");
-                       /* String cpf = jsonProfessional.getString("cpf");
+                        String cpf = jsonProfessional.getString("cpf");
                         String phone = jsonProfessional.getString("phone");
                         String neighborhood = jsonProfessional.getString("neighborhood");
                         String street = jsonProfessional.getString("street");
                         String number = jsonProfessional.getString("number");
                         String site = jsonProfessional.getString("site");
                         String socialNetwork = jsonProfessional.getString("socialNetwork");
-                        String photo = jsonProfessional.getString("photo");
-                        ArrayList<String> services = (ArrayList) jsonProfessional.get("services");
+                        String pictury = jsonProfessional.getString("pictury");
+                        //ArrayList<String> services = (ArrayList) jsonProfessional.get("services");
                         String email = jsonProfessional.getString("email");
-                        String password = jsonProfessional.getString("password");*/
+                        String password = jsonProfessional.getString("password");
                         try {
-                            Professional professional = new Professional(name);
+                            Professional professional = new Professional(name, cpf, phone,
+                                    neighborhood, street, number, site, socialNetwork, pictury,
+                                    email, password);
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();
