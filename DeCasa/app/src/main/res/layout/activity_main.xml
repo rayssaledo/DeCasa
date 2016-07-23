@@ -56,7 +56,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/ib_electrician"
-                            android:src="@mipmap/light_blue_electrician_button"
+                            android:src="@mipmap/ic_electrician"
                             android:background="@null"
 
                             android:contentDescription="@string/desc_electrician"/>
@@ -91,7 +91,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/ib_plumber"
-                            android:src="@mipmap/light_blue_plumber_button"
+                            android:src="@mipmap/ic_plumber"
                            android:background="@null"
                             android:contentDescription="@string/desc_plumber"/>
 
@@ -125,7 +125,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/ib_fitter"
-                            android:src="@mipmap/light_blue_fitter_button"
+                            android:src="@mipmap/ic_fitter"
                             android:background="@null"
                             android:contentDescription="@string/desc_fitter"/>
 
