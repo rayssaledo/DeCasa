@@ -203,8 +203,9 @@
 
                         <ImageButton
                             android:id="@+id/ib_phone_professional"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
                             android:src="@mipmap/ic_call"
                             android:background="@color/white"
                             android:contentDescription="@string/desc_phone_professional"/>
