@@ -70,5 +70,14 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
         }
+
+        String services = "";
+        for (int i = 0; i < professional.getServices().length ; i++) {
+            services += professional.getServices()[i];
+            if(i != professional.getServices().length - 1){
+                services += ", ";
+            }
+        }
+        tv_services.setText(services);
     }
 }

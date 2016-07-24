@@ -35,7 +35,7 @@ public class ProfessionalController {
         url = "http://decasa-decasa.rhcloud.com/";
     }
 
-    public List<Professional> getProfessionalsByService(String service, final Handler handler) {
+    public List<Professional> getProfessionalsByService(final String service, final Handler handler) {
 
         //ProfessionalsActivity.mLoading.setVisibility(View.VISIBLE);
         final List<Professional> professionals = new ArrayList<>();
@@ -56,13 +56,17 @@ public class ProfessionalController {
                         String site = jsonProfessional.getString("site");
                         String socialNetwork = jsonProfessional.getString("socialNetwork");
                         String pictury = jsonProfessional.getString("pictury");
-                        //ArrayList<String> services = (ArrayList) jsonProfessional.get("services");
                         String email = jsonProfessional.getString("email");
                         String password = jsonProfessional.getString("password");
+                        String services = jsonProfessional.getString("services");
+                        services = services.replace("[", "");
+                        services = services.replace("]", "");
+                        services = services.replaceAll("\"", "");
+                        String[] listServices = services.split(",");
                         try {
                             Professional professional = new Professional(name, cpf, phone,
                                     neighborhood, street, number, site, socialNetwork, pictury,
-                                    email, password);
+                                    email, password, listServices);
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();

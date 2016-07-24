@@ -17,10 +17,11 @@ public class Professional implements Serializable {
     private String pictury;
     private String email;
     private String password;
+    private String[] services;
 
     public Professional(String name,String cpf, String phone, String neighborhood, String street,
                         String number, String site, String socialNetwork, String pictury,
-                        String email, String password)
+                        String email, String password, String[] services)
             throws Exception {
         if(name == null || name.equals("")){
             throw new Exception("Professional name is invalid.");
@@ -60,6 +61,7 @@ public class Professional implements Serializable {
         this.pictury = pictury;
         this.email = email;
         this.password = password;
+        this.services = services;
     }
 
     public String getName() { return name; }
@@ -179,5 +181,13 @@ public class Professional implements Serializable {
             throw new Exception("Password is invalid.");
         }
         this.password = password;
+    }
+
+    public String[] getServices() {
+        return services;
+    }
+
+    public void setServices(String[] services) {
+        this.services = services;
     }
 }
