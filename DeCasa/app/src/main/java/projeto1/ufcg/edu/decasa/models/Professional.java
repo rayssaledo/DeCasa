@@ -1,12 +1,14 @@
 package projeto1.ufcg.edu.decasa.models;
 
 import android.location.Location;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Professional implements Serializable {
+public class Professional implements Parcelable {
 
     private String name;
     private String cpf;
@@ -66,6 +68,34 @@ public class Professional implements Serializable {
         this.password = password;
         this.services = services;
     }
+
+    protected Professional(Parcel in) {
+        name = in.readString();
+        cpf = in.readString();
+        phone = in.readString();
+        neighborhood = in.readString();
+        street = in.readString();
+        number = in.readString();
+        site = in.readString();
+        socialNetwork = in.readString();
+        pictury = in.readString();
+        email = in.readString();
+        password = in.readString();
+        services = in.createStringArray();
+        location = in.readParcelable(Location.class.getClassLoader());
+    }
+
+    public static final Creator<Professional> CREATOR = new Creator<Professional>() {
+        @Override
+        public Professional createFromParcel(Parcel in) {
+            return new Professional(in);
+        }
+
+        @Override
+        public Professional[] newArray(int size) {
+            return new Professional[size];
+        }
+    };
 
     public String getName() { return name; }
 
@@ -200,5 +230,27 @@ public class Professional implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(cpf);
+        parcel.writeString(phone);
+        parcel.writeString(neighborhood);
+        parcel.writeString(street);
+        parcel.writeString(number);
+        parcel.writeString(site);
+        parcel.writeString(socialNetwork);
+        parcel.writeString(pictury);
+        parcel.writeString(email);
+        parcel.writeString(password);
+        parcel.writeStringArray(services);
+        parcel.writeParcelable(location, i);
     }
 }

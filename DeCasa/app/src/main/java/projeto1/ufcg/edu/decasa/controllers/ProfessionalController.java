@@ -36,7 +36,8 @@ public class ProfessionalController {
         url = "http://decasa-decasa.rhcloud.com/";
     }
 
-    public List<Professional> getProfessionalsByService(final String service, final Handler handler) {
+    public List<Professional> getProfessionalsByService(final String service,
+                                                        final Handler handler) {
 
         //ProfessionalsActivity.mLoading.setVisibility(View.VISIBLE);
         final List<Professional> professionals = new ArrayList<>();
@@ -68,7 +69,8 @@ public class ProfessionalController {
                             Professional professional = new Professional(name, cpf, phone,
                                     neighborhood, street, number, site, socialNetwork, pictury,
                                     email, password, listServices);
-                            professional.setLocation(new Location(street+ " "+ neighborhood +" "+ "Campina Grande-PB"));
+                            professional.setLocation(new Location(street + ", " + number +" " + "Campina Grande"));
+                            Log.d("LOCAL", professional.getLocation() + "");
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();

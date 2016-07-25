@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private Intent it;
     private String service;
 
-    public static Boolean mFitter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,6 +20,7 @@ import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.adapters.ProfessionalsAdapter;
 import projeto1.ufcg.edu.decasa.controllers.ProfessionalController;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.MainMapFragment;
 
 public class ProfessionalsActivity extends AppCompatActivity {
 
@@ -54,6 +55,10 @@ public class ProfessionalsActivity extends AppCompatActivity {
         service = (String) it.getSerializableExtra("SERVICE");
         setTitle(service);
 
+//        Intent in = new Intent(ProfessionalsActivity.this, MapsActivity.class);
+//        in.putExtra("SERVICEA",service);
+//        startActivity(in);
+
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
 
         setList(service);
@@ -65,7 +70,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 Professional professional = (Professional) professionalsAdapter.getItem(position);
                 Intent intent = new Intent(ProfessionalsActivity.this,
                         ProfileProfessionalActivity.class);
-                intent.putExtra("PROFESSIONAL", (Serializable) professional);
+                intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
             }
         });
@@ -75,7 +80,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ProfessionalsActivity.this,
                         MapsActivity.class);
-                intent.putExtra("PROFESSIONALSERVICE", service);
+                intent.putParcelableArrayListExtra("PROFESSIONALSERVICE", (ArrayList<? extends Parcelable>) listProfessionals);
                 startActivity(intent);
             }
         });
