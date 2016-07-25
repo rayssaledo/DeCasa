@@ -2,7 +2,6 @@ package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.DateFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import projeto1.ufcg.edu.decasa.R;
+import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,12 +19,15 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton ib_fitter;
     private Intent it;
     private String service;
+    private MySharedPreferences mySharedPreferences;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mySharedPreferences = new MySharedPreferences(getApplicationContext());
 
         ib_electrician = (ImageButton) findViewById(R.id.ib_electrician);
         ib_plumber = (ImageButton) findViewById(R.id.ib_plumber);
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 service = getApplication().getString(R.string.title_electricians);
+                mySharedPreferences.saveService(service);
                 it.putExtra("SERVICE",service);
                 startActivity(it);
             }
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 service = getApplication().getString(R.string.title_plumbers);
+                mySharedPreferences.saveService(service);
                 it.putExtra("SERVICE",service);
                 startActivity(it);
             }
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 service = getApplication().getString(R.string.title_fitters);
+                mySharedPreferences.saveService(service);
                 it.putExtra("SERVICE",service);
                 startActivity(it);
             }

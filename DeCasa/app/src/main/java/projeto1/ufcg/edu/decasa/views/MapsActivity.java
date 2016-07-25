@@ -54,6 +54,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
     private ProfessionalController professionalController;
     private String service;
+    private MySharedPreferences mySharedPreferences;
 
 
     private Handler handler = new Handler() {
@@ -76,6 +77,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
 //        Intent i = getIntent();
 //        service = (String) i.getSerializableExtra("SERVICEA");
+        mySharedPreferences = new MySharedPreferences(getApplicationContext());
 
         Intent it = getIntent();
         professionals = (List<Professional>) it.getSerializableExtra("PROFESSIONALSERVICE");
@@ -179,7 +181,8 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
            // Log.d("PROF", prof.getName());
             //marker = mapFragment.placeMarker(prof, latLng);
           //  Log.d("SERVICE2", service);
-            marker = mapFragment.placeMarker(prof, getLatLng(prof.getLocation().getProvider()));
+            service = mySharedPreferences.getService();
+            marker = mapFragment.placeMarker(service, prof, getLatLng(prof.getLocation().getProvider()));
             Log.d("LATING", getLatLng(prof.getLocation().getProvider()) + " ");
             professionalMarkerMap.put(marker, prof);
         }
