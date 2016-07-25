@@ -6,13 +6,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,6 @@ import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.adapters.ProfessionalsAdapter;
 import projeto1.ufcg.edu.decasa.controllers.ProfessionalController;
 import projeto1.ufcg.edu.decasa.models.Professional;
-import projeto1.ufcg.edu.decasa.utils.MainMapFragment;
 
 public class ProfessionalsActivity extends AppCompatActivity {
 
@@ -47,7 +44,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professionals);
 
-        //mLoading = findViewById(R.id.rl_loading);
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
         btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
@@ -55,9 +51,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         service = (String) it.getSerializableExtra("SERVICE");
         setTitle(service);
 
-//        Intent in = new Intent(ProfessionalsActivity.this, MapsActivity.class);
-//        in.putExtra("SERVICEA",service);
-//        startActivity(in);
 
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
 
