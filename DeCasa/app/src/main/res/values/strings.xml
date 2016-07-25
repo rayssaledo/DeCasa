@@ -33,4 +33,6 @@
     <string name="title_electricians">Electricians</string>
     <string name="title_plumbers">Plumbers</string>
     <string name="title_fitters">Fitters</string>
+    <string name="google_maps_key">AIzaSyDy5WZ0HEaaxLss_A_UGuM6FI_k1IjIlcM</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

@@ -2,6 +2,7 @@ package projeto1.ufcg.edu.decasa.controllers;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.location.Location;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
@@ -67,6 +68,7 @@ public class ProfessionalController {
                             Professional professional = new Professional(name, cpf, phone,
                                     neighborhood, street, number, site, socialNetwork, pictury,
                                     email, password, listServices);
+                            professional.setLocation(new Location(street+ " "+ neighborhood +" "+ "Campina Grande-PB"));
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();

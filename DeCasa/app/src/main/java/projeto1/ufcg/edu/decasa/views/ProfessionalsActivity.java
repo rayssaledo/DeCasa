@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +28,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     private ProfessionalsAdapter professionalsAdapter;
     private ProfessionalController professionalController;
     private String service;
+    private Button btnFindNearest;
     public static View mLoading;
 
     private Handler handler = new Handler() {
@@ -44,6 +49,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
         //mLoading = findViewById(R.id.rl_loading);
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
+        btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
         Intent it = getIntent();
         service = (String) it.getSerializableExtra("SERVICE");
         setTitle(service);
@@ -59,7 +65,17 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 Professional professional = (Professional) professionalsAdapter.getItem(position);
                 Intent intent = new Intent(ProfessionalsActivity.this,
                         ProfileProfessionalActivity.class);
-                intent.putExtra("PROFESSIONAL", professional);
+                intent.putExtra("PROFESSIONAL", (Serializable) professional);
+                startActivity(intent);
+            }
+        });
+
+        btnFindNearest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfessionalsActivity.this,
+                        MapsActivity.class);
+                intent.putExtra("PROFESSIONALSERVICE", service);
                 startActivity(intent);
             }
         });

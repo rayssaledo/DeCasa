@@ -1,5 +1,7 @@
 package projeto1.ufcg.edu.decasa.models;
 
+import android.location.Location;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Professional implements Serializable {
     private String email;
     private String password;
     private String[] services;
+    private Location location;
 
     public Professional(String name,String cpf, String phone, String neighborhood, String street,
                         String number, String site, String socialNetwork, String pictury,
@@ -189,5 +192,13 @@ public class Professional implements Serializable {
 
     public void setServices(String[] services) {
         this.services = services;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }
