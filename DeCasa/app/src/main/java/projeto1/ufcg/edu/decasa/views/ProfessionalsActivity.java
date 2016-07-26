@@ -1,10 +1,14 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +26,7 @@ import projeto1.ufcg.edu.decasa.models.Professional;
 public class ProfessionalsActivity extends AppCompatActivity {
 
     private ListView listViewProfessionals;
-    private List<Professional> listProfessionals;
+    private static List<Professional> listProfessionals;
     private ProfessionalsAdapter professionalsAdapter;
     private ProfessionalController professionalController;
     private String service;
@@ -71,10 +75,9 @@ public class ProfessionalsActivity extends AppCompatActivity {
         btnFindNearest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfessionalsActivity.this,
-                        MapsActivity.class);
-                intent.putParcelableArrayListExtra("PROFESSIONALSERVICE", (ArrayList<? extends Parcelable>) listProfessionals);
-                startActivity(intent);
+                displayPromptForEnablingGPS(ProfessionalsActivity.this,
+                        getApplication().getString(R.string.message_dialog_gps),
+                        getApplication().getString(R.string.cancel) );
             }
         });
     }
@@ -91,4 +94,35 @@ public class ProfessionalsActivity extends AppCompatActivity {
         professionalsAdapter = new ProfessionalsAdapter(ProfessionalsActivity.this, listProfessionals);
         listViewProfessionals.setAdapter(professionalsAdapter);
     }
+
+    public static void displayPromptForEnablingGPS(final Activity activity, String message, String cancel)
+    {
+
+        final AlertDialog.Builder builder =  new AlertDialog.Builder(activity);
+        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+
+        builder.setMessage(message)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface d, int id) {
+                                activity.startActivity(new Intent(action));
+                                d.dismiss();
+                            }
+                        })
+                .setNegativeButton(cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface d, int id) {
+                                setView(activity, MapsActivity.class);
+                                d.cancel();
+                            }
+                        });
+        builder.create().show();
+    }
+
+    public static void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        context.startActivity(it);
+    }
+
 }

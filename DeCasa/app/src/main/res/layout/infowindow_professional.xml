@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:minWidth="700px">
+    android:minWidth="700dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
@@ -14,8 +14,8 @@
 
         <com.pkmmte.view.CircularImageView
             android:id="@+id/iv_professional"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="10dp"
             android:layout_weight="35"
             android:src="@drawable/default_avatar"
@@ -25,80 +25,70 @@
             app:shadow="true" />
 
         <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="65">
 
             <TextView
-                android:text="Profession"
+                android:text="@string/text_services"
                 android:id="@+id/tv_profession"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
-                android:text="Name"
+                android:text="@string/hint_professional_name"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:id="@+id/tv_name_professional"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
-                android:text="CPF"
-                android:id="@+id/tv_cpf"
+                android:text="@string/hint_phone_professional"
+                android:id="@+id/tv_phone_professional"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_width="match_parent"
-                android:gravity="left"
+                android:gravity="start"
                 android:layout_marginBottom="10dp"/>
 
-
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:layout_weight="100"
-    android:layout_marginTop="10dp">
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
 
         <TextView
-            android:text="Avaliações"
-            android:textSize="20dp"
+            android:text="@string/text_evaluation_type"
+            android:textSize="15sp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_marginTop="23dp"
-            android:layout_weight="35"/>
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"/>
+
         <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/evaluataion_bar"
+            android:id="@+id/rb_evaluation"
             style="@style/StarRatingBar"
-            android:stepSize="1"
-            android:layout_marginTop="10dp"/>
+            android:stepSize="1"/>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="100"
-        android:layout_marginTop="10dp">
 
-    </LinearLayout>
 </LinearLayout>

@@ -43,7 +43,7 @@
         android:id="@+id/rb_evaluation"
         style="@style/StarRatingBar"
         android:layout_below="@+id/tv_address"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:isIndicator="true"/>
 
 </RelativeLayout>

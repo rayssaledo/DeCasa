@@ -25,7 +25,6 @@ public class MainMapFragment extends MapFragment {
                         .title(profInfo.getName())
                         .position(latLng)
                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.plumber_location_icon)));
-
             } else if (service.equals("Montadores") || service.equals("Fitters")) {
                 m = getMap().addMarker(new MarkerOptions()
                         .title(profInfo.getName())
