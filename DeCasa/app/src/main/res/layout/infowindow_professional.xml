@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:minWidth="700dp">
+    android:minWidth="300dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="35"
             android:src="@drawable/default_avatar"
-            app:border="true"
+            app:border="false"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true" />
@@ -54,15 +54,14 @@
                 android:gravity="start"
                 android:layout_marginBottom="10dp"/>
 
-            <TextView
-                android:text="@string/hint_phone_professional"
-                android:id="@+id/tv_phone_professional"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="15sp"
+            <Button
+                android:id="@+id/btn_more_information"
                 android:layout_width="match_parent"
-                android:gravity="start"
-                android:layout_marginBottom="10dp"/>
+                android:layout_height="match_parent"
+                android:text="@string/btn_more_information"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"/>
 
         </LinearLayout>
 

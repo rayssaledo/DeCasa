@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,6 +20,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -31,6 +33,7 @@ import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.MainMapFragment;
 import projeto1.ufcg.edu.decasa.utils.MapWrapperLayout;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.utils.OnInfoWindowElemTouchListener;
 
 import android.os.Handler;
 
@@ -42,7 +45,8 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
     private List<Professional> professionals;
     private TextView tv_profession;
     private TextView tv_name_professional;
-    private TextView tv_phone_professional;
+    private Button btn_more_information;
+    private OnInfoWindowElemTouchListener btn_call_listener;
     private HashMap<Marker, Professional> professionalMarkerMap;
 
     private ViewGroup infoWindow;
@@ -198,8 +202,19 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                     tv_name_professional = (TextView) infoWindow.findViewById(R.id.tv_name_professional);
                     tv_name_professional.setText(professionalInfo.getName());
 
-                    tv_phone_professional = (TextView) infoWindow.findViewById(R.id.tv_phone_professional);
-                    tv_phone_professional.setText(professionalInfo.getPhone());
+                    btn_more_information = (Button) infoWindow.findViewById(R.id.btn_more_information);
+                    btn_call_listener = new OnInfoWindowElemTouchListener(btn_more_information)
+                    {
+                        @Override
+                        protected void onClickConfirmed(View v, Marker marker) {
+                            Intent intent = new Intent(MapsActivity.this,
+                                    ProfileProfessionalActivity.class);
+                            intent.putExtra("PROFESSIONAL", professionalInfo);
+                            startActivity(intent);
+                        }
+                    };
+                    btn_more_information.setOnTouchListener(btn_call_listener);
+
                 }
                 mapWrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
                 return infoWindow;
@@ -235,6 +250,12 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
             return latLng;
         }
         return new LatLng(0, 0);
+    }
+
+    public static void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        context.startActivity(it);
     }
 
 }
