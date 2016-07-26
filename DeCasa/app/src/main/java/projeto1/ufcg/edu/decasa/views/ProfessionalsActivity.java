@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -75,9 +76,16 @@ public class ProfessionalsActivity extends AppCompatActivity {
         btnFindNearest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayPromptForEnablingGPS(ProfessionalsActivity.this,
-                        getApplication().getString(R.string.message_dialog_gps),
-                        getApplication().getString(R.string.cancel) );
+                LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+                boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
+                if(isOn){
+                    setView(ProfessionalsActivity.this, MapsActivity.class);
+                } else{
+                    displayPromptForEnablingGPS(ProfessionalsActivity.this,
+                            getApplication().getString(R.string.message_dialog_gps),
+                            getApplication().getString(R.string.cancel) );
+                }
+
             }
         });
     }
@@ -112,7 +120,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 .setNegativeButton(cancel,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface d, int id) {
-                                setView(activity, MapsActivity.class);
                                 d.cancel();
                             }
                         });

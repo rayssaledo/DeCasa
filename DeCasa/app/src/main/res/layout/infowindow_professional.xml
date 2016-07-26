@@ -19,7 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="35"
             android:src="@drawable/default_avatar"
-            app:border="false"
+            app:border="true"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true" />
