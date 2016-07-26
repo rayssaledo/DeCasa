@@ -35,7 +35,7 @@
         <activity
             android:name=".views.ProfessionalsActivity"
             android:label="@string/title_activity_professionals"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppThemeLoading"/>
         <activity android:name=".views.ProfileProfessionalActivity">
 
         </activity>

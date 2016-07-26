@@ -4,10 +4,6 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Professional implements Parcelable {
 
     private String name;

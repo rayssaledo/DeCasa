@@ -32,7 +32,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     private ProfessionalController professionalController;
     private String service;
     private Button btnFindNearest;
-    public static View mLoading;
+    public static View mLoadingProfessionals;
 
     private Handler handler = new Handler() {
 
@@ -49,13 +49,13 @@ public class ProfessionalsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professionals);
 
+        mLoadingProfessionals = findViewById(R.id.rl_loading_professionals);
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
         btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
         Intent it = getIntent();
         service = (String) it.getSerializableExtra("SERVICE");
         setTitle(service);
-
 
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
 
@@ -76,11 +76,12 @@ public class ProfessionalsActivity extends AppCompatActivity {
         btnFindNearest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+                LocationManager manager = (LocationManager) getSystemService(Context.
+                        LOCATION_SERVICE);
                 boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
-                if(isOn){
+                if(isOn) {
                     setView(ProfessionalsActivity.this, MapsActivity.class);
-                } else{
+                } else {
                     displayPromptForEnablingGPS(ProfessionalsActivity.this,
                             getApplication().getString(R.string.message_dialog_gps),
                             getApplication().getString(R.string.cancel) );
@@ -93,18 +94,22 @@ public class ProfessionalsActivity extends AppCompatActivity {
     public void setList(String service){
         listProfessionals = new ArrayList<>();
         if (service.equals(getApplication().getString(R.string.title_electricians))){
-            listProfessionals = professionalController.getProfessionalsByService("Eletricista", handler);
+            listProfessionals = professionalController.getProfessionalsByService("Eletricista",
+                    handler);
         } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
-            listProfessionals = professionalController.getProfessionalsByService("Encanador", handler);
+            listProfessionals = professionalController.getProfessionalsByService("Encanador",
+                    handler);
         } else {
-            listProfessionals = professionalController.getProfessionalsByService("Montador", handler);
+            listProfessionals = professionalController.getProfessionalsByService("Montador",
+                    handler);
         }
-        professionalsAdapter = new ProfessionalsAdapter(ProfessionalsActivity.this, listProfessionals);
+        professionalsAdapter = new ProfessionalsAdapter(ProfessionalsActivity.this,
+                listProfessionals);
         listViewProfessionals.setAdapter(professionalsAdapter);
     }
 
-    public static void displayPromptForEnablingGPS(final Activity activity, String message, String cancel)
-    {
+    public static void displayPromptForEnablingGPS(final Activity activity, String message,
+                                                   String cancel) {
 
         final AlertDialog.Builder builder =  new AlertDialog.Builder(activity);
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;

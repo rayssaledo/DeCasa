@@ -35,7 +35,6 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         tv_website = (TextView) findViewById(R.id.tv_website);
 
         Intent it = getIntent();
-      //  professional = (Professional) it.getSerializableExtra("PROFESSIONAL");
         professional = it.getParcelableExtra("PROFESSIONAL");
 
         setProfile();

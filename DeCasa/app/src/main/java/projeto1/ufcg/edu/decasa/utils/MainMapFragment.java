@@ -19,17 +19,20 @@ public class MainMapFragment extends MapFragment {
                 m = getMap().addMarker(new MarkerOptions()
                         .title(profInfo.getName())
                         .position(latLng)
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.electrician_location_icon)));
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.
+                                electrician_location_icon)));
           } else if (service.equals("Encanadores") || service.equals("Plumbers")) {
                 m = getMap().addMarker(new MarkerOptions()
                         .title(profInfo.getName())
                         .position(latLng)
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.plumber_location_icon)));
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.
+                                plumber_location_icon)));
             } else if (service.equals("Montadores") || service.equals("Fitters")) {
                 m = getMap().addMarker(new MarkerOptions()
                         .title(profInfo.getName())
                         .position(latLng)
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.fitter_location_icon)));
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.
+                                fitter_location_icon)));
             }
        }
         return m;

@@ -32,6 +32,6 @@
     <string name="title_plumbers">Encanadores</string>
     <string name="title_fitters">Montadores</string>
     <string name="title_my_location">Minha localização</string>
-    <string name="message_dialog_gps">Deseja abrir suas configurações de GPS?</string>
+    <string name="message_dialog_gps">Você deseja ativar o seu GPS?</string>
     <string name="cancel">Cancelar</string>
 </resources>

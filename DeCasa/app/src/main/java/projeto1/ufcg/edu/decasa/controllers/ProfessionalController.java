@@ -39,7 +39,7 @@ public class ProfessionalController {
     public List<Professional> getProfessionalsByService(final String service,
                                                         final Handler handler) {
 
-        //ProfessionalsActivity.mLoading.setVisibility(View.VISIBLE);
+        ProfessionalsActivity.mLoadingProfessionals.setVisibility(View.VISIBLE);
         final List<Professional> professionals = new ArrayList<>();
         String urlGetByService = url + "get-by-service?service=" + service;
         mHttp.get(urlGetByService, new HttpListener() {
@@ -69,13 +69,13 @@ public class ProfessionalController {
                             Professional professional = new Professional(name, cpf, phone,
                                     neighborhood, street, number, site, socialNetwork, pictury,
                                     email, password, listServices);
-                            professional.setLocation(new Location(street + ", " + number +" " + "Campina Grande"));
-                            Log.d("LOCAL", professional.getLocation() + "");
+                            professional.setLocation(new Location(street + ", " + number + " " +
+                                    "Campina Grande"));
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
+                        ProfessionalsActivity.mLoadingProfessionals.setVisibility(View.GONE);
                     }
                     Message message = new Message();
                     message.what = 100;
@@ -88,7 +88,8 @@ public class ProfessionalController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                     //ProfessionalsActivity.mLoading.setVisibility(View.GONE);
+                                    ProfessionalsActivity.mLoadingProfessionals.
+                                            setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -104,7 +105,8 @@ public class ProfessionalController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //ProfessionalsActivity.mLoading.setVisibility(View.GONE);
+                                ProfessionalsActivity.mLoadingProfessionals.
+                                        setVisibility(View.GONE);
                             }
                         })
                         .create().show();

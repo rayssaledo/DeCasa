@@ -36,6 +36,6 @@
     <string name="google_maps_key">AIzaSyDy5WZ0HEaaxLss_A_UGuM6FI_k1IjIlcM</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_my_location">My location</string>
-    <string name="message_dialog_gps">Do you want open GPS setting?</string>
+    <string name="message_dialog_gps">Do you want to turn on your GPS?</string>
     <string name="cancel">Cancel</string>
 </resources>

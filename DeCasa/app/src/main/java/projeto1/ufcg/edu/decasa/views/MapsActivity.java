@@ -37,7 +37,8 @@ import projeto1.ufcg.edu.decasa.utils.OnInfoWindowElemTouchListener;
 
 import android.os.Handler;
 
-public class MapsActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MapsActivity extends Activity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
@@ -67,7 +68,6 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
             }
         }
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +168,8 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
         Marker marker;
         for (Professional prof: professionals) {
             service = mySharedPreferences.getService();
-            marker = mapFragment.placeMarker(service, prof, getLatLng(prof.getLocation().getProvider()));
+            marker = mapFragment.placeMarker(service, prof, getLatLng(prof.getLocation().
+                    getProvider()));
             professionalMarkerMap.put(marker, prof);
         }
 
@@ -182,12 +183,14 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
             public View getInfoContents(Marker marker) {
                 final Professional professionalInfo = professionalMarkerMap.get(marker);
 
-                mapWrapperLayout.init(mapFragment.getMap(), getPixelsFromDp(MapsActivity.this, 39 + 20));
+                mapWrapperLayout.init(mapFragment.getMap(), getPixelsFromDp(MapsActivity.this,
+                        39 + 20));
 
                 infoWindow = null;
 
                 if (!marker.getTitle().equals("Minha localização")) {
-                    infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.infowindow_professional, null);
+                    infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.
+                            infowindow_professional, null);
 
                     tv_profession = (TextView) infoWindow.findViewById(R.id.tv_profession);
                     service = mySharedPreferences.getService();
@@ -199,10 +202,12 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                         tv_profession.setText(getApplication().getString(R.string.text_fitter));
                     }
 
-                    tv_name_professional = (TextView) infoWindow.findViewById(R.id.tv_name_professional);
+                    tv_name_professional = (TextView) infoWindow.findViewById(R.id.
+                            tv_name_professional);
                     tv_name_professional.setText(professionalInfo.getName());
 
-                    btn_more_information = (Button) infoWindow.findViewById(R.id.btn_more_information);
+                    btn_more_information = (Button) infoWindow.findViewById(R.id.
+                            btn_more_information);
                     btn_call_listener = new OnInfoWindowElemTouchListener(btn_more_information)
                     {
                         @Override
@@ -226,11 +231,14 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
     private List<Professional> createProfessionals() {
         service = mySharedPreferences.getService();
         if (service.equals(getApplication().getString(R.string.title_electricians))){
-            professionals = professionalController.getProfessionalsByService("Eletricista", handler);
+            professionals = professionalController.getProfessionalsByService("Eletricista",
+                    handler);
         } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
-            professionals = professionalController.getProfessionalsByService("Encanador", handler);
+            professionals = professionalController.getProfessionalsByService("Encanador",
+                    handler);
         } else {
-            professionals = professionalController.getProfessionalsByService("Montador", handler);
+            professionals = professionalController.getProfessionalsByService("Montador",
+                    handler);
         }
         return professionals;
     }
