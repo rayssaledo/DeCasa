@@ -29,4 +29,10 @@
         <item name="colorAccent">@color/grey</item>
     </style>
 
+    <style name="AppThemeRegister" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
 </resources>

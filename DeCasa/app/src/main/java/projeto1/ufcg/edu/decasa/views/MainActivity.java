@@ -1,11 +1,13 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import projeto1.ufcg.edu.decasa.R;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton ib_electrician;
     private ImageButton ib_plumber;
     private ImageButton ib_fitter;
+    private Button btn_register;
     private Intent it;
     private String service;
     private MySharedPreferences mySharedPreferences;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         ib_electrician = (ImageButton) findViewById(R.id.ib_electrician);
         ib_plumber = (ImageButton) findViewById(R.id.ib_plumber);
         ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
+        btn_register = (Button)  findViewById(R.id.btn_register);
+
         it = new Intent(MainActivity.this, ProfessionalsActivity.class);
 
         ib_electrician.setOnClickListener(new View.OnClickListener(){
@@ -61,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setView(MainActivity.this, UserCadastreActivity.class);
+            }
+        });
     }
 
     @Override
@@ -83,5 +95,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        context.startActivity(it);
     }
 }
