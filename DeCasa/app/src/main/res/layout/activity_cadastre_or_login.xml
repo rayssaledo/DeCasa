@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="projeto1.ufcg.edu.decasa.views.CadastreOrLoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_cadastre_or_login">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_decasa"
+                android:paddingTop="135dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_decasa"
+                    android:contentDescription="@string/desc_decasa"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_slogan"
+                android:orientation="horizontal"
+                android:layout_below="@+id/layout_decasa"
+                android:gravity="center"
+                android:paddingTop="60dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_slogan"
+                    android:contentDescription="@string/desc_slogan"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_below="@+id/layout_slogan"
+                android:gravity="center"
+                android:layout_marginTop="40dp">
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textAlignment="center"
+                    android:text="@string/btn_register"
+                    android:textAllCaps="true"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="20dp"/>
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textAlignment="center"
+                    android:text="@string/btn_login"
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="25dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

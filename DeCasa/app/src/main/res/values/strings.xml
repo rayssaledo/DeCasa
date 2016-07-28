@@ -2,6 +2,7 @@
     <string name="app_name">DeCasa</string>
     <string name="action_settings">Settings</string>
     <string name="btn_register">Register</string>
+    <string name="btn_login">Login</string>
     <string name="text_welcome">Welcome.\nChoose here the service you want.</string>
     <string name="text_electrician">Electrician</string>
     <string name="text_plumber">Plumber</string>
@@ -13,6 +14,8 @@
     <string name="desc_favorite">Icon favorite</string>
     <string name="desc_evaluators">Icon evaluators</string>
     <string name="desc_phone_professional">Icon call</string>
+    <string name="desc_decasa">Image decasa</string>
+    <string name="desc_slogan">Image slogan</string>
     <string name="text_evaluation_type">Service</string>
     <string name="text_number_evaluations">2 evaluations</string>
     <string name="text_services">Services</string>
@@ -38,4 +41,7 @@
     <string name="title_my_location">My location</string>
     <string name="message_dialog_gps">Do you want to turn on your GPS?</string>
     <string name="cancel">Cancel</string>
+    <string name="title_activity_cadastre_or_login">CadastreOrLoginActivity</string>
+    <string name="title_activity_user_cadastre">UserCadastreActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>
