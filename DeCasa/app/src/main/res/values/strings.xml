@@ -27,7 +27,8 @@
     <string name="hint_social_network">www.facebook.com/joaoencanador</string>
     <string name="hint_website">www.meusite.com.br</string>
     <string name="hint_phone_professional">(83) 98765-4321</string>
-    <string name="hint_address_professional">Avenida Floriano Peixoto, 100, Centro, Campina Grande - Paraíba</string>
+    <string name="hint_address_professional">Avenida Floriano Peixoto, 100, Centro, Campina Grande
+        - Paraíba</string>
     <string name="hint_services">Electrician, Plumber e Fitter</string>
     <string name="hint_professional_name">Professional name</string>
     <string name="title_activity_professionals">Professionals</string>
@@ -44,4 +45,15 @@
     <string name="title_activity_cadastre_or_login">CadastreOrLoginActivity</string>
     <string name="title_activity_user_cadastre">UserCadastreActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_date_of_birth">Date of birth</string>
+    <string name="hint_city">City</string>
+    <string name="hint_neighborhood">Neighborhood</string>
+    <string name="hint_street">Street</string>
+    <string name="hint_number">Number</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_password_confirm">Confirm password</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
 </resources>
