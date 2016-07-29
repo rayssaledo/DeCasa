@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context="projeto1.ufcg.edu.decasa.views.UserCadastreActivity">
 
@@ -67,7 +67,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/layout_buttons"
-
                 android:gravity="center"
                 android:id="@+id/layout_cadastre">
 
@@ -83,102 +82,214 @@
                     android:id="@+id/linear">
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:id="@+id/relative">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/input_layout_name"
-                            android:layout_width="match_parent"
-                            android:paddingTop="4dp"
+                        <com.pkmmte.view.CircularImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:id="@+id/iv_user_photo"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/default_avatar"
+                            app:border="true"
+                            app:border_color="#EEEEEE"
+                            app:border_width="4dp"
+                            app:shadow="true"/>
+
+                        <ImageButton
+                            android:id="@+id/ib_camera"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
+                            android:src="@mipmap/ic_camera"
+                            android:background="@color/white"
+                            android:layout_toEndOf="@+id/iv_user_photo" />
 
-                            <EditText
-                                android:id="@+id/input_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:maxLength="50"
-                                android:hint="Nome"/>
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/input_layout_last_name"
-                            android:layout_width="match_parent"
+                        <ImageButton
+                            android:id="@+id/ib_gallery"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="4dp"
-                            android:layout_below="@+id/input_layout_name"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
+                            android:src="@mipmap/ic_gallery"
+                            android:background="@color/white"
+                            android:layout_below="@id/ib_camera"
+                            android:layout_toEndOf="@+id/iv_user_photo"/>
 
-                            <EditText
-                                android:id="@+id/input_last_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:maxLength="50"
-                                android:hint="Sobrenome" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/input_layout_phone"
-                            android:layout_width="match_parent"
+                        <ImageButton
+                            android:id="@+id/ib_delete"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="4dp"
-                            android:layout_below="@+id/input_layout_last_name"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
-
-                            <EditText
-                                android:id="@+id/input_phone"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:maxLength="50"
-                                android:inputType="phone"
-                                android:hint="Telefone" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/input_layout_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="4dp"
-                            android:layout_below="@+id/input_layout_phone"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
-
-                            <EditText
-                                android:id="@+id/input_email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:singleLine="true"
-                                android:maxLength="50"
-                                android:hint="E-mail" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/input_layout_password"
-                            android:layout_width="match_parent"
-                            android:paddingTop="4dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_below="@+id/input_layout_email">
-
-                            <EditText
-                                android:id="@+id/input_password"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="textPassword"
-                                android:maxLength="15"
-                                android:hint="Senha"/>
-                        </android.support.design.widget.TextInputLayout>
+                            android:src="@mipmap/ic_delete"
+                            android:background="@color/white"
+                            android:layout_below="@id/ib_gallery"
+                            android:layout_toEndOf="@+id/iv_user_photo"/>
 
                     </RelativeLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_name"
+                        android:layout_width="match_parent"
+                        android:paddingTop="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="@string/hint_name"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_date_of_birth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="4dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_date_of_birth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="date"
+                            android:singleLine="true"
+                            android:hint="@string/hint_date_of_birth" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Spinner
+                        android:id="@+id/sp_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+                    </Spinner>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="4dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="@string/hint_city" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Spinner
+                        android:id="@+id/sp_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+                    </Spinner>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_neighborhood"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="4dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_neighborhood"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:hint="@string/hint_neighborhood" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_street"
+                        android:layout_width="match_parent"
+                        android:paddingTop="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_street"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_street"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_number"
+                        android:layout_width="match_parent"
+                        android:paddingTop="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="@string/hint_number"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_username"
+                        android:layout_width="match_parent"
+                        android:paddingTop="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:maxLength="20"
+                            android:hint="@string/hint_username" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_password"
+                        android:layout_width="match_parent"
+                        android:paddingTop="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:maxLength="15"
+                            android:hint="@string/hint_password" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/input_layout_password_confirm"
+                        android:layout_width="match_parent"
+                        android:paddingTop="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <EditText
+                            android:id="@+id/input_password_confirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:maxLength="15"
+                            android:hint="@string/hint_password_confirm" />
+                    </android.support.design.widget.TextInputLayout>
 
                     <Button
                         android:id="@+id/btn_cadastre"
@@ -202,5 +313,20 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/loadingCadastre"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#64000000"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="?android:attr/progressBarStyleLarge"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
