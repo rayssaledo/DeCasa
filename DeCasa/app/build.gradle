@@ -28,3 +28,5 @@ dependencies {
     compile 'com.pkmmte.view:circularimageview:1.1'
     compile 'br.com.jansenfelipe:androidmask:1.0.1'
 }
+
+
