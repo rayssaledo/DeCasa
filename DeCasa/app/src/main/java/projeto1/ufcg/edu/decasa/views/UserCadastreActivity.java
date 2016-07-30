@@ -114,7 +114,33 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
 
     public void putBloodTypeElementsOnSpinnerArray(){
         states = new ArrayList<>();
+        states.add("AC");
+        states.add("AL");
+        states.add("AP");
+        states.add("AM");
+        states.add("BA");
+        states.add("CE");
+        states.add("DF");
+        states.add("ES");
+        states.add("GO");
+        states.add("MA");
+        states.add("MT");
+        states.add("MS");
+        states.add("MG");
+        states.add("PA");
         states.add("PB");
+        states.add("PR");
+        states.add("PE");
+        states.add("PI");
+        states.add("RJ");
+        states.add("RN");
+        states.add("RS");
+        states.add("RO");
+        states.add("RR");
+        states.add("SC");
+        states.add("SP");
+        states.add("SE");
+        states.add("TO");
     }
 
     @Override
