@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +65,7 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         mDate_of_birth.addTextChangedListener(maskDateOfBirth);
 
         putGenderElementsOnSpinnerArray();
-        ArrayAdapter<String> spinnerArrayAdapterGenders = new ArrayAdapter<>(this, android.R.
-                layout.simple_spinner_item, genders);
-        spinnerArrayAdapterGenders.setDropDownViewResource(android.R.layout.
-                simple_spinner_dropdown_item); // The drop down view
-        mGenders_spinner.setAdapter(spinnerArrayAdapterGenders);
+        mGenders_spinner.setAdapter(createArrayAdapterGender());
 
         mGenders_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
@@ -87,13 +84,8 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
             public void onNothingSelected(final AdapterView<?> parent) {}
         });
 
-
-        putBloodTypeElementsOnSpinnerArray();
-        ArrayAdapter<String> spinnerArrayAdapterBloodTypes = new ArrayAdapter<>(this, android.R.
-                layout.simple_spinner_item, states);
-        spinnerArrayAdapterBloodTypes.setDropDownViewResource(android.R.layout.
-                simple_spinner_dropdown_item); // The drop down view
-        mStates_spinner.setAdapter(spinnerArrayAdapterBloodTypes);
+        putStateElementsOnSpinnerArray();
+        mStates_spinner.setAdapter(createArrayAdapterState());
 
         mStates_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
@@ -106,13 +98,31 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+    private SpinnerAdapter createArrayAdapterState() {
+        ArrayAdapter<String> spinnerArrayAdapterState = new ArrayAdapter<>(this, android.R.
+                layout.simple_spinner_item, states);
+        spinnerArrayAdapterState.setDropDownViewResource(android.R.layout.
+                simple_spinner_dropdown_item); // The drop down view
+
+        return spinnerArrayAdapterState;
+    }
+
+    private SpinnerAdapter createArrayAdapterGender() {
+        ArrayAdapter<String> spinnerArrayAdapterGenders = new ArrayAdapter<>(this, android.R.
+                layout.simple_spinner_item, genders);
+        spinnerArrayAdapterGenders.setDropDownViewResource(android.R.layout.
+                simple_spinner_dropdown_item); // The drop down view
+
+        return spinnerArrayAdapterGenders;
+    }
+
     public void putGenderElementsOnSpinnerArray() {
         genders = new ArrayList<>();
         genders.add(getApplicationContext().getResources().getString(R.string.female));
         genders.add(getApplicationContext().getResources().getString(R.string.male));
     }
 
-    public void putBloodTypeElementsOnSpinnerArray(){
+    public void putStateElementsOnSpinnerArray(){
         states = new ArrayList<>();
         states.add("AC");
         states.add("AL");
