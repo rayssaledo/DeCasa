@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Message;
@@ -47,6 +48,8 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
     private TextView tv_profession;
     private TextView tv_name_professional;
     private Button btn_more_information;
+    private Button btn_call;
+    private OnInfoWindowElemTouchListener btn_more_listener;
     private OnInfoWindowElemTouchListener btn_call_listener;
     private HashMap<Marker, Professional> professionalMarkerMap;
 
@@ -208,7 +211,8 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
                     btn_more_information = (Button) infoWindow.findViewById(R.id.
                             btn_more_information);
-                    btn_call_listener = new OnInfoWindowElemTouchListener(btn_more_information)
+                    btn_call = (Button) infoWindow.findViewById(R.id.btn_call);
+                    btn_more_listener = new OnInfoWindowElemTouchListener(btn_more_information)
                     {
                         @Override
                         protected void onClickConfirmed(View v, Marker marker) {
@@ -218,7 +222,19 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                             startActivity(intent);
                         }
                     };
-                    btn_more_information.setOnTouchListener(btn_call_listener);
+                    btn_more_information.setOnTouchListener(btn_more_listener);
+                    btn_call_listener = new OnInfoWindowElemTouchListener(btn_call)
+                    {
+                        @Override
+                        protected void onClickConfirmed(View view, Marker marker) {
+                            String phone = professionalInfo.getPhone().substring(1,3) + professionalInfo.getPhone().
+                                    substring(4,9) + professionalInfo.getPhone().substring(9);
+                            Uri uri = Uri.parse("tel:" + phone);
+                            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                            startActivity(intent);
+                        }
+                    };
+                    btn_call.setOnTouchListener(btn_call_listener);
 
                 }
                 mapWrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);

@@ -24,6 +24,7 @@
     <string name="text_website">Website</string>
     <string name="text_social_network">Social network</string>
     <string name="text_evaluations">Evaluations</string>
+    <string name="text_call">Call</string>
     <string name="hint_social_network">www.facebook.com/joaoencanador</string>
     <string name="hint_website">www.meusite.com.br</string>
     <string name="hint_phone_professional">(83) 98765-4321</string>

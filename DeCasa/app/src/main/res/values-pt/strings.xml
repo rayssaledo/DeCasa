@@ -21,6 +21,7 @@
     <string name="text_phone_professional">Telefone</string>
     <string name="text_website">Site</string>
     <string name="text_social_network">Rede social</string>
+    <string name="text_call">Ligar</string>
     <string name="hint_social_network">www.facebook.com/joaoencanador</string>
     <string name="hint_website">www.meusite.com.br</string>
     <string name="hint_phone_professional">(83) 98765-4321</string>
