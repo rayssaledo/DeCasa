@@ -11,7 +11,7 @@
         android:layout_height="80dp"
         android:layout_margin="5dp"
         android:src="@drawable/default_avatar"
-        app:border="true"
+        app:border="false"
         app:border_color="#EEEEEE"
         app:border_width="4dp"
         app:shadow="true" />
