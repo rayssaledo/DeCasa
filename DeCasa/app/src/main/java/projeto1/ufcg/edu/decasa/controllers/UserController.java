@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
 
 public class UserController {
 
@@ -34,7 +36,7 @@ public class UserController {
                          final String city, final String state, final String photo,
                          final String username, final String password, final Class classDest) {
 
-        //mLoadingCadastre.setVisibility(View.VISIBLE);
+        UserCadastreActivity.mLoadingCadastre.setVisibility(View.VISIBLE);
         String urlCadastre = url + "add-user";
         JSONObject json = new JSONObject();
         try {
@@ -62,7 +64,7 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //mLoadingCadastre.setVisibility(View.GONE);
+                                    UserCadastreActivity.mLoadingCadastre.setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -92,7 +94,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //mLoadingCadastre.setVisibility(View.GONE);
+                                UserCadastreActivity.mLoadingCadastre.setVisibility(View.GONE);
                             }
                         })
                         .create()

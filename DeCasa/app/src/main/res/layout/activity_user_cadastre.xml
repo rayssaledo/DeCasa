@@ -86,14 +86,14 @@
                         android:layout_height="wrap_content">
 
                         <com.pkmmte.view.CircularImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:id="@+id/iv_user_photo"
                             android:layout_centerVertical="true"
                             android:layout_centerHorizontal="true"
                             android:layout_margin="10dp"
                             android:src="@drawable/default_avatar"
-                            app:border="true"
+                            app:border="false"
                             app:border_color="#EEEEEE"
                             app:border_width="4dp"
                             app:shadow="true"/>
@@ -104,6 +104,7 @@
                             android:layout_height="wrap_content"
                             android:src="@mipmap/ic_camera"
                             android:background="@color/white"
+                            android:layout_marginTop="10dp"
                             android:layout_toEndOf="@+id/iv_user_photo" />
 
                         <ImageButton
@@ -316,7 +317,7 @@
     </ScrollView>
 
     <RelativeLayout
-        android:id="@+id/loadingCadastre"
+        android:id="@+id/rl_loading_cadastre"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#64000000"

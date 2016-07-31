@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -22,12 +23,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 import projeto1.ufcg.edu.decasa.R;
+import projeto1.ufcg.edu.decasa.controllers.UserController;
 
 public class UserCadastreActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,15 +47,16 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     private List<String> genders;
     private List<String> states;
 
-    private String mGender_user;
-    private String mState;
     private String name_user;
     private String date_birth_user;
+    private String gender_user;
     private String city_user;
+    private String state_user;
     private String neighborhood_user;
     private String street_user;
     private String number_user;
     private String username_user;
+    private String photo_user;
     private String password_user;
     private String password_confirm_user;
 
@@ -77,13 +81,26 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     private TextInputLayout layout_password;
     private TextInputLayout layout_password_confirm;
 
+    private UserController userController;
+    public static View mLoadingCadastre;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_cadastre);
 
+        userController = new UserController(UserCadastreActivity.this);
+
+        mLoadingCadastre = findViewById(R.id.rl_loading_cadastre);
+
         Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.default_avatar);
         bitmapPhoto = avatar;
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 100, b);
+        byte[] photo_user_byte = b.toByteArray();
+        photo_user = Base64.encodeToString(photo_user_byte, Base64.NO_WRAP);
+
+
         iv_photo_user = (ImageView) findViewById(R.id.iv_user_photo);
         ib_camera = (ImageButton) findViewById(R.id.ib_camera);
         ib_camera.setOnClickListener(this);
@@ -114,7 +131,8 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         layout_number = (TextInputLayout) findViewById(R.id.input_layout_number);
         layout_username = (TextInputLayout) findViewById(R.id.input_layout_username);
         layout_password = (TextInputLayout) findViewById(R.id.input_layout_password);
-        layout_password_confirm = (TextInputLayout) findViewById(R.id.input_layout_password_confirm);
+        layout_password_confirm = (TextInputLayout) findViewById(R.id.
+                input_layout_password_confirm);
 
         MaskEditTextChangedListener maskDateOfBirth = new MaskEditTextChangedListener("##/##/####",
                 mDate_of_birth);
@@ -131,10 +149,10 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
 
                 if (itemGender.equals(getApplicationContext().getResources().
                         getString(R.string.female))) {
-                    mGender_user = "F";
+                    gender_user = "F";
                 } else if (itemGender.equals(getApplicationContext().getResources().
                         getString(R.string.male))) {
-                    mGender_user = "M";
+                    gender_user = "M";
                 }
             }
 
@@ -149,7 +167,7 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
             public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
                                        final long id) {
                 Object item = parent.getItemAtPosition(pos);
-                mState = item.toString();
+                state_user = item.toString();
             }
 
             public void onNothingSelected(final AdapterView<?> parent) {
@@ -169,42 +187,9 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                 password_user = mInput_password.getText().toString();
                 password_confirm_user = mInput_password_confirm.getText().toString();
 
-                if (validateName() && validateDateOfBirth() && validateCity() &&  validateNeighborhood()
-                && validateStreet()&& validateNumber() && validateUsername() && validatePassword()
-                        && validatePasswordConfirm() && confirmationPassword()) {
-                    //register!!
-
-                } else if (!validateName()) {
-                    return;
-                } else if (!validateDateOfBirth()) {
-                    return;
-                } else if (!validateCity()) {
-                    return;
-                } else if (!validateNeighborhood()) {
-                    return;
-                } else if (!validateStreet()) {
-                    return;
-                } else if (!validateNumber()) {
-                    return;
-                } else if (!validateUsername()) {
-                    return;
-                } else if (!validatePassword()) {
-                    return;
-                } else if (!validatePasswordConfirm()) {
-                    return;
-                } else if (!confirmationPassword()) {
-                    new AlertDialog.Builder(UserCadastreActivity.this)
-                            .setMessage("As senhas não coincidem!")
-                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                    mInput_password.setText("");
-                                    mInput_password_confirm.setText("");
-                                    requestFocus(mInput_password);
-                                }
-                            })
-                            .create()
-                            .show();
-                }
+                cadastreUser(name_user, date_birth_user, gender_user, street_user, number_user,
+                        neighborhood_user, city_user, state_user, photo_user, username_user,
+                        password_user);
             }
         });
     }
@@ -274,11 +259,13 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                 startActivityForResult(intent, RESULT_CAMERA);
                 break;
             case R.id.ib_gallery:
-                intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, RESULT_GALLERY);
                 break;
             default:
-                Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.default_avatar);
+                Bitmap avatar = BitmapFactory.decodeResource(getResources(),
+                        R.drawable.default_avatar);
                 iv_photo_user.setImageBitmap(avatar);
                 iv_photo_user.setImageBitmap(Bitmap.createScaledBitmap(avatar, 120, 120, true));
                 break;
@@ -302,8 +289,52 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
             bitmapPhoto = BitmapFactory.decodeFile(picturePath.toString());
             if (bitmapPhoto != null) {
                 iv_photo_user.setImageBitmap(bitmapPhoto);
-                iv_photo_user.setImageBitmap(Bitmap.createScaledBitmap(bitmapPhoto, 120, 120, true));
+                iv_photo_user.setImageBitmap(Bitmap.
+                        createScaledBitmap(bitmapPhoto, 120, 120, true));
             }
+        }
+    }
+
+    private void cadastreUser(String name, String birthDate, String gender, String street,
+                              String number, String neighborhood, String city, String state,
+                              String photo, String username, String password) {
+
+        if (validateName() && validateDateOfBirth() && validateCity() &&  validateNeighborhood()
+                && validateStreet()&& validateNumber() && validateUsername() && validatePassword()
+                && validatePasswordConfirm() && confirmationPassword()) {
+            userController.cadastre(name, birthDate, gender, street, number, neighborhood, city,
+                    state, photo, username, password, MainActivity.class);
+
+        } else if (!validateName()) {
+            return;
+        } else if (!validateDateOfBirth()) {
+            return;
+        } else if (!validateCity()) {
+            return;
+        } else if (!validateNeighborhood()) {
+            return;
+        } else if (!validateStreet()) {
+            return;
+        } else if (!validateNumber()) {
+            return;
+        } else if (!validateUsername()) {
+            return;
+        } else if (!validatePassword()) {
+            return;
+        } else if (!validatePasswordConfirm()) {
+            return;
+        } else if (!confirmationPassword()) {
+            new AlertDialog.Builder(UserCadastreActivity.this)
+                    .setMessage("As senhas não coincidem!") //TODO internacionalizar
+                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            mInput_password.setText("");
+                            mInput_password_confirm.setText("");
+                            requestFocus(mInput_password);
+                        }
+                    })
+                    .create()
+                    .show();
         }
     }
 
@@ -445,10 +476,10 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         return true;
     }
 
-
     private void requestFocus(View view) {
         if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                    SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 }
