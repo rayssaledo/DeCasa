@@ -19,7 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="35"
             android:src="@drawable/default_avatar"
-            app:border="true"
+            app:border="false"
             app:border_color="#EEEEEE"
             app:border_width="4dp"
             app:shadow="true" />
@@ -89,5 +89,25 @@
             android:stepSize="1"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
 
+        <Button
+            android:id="@+id/btn_call"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/text_call"
+            android:gravity="center"
+            android:textAllCaps="false"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:background="@drawable/screen_border"/>
+
+    </LinearLayout>
 </LinearLayout>

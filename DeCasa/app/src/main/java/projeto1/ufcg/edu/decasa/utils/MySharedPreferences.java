@@ -15,7 +15,7 @@ public class MySharedPreferences {
 
     private static final String PREFER_NAME = "Pref";
     private static final String KEY_SERVICE_ACTIVE = "service_active";
-    private  static final String KEY_USERNAME_USER = "username_user";
+    public static final String KEY_USERNAME_USER = "username_user";
     private static final String IS_USER_LOGIN = "IsUserLoggedIn";
 
 

@@ -5,8 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +27,78 @@ public class UserController {
         mHttp = new HttpUtils(mActivity);
         url = "http://decasa-decasa.rhcloud.com/";
         mySharedPreferences = new MySharedPreferences(mActivity.getApplicationContext());
+    }
+
+    public void cadastre(final String name, final String birthDate, final String gender,
+                         final String street, final String number, final String neighborhood,
+                         final String city, final String state, final String photo,
+                         final String username, final String password, final Class classDest) {
+
+        //mLoadingCadastre.setVisibility(View.VISIBLE);
+        String urlCadastre = url + "add-user";
+        JSONObject json = new JSONObject();
+        try {
+            json.put("name", name);
+            json.put("birthDate", birthDate);
+            json.put("gender", gender);
+            json.put("street", street);
+            json.put("number", number);
+            json.put("neighborhood", neighborhood);
+            json.put("city", city);
+            json.put("state", state);
+            json.put("photo", photo);
+            json.put("username", username);
+            json.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mHttp.post(urlCadastre, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) throws JSONException{
+                if (result.getInt("ok") == 0) {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage(result.getString("msg")) //TODO internacionalizar
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //mLoadingCadastre.setVisibility(View.GONE);
+                                }
+                            })
+                            .create()
+                            .show();
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setMessage("Cadastro realizado com sucesso") //TODO internacionalizar
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mySharedPreferences.saveUserLogged(username);
+                                    setView(mActivity, classDest);
+                                    mActivity.finish();
+                                    mActivity.finish();
+
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            }
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível") //TODO intercionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //mLoadingCadastre.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
     }
 
 
@@ -150,6 +220,5 @@ public class UserController {
         it.setClass(context, classe);
         mActivity.startActivity(it);
     }
-
 
 }

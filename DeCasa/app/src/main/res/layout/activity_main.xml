@@ -56,7 +56,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/ib_electrician"
-                            android:src="@mipmap/ic_electrician"
+                            android:src="@drawable/ic_electrician"
                             android:background="@null"
 
                             android:contentDescription="@string/desc_electrician"/>
@@ -84,24 +84,24 @@
                     card_view:contentPadding="10dp">
 
                     <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
                         <ImageButton
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/ib_plumber"
-                            android:src="@mipmap/ic_plumber"
-                           android:background="@null"
+                            android:src="@drawable/ic_plumber"
+                            android:background="@null"
                             android:contentDescription="@string/desc_plumber"/>
 
                         <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:textAlignment="center"
-                           android:text="@string/text_plumber"
-                           android:textColor="@color/colorPrimaryDark"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAlignment="center"
+                            android:text="@string/text_plumber"
+                            android:textColor="@color/colorPrimaryDark"/>
 
                     </LinearLayout>
 
@@ -126,16 +126,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/ib_fitter"
-                            android:src="@mipmap/ic_fitter"
+                            android:src="@drawable/ic_fitter"
                             android:background="@null"
                             android:contentDescription="@string/desc_fitter"/>
 
                         <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:textAlignment="center"
-                           android:text="@string/text_fitter"
-                           android:textColor="@color/colorPrimaryDark"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAlignment="center"
+                            android:text="@string/text_fitter"
+                            android:textColor="@color/colorPrimaryDark"/>
 
                     </LinearLayout>
 
@@ -145,18 +145,18 @@
 
         </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_register"
-                android:textAllCaps="false"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:gravity="center_horizontal"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true" />
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_register"
+            android:textAllCaps="false"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 
