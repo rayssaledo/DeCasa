@@ -48,4 +48,7 @@
     <string name="hint_password_confirm">Confirmar senha</string>
     <string name="female">Feminino</string>
     <string name="male">Masculino</string>
+    <string name="btn_login_user">Entrar</string>
+    <string name="hint_user_email">E-mail</string>
+    <string name="hint_user_password">Digite sua senha</string>
 </resources>

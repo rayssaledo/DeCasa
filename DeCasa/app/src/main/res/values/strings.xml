@@ -56,4 +56,9 @@
     <string name="hint_password_confirm">Confirm password</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
+    <string name="btn_login_user">Sign in</string>
+    <string name="hint_user_email">Email</string>
+    <string name="hint_user_password">Password</string>
+    <string name="title_activity_login">LoginActivity</string>
+
 </resources>

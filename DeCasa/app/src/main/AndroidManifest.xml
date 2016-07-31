@@ -30,7 +30,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
@@ -38,8 +37,7 @@
         <activity
             android:name=".views.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".views.ProfessionalsActivity"
             android:label="@string/title_activity_professionals"
@@ -57,7 +55,7 @@
         <activity
             android:name=".views.UserCadastreActivity"
             android:label="@string/title_activity_user_cadastre"
-            android:theme="@style/AppThemeRegister" />
+            android:theme="@style/AppThemeRegisterOrLogin" />
         <activity
             android:name=".views.SplashActivity"
             android:label="@string/app_name"
@@ -67,6 +65,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppThemeRegisterOrLogin">
         </activity>
     </application>
 

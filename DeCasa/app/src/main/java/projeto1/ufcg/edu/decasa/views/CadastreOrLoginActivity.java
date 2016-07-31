@@ -32,7 +32,7 @@ public class CadastreOrLoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                setView(CadastreOrLoginActivity.this, LoginActivity.class);
             }
         });
     }
@@ -42,5 +42,7 @@ public class CadastreOrLoginActivity extends AppCompatActivity {
         it.setClass(context, classe);
         startActivity(it);
     }
+
+
 
 }
