@@ -1,5 +1,7 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -7,10 +9,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,13 +38,44 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALLERY = 222;
     private Bitmap bitmapPhoto;
-    private EditText mDate_of_birth;
+
     private Spinner mGenders_spinner;
     private Spinner mStates_spinner;
     private List<String> genders;
     private List<String> states;
+
     private String mGender_user;
     private String mState;
+    private String name_user;
+    private String date_birth_user;
+    private String city_user;
+    private String neighborhood_user;
+    private String street_user;
+    private String number_user;
+    private String username_user;
+    private String password_user;
+    private String password_confirm_user;
+
+    private Button btn_cadastre;
+    private EditText mInput_name;
+    private EditText mDate_of_birth;
+    private EditText mInput_city;
+    private EditText mInput_neighborhood;
+    private EditText mInput_street;
+    private EditText mInput_number;
+    private EditText mInput_username;
+    private EditText mInput_password;
+    private EditText mInput_password_confirm;
+
+    private TextInputLayout layout_name;
+    private TextInputLayout layout_date_birth;
+    private TextInputLayout layout_city;
+    private TextInputLayout layout_neighborhood;
+    private TextInputLayout layout_street;
+    private TextInputLayout layout_number;
+    private TextInputLayout layout_username;
+    private TextInputLayout layout_password;
+    private TextInputLayout layout_password_confirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +92,29 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         ib_delete = (ImageButton) findViewById(R.id.ib_delete);
         ib_delete.setOnClickListener(this);
 
-        mDate_of_birth = (EditText) findViewById(R.id.input_date_of_birth);
         mGenders_spinner = (Spinner) findViewById(R.id.sp_gender);
         mStates_spinner = (Spinner) findViewById(R.id.sp_state);
+
+        btn_cadastre = (Button) findViewById(R.id.btn_cadastre);
+        mInput_name = (EditText) findViewById(R.id.input_name);
+        mDate_of_birth = (EditText) findViewById(R.id.input_date_of_birth);
+        mInput_city = (EditText) findViewById(R.id.input_city);
+        mInput_neighborhood = (EditText) findViewById(R.id.input_neighborhood);
+        mInput_street = (EditText) findViewById(R.id.input_street);
+        mInput_number = (EditText) findViewById(R.id.input_number);
+        mInput_username = (EditText) findViewById(R.id.input_username);
+        mInput_password = (EditText) findViewById(R.id.input_password);
+        mInput_password_confirm = (EditText) findViewById(R.id.input_password_confirm);
+
+        layout_name = (TextInputLayout) findViewById(R.id.input_layout_name);
+        layout_date_birth = (TextInputLayout) findViewById(R.id.input_layout_date_of_birth);
+        layout_city = (TextInputLayout) findViewById(R.id.input_layout_city);
+        layout_neighborhood = (TextInputLayout) findViewById(R.id.input_layout_neighborhood);
+        layout_street = (TextInputLayout) findViewById(R.id.input_layout_street);
+        layout_number = (TextInputLayout) findViewById(R.id.input_layout_number);
+        layout_username = (TextInputLayout) findViewById(R.id.input_layout_username);
+        layout_password = (TextInputLayout) findViewById(R.id.input_layout_password);
+        layout_password_confirm = (TextInputLayout) findViewById(R.id.input_layout_password_confirm);
 
         MaskEditTextChangedListener maskDateOfBirth = new MaskEditTextChangedListener("##/##/####",
                 mDate_of_birth);
@@ -81,7 +137,9 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                     mGender_user = "M";
                 }
             }
-            public void onNothingSelected(final AdapterView<?> parent) {}
+
+            public void onNothingSelected(final AdapterView<?> parent) {
+            }
         });
 
         putStateElementsOnSpinnerArray();
@@ -93,9 +151,62 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                 Object item = parent.getItemAtPosition(pos);
                 mState = item.toString();
             }
-            public void onNothingSelected(final AdapterView<?> parent) {}
+
+            public void onNothingSelected(final AdapterView<?> parent) {
+            }
         });
 
+        btn_cadastre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name_user = mInput_name.getText().toString();
+                date_birth_user = mDate_of_birth.getText().toString();
+                city_user = mInput_city.getText().toString();
+                neighborhood_user = mInput_neighborhood.getText().toString();
+                street_user = mInput_street.getText().toString();
+                number_user = mInput_number.getText().toString();
+                username_user = mInput_username.getText().toString();
+                password_user = mInput_password.getText().toString();
+                password_confirm_user = mInput_password_confirm.getText().toString();
+
+                if (validateName() && validateDateOfBirth() && validateCity() &&  validateNeighborhood()
+                && validateStreet()&& validateNumber() && validateUsername() && validatePassword()
+                        && validatePasswordConfirm() && confirmationPassword()) {
+                    //register!!
+
+                } else if (!validateName()) {
+                    return;
+                } else if (!validateDateOfBirth()) {
+                    return;
+                } else if (!validateCity()) {
+                    return;
+                } else if (!validateNeighborhood()) {
+                    return;
+                } else if (!validateStreet()) {
+                    return;
+                } else if (!validateNumber()) {
+                    return;
+                } else if (!validateUsername()) {
+                    return;
+                } else if (!validatePassword()) {
+                    return;
+                } else if (!validatePasswordConfirm()) {
+                    return;
+                } else if (!confirmationPassword()) {
+                    new AlertDialog.Builder(UserCadastreActivity.this)
+                            .setMessage("As senhas não coincidem!")
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    mInput_password.setText("");
+                                    mInput_password_confirm.setText("");
+                                    requestFocus(mInput_password);
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            }
+        });
     }
 
     private SpinnerAdapter createArrayAdapterState() {
@@ -196,4 +307,148 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    private boolean validateName(){
+        if (name_user.trim().isEmpty() || name_user == null) {
+            layout_name.setError(getString(R.string.err_msg_name));
+            requestFocus(mInput_name);
+            return false;
+        } else if (name_user.trim().length() < 10){
+            layout_name.setError(getString(R.string.err_short_name));
+            requestFocus(mInput_name);
+            return false;
+        } else {
+            layout_name.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateDateOfBirth(){
+        if (date_birth_user.trim().isEmpty()) {
+            layout_date_birth.setError(getString(R.string.err_msg_birth));
+            requestFocus(mDate_of_birth);
+            return false;
+        } else if (date_birth_user.trim().length() != 10){
+            layout_date_birth.setError(getString(R.string.err_invalid_birth));
+            requestFocus(mDate_of_birth);
+            return false;
+        } else {
+            layout_date_birth.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateNeighborhood(){
+        if (neighborhood_user.trim().isEmpty() || neighborhood_user == null) {
+            layout_neighborhood.setError(getString(R.string.err_msg_neighborhood));
+            requestFocus(mInput_neighborhood);
+            return false;
+        } else if (neighborhood_user.trim().length() < 4){
+            layout_neighborhood.setError(getString(R.string.err_short_neighborhood_name));
+            requestFocus(mInput_neighborhood);
+            return false;
+        } else {
+            layout_neighborhood.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateStreet(){
+        if (street_user.trim().isEmpty() || street_user == null) {
+            layout_street.setError(getString(R.string.err_msg_street));
+            requestFocus(mInput_street);
+            return false;
+        } else if (street_user.trim().length() < 4){
+            layout_street.setError(getString(R.string.err_short_street_name));
+            requestFocus(mInput_street);
+            return false;
+        } else {
+            layout_street.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateNumber(){
+        if (number_user.trim().isEmpty() || number_user == null) {
+            layout_number.setError(getString(R.string.err_msg_number));
+            requestFocus(mInput_number);
+            return false;
+        } else {
+            layout_number.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateCity(){
+        if (city_user.trim().isEmpty() || city_user == null) {
+            layout_city.setError(getString(R.string.err_msg_city));
+            requestFocus(mInput_city);
+            return false;
+        } else if (city_user.trim().length() < 4){
+            layout_city.setError(getString(R.string.err_short_city_name));
+            requestFocus(mInput_city);
+            return false;
+        } else {
+            layout_city.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validateUsername(){
+        if (username_user.trim().isEmpty()) {
+            layout_username.setError(getString(R.string.err_msg_username));
+            requestFocus(mInput_username);
+            return false;
+        } else if (username_user.trim().length() < 5) {
+            layout_username.setError(getString(R.string.err_short_username));
+            requestFocus(mInput_username);
+            return false;
+        } else{
+            layout_username.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validatePassword(){
+        if (password_user.trim().isEmpty()) {
+            layout_password.setError(getString(R.string.err_msg_password));
+            requestFocus(mInput_password);
+            return false;
+        } else if (password_user.trim().length() < 6){
+            layout_password.setError(getString(R.string.err_short_password));
+            requestFocus(mInput_password);
+            return false;
+        } else {
+            layout_password.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean validatePasswordConfirm(){
+        if (password_confirm_user.trim().isEmpty()) {
+            layout_password_confirm.setError(getString(R.string.err_msg_password_confirm));
+            requestFocus(mInput_password_confirm);
+            return false;
+        } else if (password_confirm_user.trim().length() < 6){
+            layout_password_confirm.setError(getString(R.string.err_short_password));
+            requestFocus(mInput_password_confirm);
+            return false;
+        } else {
+            layout_password_confirm.setErrorEnabled(false);
+        }
+        return true;
+    }
+
+    private boolean confirmationPassword(){
+        if (!password_user.trim().equals(password_confirm_user)){
+            return false;
+        }
+        return true;
+    }
+
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
 }
