@@ -29,7 +29,7 @@
         <item name="colorAccent">@color/grey</item>
     </style>
 
-    <style name="AppThemeRegisterOrLogin" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeCustom" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>

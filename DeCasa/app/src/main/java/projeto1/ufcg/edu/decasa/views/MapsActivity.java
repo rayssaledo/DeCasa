@@ -8,8 +8,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -18,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +63,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
     private ProfessionalController professionalController;
     private String service;
     private MySharedPreferences mySharedPreferences;
+    private String address;
 
 
     private Handler handler = new Handler() {
@@ -109,12 +113,36 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
     private void handleNewLocation(Location location) {
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
+        LatLng latLng;
 
-        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+        if (currentLatitude == 0.0  && currentLongitude == 0.0) {
+            latLng = getLatLng(location.getProvider());
+            if (latLng.latitude == 0.0 && latLng.longitude == 0.0) {
+                final AlertDialog.Builder builder =  new AlertDialog.Builder(MapsActivity.this);
+                builder.setMessage("Endereço não encontrado!")
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface d, int id) {
+                                        service = mySharedPreferences.getService();
+                                        Intent intent = new Intent(MapsActivity.this,
+                                                ProfessionalsActivity.class);
+                                        intent.putExtra("SERVICE",service);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                builder.create().show();
+            }
+        } else {
+            latLng = new LatLng(currentLatitude, currentLongitude);
+        }
 
-        mapFragment.placeMarker(latLng);
-        mapFragment.getMap().animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
+        Log.d("LATLNG", latLng + "");
 
+        if (latLng != null) {
+            mapFragment.placeMarker(latLng);
+            mapFragment.getMap().animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
+        }
     }
 
     @Override
@@ -134,10 +162,16 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                     mGoogleApiClient);
         }
 
-        if  ( mLastLocation !=  null )  {
+        if  (mySharedPreferences.getUserLocation() !=  null)  {
+            Log.d("USERLOCATION", mySharedPreferences.getUserLocation() + "");
+
+            Location location = new Location(mySharedPreferences.getUserLocation());
+            setUpProfessionalsMarker();
+            handleNewLocation(location);
+
+        } else if (mLastLocation != null) {
             setUpProfessionalsMarker();
             handleNewLocation(mLastLocation);
-
         } else {
             Log.i("MY LOCATION", "NULL");
         }
@@ -191,7 +225,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
                 infoWindow = null;
 
-                if (!marker.getTitle().equals("Minha localização")) {
+                if (!marker.getTitle().equals("Minha localização")) { //TODO internacionalizar
                     infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.
                             infowindow_professional, null);
 
@@ -216,10 +250,14 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                     {
                         @Override
                         protected void onClickConfirmed(View v, Marker marker) {
-                            Intent intent = new Intent(MapsActivity.this,
-                                    ProfileProfessionalActivity.class);
-                            intent.putExtra("PROFESSIONAL", professionalInfo);
-                            startActivity(intent);
+                            if (mySharedPreferences.isUserLoggedIn()) {
+                                Intent intent = new Intent(MapsActivity.this,
+                                        ProfileProfessionalActivity.class);
+                                intent.putExtra("PROFESSIONAL", professionalInfo);
+                                startActivity(intent);
+                            } else {
+                                setView(MapsActivity.this, CadastreOrLoginActivity.class);
+                            }
                         }
                     };
                     btn_more_information.setOnTouchListener(btn_more_listener);
@@ -227,11 +265,16 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                     {
                         @Override
                         protected void onClickConfirmed(View view, Marker marker) {
-                            String phone = professionalInfo.getPhone().substring(1,3) + professionalInfo.getPhone().
-                                    substring(4,9) + professionalInfo.getPhone().substring(9);
-                            Uri uri = Uri.parse("tel:" + phone);
-                            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                            startActivity(intent);
+                            if (mySharedPreferences.isUserLoggedIn()) {
+                                String phone = professionalInfo.getPhone().substring(1, 3) +
+                                        professionalInfo.getPhone().
+                                        substring(4, 9) + professionalInfo.getPhone().substring(9);
+                                Uri uri = Uri.parse("tel:" + phone);
+                                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                                startActivity(intent);
+                            } else {
+                                setView(MapsActivity.this, CadastreOrLoginActivity.class);
+                            }
                         }
                     };
                     btn_call.setOnTouchListener(btn_call_listener);
@@ -265,13 +308,14 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
             Geocoder geocoder = new Geocoder(this);
             try {
                 addressList = geocoder.getFromLocationName(location , 1);
+                if (addressList.size() > 0) {
+                    Address address = addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
+                    return latLng;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Address address = addressList.get(0);
-            LatLng latLng = new LatLng(address.getLatitude() , address.getLongitude());
-
-            return latLng;
         }
         return new LatLng(0, 0);
     }

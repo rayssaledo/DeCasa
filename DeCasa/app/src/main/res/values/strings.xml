@@ -43,6 +43,7 @@
     <string name="title_my_location">My location</string>
     <string name="message_dialog_gps">Do you want to turn on your GPS?</string>
     <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
     <string name="title_activity_cadastre_or_login">CadastreOrLoginActivity</string>
     <string name="title_activity_user_cadastre">UserCadastreActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
@@ -55,6 +56,7 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_password_confirm">Confirm password</string>
+    <string name="hint_address">Address</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="btn_login_user">Sign in</string>
@@ -80,4 +82,9 @@
     <string name="err_msg_password">Insira uma senha</string>
     <string name="err_short_password">A senha deve conter no mínimo 6 caracteres</string>
     <string name="err_msg_password_confirm">Insira sua senha novamente</string>
+
+    <string name="title_dialog_find_nearest">Choose an option:</string>
+    <string name="option_dialog_GPS">Find by GPS</string>
+    <string name="option_dialog_address">Find by an address</string>
+    <string name="title_dialog_address_form">Address:</string>
 </resources>

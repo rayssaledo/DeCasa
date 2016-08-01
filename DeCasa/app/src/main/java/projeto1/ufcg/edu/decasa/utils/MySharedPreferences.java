@@ -17,6 +17,7 @@ public class MySharedPreferences {
     private static final String KEY_SERVICE_ACTIVE = "service_active";
     public static final String KEY_USERNAME_USER = "username_user";
     private static final String IS_USER_LOGIN = "IsUserLoggedIn";
+    private static final String USER_LOCATION = "user_location";
 
 
     public MySharedPreferences(Context context){
@@ -69,5 +70,15 @@ public class MySharedPreferences {
 //        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        mContext.startActivity(i);
+    }
+
+    public String getUserLocation() {
+        String location = mPref.getString(USER_LOCATION, null);
+        return location;
+    }
+
+    public void saveUserLocation (String location){
+        mEditor.putString(USER_LOCATION, location);
+        mEditor.commit();
     }
 }

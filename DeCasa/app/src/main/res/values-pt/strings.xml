@@ -38,6 +38,7 @@
     <string name="title_my_location">Minha localização</string>
     <string name="message_dialog_gps">Você deseja ativar o seu GPS?</string>
     <string name="cancel">Cancelar</string>
+    <string name="ok">Ok</string>
     <string name="hint_name">Nome</string>
     <string name="hint_date_of_birth">Data de nascimento</string>
     <string name="hint_city">Cidade</string>
@@ -47,9 +48,15 @@
     <string name="hint_username">Nome de usuário</string>
     <string name="hint_password">Senha</string>
     <string name="hint_password_confirm">Confirmar senha</string>
+    <string name="hint_address">Endereço</string>
     <string name="female">Feminino</string>
     <string name="male">Masculino</string>
     <string name="btn_login_user">Entrar</string>
     <string name="hint_user_email">E-mail</string>
     <string name="hint_user_password">Digite sua senha</string>
+
+    <string name="title_dialog_find_nearest">Escolha uma opção:</string>
+    <string name="option_dialog_GPS">Procurar através do GPS</string>
+    <string name="option_dialog_address">Procurar através de um endereço</string>
+    <string name="title_dialog_address_form">Endereço:</string>
 </resources>
