@@ -38,6 +38,7 @@ public class MySharedPreferences {
     }
 
     public void saveUserLogged(String login){
+        mEditor.putBoolean(IS_USER_LOGIN, true);
         mEditor.putString(KEY_USERNAME_USER, login);
         mEditor.commit();
     }

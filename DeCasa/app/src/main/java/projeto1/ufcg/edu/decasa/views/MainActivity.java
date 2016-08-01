@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
         btn_register = (Button)  findViewById(R.id.btn_register);
 
+        Log.d("USER LOGGED: ", mySharedPreferences.checkLogin() + "");
         it = new Intent(MainActivity.this, ProfessionalsActivity.class);
 
         ib_electrician.setOnClickListener(new View.OnClickListener(){

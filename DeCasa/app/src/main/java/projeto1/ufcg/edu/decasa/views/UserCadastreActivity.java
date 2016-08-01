@@ -1,6 +1,7 @@
 package projeto1.ufcg.edu.decasa.views;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -61,6 +62,7 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     private String password_confirm_user;
 
     private Button btn_cadastre;
+    private Button btn_login;
     private EditText mInput_name;
     private EditText mDate_of_birth;
     private EditText mInput_city;
@@ -113,6 +115,7 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         mStates_spinner = (Spinner) findViewById(R.id.sp_state);
 
         btn_cadastre = (Button) findViewById(R.id.btn_cadastre);
+        btn_login = (Button) findViewById(R.id.btn_login);
         mInput_name = (EditText) findViewById(R.id.input_name);
         mDate_of_birth = (EditText) findViewById(R.id.input_date_of_birth);
         mInput_city = (EditText) findViewById(R.id.input_city);
@@ -192,6 +195,20 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                         password_user);
             }
         });
+
+        btn_login.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                setView(UserCadastreActivity.this, LoginActivity.class);
+            }
+        });
+    }
+
+    public void setView(Context context, Class classe) {
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 
     private SpinnerAdapter createArrayAdapterState() {

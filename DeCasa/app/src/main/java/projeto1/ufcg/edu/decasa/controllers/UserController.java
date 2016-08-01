@@ -14,6 +14,7 @@ import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.views.LoginActivity;
 import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
 
 public class UserController {
@@ -105,11 +106,11 @@ public class UserController {
 
 
     public void login(final String login, final String password, final Class classDest) {
-       // mActivity.mLoadingLogin.setVisibility(View.VISIBLE);
-        String rout_check_login = url + "checklogin";
+        LoginActivity.loading.setVisibility(View.VISIBLE);
+        String rout_check_login = url + "check-login";
         final JSONObject json = new JSONObject();
         try {
-            json.put("login", login);
+            json.put("username", login);
             json.put("password", password);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -125,7 +126,7 @@ public class UserController {
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                      //mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                      LoginActivity.loading.setVisibility(View.GONE);
                                     }
                                 })
                                 .create()
@@ -135,7 +136,7 @@ public class UserController {
                         mySharedPreferences.saveUserLogged(login);
                         setView(mActivity, classDest);
                         mActivity.finish();
-
+                        mActivity.finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -150,7 +151,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                              //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                LoginActivity.loading.setVisibility(View.GONE);
                             }
                         })
                         .create()
@@ -166,6 +167,7 @@ public class UserController {
                 @Override
                 public void onSucess(JSONObject response) throws JSONException {
                     if (response.getInt("ok") == 1) {
+                     //TODO conferir nome dos campos
                         String name = response.getString("name");
                         String date_of_birth = response.getString("birth");
                         String gender = response.getString("gender");
