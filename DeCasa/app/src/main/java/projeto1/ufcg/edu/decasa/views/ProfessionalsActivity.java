@@ -91,97 +91,99 @@ public class ProfessionalsActivity extends AppCompatActivity {
         btnFindNearest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialogFindNearest = new Dialog(ProfessionalsActivity.this);
-                dialogFindNearest.setContentView(R.layout.dialog_find_nearest);
-                dialogFindNearest.setTitle(getApplication().getString(R.string.title_dialog_find_nearest));
-                dialogFindNearest.setCancelable(true);
+                createDialogChoose();
+            }
+        });
+    }
 
-                final RadioButton rd1 = (RadioButton) dialogFindNearest.findViewById(R.id.rd1);
-                final RadioButton rd2 = (RadioButton) dialogFindNearest.findViewById(R.id.rd2);
-                final Button okButton = (Button) dialogFindNearest.findViewById(R.id.btn_ok);
-                final Button cancelButton = (Button) dialogFindNearest.findViewById(R.id.btn_cancel);
+    private void createDialogChoose() {
+        final Dialog dialogFindNearest = new Dialog(ProfessionalsActivity.this);
+        dialogFindNearest.setContentView(R.layout.dialog_find_nearest);
+        dialogFindNearest.setTitle(getApplication().getString(R.string.title_dialog_find_nearest));
+        dialogFindNearest.setCancelable(true);
 
-                rd1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rd1.setChecked(true);
-                        rd2.setChecked(false);
+        final RadioButton rd1 = (RadioButton) dialogFindNearest.findViewById(R.id.rd1);
+        final RadioButton rd2 = (RadioButton) dialogFindNearest.findViewById(R.id.rd2);
+        final Button okButton = (Button) dialogFindNearest.findViewById(R.id.btn_ok);
+        final Button cancelButton = (Button) dialogFindNearest.findViewById(R.id.btn_cancel);
+
+        rd1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rd1.setChecked(true);
+                rd2.setChecked(false);
+            }
+        });
+        rd2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rd2.setChecked(true);
+                rd1.setChecked(false);
+            }
+        });
+
+        dialogFindNearest.show();
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogFindNearest.dismiss();
+            }
+        });
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (rd1.isChecked()) {
+                    LocationManager manager = (LocationManager) getSystemService(Context.
+                            LOCATION_SERVICE);
+                    boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
+                    if(isOn) {
+                        setView(ProfessionalsActivity.this, MapsActivity.class);
+                    } else {
+                        displayPromptForEnablingGPS(ProfessionalsActivity.this,
+                                getApplication().getString(R.string.message_dialog_gps),
+                                getApplication().getString(R.string.cancel), dialogFindNearest);
                     }
-                });
-                rd2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        rd2.setChecked(true);
-                        rd1.setChecked(false);
-                    }
-                });
+                    mySharedPreferences.saveUserLocation(null);
+                } else if (rd2.isChecked()) {
+                    createDialogAddress(dialogFindNearest);
+                }
+            }
+        });
+    }
 
-                dialogFindNearest.show();
+    private void createDialogAddress(final Dialog dialogFindNearest) {
+        final Dialog dialogAddress = new Dialog(ProfessionalsActivity.this);
+        dialogAddress.setContentView(R.layout.dialog_address);
+        dialogAddress.setTitle(getApplication().getString(R.string.title_dialog_address_form));
+        dialogAddress.setCancelable(true);
+        dialogAddress.show();
 
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogFindNearest.dismiss();
-                    }
-                });
+        final EditText input_street = (EditText) dialogAddress.findViewById(R.id.input_address);
+        final Button btn_ok = (Button) dialogAddress.findViewById(R.id.btn_ok);
 
-                okButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (rd1.isChecked()) {
-                            LocationManager manager = (LocationManager) getSystemService(Context.
-                                    LOCATION_SERVICE);
-                            boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
-                            if(isOn) {
-                                setView(ProfessionalsActivity.this, MapsActivity.class);
-                            } else {
-                                displayPromptForEnablingGPS(ProfessionalsActivity.this,
-                                        getApplication().getString(R.string.message_dialog_gps),
-                                        getApplication().getString(R.string.cancel) );
-                            }
-                            mySharedPreferences.saveUserLocation(null);
-                            dialogFindNearest.dismiss();
-                        } else if (rd2.isChecked()) {
-                            final Dialog dialogAddressForm = new Dialog(ProfessionalsActivity.this);
-                            dialogAddressForm.setContentView(R.layout.dialog_address_form);
-                            dialogAddressForm.setTitle(getApplication().getString(R.string.title_dialog_address_form));
-                            dialogAddressForm.setCancelable(true);
-                            dialogAddressForm.show();
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ed_address = (EditText) dialogAddress.
+                        findViewById(R.id.input_address);
+                til_address = (TextInputLayout) dialogAddress.
+                        findViewById(R.id.input_layout_address);
+                address = ed_address.getText().toString();
+                mySharedPreferences.saveUserLocation(address);
+                setView(ProfessionalsActivity.this, MapsActivity.class);
+                dialogAddress.dismiss();
+                dialogFindNearest.dismiss();
+            }
+        });
 
-                            final EditText input_street = (EditText) dialogAddressForm.
-                                    findViewById(R.id.input_address);
+        final Button btn_cancel = (Button) dialogAddress.findViewById(R.id.btn_cancel);
 
-                            final Button btn_ok = (Button) dialogAddressForm.findViewById(R.id.btn_ok);
-
-                            btn_ok.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    ed_address = (EditText) dialogAddressForm.
-                                            findViewById(R.id.input_address);
-
-                                    til_address = (TextInputLayout) dialogAddressForm.
-                                            findViewById(R.id.input_layout_address);
-
-                                    address = ed_address.getText().toString();
-
-                                    mySharedPreferences.saveUserLocation(address);
-                                    setView(ProfessionalsActivity.this, MapsActivity.class);
-
-                                }
-                            });
-
-                            final Button btn_cancel = (Button) dialogAddressForm.findViewById(R.id.btn_cancel);
-
-                            btn_cancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialogAddressForm.dismiss();
-                                }
-                            });
-
-                        }
-                    }
-                });
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAddress.dismiss();
             }
         });
     }
@@ -204,7 +206,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public static void displayPromptForEnablingGPS(final Activity activity, String message,
-                                                   String cancel) {
+                                                   String cancel, final Dialog dialogFindNearest) {
 
         final AlertDialog.Builder builder =  new AlertDialog.Builder(activity);
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
@@ -215,6 +217,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                             public void onClick(DialogInterface d, int id) {
                                 activity.startActivity(new Intent(action));
                                 d.dismiss();
+                                dialogFindNearest.dismiss();
                             }
                         })
                 .setNegativeButton(cancel,

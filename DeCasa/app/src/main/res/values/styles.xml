@@ -23,13 +23,13 @@
         <item name="android:maxHeight">48dip</item>
     </style>
 
-    <style name="AppThemeLoading" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeCustom" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/grey</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
-    <style name="AppThemeCustom" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeCustomNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>

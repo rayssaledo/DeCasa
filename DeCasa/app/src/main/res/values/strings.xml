@@ -63,28 +63,24 @@
     <string name="hint_user_email">Email</string>
     <string name="hint_user_password">Password</string>
     <string name="title_activity_login">LoginActivity</string>
-
-    ------------ UserCadastreActivity -------------
-    <string name="err_msg_name">Insira seu nome completo</string>
-    <string name="err_short_name">Nome muito curto</string>
-    <string name="err_msg_birth">Insira sua data de nascimento</string>
-    <string name="err_invalid_birth">Data inválida</string>
-
-    <string name="err_msg_neighborhood">Insira seu bairro</string>
-    <string name="err_short_neighborhood_name">Nome de bairro muito curto</string>
-    <string name="err_msg_street">Insira sua rua</string>
-    <string name="err_short_street_name">Nome de rua muito curto</string>
-    <string name="err_msg_number">Insira o número</string>
-    <string name="err_msg_city">Insira sua Cidade</string>
-    <string name="err_short_city_name">Nome de cidade muito curto</string>
-    <string name="err_msg_username">Insira um nome de usuário</string>
-    <string name="err_short_username">Nome de usuário muito curto</string>
-    <string name="err_msg_password">Insira uma senha</string>
-    <string name="err_short_password">A senha deve conter no mínimo 6 caracteres</string>
-    <string name="err_msg_password_confirm">Insira sua senha novamente</string>
-
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_short_name">Very short name</string>
+    <string name="err_msg_birth">Enter your date of bith</string>
+    <string name="err_invalid_birth">Invalid date</string>
+    <string name="err_msg_neighborhood">Enter your neighborhood</string>
+    <string name="err_short_neighborhood_name">Very short neighborhood name</string>
+    <string name="err_msg_street">Enter your street</string>
+    <string name="err_short_street_name">Very short street name</string>
+    <string name="err_msg_number">Enter the number</string>
+    <string name="err_msg_city">Enter you city</string>
+    <string name="err_short_city_name">Very short city name</string>
+    <string name="err_msg_username">Enter you username</string>
+    <string name="err_short_username">Very short username</string>
+    <string name="err_msg_password">Enter your password</string>
+    <string name="err_short_password">The password must contain at least 6 characters</string>
+    <string name="err_msg_password_confirm">Enter your password again</string>
     <string name="title_dialog_find_nearest">Choose an option:</string>
     <string name="option_dialog_GPS">Find by GPS</string>
     <string name="option_dialog_address">Find by an address</string>
-    <string name="title_dialog_address_form">Address:</string>
+    <string name="title_dialog_address_form">Address</string>
 </resources>
