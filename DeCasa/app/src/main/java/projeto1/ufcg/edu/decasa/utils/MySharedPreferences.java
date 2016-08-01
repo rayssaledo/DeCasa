@@ -48,20 +48,11 @@ public class MySharedPreferences {
         return login;
     }
 
-    public boolean checkLogin(){
-        if(this.isUserLoggedIn()){
-            Intent i = new Intent(mContext, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(i);
-            return true;
-        }
-        return false;
-    }
 
     public boolean isUserLoggedIn(){
         return mPref.getBoolean(IS_USER_LOGIN, false);
     }
+
 
     public void logoutUser(){
         mEditor.clear();

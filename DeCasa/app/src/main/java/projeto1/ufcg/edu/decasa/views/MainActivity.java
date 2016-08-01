@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
         btn_register = (Button)  findViewById(R.id.btn_register);
 
-        Log.d("USER LOGGED: ", mySharedPreferences.checkLogin() + "");
+        Toast.makeText(MainActivity.this, mySharedPreferences.isUserLoggedIn() + "", Toast.LENGTH_SHORT).show();
+
         it = new Intent(MainActivity.this, ProfessionalsActivity.class);
 
         ib_electrician.setOnClickListener(new View.OnClickListener(){
