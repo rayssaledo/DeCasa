@@ -10,6 +10,7 @@ import android.view.View;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
@@ -35,7 +36,8 @@ public class UserController {
     public void cadastre(final String name, final String birthDate, final String gender,
                          final String street, final String number, final String neighborhood,
                          final String city, final String state, final String photo,
-                         final String username, final String password, final Class classDest) {
+                         final String username, final String password, final Class classDest,
+                         final Professional professional) {
 
         UserCadastreActivity.mLoadingCadastre.setVisibility(View.VISIBLE);
         String urlCadastre = url + "add-user";
@@ -77,7 +79,11 @@ public class UserController {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     mySharedPreferences.saveUserLogged(username);
-                                    setView(mActivity, classDest);
+                                    Intent intent = new Intent(mActivity,
+                                            classDest);
+                                    intent.putExtra("PROFESSIONAL", professional);
+                                    mActivity.startActivity(intent);
+                                    //setView(mActivity, classDest);
                                     mActivity.finish();
                                     mActivity.finish();
 
@@ -105,7 +111,8 @@ public class UserController {
     }
 
 
-    public void login(final String login, final String password, final Class classDest) {
+    public void login(final String login, final String password, final Class classDest,
+                      final Professional professional) {
         LoginActivity.loading.setVisibility(View.VISIBLE);
         String rout_check_login = url + "check-login";
         final JSONObject json = new JSONObject();
@@ -134,7 +141,11 @@ public class UserController {
 
                     } else {
                         mySharedPreferences.saveUserLogged(login);
-                        setView(mActivity, classDest);
+                        Intent intent = new Intent(mActivity,
+                                classDest);
+                        intent.putExtra("PROFESSIONAL", professional);
+                        mActivity.startActivity(intent);
+                        //setView(mActivity, classDest);
                         mActivity.finish();
                         mActivity.finish();
                     }

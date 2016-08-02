@@ -1,23 +1,19 @@
 package projeto1.ufcg.edu.decasa.views;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import org.w3c.dom.Text;
-
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
+import projeto1.ufcg.edu.decasa.models.Professional;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,11 +29,16 @@ public class LoginActivity extends AppCompatActivity {
     private UserController userController;
     public static View loading;
 
+    private Professional professional;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Intent it = getIntent();
+        professional = it.getParcelableExtra("PROFESSIONAL");
 
         userController = new UserController(LoginActivity.this);
         btn_login = (Button) findViewById(R.id.btn_signin);
@@ -55,7 +56,13 @@ public class LoginActivity extends AppCompatActivity {
                 password = et_password.getText().toString();
 
                 if (validateEmail() && validatePassword()) {
-                    userController.login(email, password, MainActivity.class);
+                    if (professional == null){
+                        userController.login(email, password, MainActivity.class, professional);
+                    } else {
+                        userController.login(email, password, ProfileProfessionalActivity.class,
+                                professional);
+                    }
+                    //userController.login(email, password, MainActivity.class, professional);
                 } else if (!validateEmail()){
                     return;
                 } else if (!validatePassword()){
@@ -67,7 +74,12 @@ public class LoginActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                setView(LoginActivity.this, UserCadastreActivity.class);
+                Intent intent = new Intent(LoginActivity.this,
+                        UserCadastreActivity.class);
+                intent.putExtra("PROFESSIONAL", professional);
+                startActivity(intent);
+                finish();
+               //setView(LoginActivity.this, UserCadastreActivity.class);
             }
         });
 
@@ -106,7 +118,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.
+                    SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
 
