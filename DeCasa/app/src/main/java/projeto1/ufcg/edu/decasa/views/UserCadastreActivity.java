@@ -36,15 +36,10 @@ import projeto1.ufcg.edu.decasa.controllers.UserController;
 public class UserCadastreActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView iv_photo_user;
-    private ImageButton ib_camera;
-    private ImageButton ib_gallery;
-    private ImageButton ib_delete;
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALLERY = 222;
     private Bitmap bitmapPhoto;
 
-    private Spinner mGenders_spinner;
-    private Spinner mStates_spinner;
     private List<String> genders;
     private List<String> states;
 
@@ -61,8 +56,6 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     private String password_user;
     private String password_confirm_user;
 
-    private Button btn_cadastre;
-    private Button btn_login;
     private EditText mInput_name;
     private EditText mDate_of_birth;
     private EditText mInput_city;
@@ -104,18 +97,18 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
 
 
         iv_photo_user = (ImageView) findViewById(R.id.iv_user_photo);
-        ib_camera = (ImageButton) findViewById(R.id.ib_camera);
+        ImageButton ib_camera = (ImageButton) findViewById(R.id.ib_camera);
         ib_camera.setOnClickListener(this);
-        ib_gallery = (ImageButton) findViewById(R.id.ib_gallery);
+        ImageButton ib_gallery = (ImageButton) findViewById(R.id.ib_gallery);
         ib_gallery.setOnClickListener(this);
-        ib_delete = (ImageButton) findViewById(R.id.ib_delete);
+        ImageButton ib_delete = (ImageButton) findViewById(R.id.ib_delete);
         ib_delete.setOnClickListener(this);
 
-        mGenders_spinner = (Spinner) findViewById(R.id.sp_gender);
-        mStates_spinner = (Spinner) findViewById(R.id.sp_state);
+        Spinner mGenders_spinner = (Spinner) findViewById(R.id.sp_gender);
+        Spinner mStates_spinner = (Spinner) findViewById(R.id.sp_state);
 
-        btn_cadastre = (Button) findViewById(R.id.btn_cadastre);
-        btn_login = (Button) findViewById(R.id.btn_login);
+        Button btn_cadastre = (Button) findViewById(R.id.btn_cadastre);
+        Button btn_login = (Button) findViewById(R.id.btn_login);
         mInput_name = (EditText) findViewById(R.id.input_name);
         mDate_of_birth = (EditText) findViewById(R.id.input_date_of_birth);
         mInput_city = (EditText) findViewById(R.id.input_city);
@@ -487,10 +480,7 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     }
 
     private boolean confirmationPassword(){
-        if (!password_user.trim().equals(password_confirm_user)){
-            return false;
-        }
-        return true;
+        return password_user.trim().equals(password_confirm_user);
     }
 
     private void requestFocus(View view) {

@@ -1,10 +1,7 @@
 package projeto1.ufcg.edu.decasa.models;
 
-import java.util.Date;
 
 public class User {
-
-
     private String name;
     private String date_of_birth;
     private String gender;

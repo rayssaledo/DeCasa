@@ -1,10 +1,7 @@
 package projeto1.ufcg.edu.decasa.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-
-import projeto1.ufcg.edu.decasa.views.MainActivity;
 
 public class MySharedPreferences {
 

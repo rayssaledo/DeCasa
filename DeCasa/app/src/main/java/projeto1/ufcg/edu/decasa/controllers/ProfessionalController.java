@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.location.Location;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;

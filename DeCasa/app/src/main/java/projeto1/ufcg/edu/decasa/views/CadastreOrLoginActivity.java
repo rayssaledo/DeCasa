@@ -11,16 +11,14 @@ import projeto1.ufcg.edu.decasa.R;
 
 public class CadastreOrLoginActivity extends AppCompatActivity {
 
-    private Button btn_register;
-    private Button btn_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastre_or_login);
 
-        btn_register = (Button) findViewById(R.id.btn_register);
-        btn_login = (Button) findViewById(R.id.btn_login);
+        Button btn_register = (Button) findViewById(R.id.btn_register);
+        Button btn_login = (Button) findViewById(R.id.btn_login);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override

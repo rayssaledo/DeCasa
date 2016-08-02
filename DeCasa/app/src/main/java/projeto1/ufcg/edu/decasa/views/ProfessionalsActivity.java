@@ -32,11 +32,8 @@ import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 public class ProfessionalsActivity extends AppCompatActivity {
 
     private ListView listViewProfessionals;
-    private static List<Professional> listProfessionals;
     private ProfessionalsAdapter professionalsAdapter;
     private ProfessionalController professionalController;
-    private String service;
-    private Button btnFindNearest;
     public static View mLoadingProfessionals;
     private EditText ed_address;
     private TextInputLayout til_address;
@@ -63,9 +60,9 @@ public class ProfessionalsActivity extends AppCompatActivity {
         mLoadingProfessionals = findViewById(R.id.rl_loading_professionals);
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
-        btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
+        Button btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
         Intent it = getIntent();
-        service = (String) it.getSerializableExtra("SERVICE");
+        String service = (String) it.getSerializableExtra("SERVICE");
         setTitle(service);
 
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
@@ -189,7 +186,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public void setList(String service){
-        listProfessionals = new ArrayList<>();
+        List<Professional> listProfessionals = new ArrayList<>();
         if (service.equals(getApplication().getString(R.string.title_electricians))){
             listProfessionals = professionalController.getProfessionalsByService("Eletricista",
                     handler);

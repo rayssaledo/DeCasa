@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +16,6 @@ import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton ib_electrician;
-    private ImageButton ib_plumber;
-    private ImageButton ib_fitter;
-    private Button btn_register;
     private Intent it;
     private String service;
     private MySharedPreferences mySharedPreferences;
@@ -32,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
 
-        ib_electrician = (ImageButton) findViewById(R.id.ib_electrician);
-        ib_plumber = (ImageButton) findViewById(R.id.ib_plumber);
-        ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
-        btn_register = (Button)  findViewById(R.id.btn_register);
+        ImageButton ib_electrician = (ImageButton) findViewById(R.id.ib_electrician);
+        ImageButton ib_plumber = (ImageButton) findViewById(R.id.ib_plumber);
+        ImageButton ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
+        Button btn_register = (Button)  findViewById(R.id.btn_register);
 
         Toast.makeText(MainActivity.this, mySharedPreferences.isUserLoggedIn() + "", Toast.LENGTH_SHORT).show();
 

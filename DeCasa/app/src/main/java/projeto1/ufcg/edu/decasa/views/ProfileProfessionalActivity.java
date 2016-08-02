@@ -20,7 +20,6 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private TextView tv_phone_professional;
     private TextView tv_social_network;
     private TextView tv_website;
-    private ImageButton ib_call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
 
         setProfile();
 
-        ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);
+        ImageButton ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);
         ib_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

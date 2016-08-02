@@ -1,5 +1,4 @@
 package projeto1.ufcg.edu.decasa.utils;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;

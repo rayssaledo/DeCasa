@@ -1,28 +1,21 @@
 package projeto1.ufcg.edu.decasa.views;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-
-import org.w3c.dom.Text;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button btn_register;
-    private Button btn_login;
     private EditText et_email;
     private EditText et_password;
     private TextInputLayout layout_email;
@@ -40,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         userController = new UserController(LoginActivity.this);
-        btn_login = (Button) findViewById(R.id.btn_signin);
-        btn_register =  (Button) findViewById(R.id.btn_register);
+        Button btn_login = (Button) findViewById(R.id.btn_signin);
+        Button btn_register =  (Button) findViewById(R.id.btn_register);
         et_email = (EditText) findViewById(R.id.input_user_email);
         et_password = (EditText) findViewById(R.id.input_user_password);
         layout_email = (TextInputLayout) findViewById(R.id.input_layout_username);
