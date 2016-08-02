@@ -255,7 +255,10 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                                 intent.putExtra("PROFESSIONAL", professionalInfo);
                                 startActivity(intent);
                             } else {
-                                setView(MapsActivity.this, CadastreOrLoginActivity.class);
+                                Intent intent = new Intent(MapsActivity.this,
+                                        CadastreOrLoginActivity.class);
+                                intent.putExtra("PROFESSIONAL", professionalInfo);
+                                startActivity(intent);
                             }
                         }
                     };
@@ -272,7 +275,10 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                                 Intent intent = new Intent(Intent.ACTION_DIAL, uri);
                                 startActivity(intent);
                             } else {
-                                setView(MapsActivity.this, CadastreOrLoginActivity.class);
+                                Intent intent = new Intent(MapsActivity.this,
+                                        CadastreOrLoginActivity.class);
+                                intent.putExtra("PROFESSIONAL", professionalInfo);
+                                startActivity(intent);
                             }
                         }
                     };

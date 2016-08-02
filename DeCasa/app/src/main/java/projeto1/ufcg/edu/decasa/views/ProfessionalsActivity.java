@@ -73,14 +73,17 @@ public class ProfessionalsActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Professional professional = (Professional) professionalsAdapter.getItem(position);
                 if (mySharedPreferences.isUserLoggedIn()) {
-                    Professional professional = (Professional) professionalsAdapter.getItem(position);
                     Intent intent = new Intent(ProfessionalsActivity.this,
                             ProfileProfessionalActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
                 } else {
-                    setView(ProfessionalsActivity.this, CadastreOrLoginActivity.class);
+                    Intent intent = new Intent(ProfessionalsActivity.this,
+                            CadastreOrLoginActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
                 }
             }
         });
@@ -137,6 +140,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                     boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
                     if(isOn) {
                         setView(ProfessionalsActivity.this, MapsActivity.class);
+                        dialogFindNearest.dismiss();
                     } else {
                         displayPromptForEnablingGPS(ProfessionalsActivity.this,
                                 getApplication().getString(R.string.message_dialog_gps),

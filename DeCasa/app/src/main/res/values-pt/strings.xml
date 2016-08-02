@@ -73,5 +73,5 @@
     <string name="title_dialog_find_nearest">Escolha uma opção:</string>
     <string name="option_dialog_GPS">Procurar através do GPS</string>
     <string name="option_dialog_address">Procurar através de um endereço</string>
-    <string name="title_dialog_address_form">Endereço</string>
+    <string name="title_dialog_address_form">Digite o endereço:</string>
 </resources>

@@ -32,6 +32,7 @@ import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
+import projeto1.ufcg.edu.decasa.models.Professional;
 
 public class UserCadastreActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -78,11 +79,15 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
 
     private UserController userController;
     public static View mLoadingCadastre;
+    private Professional professional;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_cadastre);
+
+        Intent it = getIntent();
+        professional = it.getParcelableExtra("PROFESSIONAL");
 
         userController = new UserController(UserCadastreActivity.this);
 
@@ -193,7 +198,11 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onClick(View view) {
-                setView(UserCadastreActivity.this, LoginActivity.class);
+                Intent intent = new Intent(UserCadastreActivity.this,
+                        LoginActivity.class);
+                intent.putExtra("PROFESSIONAL", professional);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -312,9 +321,14 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         if (validateName() && validateDateOfBirth() && validateCity() &&  validateNeighborhood()
                 && validateStreet()&& validateNumber() && validateUsername() && validatePassword()
                 && validatePasswordConfirm() && confirmationPassword()) {
-            userController.cadastre(name, birthDate, gender, street, number, neighborhood, city,
-                    state, photo, username, password, MainActivity.class);
-
+            if (professional == null){
+                userController.cadastre(name, birthDate, gender, street, number, neighborhood, city,
+                        state, photo, username, password, MainActivity.class, professional);
+            } else {
+                userController.cadastre(name, birthDate, gender, street, number, neighborhood, city,
+                        state, photo, username, password, ProfileProfessionalActivity.class,
+                        professional);
+            }
         } else if (!validateName()) {
             return;
         } else if (!validateDateOfBirth()) {
