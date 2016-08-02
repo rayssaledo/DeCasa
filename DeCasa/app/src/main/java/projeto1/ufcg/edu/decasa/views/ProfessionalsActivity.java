@@ -12,20 +12,28 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
+import projeto1.ufcg.edu.decasa.adapters.DrawerListAdapter;
 import projeto1.ufcg.edu.decasa.adapters.ProfessionalsAdapter;
 import projeto1.ufcg.edu.decasa.controllers.ProfessionalController;
+import projeto1.ufcg.edu.decasa.models.NavItem;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
@@ -39,6 +47,19 @@ public class ProfessionalsActivity extends AppCompatActivity {
     private TextInputLayout til_address;
     private String address;
     private MySharedPreferences mySharedPreferences;
+    private HashMap<String, String> userDetails;
+
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private ArrayList<NavItem> mNavItems;
+    private CharSequence mTitle;
+
+    private android.support.v7.app.ActionBar actionBar;
+
+    private TextView tv_name_user;
+    private TextView tv_username;
 
     private Handler handler = new Handler() {
 
@@ -58,6 +79,25 @@ public class ProfessionalsActivity extends AppCompatActivity {
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
 
         mLoadingProfessionals = findViewById(R.id.rl_loading_professionals);
+
+        mNavItems = new ArrayList<>();
+        setmDrawer(mNavItems);
+
+        if (mySharedPreferences.isUserLoggedIn()) {
+            userDetails = mySharedPreferences.getUserDetails();
+
+            String name = userDetails.get(MySharedPreferences.KEY_NAME_USER);
+            String username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
+
+            tv_name_user = (TextView) findViewById(R.id.tv_name_user);
+            tv_name_user.setText(name);
+            tv_username= (TextView) findViewById(R.id.tv_username);
+            tv_username.setText(username);
+        } else {
+            tv_name_user = (TextView) findViewById(R.id.tv_name_user);
+            tv_name_user.setText("Bem-vindo!");
+        }
+
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
         Button btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
@@ -79,6 +119,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                             ProfileProfessionalActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
+                    finish();
                 } else {
                     Intent intent = new Intent(ProfessionalsActivity.this,
                             CadastreOrLoginActivity.class);
@@ -228,6 +269,86 @@ public class ProfessionalsActivity extends AppCompatActivity {
                             }
                         });
         builder.create().show();
+    }
+
+    public void setmDrawer(ArrayList<NavItem> mNavItems) {
+        mNavItems.add(new NavItem("Meus Favoritos", R.mipmap.ic_favorite_border_black_24dp)); //TODO internacionalizar
+        mNavItems.add(new NavItem("Instruções de Uso", R.drawable.icon_leave)); //TODO internacionalizar
+        mNavItems.add(new NavItem("Sobre", R.drawable.icon_leave)); //TODO internacionalizar
+        if (mySharedPreferences.isUserLoggedIn()) {
+            mNavItems.add(new NavItem("Sair", R.drawable.icon_leave)); //TODO internacionalizar
+        }
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
+        mDrawerList.setAdapter(adapter2);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) { // Favoritos
+//                    mDrawerLayout.closeDrawer(mDrawerPane);
+//                    setView(ProfessionalsActivity.this, DonorsActivity.class);
+                } else if (position == 1) { // Instruções de Uso
+//                    mDrawerLayout.closeDrawer(mDrawerPane);
+//                    setView(ProfessionalsActivity.this, InformationActivity.class);
+                } else if (position == 2) { // Sobre
+//                    mDrawerLayout.closeDrawer(mDrawerPane);
+//                    setView(MyRequestsActivity.this, UserCadastreActivity.class);
+                } else if (position == 3) { // Sair
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    mySharedPreferences.logoutUser();
+                    setView(ProfessionalsActivity.this, MainActivity.class);
+                    finish();
+                }
+            }
+        });
+
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.ic_menu_white_24dp);
+        actionBar.setHomeButtonEnabled(true);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mTitle = getTitle().toString();
+        mDrawerToggle = new ActionBarDrawerToggle(
+                ProfessionalsActivity.this,
+                mDrawerLayout,
+                R.mipmap.ic_menu_white_24dp,
+                R.string.drawer_open,
+                R.string.drawer_close) {
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        int id = item.getItemId();
+        if (id == R.id.action_settings){
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public static void setView(Context context, Class classe){

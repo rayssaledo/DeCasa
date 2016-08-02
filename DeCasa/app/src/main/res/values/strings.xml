@@ -83,4 +83,6 @@
     <string name="option_dialog_GPS">Find by GPS</string>
     <string name="option_dialog_address">Find by an address</string>
     <string name="title_dialog_address_form">Enter the address:</string>
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
 </resources>

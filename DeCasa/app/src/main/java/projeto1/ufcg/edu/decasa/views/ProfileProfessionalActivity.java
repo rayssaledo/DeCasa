@@ -36,6 +36,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
+        setTitle(professional.getName());
+
         setProfile();
 
         ImageButton ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);

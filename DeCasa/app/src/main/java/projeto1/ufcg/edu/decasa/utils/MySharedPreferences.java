@@ -3,6 +3,8 @@ package projeto1.ufcg.edu.decasa.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.HashMap;
+
 public class MySharedPreferences {
 
     private SharedPreferences mPref;
@@ -12,9 +14,11 @@ public class MySharedPreferences {
 
     private static final String PREFER_NAME = "Pref";
     private static final String KEY_SERVICE_ACTIVE = "service_active";
-    public static final String KEY_USERNAME_USER = "username_user";
     private static final String IS_USER_LOGIN = "IsUserLoggedIn";
     private static final String USER_LOCATION = "user_location";
+
+    public static final String KEY_NAME_USER = "name_user";
+    public static final String KEY_USERNAME_USER = "username_user";
 
 
     public MySharedPreferences(Context context){
@@ -46,6 +50,12 @@ public class MySharedPreferences {
         return login;
     }
 
+    public HashMap<String, String> getUserDetails(){
+        HashMap<String, String> userDetails = new HashMap<String, String>();
+        userDetails.put(KEY_NAME_USER, mPref.getString(KEY_NAME_USER, null));
+        userDetails.put(KEY_USERNAME_USER, mPref.getString(KEY_USERNAME_USER, null));
+        return userDetails;
+    }
 
     public boolean isUserLoggedIn(){
         return mPref.getBoolean(IS_USER_LOGIN, false);
