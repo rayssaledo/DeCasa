@@ -19,12 +19,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btn_register;
     private Button btn_login;
-    private EditText et_email;
+    private EditText et_username;
     private EditText et_password;
-    private TextInputLayout layout_email;
+    private TextInputLayout layout_username;
     private TextInputLayout layout_password;
 
-    private String email;
+    private String username;
     private String password;
     private UserController userController;
     public static View loading;
@@ -43,27 +43,27 @@ public class LoginActivity extends AppCompatActivity {
         userController = new UserController(LoginActivity.this);
         btn_login = (Button) findViewById(R.id.btn_signin);
         btn_register =  (Button) findViewById(R.id.btn_register);
-        et_email = (EditText) findViewById(R.id.input_user_email);
+        et_username = (EditText) findViewById(R.id.input_username);
         et_password = (EditText) findViewById(R.id.input_user_password);
-        layout_email = (TextInputLayout) findViewById(R.id.input_layout_username);
+        layout_username = (TextInputLayout) findViewById(R.id.input_layout_username);
         layout_password = (TextInputLayout) findViewById(R.id.input_layout_password);
         loading =  findViewById(R.id.loadingLogin);
 
         btn_login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                email = et_email.getText().toString();
+                username = et_username.getText().toString();
                 password = et_password.getText().toString();
 
-                if (validateEmail() && validatePassword()) {
+                if (validateUsername() && validatePassword()) {
                     if (professional == null){
-                        userController.login(email, password, MainActivity.class, professional);
+                        userController.login(username, password, MainActivity.class, professional);
                     } else {
-                        userController.login(email, password, ProfileProfessionalActivity.class,
+                        userController.login(username, password, ProfileProfessionalActivity.class,
                                 professional);
                     }
-                    //userController.login(email, password, MainActivity.class, professional);
-                } else if (!validateEmail()){
+                    //userController.login(username, password, MainActivity.class, professional);
+                } else if (!validateUsername()){
                     return;
                 } else if (!validatePassword()){
                     return;
@@ -90,13 +90,13 @@ public class LoginActivity extends AppCompatActivity {
         it.setClass(context, classe);
         startActivity(it);
     }
-    private boolean validateEmail(){
-        if (email.trim().isEmpty()) {
-            layout_email.setError(getString(R.string.err_msg_username));
-            requestFocus(et_email);
+    private boolean validateUsername(){
+        if (username.trim().isEmpty()) {
+            layout_username.setError(getString(R.string.err_msg_username));
+            requestFocus(et_username);
             return false;
         } else {
-            layout_email.setErrorEnabled(false);
+            layout_username.setErrorEnabled(false);
         }
         return true;
     }

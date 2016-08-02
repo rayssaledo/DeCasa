@@ -145,6 +145,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                     boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
                     if(isOn) {
                         setView(ProfessionalsActivity.this, MapsActivity.class);
+                        dialogFindNearest.dismiss();
                     } else {
                         displayPromptForEnablingGPS(ProfessionalsActivity.this,
                                 getApplication().getString(R.string.message_dialog_gps),
