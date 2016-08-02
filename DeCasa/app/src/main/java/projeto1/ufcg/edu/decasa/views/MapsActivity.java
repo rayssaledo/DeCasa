@@ -260,7 +260,6 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                                         CadastreOrLoginActivity.class);
                                 intent.putExtra("PROFESSIONAL", professionalInfo);
                                 startActivity(intent);
-                                //setView(MapsActivity.this, CadastreOrLoginActivity.class);
                             }
                         }
                     };
@@ -281,7 +280,6 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                                         CadastreOrLoginActivity.class);
                                 intent.putExtra("PROFESSIONAL", professionalInfo);
                                 startActivity(intent);
-                                //setView(MapsActivity.this, CadastreOrLoginActivity.class);
                             }
                         }
                     };

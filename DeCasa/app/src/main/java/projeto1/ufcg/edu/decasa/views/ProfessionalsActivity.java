@@ -78,7 +78,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) professionalsAdapter.getItem(position);
                 if (mySharedPreferences.isUserLoggedIn()) {
-                    //Professional professional = (Professional) professionalsAdapter.getItem(position);
                     Intent intent = new Intent(ProfessionalsActivity.this,
                             ProfileProfessionalActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
@@ -88,7 +87,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
                             CadastreOrLoginActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
-                    //setView(ProfessionalsActivity.this, CadastreOrLoginActivity.class);
                 }
             }
         });

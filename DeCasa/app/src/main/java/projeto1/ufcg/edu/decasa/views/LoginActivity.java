@@ -1,6 +1,5 @@
 package projeto1.ufcg.edu.decasa.views;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
                         userController.login(username, password, ProfileProfessionalActivity.class,
                                 professional);
                     }
-                    //userController.login(username, password, MainActivity.class, professional);
                 } else if (!validateUsername()){
                     return;
                 } else if (!validatePassword()){
@@ -79,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
                 finish();
-               //setView(LoginActivity.this, UserCadastreActivity.class);
             }
         });
 

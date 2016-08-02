@@ -34,7 +34,7 @@ public class CadastreOrLoginActivity extends AppCompatActivity {
                         UserCadastreActivity.class);
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
-                //setView(CadastreOrLoginActivity.this, UserCadastreActivity.class);
+                finish();
             }
         });
 
@@ -45,7 +45,7 @@ public class CadastreOrLoginActivity extends AppCompatActivity {
                         LoginActivity.class);
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
-                //setView(CadastreOrLoginActivity.this, LoginActivity.class);
+                finish();
             }
         });
     }
@@ -55,7 +55,5 @@ public class CadastreOrLoginActivity extends AppCompatActivity {
         it.setClass(context, classe);
         startActivity(it);
     }
-
-
 
 }

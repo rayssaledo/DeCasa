@@ -210,7 +210,6 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
                 finish();
-                //setView(UserCadastreActivity.this, LoginActivity.class);
             }
         });
     }
@@ -334,11 +333,9 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                         state, photo, username, password, MainActivity.class, professional);
             } else {
                 userController.cadastre(name, birthDate, gender, street, number, neighborhood, city,
-                        state, photo, username, password, ProfileProfessionalActivity.class, professional);
+                        state, photo, username, password, ProfileProfessionalActivity.class,
+                        professional);
             }
-//            userController.cadastre(name, birthDate, gender, street, number, neighborhood, city,
-//                    state, photo, username, password, MainActivity.class, professional);
-
         } else if (!validateName()) {
             return;
         } else if (!validateDateOfBirth()) {
