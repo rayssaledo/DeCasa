@@ -85,4 +85,7 @@
     <string name="title_dialog_address_form">Enter the address:</string>
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">Close drawer</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_view_profile">View profile</string>
+    <string name="btn_enter">Enter</string>
 </resources>

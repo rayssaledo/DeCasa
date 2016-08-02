@@ -3,7 +3,6 @@ package projeto1.ufcg.edu.decasa.views;
 import android.widget.EditText;
 import android.widget.Button;
 
-import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -59,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (validateUsername() && validatePassword()) {
                     if (professional == null){
-                        userController.login(username, password, MainActivity.class, professional);
+                        userController.login(username, password, MainActivity.class, null);
                     } else {
                         userController.login(username, password, ProfileProfessionalActivity.class,
                                 professional);
@@ -85,11 +84,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void setView(Context context, Class classe) {
-        Intent it = new Intent();
-        it.setClass(context, classe);
-        startActivity(it);
-    }
     private boolean validateUsername(){
         if (username.trim().isEmpty()) {
             layout_username.setError(getString(R.string.err_msg_username));

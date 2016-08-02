@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,19 +48,10 @@ public class ProfessionalsActivity extends AppCompatActivity {
     private TextInputLayout til_address;
     private String address;
     private MySharedPreferences mySharedPreferences;
-    private HashMap<String, String> userDetails;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private RelativeLayout mDrawerPane;
-    private ListView mDrawerList;
-    private ArrayList<NavItem> mNavItems;
-    private CharSequence mTitle;
-
-    private android.support.v7.app.ActionBar actionBar;
-
-    private TextView tv_name_user;
-    private TextView tv_username;
 
     private Handler handler = new Handler() {
 
@@ -67,6 +59,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 100) {
                 listViewProfessionals.setAdapter(professionalsAdapter);
+
             }
         }
     };
@@ -80,24 +73,35 @@ public class ProfessionalsActivity extends AppCompatActivity {
 
         mLoadingProfessionals = findViewById(R.id.rl_loading_professionals);
 
-        mNavItems = new ArrayList<>();
-        setmDrawer(mNavItems);
-
+        ArrayList<NavItem> mNavItems = new ArrayList<>();
         if (mySharedPreferences.isUserLoggedIn()) {
-            userDetails = mySharedPreferences.getUserDetails();
-
-            String name = userDetails.get(MySharedPreferences.KEY_NAME_USER);
-            String username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
-
-            tv_name_user = (TextView) findViewById(R.id.tv_name_user);
-            tv_name_user.setText(name);
-            tv_username= (TextView) findViewById(R.id.tv_username);
-            tv_username.setText(username);
-        } else {
-            tv_name_user = (TextView) findViewById(R.id.tv_name_user);
-            tv_name_user.setText("Bem-vindo!");
+            setmDrawer(mNavItems);
         }
 
+        Button btn_profile_or_login = (Button) findViewById(R.id.btn_profile_or_login);
+        TextView tv_name_user_or_welcome = (TextView) findViewById(R.id.tv_name_user_or_welcome);
+
+        if (mySharedPreferences.isUserLoggedIn()) {
+            HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
+            String username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
+            tv_name_user_or_welcome.setText(username);
+            btn_profile_or_login.setText(getApplication().getString(R.string.btn_view_profile));
+            btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Setar par a tela de perfil do usuário
+                }
+            });
+        } else {
+            tv_name_user_or_welcome.setText(getApplication().getString(R.string.welcome));
+            btn_profile_or_login.setText(getApplication().getString(R.string.btn_enter));
+            btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Setar para a tela de login
+                }
+            });
+        }
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
         Button btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
@@ -119,7 +123,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
                             ProfileProfessionalActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
-                    finish();
                 } else {
                     Intent intent = new Intent(ProfessionalsActivity.this,
                             CadastreOrLoginActivity.class);
@@ -135,6 +138,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 createDialogChoose();
             }
         });
+
     }
 
     private void createDialogChoose() {
@@ -281,7 +285,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
-        mDrawerList = (ListView) findViewById(R.id.navList);
+        ListView mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter2);
 
@@ -307,13 +311,13 @@ public class ProfessionalsActivity extends AppCompatActivity {
             }
         });
 
-        actionBar =  getSupportActionBar();
+        ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.mipmap.ic_menu_white_24dp);
         actionBar.setHomeButtonEnabled(true);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mTitle = getTitle().toString();
+        CharSequence mTitle = getTitle().toString();
         mDrawerToggle = new ActionBarDrawerToggle(
                 ProfessionalsActivity.this,
                 mDrawerLayout,
@@ -333,7 +337,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
 
     }
     @Override

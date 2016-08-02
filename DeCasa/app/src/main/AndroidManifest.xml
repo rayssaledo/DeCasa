@@ -51,7 +51,7 @@
         <activity
             android:name=".views.CadastreOrLoginActivity"
             android:label="@string/title_activity_cadastre_or_login"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppThemeCustomNoActionBar" />
         <activity
             android:name=".views.UserCadastreActivity"
             android:label="@string/title_activity_user_cadastre"
@@ -59,7 +59,7 @@
         <activity
             android:name=".views.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppThemeCustomNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

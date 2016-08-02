@@ -76,4 +76,7 @@
     <string name="title_dialog_address_form">Digite o endereço:</string>
     <string name="drawer_open">Abre drawer</string>
     <string name="drawer_close">Fecha drawer</string>
+    <string name="welcome">Bem-vindo</string>
+    <string name="btn_view_profile">Ver perfil</string>
+    <string name="btn_enter">Entrar</string>
 </resources>

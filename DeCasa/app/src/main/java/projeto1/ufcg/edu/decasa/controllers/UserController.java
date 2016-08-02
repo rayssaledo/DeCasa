@@ -2,7 +2,6 @@ package projeto1.ufcg.edu.decasa.controllers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
@@ -83,7 +82,6 @@ public class UserController {
                                             classDest);
                                     intent.putExtra("PROFESSIONAL", professional);
                                     mActivity.startActivity(intent);
-                                    //setView(mActivity, classDest);
                                     mActivity.finish();
                                     mActivity.finish();
 
@@ -145,7 +143,6 @@ public class UserController {
                                 classDest);
                         intent.putExtra("PROFESSIONAL", professional);
                         mActivity.startActivity(intent);
-                        //setView(mActivity, classDest);
                         mActivity.finish();
                         mActivity.finish();
                     }
@@ -228,12 +225,6 @@ public class UserController {
             });
 
             return user;
-    }
-
-    public void setView(Context context, Class classe) {
-        Intent it = new Intent();
-        it.setClass(context, classe);
-        mActivity.startActivity(it);
     }
 
 }
