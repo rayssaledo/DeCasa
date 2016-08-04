@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -26,6 +27,8 @@ import android.widget.SpinnerAdapter;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
@@ -378,7 +381,13 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     }
 
     private boolean validateDateOfBirth(){
-        String date = date_birth_user.replaceAll("/", "");
+        String dateBirthUser = date_birth_user.replaceAll("/", "");
+
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int currentYear = cal.get(Calendar.YEAR);
+        Log.d("YEAR", currentYear +"");
         if (date_birth_user.trim().isEmpty()) {
             layout_date_birth.setError(getString(R.string.err_msg_birth));
             requestFocus(mDate_of_birth);
@@ -387,17 +396,18 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
             layout_date_birth.setError(getString(R.string.err_invalid_birth));
             requestFocus(mDate_of_birth);
             return false;
-        } else if (Integer.parseInt(date.substring(0,2)) < 1 ||
-                Integer.parseInt(date.substring(0,2)) > 31){
+        } else if (Integer.parseInt(dateBirthUser.substring(0,2)) < 1 ||
+                Integer.parseInt(dateBirthUser.substring(0,2)) > 31){
             layout_date_birth.setError(getString(R.string.err_invalid_day));
             requestFocus(mDate_of_birth);
             return false;
-        } else if (Integer.parseInt(date.trim().substring(2,4)) < 1 ||
-                Integer.parseInt(date.substring(2,4)) > 12){
+        } else if (Integer.parseInt(dateBirthUser.trim().substring(2,4)) < 1 ||
+                Integer.parseInt(dateBirthUser.substring(2,4)) > 12){
             layout_date_birth.setError(getString(R.string.err_invalid_month));
             requestFocus(mDate_of_birth);
             return false;
-        } else if (Integer.parseInt(date.substring(4)) > 2016){
+        } else if (Integer.parseInt(dateBirthUser.substring(4)) < (currentYear - 100) ||
+                Integer.parseInt(dateBirthUser.substring(4)) > currentYear){
             layout_date_birth.setError(getString(R.string.err_invalid_year));
             requestFocus(mDate_of_birth);
             return false;
