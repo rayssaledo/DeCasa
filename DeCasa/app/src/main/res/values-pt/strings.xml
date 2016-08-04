@@ -79,4 +79,8 @@
     <string name="welcome">Bem-vindo</string>
     <string name="btn_view_profile">Ver perfil</string>
     <string name="btn_enter">Entrar</string>
+    <string name="err_passwords_do_not_match">As senhas não coincidem!</string>
+    <string name="err_invalid_day">Dia inválido</string>
+    <string name="err_invalid_month">Mês inválido</string>
+    <string name="err_invalid_year">Ano inválido</string>
 </resources>

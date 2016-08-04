@@ -349,7 +349,7 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
             return;
         } else if (!confirmationPassword()) {
             new AlertDialog.Builder(UserCadastreActivity.this)
-                    .setMessage("As senhas não coincidem!") //TODO internacionalizar
+                    .setMessage(getString(R.string.err_passwords_do_not_match))
                     .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
                             mInput_password.setText("");
@@ -378,12 +378,27 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     }
 
     private boolean validateDateOfBirth(){
+        String date = date_birth_user.replaceAll("/", "");
         if (date_birth_user.trim().isEmpty()) {
             layout_date_birth.setError(getString(R.string.err_msg_birth));
             requestFocus(mDate_of_birth);
             return false;
-        } else if (date_birth_user.trim().length() != 10){
+        } else if (date_birth_user.trim().length() != 10) {
             layout_date_birth.setError(getString(R.string.err_invalid_birth));
+            requestFocus(mDate_of_birth);
+            return false;
+        } else if (Integer.parseInt(date.substring(0,2)) < 1 ||
+                Integer.parseInt(date.substring(0,2)) > 31){
+            layout_date_birth.setError(getString(R.string.err_invalid_day));
+            requestFocus(mDate_of_birth);
+            return false;
+        } else if (Integer.parseInt(date.trim().substring(2,4)) < 1 ||
+                Integer.parseInt(date.substring(2,4)) > 12){
+            layout_date_birth.setError(getString(R.string.err_invalid_month));
+            requestFocus(mDate_of_birth);
+            return false;
+        } else if (Integer.parseInt(date.substring(4)) > 2016){
+            layout_date_birth.setError(getString(R.string.err_invalid_year));
             requestFocus(mDate_of_birth);
             return false;
         } else {
