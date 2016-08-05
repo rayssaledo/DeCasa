@@ -14,14 +14,21 @@
     <string name="desc_evaluators">ícone avaliadores</string>
     <string name="desc_phone_professional">Ícone telefone</string>
     <string name="desc_decasa">Imagem slogan</string>
+    <string name="desc_decasa_icon">Ícone app</string>
+    <string name="desc_cam">Ícone câmera</string>
+    <string name="desc_gallery">Ícone galeria</string>
+    <string name="desc_delete">Ícone excluir</string>
     <string name="text_evaluation_type">Atendimento</string>
-    <string name="text_number_evaluations">2 avaliações</string>
+    <string name="text_number_evaluations">0 avaliações</string>
+    <string name="text_see_evaluations">Ver avaliações</string>
     <string name="text_services">Serviços</string>
     <string name="text_address_professional">Endereço</string>
     <string name="text_phone_professional">Telefone</string>
     <string name="text_website">Site</string>
     <string name="text_social_network">Rede social</string>
     <string name="text_call">Ligar</string>
+    <string name="hint_item">Item</string>
+    <string name="desc_item">Ícone item</string>
     <string name="hint_social_network">www.facebook.com/joaoencanador</string>
     <string name="hint_website">www.meusite.com.br</string>
     <string name="hint_phone_professional">(83) 98765-4321</string>
@@ -85,4 +92,8 @@
     <string name="err_invalid_day">Dia inválido</string>
     <string name="err_invalid_month">Mês inválido</string>
     <string name="err_invalid_year">Ano inválido</string>
+    <string name="title_activity_evaluation_professional">Avaliar perfil</string>
+    <string name="tv_attendance">Atendimento</string>
+    <string name="hint_comment">Seu comentário</string>
+    <string name="btn_evaluate">Avaliar</string>
 </resources>

@@ -29,8 +29,7 @@
         android:layout_marginTop="24dp"
         android:layout_below="@+id/rd2"
         android:orientation="horizontal"
-        android:layout_alignParentEnd="true"
-        >
+        android:layout_alignParentEnd="true">
 
         <Button
             android:id="@+id/btn_cancel"

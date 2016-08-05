@@ -57,9 +57,7 @@
                             android:id="@+id/ib_electrician"
                             android:src="@drawable/ic_electrician"
                             android:background="@null"
-
                             android:contentDescription="@string/desc_electrician"/>
-
 
                         <TextView
                             android:layout_width="match_parent"

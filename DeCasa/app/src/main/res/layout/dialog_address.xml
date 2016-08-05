@@ -6,7 +6,6 @@
     android:paddingEnd="16dp"
     android:paddingTop="16dp">
 
-
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_address"
             android:layout_width="match_parent"

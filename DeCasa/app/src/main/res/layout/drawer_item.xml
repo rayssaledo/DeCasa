@@ -13,7 +13,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:gravity="center_vertical"
-        />
+        android:contentDescription="@string/desc_item"/>
 
     <TextView
         android:id="@+id/title"
@@ -21,8 +21,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:gravity="center_vertical"
-        android:text="Texto"
-        android:textColor="@color/abc_input_method_navigation_guard"
+        android:hint="@string/hint_item"
         android:layout_toEndOf="@+id/icon" />
 
 </RelativeLayout>

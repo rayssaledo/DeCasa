@@ -69,17 +69,20 @@
         <activity
             android:name=".views.LoginActivity"
             android:label="@string/title_activity_login"
+<<<<<<< HEAD
             android:theme="@style/AppThemeCustomNoActionBar">
         </activity>
         <activity
             android:name=".views.AssessmentsActivity"
             android:label="@string/title_activity_assessments"
-            android:theme="@style/AppThemeCustom">
-        </activity>
+            android:theme="@style/AppThemeCustom" />
+=======
+            android:theme="@style/AppThemeCustomNoActionBar"></activity>
         <activity
             android:name=".views.EvaluationProfessionalActivity"
             android:label="@string/title_activity_evaluation_professional"
             android:theme="@style/AppThemeCustomNoActionBar"></activity>
+>>>>>>> 7f5fc8fccf4f74a8a8b35e0b5e36f43e17ae8f8c
     </application>
 
 </manifest>
