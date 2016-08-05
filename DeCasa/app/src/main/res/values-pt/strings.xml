@@ -30,6 +30,7 @@
     <string name="hint_services">Eletricista, Encanador e Montador</string>
     <string name="hint_professional_name">Nome do profissional</string>
     <string name="title_activity_professionals">Profissionais</string>
+    <string name="title_activity_assessments">Avaliações</string>
     <string name="text_location_nearest">Encontrar mais próximos</string>
     <string name="btn_more_information">Ver mais</string>
     <string name="title_electricians">Eletricistas</string>
@@ -77,6 +78,7 @@
     <string name="drawer_open">Abre drawer</string>
     <string name="drawer_close">Fecha drawer</string>
     <string name="welcome">Bem-vindo</string>
+    <string name="btn_to_evaluate">Avaliar</string>
     <string name="btn_view_profile">Ver perfil</string>
     <string name="btn_enter">Entrar</string>
 </resources>

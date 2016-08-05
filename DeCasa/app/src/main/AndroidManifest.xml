@@ -71,6 +71,10 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppThemeCustomNoActionBar">
         </activity>
+        <activity
+            android:name=".views.AssessmentsActivity"
+            android:label="@string/title_activity_assessments"
+            android:theme="@style/AppThemeCustom" />
     </application>
 
 </manifest>
