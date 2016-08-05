@@ -90,4 +90,9 @@
     <string name="btn_to_evaluate">To evaluate</string>
     <string name="btn_view_profile">View profile</string>
     <string name="btn_enter">Enter</string>
+    <string name="err_passwords_do_not_match">Passwords do not match!</string>
+    <string name="err_invalid_day">Invalid day</string>
+    <string name="err_invalid_month">Invalid month</string>
+    <string name="err_invalid_year">Invalid year</string>
+
 </resources>
