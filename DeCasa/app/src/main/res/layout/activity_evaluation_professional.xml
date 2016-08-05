@@ -22,35 +22,34 @@
         card_view:cardCornerRadius="2dp"
         card_view:contentPadding="10dp">
 
-    <LinearLayout
-        android:id="@+id/ll_attendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:id="@+id/tv_attendance"
+        <LinearLayout
+            android:id="@+id/ll_evaluation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:hint="@string/tv_attendance"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
 
-        <RatingBar
-            android:id="@+id/rb_evaluation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            style="@style/StarRatingBar"
-            android:isIndicator="false"
-            android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/tv_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:hint="@string/tv_attendance"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
+            <RatingBar
+                android:id="@+id/rb_evaluation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                style="@style/StarRatingBar"
+                android:isIndicator="false"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
-    </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <LinearLayout
@@ -81,20 +80,20 @@
 
     </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_evaluate"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textAlignment="center"
-            android:text="@string/btn_evaluate"
-            android:gravity="center"
-            android:textAllCaps="true"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:background="@drawable/screen_border"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="15dp"
-            android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/btn_evaluate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:text="@string/btn_evaluate"
+        android:gravity="center"
+        android:textAllCaps="true"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:background="@drawable/screen_border"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
