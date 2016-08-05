@@ -276,11 +276,11 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public void setmDrawer(ArrayList<NavItem> mNavItems) {
-        mNavItems.add(new NavItem("Meus Favoritos", R.mipmap.ic_favorite_border_black_24dp)); //TODO internacionalizar
-        mNavItems.add(new NavItem("Instruções de Uso", R.drawable.icon_leave)); //TODO internacionalizar
-        mNavItems.add(new NavItem("Sobre", R.drawable.icon_leave)); //TODO internacionalizar
+        mNavItems.add(new NavItem("Meus Favoritos", R.mipmap.ic_favorite_black_24dp)); //TODO internacionalizar
+        mNavItems.add(new NavItem("Instruções de Uso", R.mipmap.ic_class_black_24dp)); //TODO internacionalizar
+        mNavItems.add(new NavItem("Sobre", R.mipmap.ic_info_black_24dp)); //TODO internacionalizar
         if (mySharedPreferences.isUserLoggedIn()) {
-            mNavItems.add(new NavItem("Sair", R.drawable.icon_leave)); //TODO internacionalizar
+            mNavItems.add(new NavItem("Sair", R.mipmap.ic_exit_to_app_black_24dp)); //TODO internacionalizar
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
