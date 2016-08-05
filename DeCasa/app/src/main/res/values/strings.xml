@@ -16,6 +16,10 @@
     <string name="desc_phone_professional">Icon call</string>
     <string name="desc_decasa">Image decasa</string>
     <string name="desc_slogan">Image slogan</string>
+    <string name="desc_decasa_icon">ícone app</string>
+    <string name="desc_cam">Icon cam</string>
+    <string name="desc_gallery">Icon gallery</string>
+    <string name="desc_delete">Icon delete</string>
     <string name="text_evaluation_type">Service</string>
     <string name="text_number_evaluations">2 evaluations</string>
     <string name="text_services">Services</string>
@@ -24,7 +28,10 @@
     <string name="text_website">Website</string>
     <string name="text_social_network">Social network</string>
     <string name="text_evaluations">Evaluations</string>
+    <string name="text_see_evaluations">See evaluations</string>
     <string name="text_call">Call</string>
+    <string name="hint_item">Item</string>
+    <string name="desc_item">Icon item</string>
     <string name="hint_social_network">www.facebook.com/joaoencanador</string>
     <string name="hint_website">www.meusite.com.br</string>
     <string name="hint_phone_professional">(83) 98765-4321</string>

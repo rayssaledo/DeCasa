@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context="projeto1.ufcg.edu.decasa.views.UserCadastreActivity">
 
@@ -22,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/image_decasa_white"
                 android:id="@+id/image_decasa"
-                android:paddingTop="40dp"/>
+                android:paddingTop="40dp"
+                android:contentDescription="@string/desc_decasa_icon"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,11 +66,11 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/layout_cadastre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/layout_buttons"
-                android:gravity="center"
-                android:id="@+id/layout_cadastre">
+                android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -105,7 +107,8 @@
                             android:src="@mipmap/ic_camera"
                             android:background="@color/white"
                             android:layout_marginTop="10dp"
-                            android:layout_toEndOf="@+id/iv_user_photo" />
+                            android:layout_toEndOf="@+id/iv_user_photo"
+                            android:contentDescription="@string/desc_cam"/>
 
                         <ImageButton
                             android:id="@+id/ib_gallery"
@@ -114,7 +117,8 @@
                             android:src="@mipmap/ic_gallery"
                             android:background="@color/white"
                             android:layout_below="@id/ib_camera"
-                            android:layout_toEndOf="@+id/iv_user_photo"/>
+                            android:layout_toEndOf="@+id/iv_user_photo"
+                            android:contentDescription="@string/desc_gallery"/>
 
                         <ImageButton
                             android:id="@+id/ib_delete"
@@ -123,7 +127,8 @@
                             android:src="@mipmap/ic_delete"
                             android:background="@color/white"
                             android:layout_below="@id/ib_gallery"
-                            android:layout_toEndOf="@+id/iv_user_photo"/>
+                            android:layout_toEndOf="@+id/iv_user_photo"
+                            android:contentDescription="@string/desc_delete"/>
 
                     </RelativeLayout>
 

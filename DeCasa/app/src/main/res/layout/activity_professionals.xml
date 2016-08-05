@@ -28,7 +28,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:gravity="left|center_vertical"
+                android:gravity="start|center_vertical"
                 android:text="@string/text_location_nearest"
                 android:drawablePadding="5dp"
                 android:drawableStart="@mipmap/user_location_icon"
@@ -81,7 +81,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@mipmap/ic_launcher"
+                android:contentDescription="@string/desc_decasa_icon"/>
 
             <LinearLayout
                 android:id="@+id/layout_profile"
@@ -91,7 +92,7 @@
                 android:layout_marginTop="30dp"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"
-                android:layout_toRightOf="@+id/logotipo"
+                android:layout_toEndOf="@+id/logotipo"
                 android:orientation="vertical" >
 
                 <TextView
