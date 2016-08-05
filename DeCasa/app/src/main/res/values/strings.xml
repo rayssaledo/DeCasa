@@ -99,5 +99,8 @@
     <string name="err_invalid_day">Invalid day</string>
     <string name="err_invalid_month">Invalid month</string>
     <string name="err_invalid_year">Invalid year</string>
-
+    <string name="title_activity_evaluation_professional">Evaluate profile</string>
+    <string name="tv_attendance">Attendance</string>
+    <string name="hint_comment">Your comment</string>
+    <string name="btn_evaluate">Evaluate</string>
 </resources>

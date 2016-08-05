@@ -90,4 +90,8 @@
     <string name="err_invalid_day">Dia inválido</string>
     <string name="err_invalid_month">Mês inválido</string>
     <string name="err_invalid_year">Ano inválido</string>
+    <string name="title_activity_evaluation_professional">Avaliar perfil</string>
+    <string name="tv_attendance">Atendimento</string>
+    <string name="hint_comment">Seu comentário</string>
+    <string name="btn_evaluate">Avaliar</string>
 </resources>
