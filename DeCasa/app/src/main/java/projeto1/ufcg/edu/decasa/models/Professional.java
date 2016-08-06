@@ -14,16 +14,15 @@ public class Professional implements Parcelable {
     private String number;
     private String site;
     private String socialNetwork;
-    private String pictury;
+    //private String pictury;
     private String email;
     private String password;
     private String[] services;
     private Location location;
 
     public Professional(String name,String cpf, String phone, String neighborhood, String street,
-                        String number, String site, String socialNetwork, String pictury,
-                        String email, String password, String[] services)
-            throws Exception {
+                        String number, String site, String socialNetwork,
+                        String email, String password, String[] services) throws Exception {
         if(name == null || name.equals("")){
             throw new Exception("Professional name is invalid.");
         }
@@ -42,9 +41,9 @@ public class Professional implements Parcelable {
         if(number == null || number.equals("")){
             throw new Exception("Number is invalid.");
         }
-        if(pictury == null || pictury.equals("")){
-            throw new Exception("Pictury is invalid.");
-        }
+//        if(pictury == null || pictury.equals("")){
+//            throw new Exception("Pictury is invalid.");
+//        }
         if(email == null || email.equals("")){
             throw new Exception("Email is invalid.");
         }
@@ -59,7 +58,7 @@ public class Professional implements Parcelable {
         this.number = number;
         this.site = site;
         this.socialNetwork = socialNetwork;
-        this.pictury = pictury;
+        //this.pictury = pictury;
         this.email = email;
         this.password = password;
         this.services = services;
@@ -74,7 +73,7 @@ public class Professional implements Parcelable {
         number = in.readString();
         site = in.readString();
         socialNetwork = in.readString();
-        pictury = in.readString();
+        //pictury = in.readString();
         email = in.readString();
         password = in.readString();
         services = in.createStringArray();
@@ -179,16 +178,16 @@ public class Professional implements Parcelable {
         this.socialNetwork = socialNetwork;
     }
 
-    public String getPictury() {
-        return pictury;
-    }
-
-    public void setPictury(String pictury) throws Exception {
-        if(pictury == null || pictury.equals("")){
-            throw new Exception("Pictury is invalid.");
-        }
-        this.pictury = pictury;
-    }
+//    public String getPictury() {
+//        return pictury;
+//    }
+//
+//    public void setPictury(String pictury) throws Exception {
+//        if(pictury == null || pictury.equals("")){
+//            throw new Exception("Pictury is invalid.");
+//        }
+//        this.pictury = pictury;
+//    }
 
     public String getEmail() {
         return email;
@@ -243,7 +242,7 @@ public class Professional implements Parcelable {
         parcel.writeString(number);
         parcel.writeString(site);
         parcel.writeString(socialNetwork);
-        parcel.writeString(pictury);
+        //parcel.writeString(pictury);
         parcel.writeString(email);
         parcel.writeString(password);
         parcel.writeStringArray(services);

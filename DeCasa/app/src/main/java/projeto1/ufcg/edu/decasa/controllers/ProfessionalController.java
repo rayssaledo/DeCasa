@@ -20,6 +20,7 @@ import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 public class ProfessionalController {
@@ -56,7 +57,7 @@ public class ProfessionalController {
                         String number = jsonProfessional.getString("number");
                         String site = jsonProfessional.getString("site");
                         String socialNetwork = jsonProfessional.getString("socialNetwork");
-                        String pictury = jsonProfessional.getString("pictury");
+                        //String pictury = jsonProfessional.getString("pictury");
                         String email = jsonProfessional.getString("email");
                         String password = jsonProfessional.getString("password");
                         String services = jsonProfessional.getString("services");
@@ -66,7 +67,7 @@ public class ProfessionalController {
                         String[] listServices = services.split(",");
                         try {
                             Professional professional = new Professional(name, cpf, phone,
-                                    neighborhood, street, number, site, socialNetwork, pictury,
+                                    neighborhood, street, number, site, socialNetwork,
                                     email, password, listServices);
                             professional.setLocation(new Location(street + ", " + number + " " +
                                     "Campina Grande"));

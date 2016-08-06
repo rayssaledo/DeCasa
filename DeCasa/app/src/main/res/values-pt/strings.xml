@@ -96,4 +96,6 @@
     <string name="tv_attendance">Atendimento</string>
     <string name="hint_comment">Seu comentário</string>
     <string name="btn_evaluate">Avaliar</string>
+    <string name="text_successfully_completed_evaluation">Avaliação realizada com sucesso</string>
+    <string name="err_unavailable_connection">Conexão não disponível!</string>
 </resources>

@@ -5,9 +5,9 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Professional;
 
@@ -48,6 +48,17 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                         substring(4,9) + professional.getPhone().substring(9);
                 Uri uri = Uri.parse("tel:" + phone);
                 Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                startActivity(intent);
+            }
+        });
+
+        Button btn_evaluations = (Button) findViewById(R.id.btn_evaluations);
+        btn_evaluations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileProfessionalActivity.this,
+                        AssessmentsActivity.class);
+                intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
             }
         });

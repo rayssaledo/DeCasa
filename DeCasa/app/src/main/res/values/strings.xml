@@ -105,4 +105,6 @@
     <string name="tv_attendance">Attendance</string>
     <string name="hint_comment">Your comment</string>
     <string name="btn_evaluate">Evaluate</string>
+    <string name="text_successfully_completed_evaluation">Successfully completed evaluation</string>
+    <string name="err_unavailable_connection">Unavailable connection!</string>
 </resources>
