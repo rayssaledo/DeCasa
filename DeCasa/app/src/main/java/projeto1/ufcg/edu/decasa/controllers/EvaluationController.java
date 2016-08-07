@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import org.json.JSONArray;
@@ -99,7 +101,8 @@ public class EvaluationController {
         });
     }
 
-    public List<Evaluation> getEvaluationsByProfessional(final String professionalEmail) {
+    public List<Evaluation> getEvaluationsByProfessional(final String professionalEmail,
+                                                         final Handler handler) {
         AssessmentsActivity.mLoadingAssessments.setVisibility(View.VISIBLE);
         final List<Evaluation> evaluationsList = new ArrayList<Evaluation>();
         String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
@@ -128,6 +131,9 @@ public class EvaluationController {
                         }
                         AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
                     }
+                    Message message = new Message();
+                    message.what = 101;
+                    handler.sendMessage(message);
                 } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")

@@ -2,6 +2,8 @@ package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,17 @@ public class AssessmentsActivity extends AppCompatActivity {
 
     public static View mLoadingAssessments;
 
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 101) {
+                listViewAssessments.setAdapter(assessmentsAdapter);
+
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +51,9 @@ public class AssessmentsActivity extends AppCompatActivity {
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
-        List<Evaluation> assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail());
+        List<Evaluation> assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(), handler);
 
-        AssessmentsAdapter assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
+        assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
         listViewAssessments.setAdapter(assessmentsAdapter);
 
         Button btn_to_evaluate = (Button) findViewById(R.id.btn_to_evaluate);
