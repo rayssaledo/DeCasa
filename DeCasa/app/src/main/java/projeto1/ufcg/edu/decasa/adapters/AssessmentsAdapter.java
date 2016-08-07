@@ -6,22 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
+import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
 
 public class AssessmentsAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    //TODO change Professional to Evaluation class
-    private List<Professional> items;
+    private List<Evaluation> items;
     Context context;
 
-    //TODO change Professional to Evaluation class
-    public AssessmentsAdapter(Context context, List<Professional> items) {
+    public AssessmentsAdapter(Context context, List<Evaluation> items) {
         this.items = items;
         mInflater = LayoutInflater.from(context);
         this.context = context;
@@ -44,16 +44,15 @@ public class AssessmentsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //TODO change Professional to Evaluation class
-        Professional item = items.get(position);
+        Evaluation item = items.get(position);
         convertView = mInflater.inflate(R.layout.my_item_evaluation, null);
 
         //TODO set up values about Evaluation class...
         //((ImageView) convertView.findViewById(R.id.iv_user)).setImageBitmap();
-        ((TextView) convertView.findViewById(R.id.tv_user_name)).setText(item.getName());
-        //((TextView) convertView.findViewById(R.id.tv_date_evaluation)).setText();
-        //((TextView) convertView.findViewById(R.id.rb_evaluation_user)).setText();
-        //((TextView) convertView.findViewById(R.id.tv_comment)).setText();
+        ((TextView) convertView.findViewById(R.id.tv_user_name)).setText(item.getUsernameValuer());
+        ((TextView) convertView.findViewById(R.id.tv_date_evaluation)).setText(item.getDate());
+        ((RatingBar) convertView.findViewById(R.id.rb_evaluation_user)).setRating(item.getEvaluationValue());
+        ((TextView) convertView.findViewById(R.id.tv_comment)).setText(item.getComment());
 
         return convertView;
     }

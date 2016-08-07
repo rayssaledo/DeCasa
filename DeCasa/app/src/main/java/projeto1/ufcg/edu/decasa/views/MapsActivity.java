@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.media.Rating;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,6 +25,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -49,6 +51,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
     private List<Professional> professionals;
     private TextView tv_profession;
     private TextView tv_name_professional;
+    private RatingBar rb_evaluation;
     private Button btn_more_information;
     private Button btn_call;
     private OnInfoWindowElemTouchListener btn_more_listener;
@@ -241,6 +244,9 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                     tv_name_professional = (TextView) infoWindow.findViewById(R.id.
                             tv_name_professional);
                     tv_name_professional.setText(professionalInfo.getName());
+
+                    rb_evaluation = (RatingBar) findViewById(R.id.rb_evaluation);
+                    rb_evaluation.setRating(professionalInfo.getEvaluationsAverage());
 
                     btn_more_information = (Button) infoWindow.findViewById(R.id.
                             btn_more_information);
