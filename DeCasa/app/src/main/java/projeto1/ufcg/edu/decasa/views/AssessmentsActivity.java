@@ -13,7 +13,6 @@ import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.adapters.AssessmentsAdapter;
-import projeto1.ufcg.edu.decasa.adapters.ProfessionalsAdapter;
 import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
@@ -33,7 +32,6 @@ public class AssessmentsActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 101) {
                 listViewAssessments.setAdapter(assessmentsAdapter);
-
             }
         }
     };
