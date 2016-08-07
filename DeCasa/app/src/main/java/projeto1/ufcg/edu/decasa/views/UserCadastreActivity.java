@@ -1,19 +1,16 @@
 package projeto1.ufcg.edu.decasa.views;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -24,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -36,12 +34,12 @@ import br.com.jansenfelipe.androidmask.MaskEditTextChangedListener;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.Constants;
+import projeto1.ufcg.edu.decasa.utils.PicModeSelectDialogFragment;
 
-public class UserCadastreActivity extends AppCompatActivity implements View.OnClickListener {
+public class UserCadastreActivity extends AppCompatActivity implements PicModeSelectDialogFragment.IPicModeSelectListener {
 
     private ImageView iv_photo_user;
-    private static final int RESULT_CAMERA = 111;
-    private static final int RESULT_GALLERY = 222;
     private Bitmap bitmapPhoto;
 
     private List<String> genders;
@@ -84,6 +82,9 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
     public static View mLoadingCadastre;
     private Professional professional;
 
+    public static final String TEMP_PHOTO_FILE_NAME = "temp_photo.jpg";
+    public static final int REQUEST_CODE_UPDATE_PIC = 0x1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,14 +104,15 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         byte[] photo_user_byte = b.toByteArray();
         photo_user = Base64.encodeToString(photo_user_byte, Base64.NO_WRAP);
 
-
         iv_photo_user = (ImageView) findViewById(R.id.iv_user_photo);
+
         ImageButton ib_camera = (ImageButton) findViewById(R.id.ib_camera);
-        ib_camera.setOnClickListener(this);
-        ImageButton ib_gallery = (ImageButton) findViewById(R.id.ib_gallery);
-        ib_gallery.setOnClickListener(this);
-        ImageButton ib_delete = (ImageButton) findViewById(R.id.ib_delete);
-        ib_delete.setOnClickListener(this);
+        ib_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddProfilePicDialog();
+            }
+        });
 
         Spinner mGenders_spinner = (Spinner) findViewById(R.id.sp_gender);
         Spinner mStates_spinner = (Spinner) findViewById(R.id.sp_state);
@@ -210,12 +212,6 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
-    public void setView(Context context, Class classe) {
-        Intent it = new Intent();
-        it.setClass(context, classe);
-        startActivity(it);
-    }
-
     private SpinnerAdapter createArrayAdapterState() {
         ArrayAdapter<String> spinnerArrayAdapterState = new ArrayAdapter<>(this, android.R.
                 layout.simple_spinner_item, states);
@@ -269,52 +265,6 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
         states.add("SP");
         states.add("SE");
         states.add("TO");
-    }
-
-    @Override
-    public void onClick(View view) {
-        Intent intent;
-
-        switch (view.getId()) {
-            case R.id.ib_camera:
-                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, RESULT_CAMERA);
-                break;
-            case R.id.ib_gallery:
-                intent = new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, RESULT_GALLERY);
-                break;
-            default:
-                Bitmap avatar = BitmapFactory.decodeResource(getResources(),
-                        R.drawable.default_avatar);
-                iv_photo_user.setImageBitmap(avatar);
-                iv_photo_user.setImageBitmap(Bitmap.createScaledBitmap(avatar, 120, 120, true));
-                break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
-            bitmapPhoto = (Bitmap)data.getExtras().get("data");
-            iv_photo_user.setImageBitmap(bitmapPhoto);
-            iv_photo_user.setImageBitmap(Bitmap.createScaledBitmap(bitmapPhoto, 120, 120, true));
-        } else if (requestCode == RESULT_GALLERY && resultCode == RESULT_OK) {
-            Uri imageUri = data.getData();
-            String[] columnFile = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(imageUri, columnFile, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(columnFile[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-            bitmapPhoto = BitmapFactory.decodeFile(picturePath.toString());
-            if (bitmapPhoto != null) {
-                iv_photo_user.setImageBitmap(bitmapPhoto);
-                iv_photo_user.setImageBitmap(Bitmap.
-                        createScaledBitmap(bitmapPhoto, 120, 120, true));
-            }
-        }
     }
 
     private void cadastreUser(String name, String birthDate, String gender, String street,
@@ -528,4 +478,63 @@ public class UserCadastreActivity extends AppCompatActivity implements View.OnCl
                     SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
+
+
+    //Código do PhotoCrop
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == REQUEST_CODE_UPDATE_PIC) {
+            if (resultCode == RESULT_OK) {
+                String imagePath = result.getStringExtra(Constants.IntentExtras.IMAGE_PATH);
+                showCroppedImage(imagePath);
+            } else if (resultCode == RESULT_CANCELED) {
+
+            } else {
+                String errorMsg = result.getStringExtra(ImageCropActivity.ERROR_MSG);
+                Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void showCroppedImage(String mImagePath) {
+        if (mImagePath != null) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(mImagePath);
+            iv_photo_user.setImageBitmap(myBitmap);
+            bitmapPhoto = myBitmap;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showAddProfilePicDialog() {
+        PicModeSelectDialogFragment dialogFragment = new PicModeSelectDialogFragment();
+        dialogFragment.setiPicModeSelectListener(this);
+        dialogFragment.show(getFragmentManager(), "picModeSelector");
+    }
+
+    private void actionProfilePic(String action) {
+        Intent intent = new Intent(this, ImageCropActivity.class);
+        intent.putExtra("ACTION", action);
+        startActivityForResult(intent, REQUEST_CODE_UPDATE_PIC);
+    }
+
+
+    @Override
+    public void onPicModeSelected(String mode) {
+        String action = mode.equalsIgnoreCase(Constants.PicModes.CAMERA) ? Constants.IntentExtras.ACTION_CAMERA : Constants.IntentExtras.ACTION_GALLERY;
+        actionProfilePic(action);
+    }
+
+
+
 }

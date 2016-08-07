@@ -98,4 +98,5 @@
     <string name="btn_evaluate">Avaliar</string>
     <string name="text_successfully_completed_evaluation">Avaliação realizada com sucesso</string>
     <string name="err_unavailable_connection">Conexão não disponível!</string>
+    <string name="btn_send">Enviar</string>
 </resources>

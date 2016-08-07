@@ -16,7 +16,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/default_avatar"
+            android:src="@drawable/photo_default"
             app:border="false"
             app:border_color="#EEEEEE"
             app:border_width="4dp"

@@ -107,4 +107,5 @@
     <string name="btn_evaluate">Evaluate</string>
     <string name="text_successfully_completed_evaluation">Successfully completed evaluation</string>
     <string name="err_unavailable_connection">Unavailable connection!</string>
+    <string name="btn_send">Send</string>
 </resources>
