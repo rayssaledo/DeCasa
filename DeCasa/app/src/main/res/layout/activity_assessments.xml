@@ -63,9 +63,26 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
                 </ListView>
+
             </LinearLayout>
 
         </LinearLayout>
+
     </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/loadingAssessments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#64000000"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="?android:attr/progressBarStyleLarge"/>
+
+    </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>

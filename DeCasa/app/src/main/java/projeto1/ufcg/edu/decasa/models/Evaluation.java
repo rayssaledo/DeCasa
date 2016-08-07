@@ -8,10 +8,10 @@ public class Evaluation {
     private String usernameValuer;
     private float evaluationValue;
     private String comment;
-    private Date date;
+    private String date;
 
     public Evaluation(String professionalValued, String usernameValuer, float evaluationValue,
-                      String comment, Date date) throws Exception {
+                      String comment, String date) throws Exception {
 
         if(professionalValued == null || professionalValued.equals("")){
             throw new Exception("Professional valued is invalid.");
@@ -22,7 +22,7 @@ public class Evaluation {
         if(evaluationValue <= 0){
             throw new Exception("Evaluation value is invalid.");
         }
-        if(date == null){
+        if(date == null || professionalValued.equals("")){
             throw new Exception("Date is invalid.");
         }
 
@@ -55,7 +55,7 @@ public class Evaluation {
         this.professionalValued = professionalValued;
     }
 
-    public Float getEvaluationValue() {
+    public float getEvaluationValue() {
         return evaluationValue;
     }
 
@@ -74,11 +74,14 @@ public class Evaluation {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) throws Exception {
+        if(date == null || professionalValued.equals("")){
+            throw new Exception("Date is invalid.");
+        }
         this.date = date;
     }
 }

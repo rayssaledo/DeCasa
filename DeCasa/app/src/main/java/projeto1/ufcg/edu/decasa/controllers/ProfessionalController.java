@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
@@ -65,10 +66,12 @@ public class ProfessionalController {
                         services = services.replace("]", "");
                         services = services.replaceAll("\"", "");
                         String[] listServices = services.split(",");
+                        float evaluationAverage = Float.valueOf(jsonProfessional.getString("avg"));
                         try {
                             Professional professional = new Professional(name, cpf, phone,
                                     neighborhood, street, number, site, socialNetwork,
                                     email, password, listServices);
+                            professional.setEvaluationsAverage(evaluationAverage);
                             professional.setLocation(new Location(street + ", " + number + " " +
                                     "Campina Grande"));
                             professionals.add(professional);
@@ -101,7 +104,7 @@ public class ProfessionalController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.")
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

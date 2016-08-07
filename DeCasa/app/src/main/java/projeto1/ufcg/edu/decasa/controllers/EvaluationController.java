@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import java.util.ArrayList;
+import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
+import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
+import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
 import projeto1.ufcg.edu.decasa.views.EvaluationProfessionalActivity;
 
 public class EvaluationController {
@@ -93,5 +97,69 @@ public class EvaluationController {
                         .show();
             }
         });
+    }
+
+    public List<Evaluation> getEvaluationsByProfessional(final String professionalEmail) {
+        AssessmentsActivity.mLoadingAssessments.setVisibility(View.VISIBLE);
+        final List<Evaluation> evaluationsList = new ArrayList<Evaluation>();
+        String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
+                professionalEmail;
+        mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
+            @Override
+            public void onSucess(JSONObject response) throws JSONException {
+                if (response.getInt("ok") == 1) {
+                    JSONArray jsonResult = response.getJSONArray("result");
+                    JSONObject jsonObjectEvaluation = jsonResult.getJSONObject(0);
+                    //Recuperando a lista de avaliações
+                    JSONArray jsonArrayEvaluation = jsonObjectEvaluation.getJSONArray("avaliacoes");
+                    for (int i = 0; i < jsonArrayEvaluation.length(); i++) {
+                        JSONObject jsonEvaluation = jsonArrayEvaluation.getJSONObject(i);
+                        String usernameValuer = jsonEvaluation.getString("emailAvaliador");
+                        String evaluationValue = jsonEvaluation.getString("avaliacao");
+                        String comment = jsonEvaluation.getString("comentario");
+                        String date = jsonEvaluation.getString("data");
+                        try{
+                            float evaluationValueFloat = Float.valueOf(evaluationValue);
+                            Evaluation evaluation = new Evaluation(professionalEmail,
+                                    usernameValuer, evaluationValueFloat, comment, date);
+                            evaluationsList.add(evaluation);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
+                    }
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage("") //TODO internacionalizar com mensagem certa
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    AssessmentsActivity.mLoadingAssessments.
+                                            setVisibility(View.GONE);
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+                AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+        return evaluationsList;
     }
 }
