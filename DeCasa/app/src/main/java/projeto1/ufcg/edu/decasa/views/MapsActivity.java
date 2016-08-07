@@ -245,7 +245,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                             tv_name_professional);
                     tv_name_professional.setText(professionalInfo.getName());
 
-                    rb_evaluation = (RatingBar) findViewById(R.id.rb_evaluation);
+                    rb_evaluation = (RatingBar) infoWindow.findViewById(R.id.rb_evaluation_infowindow);
                     rb_evaluation.setRating(professionalInfo.getEvaluationsAverage());
 
                     btn_more_information = (Button) infoWindow.findViewById(R.id.

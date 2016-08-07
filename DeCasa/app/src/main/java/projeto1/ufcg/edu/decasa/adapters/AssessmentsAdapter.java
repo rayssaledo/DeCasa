@@ -51,7 +51,8 @@ public class AssessmentsAdapter extends BaseAdapter {
         //((ImageView) convertView.findViewById(R.id.iv_user)).setImageBitmap();
         ((TextView) convertView.findViewById(R.id.tv_user_name)).setText(item.getUsernameValuer());
         ((TextView) convertView.findViewById(R.id.tv_date_evaluation)).setText(item.getDate());
-        ((RatingBar) convertView.findViewById(R.id.rb_evaluation_user)).setRating(item.getEvaluationValue());
+        ((RatingBar) convertView.findViewById(R.id.rb_evaluation_user)).setRating(item.
+                getEvaluationValue());
         ((TextView) convertView.findViewById(R.id.tv_comment)).setText(item.getComment());
 
         return convertView;

@@ -361,5 +361,4 @@ public class ProfessionalsActivity extends AppCompatActivity {
         it.setClass(context, classe);
         context.startActivity(it);
     }
-
 }

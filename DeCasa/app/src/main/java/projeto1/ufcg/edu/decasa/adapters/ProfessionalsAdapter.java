@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -50,7 +51,8 @@ public class ProfessionalsAdapter extends BaseAdapter {
 
         ((TextView) convertView.findViewById(R.id.tv_name)).setText(item.getName());
         ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
-
+        ((RatingBar) convertView.findViewById(R.id.rb_evaluation)).setRating(item.
+                getEvaluationsAverage());
         return convertView;
     }
 
