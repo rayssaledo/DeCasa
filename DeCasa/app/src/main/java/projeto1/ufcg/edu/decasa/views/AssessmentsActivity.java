@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
@@ -26,6 +27,7 @@ public class AssessmentsActivity extends AppCompatActivity {
     private TextView tv_no_assessments;
     private TextView tv_label_assessments;
     private AssessmentsAdapter assessmentsAdapter;
+    private List<Evaluation> assessments;
 
     public static View mLoadingAssessments;
 
@@ -34,6 +36,10 @@ public class AssessmentsActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 101) {
+                if (assessments.size() == 0) {
+                    tv_no_assessments.setVisibility(View.VISIBLE);
+                }
+                assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
                 listViewAssessments.setAdapter(assessmentsAdapter);
             }
         }
@@ -53,17 +59,8 @@ public class AssessmentsActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
-
-        List<Evaluation> assessments = evaluationController.getEvaluationsByProfessional(
-                professional.getEmail(), handler);
-        if(assessments.size() == 0){
-            tv_no_assessments.setVisibility(View.VISIBLE);
-        }
-
         tv_label_assessments.setText(getApplication().getString(R.string.title_activity_assessments)
                 + " (" + professional.getNumberAssessments() + ")");
-        assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
-        listViewAssessments.setAdapter(assessmentsAdapter);
 
         Button btn_to_evaluate = (Button) findViewById(R.id.btn_to_evaluate);
         btn_to_evaluate.setOnClickListener(new View.OnClickListener() {
@@ -76,4 +73,11 @@ public class AssessmentsActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(), handler);
+    }
+
 }
