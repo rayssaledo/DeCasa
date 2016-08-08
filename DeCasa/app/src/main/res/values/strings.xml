@@ -21,7 +21,8 @@
     <string name="desc_gallery">Icon gallery</string>
     <string name="desc_delete">Icon delete</string>
     <string name="text_evaluation_type">Service</string>
-    <string name="text_number_evaluations"> evaluations</string>
+    <string name="text_number_evaluation">evaluation</string>
+    <string name="text_number_assessments">assessments</string>
     <string name="text_services">Services</string>
     <string name="text_address_professional">Address</string>
     <string name="text_phone_professional">Telephone</string>

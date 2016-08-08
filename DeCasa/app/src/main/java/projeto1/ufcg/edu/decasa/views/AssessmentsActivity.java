@@ -38,6 +38,7 @@ public class AssessmentsActivity extends AppCompatActivity {
             if (msg.what == 101) {
                 if (assessments.size() == 0) {
                     tv_no_assessments.setVisibility(View.VISIBLE);
+                    listViewAssessments.setVisibility(View.GONE);
                 }
                 assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
                 listViewAssessments.setAdapter(assessmentsAdapter);

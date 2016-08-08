@@ -32,6 +32,10 @@ public class EvaluationController {
         url = "http://decasa-decasa.rhcloud.com/";
     }
 
+    public void getNumAssessments(final String professionalEmail) {
+
+    }
+
     public void addEvaluation(final String professionalValued, final String usernameValuer,
                               final String evaluationValue, final String comment,
                               final String date, final Class classDest,

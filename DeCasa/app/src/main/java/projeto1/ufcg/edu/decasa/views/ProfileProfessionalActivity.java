@@ -103,7 +103,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         }
         tv_services.setText(services);
         rb_evaluation.setRating(professional.getEvaluationsAverage());
-        tv_number_assessments.setText(professional.getNumberAssessments() +
-                getApplication().getString(R.string.text_number_evaluations));
+        tv_number_assessments.setText(professional.getNumberAssessments() + " " +
+                getApplication().getString(R.string.text_number_assessments));
     }
 }

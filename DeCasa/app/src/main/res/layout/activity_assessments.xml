@@ -8,6 +8,17 @@
     android:id="@+id/drawerLayout"
     tools:context=".views.AssessmentsActivity">
 
+    <TextView
+        android:id="@+id/tv_no_assessments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_assessments"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -48,7 +59,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:gravity="center_horizontal"
-                    android:paddingStart="50dp"
+                    android:paddingStart="20dp"
                     android:paddingEnd="20dp" />
             </LinearLayout>
 
@@ -63,14 +74,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
                 </ListView>
-
-                <TextView
-                    android:id="@+id/tv_no_assessments"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="#FF0000"
-                    android:text="@string/no_assessments"
-                    android:visibility="invisible"/>
 
             </LinearLayout>
 
