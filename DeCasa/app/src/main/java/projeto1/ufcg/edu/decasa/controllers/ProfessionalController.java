@@ -112,6 +112,7 @@ public class ProfessionalController {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 ProfessionalsActivity.mLoadingProfessionals.
                                         setVisibility(View.GONE);
+                                mActivity.finish();
                             }
                         })
                         .create().show();

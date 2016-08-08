@@ -9,10 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.adapters.AssessmentsAdapter;
 import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
@@ -28,6 +25,7 @@ public class AssessmentsActivity extends AppCompatActivity {
     private TextView tv_label_assessments;
     private AssessmentsAdapter assessmentsAdapter;
     private List<Evaluation> assessments;
+    private List<Integer> numAssessmentsProfessional;
 
     public static View mLoadingAssessments;
 
@@ -43,8 +41,20 @@ public class AssessmentsActivity extends AppCompatActivity {
                 assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
                 listViewAssessments.setAdapter(assessmentsAdapter);
             }
+            if (msg.what == 102) {
+                if (numAssessmentsProfessional.get(0) == 1) {
+                    tv_label_assessments.setText(getApplication().getString(R.string.
+                            text_number_evaluation) + " (" + numAssessmentsProfessional.get(0)
+                            + ")");
+                } else {
+                    tv_label_assessments.setText(getApplication().getString(R.string.
+                            text_number_assessments) + " (" + numAssessmentsProfessional.get(0)
+                            + ")");
+                }
+            }
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +70,6 @@ public class AssessmentsActivity extends AppCompatActivity {
 
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
-        tv_label_assessments.setText(getApplication().getString(R.string.title_activity_assessments)
-                + " (" + professional.getNumberAssessments() + ")");
 
         Button btn_to_evaluate = (Button) findViewById(R.id.btn_to_evaluate);
         btn_to_evaluate.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +87,7 @@ public class AssessmentsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(), handler);
+        numAssessmentsProfessional = evaluationController.getNumAssessments(professional.getEmail(), handler);
     }
 
 }

@@ -60,7 +60,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 100) {
                 listViewProfessionals.setAdapter(professionalsAdapter);
-
             }
         }
     };
@@ -119,10 +118,9 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public void updateNavigationMenu() {
+
         ArrayList<NavItem> mNavItems = new ArrayList<>();
-        if (mySharedPreferences.isUserLoggedIn()) {
-            setmDrawer(mNavItems);
-        }
+        setmDrawer(mNavItems);
 
         Button btn_profile_or_login = (Button) findViewById(R.id.btn_profile_or_login);
         TextView tv_name_user_or_welcome = (TextView) findViewById(R.id.tv_name_user_or_welcome);
@@ -144,7 +142,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
             btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Setar para a tela de login
+                    setView(ProfessionalsActivity.this, LoginActivity.class);
                 }
             });
         }
@@ -286,11 +284,15 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public void setmDrawer(ArrayList<NavItem> mNavItems) {
-        mNavItems.add(new NavItem("Meus Favoritos", R.mipmap.ic_favorite_black_24dp)); //TODO internacionalizar
-        mNavItems.add(new NavItem("Instruções de Uso", R.mipmap.ic_class_black_24dp)); //TODO internacionalizar
-        mNavItems.add(new NavItem("Sobre", R.mipmap.ic_info_black_24dp)); //TODO internacionalizar
+        mNavItems.add(new NavItem(getApplication().getString(R.string.text_my_favorites),
+                R.mipmap.ic_favorite_black_24dp));
+        mNavItems.add(new NavItem(getApplication().getString(R.string.text_instructions_for_use),
+                R.mipmap.ic_class_black_24dp));
+        mNavItems.add(new NavItem(getApplication().getString(R.string.text_about),
+                R.mipmap.ic_info_black_24dp));
         if (mySharedPreferences.isUserLoggedIn()) {
-            mNavItems.add(new NavItem("Sair", R.mipmap.ic_exit_to_app_black_24dp)); //TODO internacionalizar
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_logout),
+                    R.mipmap.ic_exit_to_app_black_24dp));
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);

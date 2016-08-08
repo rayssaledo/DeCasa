@@ -19,8 +19,8 @@
     <string name="desc_gallery">Ícone galeria</string>
     <string name="desc_delete">Ícone excluir</string>
     <string name="text_evaluation_type">Atendimento</string>
-    <string name="text_number_evaluation">avaliação</string>
-    <string name="text_number_assessments">avaliações</string>
+    <string name="text_number_evaluation">Avaliação</string>
+    <string name="text_number_assessments">Avaliações</string>
     <string name="text_see_evaluations">Ver avaliações</string>
     <string name="text_services">Serviços</string>
     <string name="text_address_professional">Endereço</string>
@@ -100,4 +100,8 @@
     <string name="text_successfully_completed_evaluation">Avaliação realizada com sucesso</string>
     <string name="err_unavailable_connection">Conexão não disponível!</string>
     <string name="no_assessments">Nenhuma avaliação</string>
+    <string name="text_my_favorites">Meus favoritos</string>
+    <string name="text_instructions_for_use">Instruções de uso</string>
+    <string name="text_about">Sobre</string>
+    <string name="text_logout">Sair</string>
 </resources>

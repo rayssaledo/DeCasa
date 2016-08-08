@@ -19,6 +19,7 @@ import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
 import projeto1.ufcg.edu.decasa.views.EvaluationProfessionalActivity;
+import projeto1.ufcg.edu.decasa.views.ProfileProfessionalActivity;
 
 public class EvaluationController {
 
@@ -32,8 +33,63 @@ public class EvaluationController {
         url = "http://decasa-decasa.rhcloud.com/";
     }
 
-    public void getNumAssessments(final String professionalEmail) {
+    public List<Integer> getNumAssessments(final String professionalEmail, final Handler handler) {
+        final List<Integer> numAssessments = new ArrayList<>();
+        ProfileProfessionalActivity.mLoadingProfileProfessional.setVisibility(View.VISIBLE);
+        String urlNumEvaluationsByProfessional = url + "/get-num-avaliacoes-profissional?email=" +
+                professionalEmail;
+        mHttp.get(urlNumEvaluationsByProfessional, new HttpListener() {
+            @Override
+            public void onSucess(JSONObject response) throws JSONException {
+                if (response.getInt("ok") == 1) {
+                    JSONArray jsonResult = response.getJSONArray("result");
+                    JSONObject jsonObject = jsonResult.getJSONObject(0);
+                    String stringNumAssessments = jsonObject.getString("numAvaliacoes");
+                    try{
+                        numAssessments.add(Integer.valueOf(stringNumAssessments));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Message message = new Message();
+                    message.what = 102;
+                    handler.sendMessage(message);
+                    ProfileProfessionalActivity.mLoadingProfileProfessional.
+                            setVisibility(View.GONE);
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage("") //TODO internacionalizar com mensagem certa
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    ProfileProfessionalActivity.mLoadingProfileProfessional.
+                                            setVisibility(View.GONE);
+                                    mActivity.finish();
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+                ProfileProfessionalActivity.mLoadingProfileProfessional.setVisibility(View.GONE);
+            }
 
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ProfileProfessionalActivity.mLoadingProfileProfessional.
+                                        setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+        return numAssessments;
     }
 
     public void addEvaluation(final String professionalValued, final String usernameValuer,
@@ -95,7 +151,7 @@ public class EvaluationController {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 EvaluationProfessionalActivity.mLoadingEvaluation.
-                                        setVisibility(View.VISIBLE);
+                                        setVisibility(View.GONE);
                             }
                         })
                         .create()
@@ -132,11 +188,11 @@ public class EvaluationController {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
                     }
                     Message message = new Message();
                     message.what = 101;
                     handler.sendMessage(message);
+                    AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
                 } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
@@ -163,12 +219,14 @@ public class EvaluationController {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
+                                mActivity.finish();
                             }
                         })
                         .create()
                         .show();
             }
         });
+
         return evaluationsList;
     }
 }
