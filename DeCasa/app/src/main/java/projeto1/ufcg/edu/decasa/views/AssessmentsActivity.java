@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class AssessmentsActivity extends AppCompatActivity {
     private EvaluationController evaluationController;
     private Professional professional;
     private ListView listViewAssessments;
+    private TextView tv_no_assessments;
+    private TextView tv_label_assessments;
     private AssessmentsAdapter assessmentsAdapter;
 
     public static View mLoadingAssessments;
@@ -43,14 +46,22 @@ public class AssessmentsActivity extends AppCompatActivity {
 
         mLoadingAssessments =  findViewById(R.id.loadingAssessments);
         listViewAssessments = (ListView) findViewById(R.id.lv_assessments);
+        tv_no_assessments = (TextView) findViewById(R.id.tv_no_assessments);
+        tv_label_assessments = (TextView) findViewById(R.id.tv_label_assessments);
 
         evaluationController = new EvaluationController(AssessmentsActivity.this);
 
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
-        List<Evaluation> assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(), handler);
+        List<Evaluation> assessments = evaluationController.getEvaluationsByProfessional(
+                professional.getEmail(), handler);
+        if(assessments.size() == 0){
+            tv_no_assessments.setVisibility(View.VISIBLE);
+        }
 
+        tv_label_assessments.setText(getApplication().getString(R.string.title_activity_assessments)
+                + " (" + professional.getNumberAssessments() + ")");
         assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
         listViewAssessments.setAdapter(assessmentsAdapter);
 

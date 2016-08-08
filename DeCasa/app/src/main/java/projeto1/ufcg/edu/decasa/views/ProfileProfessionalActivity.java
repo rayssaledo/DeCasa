@@ -9,7 +9,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.List;
+
 import projeto1.ufcg.edu.decasa.R;
+import projeto1.ufcg.edu.decasa.controllers.ProfessionalController;
 import projeto1.ufcg.edu.decasa.models.Professional;
 
 public class ProfileProfessionalActivity extends AppCompatActivity {
@@ -22,6 +28,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private TextView tv_social_network;
     private TextView tv_website;
     private RatingBar rb_evaluation;
+    private TextView tv_number_assessments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         tv_social_network = (TextView) findViewById(R.id.tv_social_network);
         tv_website = (TextView) findViewById(R.id.tv_website);
         rb_evaluation = (RatingBar) findViewById(R.id.rb_evaluation);
+        tv_number_assessments = (TextView) findViewById(R.id.tv_number_assessments);
 
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
@@ -95,5 +103,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         }
         tv_services.setText(services);
         rb_evaluation.setRating(professional.getEvaluationsAverage());
+        tv_number_assessments.setText(professional.getNumberAssessments() +
+                getApplication().getString(R.string.text_number_evaluations));
     }
 }

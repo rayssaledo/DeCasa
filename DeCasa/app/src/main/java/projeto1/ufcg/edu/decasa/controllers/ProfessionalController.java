@@ -67,11 +67,13 @@ public class ProfessionalController {
                         services = services.replaceAll("\"", "");
                         String[] listServices = services.split(",");
                         float evaluationAverage = Float.valueOf(jsonProfessional.getString("avg"));
+                        int numberAssessments = Integer.valueOf(jsonProfessional.getString("numAvaliacoes"));
                         try {
                             Professional professional = new Professional(name, cpf, phone,
                                     neighborhood, street, number, site, socialNetwork,
                                     email, password, listServices);
                             professional.setEvaluationsAverage(evaluationAverage);
+                            professional.setNumberAssessments(numberAssessments);
                             professional.setLocation(new Location(street + ", " + number + " " +
                                     "Campina Grande"));
                             professionals.add(professional);

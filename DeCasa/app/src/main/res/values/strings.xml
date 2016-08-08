@@ -21,7 +21,7 @@
     <string name="desc_gallery">Icon gallery</string>
     <string name="desc_delete">Icon delete</string>
     <string name="text_evaluation_type">Service</string>
-    <string name="text_number_evaluations">2 evaluations</string>
+    <string name="text_number_evaluations"> evaluations</string>
     <string name="text_services">Services</string>
     <string name="text_address_professional">Address</string>
     <string name="text_phone_professional">Telephone</string>
@@ -107,4 +107,5 @@
     <string name="btn_evaluate">Evaluate</string>
     <string name="text_successfully_completed_evaluation">Successfully completed evaluation</string>
     <string name="err_unavailable_connection">Unavailable connection!</string>
+    <string name="no_assessments">No assessments</string>
 </resources>

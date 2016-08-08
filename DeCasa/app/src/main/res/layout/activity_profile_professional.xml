@@ -123,6 +123,7 @@
                             android:contentDescription="@string/desc_evaluators"/>
 
                         <TextView
+                            android:id="@+id/tv_number_assessments"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:hint="@string/text_number_evaluations"

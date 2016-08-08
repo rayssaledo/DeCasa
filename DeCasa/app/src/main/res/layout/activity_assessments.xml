@@ -29,12 +29,13 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_label_assessments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:text="@string/title_activity_assessments"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="110dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="110dp"
                     android:textAlignment="viewStart"/>
 
                 <Button
@@ -47,9 +48,8 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:gravity="center_horizontal"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="20dp"
-                    android:layout_centerHorizontal="true" />
+                    android:paddingStart="50dp"
+                    android:paddingEnd="20dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -63,6 +63,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
                 </ListView>
+
+                <TextView
+                    android:id="@+id/tv_no_assessments"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#FF0000"
+                    android:text="@string/no_assessments"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 
