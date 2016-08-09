@@ -60,7 +60,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 100) {
                 listViewProfessionals.setAdapter(professionalsAdapter);
-
             }
         }
     };
@@ -73,36 +72,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
 
         mLoadingProfessionals = findViewById(R.id.rl_loading_professionals);
-
-        ArrayList<NavItem> mNavItems = new ArrayList<>();
-        if (mySharedPreferences.isUserLoggedIn()) {
-            setmDrawer(mNavItems);
-        }
-
-        Button btn_profile_or_login = (Button) findViewById(R.id.btn_profile_or_login);
-        TextView tv_name_user_or_welcome = (TextView) findViewById(R.id.tv_name_user_or_welcome);
-
-        if (mySharedPreferences.isUserLoggedIn()) {
-            HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
-            String username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
-            tv_name_user_or_welcome.setText(username);
-            btn_profile_or_login.setText(getApplication().getString(R.string.btn_view_profile));
-            btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Setar par a tela de perfil do usuário
-                }
-            });
-        } else {
-            tv_name_user_or_welcome.setText(getApplication().getString(R.string.welcome));
-            btn_profile_or_login.setText(getApplication().getString(R.string.btn_enter));
-            btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Setar para a tela de login
-                }
-            });
-        }
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
         Button btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
@@ -140,6 +109,43 @@ public class ProfessionalsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateNavigationMenu();
+    }
+
+    public void updateNavigationMenu() {
+
+        ArrayList<NavItem> mNavItems = new ArrayList<>();
+        setmDrawer(mNavItems);
+
+        Button btn_profile_or_login = (Button) findViewById(R.id.btn_profile_or_login);
+        TextView tv_name_user_or_welcome = (TextView) findViewById(R.id.tv_name_user_or_welcome);
+
+        if (mySharedPreferences.isUserLoggedIn()) {
+            HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
+            String username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
+            tv_name_user_or_welcome.setText(username);
+            btn_profile_or_login.setText(getApplication().getString(R.string.btn_view_profile));
+            btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Setar par a tela de perfil do usuário
+                }
+            });
+        } else {
+            tv_name_user_or_welcome.setText(getApplication().getString(R.string.welcome));
+            btn_profile_or_login.setText(getApplication().getString(R.string.btn_enter));
+            btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setView(ProfessionalsActivity.this, LoginActivity.class);
+                }
+            });
+        }
     }
 
     private void createDialogChoose() {
@@ -278,11 +284,15 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public void setmDrawer(ArrayList<NavItem> mNavItems) {
-        mNavItems.add(new NavItem("Meus Favoritos", R.mipmap.ic_favorite_black_24dp)); //TODO internacionalizar
-        mNavItems.add(new NavItem("Instruções de Uso", R.mipmap.ic_class_black_24dp)); //TODO internacionalizar
-        mNavItems.add(new NavItem("Sobre", R.mipmap.ic_info_black_24dp)); //TODO internacionalizar
+        mNavItems.add(new NavItem(getApplication().getString(R.string.text_my_favorites),
+                R.mipmap.ic_favorite_black_24dp));
+        mNavItems.add(new NavItem(getApplication().getString(R.string.text_instructions_for_use),
+                R.mipmap.ic_class_black_24dp));
+        mNavItems.add(new NavItem(getApplication().getString(R.string.text_about),
+                R.mipmap.ic_info_black_24dp));
         if (mySharedPreferences.isUserLoggedIn()) {
-            mNavItems.add(new NavItem("Sair", R.mipmap.ic_exit_to_app_black_24dp)); //TODO internacionalizar
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_logout),
+                    R.mipmap.ic_exit_to_app_black_24dp));
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -361,5 +371,4 @@ public class ProfessionalsActivity extends AppCompatActivity {
         it.setClass(context, classe);
         context.startActivity(it);
     }
-
 }

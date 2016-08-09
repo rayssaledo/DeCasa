@@ -20,6 +20,7 @@ public class Professional implements Parcelable {
     private String[] services;
     private Location location;
     private float evaluationsAverage;
+    private int numberAssessments;
 
     public Professional(String name,String cpf, String phone, String neighborhood, String street,
                         String number, String site, String socialNetwork,
@@ -79,6 +80,7 @@ public class Professional implements Parcelable {
         services = in.createStringArray();
         location = in.readParcelable(Location.class.getClassLoader());
         evaluationsAverage = in.readFloat();
+        numberAssessments = in.readInt();
     }
 
     public static final Creator<Professional> CREATOR = new Creator<Professional>() {
@@ -236,6 +238,13 @@ public class Professional implements Parcelable {
         this.evaluationsAverage = evaluationsAverage;
     }
 
+    public int getNumberAssessments() {
+        return numberAssessments;
+    }
+
+    public void setNumberAssessments(int numberAssessments) {
+        this.numberAssessments = numberAssessments;
+    }
 
     @Override
     public int describeContents() {
@@ -257,5 +266,6 @@ public class Professional implements Parcelable {
         parcel.writeStringArray(services);
         parcel.writeParcelable(location, i);
         parcel.writeFloat(evaluationsAverage);
+        parcel.writeInt(numberAssessments);
     }
 }

@@ -123,9 +123,10 @@
                             android:contentDescription="@string/desc_evaluators"/>
 
                         <TextView
+                            android:id="@+id/tv_number_assessments"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:hint="@string/text_number_evaluations"
+                            android:hint="@string/text_number_assessments"
                             android:textAlignment="center"
                             android:textSize="16sp"
                             android:layout_gravity="center_horizontal" />
@@ -271,5 +272,20 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/loadingProfileProfessional"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#64000000"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            style="?android:attr/progressBarStyleLarge"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

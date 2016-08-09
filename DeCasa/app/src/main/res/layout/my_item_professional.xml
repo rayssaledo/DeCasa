@@ -40,7 +40,7 @@
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rb_evaluation"
+        android:id="@+id/rb_evaluation_professionals"
         style="@style/StarRatingBar"
         android:layout_below="@+id/tv_address"
         android:layout_alignParentEnd="true"
