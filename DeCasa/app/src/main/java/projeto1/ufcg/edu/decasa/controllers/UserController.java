@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -175,23 +176,32 @@ public class UserController {
 
     public List<User> getUser(final String login, final Handler handler){
             final List<User> userList = new ArrayList<>();
-            String urlGetUser = "http://decasa-decasa.rhcloud.com/getUser?login=" + login ;
+            String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
             mHttp.get(urlGetUser, new HttpListener() {
                 @Override
-                public void onSucess(JSONObject response) throws JSONException {
-                    if (response.getInt("ok") == 1) {
+                public void onSucess(JSONObject result) throws JSONException {
+                    Log.d("USERPHOTOGETUSER", "passou aqui 1");
+                    if (result.getInt("ok") == 1) {
+                        Log.d("USERPHOTOGETUSER", result.toString()+"");
+                        JSONObject jsonResult = result.getJSONObject("result");
+                        Log.d("USERPHOTOGETUSER", "passou aqui 2");
                      //TODO conferir nome dos campos
-                        String name = response.getString("name");
-                        String date_of_birth = response.getString("birth");
-                        String gender = response.getString("gender");
-                        String street = response.getString("street");
-                        String number = response.getString("number");
-                        String neighborhood = response.getString("neighborhood");
-                        String city = response.getString("city");
-                        String state = response.getString("state");
-                        String username = response.getString("username");
-                        String password = response.getString("password");
-                        String photo = response.getString("photo");
+                        String name = jsonResult.getString("name");
+                        Log.d("USERPHOTOGETUSER", "passou aqui 3");
+                        String date_of_birth = jsonResult.getString("birthDate");
+                        String gender = jsonResult.getString("gender");
+                        String street = jsonResult.getString("street");
+                        String number = jsonResult.getString("number");
+                        String neighborhood = jsonResult.getString("neighborhood");
+                        String city = jsonResult.getString("city");
+                        String state = jsonResult.getString("state");
+
+                        String username = jsonResult.getString("username");
+                        String password = jsonResult.getString("password");
+
+                        String photo = jsonResult.getString("photo");
+                        Log.d("PHOTOUSER1", photo+"");
+
                         try {
                             User user = new User(name, date_of_birth, gender, street, number,
                                     neighborhood, city, state, username, password, photo);
@@ -199,6 +209,7 @@ public class UserController {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        Log.d("PHOTOUSER2", photo+"");
                         Message message = new Message();
                         message.what = 103;
                         handler.sendMessage(message);

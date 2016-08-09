@@ -97,7 +97,7 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
 
         mLoadingCadastre = findViewById(R.id.rl_loading_cadastre);
 
-        Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.default_avatar);
+        Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.photo_default);
         bitmapPhoto = avatar;
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 100, b);
@@ -502,6 +502,10 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
             Bitmap myBitmap = BitmapFactory.decodeFile(mImagePath);
             iv_photo_user.setImageBitmap(myBitmap);
             bitmapPhoto = myBitmap;
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 100, b);
+            byte[] photo_user_byte = b.toByteArray();
+            photo_user = Base64.encodeToString(photo_user_byte, Base64.NO_WRAP);
         }
     }
 

@@ -50,7 +50,8 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
             if (msg.what == 103) {
                 user = userList.get(0);
                 photoUser = user.getPhoto();
-                Log.d("USERNAME", user.getUsername() + "");
+//                Log.d("USERNAME", user.getUsername() + "");
+//                Log.d("USERPHOTO", user.getPhoto() + "");
             }
         }
     };
@@ -86,20 +87,27 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-         userList = userController.getUser(username, handler);
+        HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
+        username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
+        Log.d("GETUSER", username+"");
+        userList = userController.getUser(username, handler);
+        Log.d("GETUSER", "Passou aqui");
     }
 
     private void addEvaluation() {
-        HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
-        username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
+//        HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
+//        username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
         float evaluationValue = rbEvaluation.getRating();
         String stringEvaluationValue = String.valueOf(evaluationValue);
         String comment = edComment.getText().toString();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String stringEvaluationDate = dateFormat.format(date);
+        //userList = userController.getUser(username, handler);
+        Log.d("PHOTOUSER4", photoUser+"");
         evaluationController.addEvaluation(professional.getEmail(), username, stringEvaluationValue,
                 comment, stringEvaluationDate, photoUser,
                 AssessmentsActivity.class, professional);
+        //Log.d("USERPHOTO", photoUser + "");
     }
 }
