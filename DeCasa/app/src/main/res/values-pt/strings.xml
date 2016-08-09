@@ -27,6 +27,7 @@
     <string name="text_phone_professional">Telefone</string>
     <string name="text_website">Site</string>
     <string name="text_social_network">Rede social</string>
+    <string name="text_first_evaluate">No evaluate.\nBe the first to evaluate.</string>
     <string name="text_call">Ligar</string>
     <string name="hint_item">Item</string>
     <string name="desc_item">Ícone item</string>

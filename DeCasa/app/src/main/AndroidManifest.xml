@@ -77,7 +77,7 @@
         <activity
             android:name=".views.EvaluationProfessionalActivity"
             android:label="@string/title_activity_evaluation_professional"
-            android:theme="@style/AppThemeCustomNoActionBar">
+            android:theme="@style/AppThemeCustom">
         </activity>
         <activity
             android:name=".views.ImageCropActivity"

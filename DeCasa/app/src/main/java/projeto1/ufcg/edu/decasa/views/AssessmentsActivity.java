@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -26,6 +27,8 @@ public class AssessmentsActivity extends AppCompatActivity {
     private AssessmentsAdapter assessmentsAdapter;
     private List<Evaluation> assessments;
     private List<Integer> numAssessmentsProfessional;
+    private Button btn_first_evaluate;
+
 
     public static View mLoadingAssessments;
 
@@ -35,7 +38,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 101) {
                 if (assessments.size() == 0) {
-                    tv_no_assessments.setVisibility(View.VISIBLE);
+                     btn_first_evaluate.setVisibility(View.VISIBLE);
                     listViewAssessments.setVisibility(View.GONE);
                 }
                 assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
@@ -81,6 +84,21 @@ public class AssessmentsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_first_evaluate = (Button) findViewById(R.id.btn_first_evaluate);
+        btn_first_evaluate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AssessmentsActivity.this,
+                        EvaluationProfessionalActivity.class);
+                intent.putExtra("PROFESSIONAL", professional);
+                startActivity(intent);
+            }
+        });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
     }
 
     @Override
@@ -88,6 +106,18 @@ public class AssessmentsActivity extends AppCompatActivity {
         super.onResume();
         assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(), handler);
         numAssessmentsProfessional = evaluationController.getNumAssessments(professional.getEmail(), handler);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
 }

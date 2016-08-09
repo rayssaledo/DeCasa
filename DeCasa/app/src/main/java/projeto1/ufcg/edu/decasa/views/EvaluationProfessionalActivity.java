@@ -3,6 +3,7 @@ package projeto1.ufcg.edu.decasa.views;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +55,9 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
             }
         });
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
 
     }
 
@@ -68,5 +72,18 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
         String stringEvaluationDate = dateFormat.format(date);
         evaluationController.addEvaluation(professional.getEmail(), username, stringEvaluationValue,
                 comment, stringEvaluationDate, AssessmentsActivity.class, professional);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -96,6 +97,9 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -133,5 +137,17 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         }
         tv_services.setText(services);
         rb_evaluation.setRating(professional.getEvaluationsAverage());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

@@ -30,6 +30,7 @@
     <string name="text_social_network">Social network</string>
     <string name="text_evaluations">Evaluations</string>
     <string name="text_see_evaluations">See evaluations</string>
+
     <string name="text_call">Call</string>
     <string name="hint_item">Item</string>
     <string name="desc_item">Icon item</string>

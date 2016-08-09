@@ -19,6 +19,20 @@
         android:layout_centerVertical="true"
         android:visibility="gone"/>
 
+    <Button
+        android:id="@+id/btn_first_evaluate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_first_evaluate"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,6 +51,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:divider="@color/black"
                 android:orientation="horizontal">
 
                 <TextView
@@ -45,22 +61,20 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:text="@string/title_activity_assessments"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="110dp"
+                    android:layout_marginStart="16dp"
                     android:textAlignment="viewStart"/>
 
                 <Button
                     android:id="@+id/btn_to_evaluate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/btn_to_evaluate"
                     android:textAllCaps="false"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:textColor="@color/black"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    android:gravity="center_horizontal"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp" />
+                    android:gravity="end"
+                    android:layout_marginEnd="16dp" />
             </LinearLayout>
 
             <LinearLayout
