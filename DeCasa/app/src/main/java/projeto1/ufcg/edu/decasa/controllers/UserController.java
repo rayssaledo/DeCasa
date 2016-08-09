@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
@@ -168,8 +173,8 @@ public class UserController {
         });
     }
 
-    public User getUser(final String login){
-            User user = null;
+    public List<User> getUser(final String login, final Handler handler){
+            final List<User> userList = new ArrayList<>();
             String urlGetUser = "http://decasa-decasa.rhcloud.com/getUser?login=" + login ;
             mHttp.get(urlGetUser, new HttpListener() {
                 @Override
@@ -186,13 +191,17 @@ public class UserController {
                         String state = response.getString("state");
                         String username = response.getString("username");
                         String password = response.getString("password");
-
+                        String photo = response.getString("photo");
                         try {
                             User user = new User(name, date_of_birth, gender, street, number,
-                                    neighborhood, city, state, username, password);
+                                    neighborhood, city, state, username, password, photo);
+                            userList.add(user);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        Message message = new Message();
+                        message.what = 103;
+                        handler.sendMessage(message);
                     } else {
                             new AlertDialog.Builder(mActivity)
                                     .setTitle("Erro")
@@ -224,7 +233,7 @@ public class UserController {
                 }
             });
 
-            return user;
+            return userList;
     }
 
 }

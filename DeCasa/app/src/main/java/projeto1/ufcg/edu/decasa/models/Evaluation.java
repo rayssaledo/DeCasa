@@ -9,9 +9,10 @@ public class Evaluation {
     private float evaluationValue;
     private String comment;
     private String date;
+    private String photo;
 
     public Evaluation(String professionalValued, String usernameValuer, float evaluationValue,
-                      String comment, String date) throws Exception {
+                      String comment, String date, String photo) throws Exception {
 
         if(professionalValued == null || professionalValued.equals("")){
             throw new Exception("Professional valued is invalid.");
@@ -25,12 +26,16 @@ public class Evaluation {
         if(date == null || professionalValued.equals("")){
             throw new Exception("Date is invalid.");
         }
+        if(photo == null || photo.equals("")){
+            throw new Exception("Photo is invalid.");
+        }
 
         this.professionalValued = professionalValued;
         this.usernameValuer = usernameValuer;
         this.evaluationValue = evaluationValue;
         this.comment = comment;
         this.date = date;
+        this.photo = photo;
     }
 
     public String getUsernameValuer() {
@@ -83,5 +88,16 @@ public class Evaluation {
             throw new Exception("Date is invalid.");
         }
         this.date = date;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) throws Exception {
+        if(photo == null || photo.equals("")){
+            throw new Exception("Photo is invalid.");
+        }
+        this.photo = photo;
     }
 }
