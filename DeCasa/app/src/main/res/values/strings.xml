@@ -30,8 +30,12 @@
     <string name="text_social_network">Social network</string>
     <string name="text_evaluations">Evaluations</string>
     <string name="text_see_evaluations">See evaluations</string>
-
+    <string name="text_developers">Developers</string>
+    <string name="text_designer">Designer</string>
+    <string name="text_designer_name">Kaio Cordeiro</string>
+    <string name="text_developers_name">Andreza Raquel\nErick Alcântara\nLucas Marlon\nMarcos Antônio\nMaria Daniela\nRayssa Naianny</string>
     <string name="text_call">Call</string>
+    <string name="text_version">Version 1.0</string>
     <string name="hint_item">Item</string>
     <string name="desc_item">Icon item</string>
     <string name="hint_social_network">www.facebook.com/joaoencanador</string>
@@ -115,4 +119,5 @@
     <string name="text_instructions_for_use">Instructions for use</string>
     <string name="text_about">About</string>
     <string name="text_logout">Logout</string>
+    <string name="title_activity_about">About</string>
 </resources>

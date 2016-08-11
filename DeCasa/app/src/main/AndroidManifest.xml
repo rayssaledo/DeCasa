@@ -67,22 +67,23 @@
         <activity
             android:name=".views.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppThemeCustomNoActionBar">
-        </activity>
+            android:theme="@style/AppThemeCustomNoActionBar"></activity>
         <activity
             android:name=".views.AssessmentsActivity"
             android:label="@string/title_activity_assessments"
-            android:theme="@style/AppThemeCustom">
-        </activity>
+            android:theme="@style/AppThemeCustom"></activity>
         <activity
             android:name=".views.EvaluationProfessionalActivity"
             android:label="@string/title_activity_evaluation_professional"
-            android:theme="@style/AppThemeCustom">
-        </activity>
+            android:theme="@style/AppThemeCustom"></activity>
         <activity
             android:name=".views.ImageCropActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".views.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppThemeCustom">
         </activity>
     </application>
 

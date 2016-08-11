@@ -26,9 +26,11 @@
     <string name="text_address_professional">Endereço</string>
     <string name="text_phone_professional">Telefone</string>
     <string name="text_website">Site</string>
+    <string name="text_developers">Desenvolvedores</string>
     <string name="text_social_network">Rede social</string>
     <string name="text_first_evaluate">No evaluate.\nBe the first to evaluate.</string>
     <string name="text_call">Ligar</string>
+    <string name="text_version">Versão 1.0</string>
     <string name="hint_item">Item</string>
     <string name="desc_item">Ícone item</string>
     <string name="hint_social_network">www.facebook.com/joaoencanador</string>
@@ -106,4 +108,5 @@
     <string name="text_instructions_for_use">Instruções de uso</string>
     <string name="text_about">Sobre</string>
     <string name="text_logout">Sair</string>
+    <string name="title_activity_about">Sobre</string>
 </resources>
