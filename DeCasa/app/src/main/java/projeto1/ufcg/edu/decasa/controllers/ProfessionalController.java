@@ -53,9 +53,11 @@ public class ProfessionalController {
                         String name = jsonProfessional.getString("name");
                         String cpf = jsonProfessional.getString("cpf");
                         String phone = jsonProfessional.getString("phone");
-                        String neighborhood = jsonProfessional.getString("neighborhood");
                         String street = jsonProfessional.getString("street");
                         String number = jsonProfessional.getString("number");
+                        String neighborhood = jsonProfessional.getString("neighborhood");
+                        String city = jsonProfessional.getString("city");
+                        String state = jsonProfessional.getString("state");
                         String site = jsonProfessional.getString("site");
                         String socialNetwork = jsonProfessional.getString("socialNetwork");
                         //String pictury = jsonProfessional.getString("pictury");
@@ -70,12 +72,12 @@ public class ProfessionalController {
                         int numberAssessments = Integer.valueOf(jsonProfessional.getString("numAvaliacoes"));
                         try {
                             Professional professional = new Professional(name, cpf, phone,
-                                    neighborhood, street, number, site, socialNetwork,
+                                    street, number, neighborhood, city, state, site, socialNetwork,
                                     email, password, listServices);
                             professional.setEvaluationsAverage(evaluationAverage);
                             professional.setNumberAssessments(numberAssessments);
                             professional.setLocation(new Location(street + ", " + number + " " +
-                                    "Campina Grande"));
+                                    city + " " + state));
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();

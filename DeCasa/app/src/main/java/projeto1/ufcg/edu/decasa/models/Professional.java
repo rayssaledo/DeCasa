@@ -12,6 +12,8 @@ public class Professional implements Parcelable {
     private String neighborhood;
     private String street;
     private String number;
+    private String city;
+    private String state;
     private String site;
     private String socialNetwork;
     //private String pictury;
@@ -22,9 +24,10 @@ public class Professional implements Parcelable {
     private float evaluationsAverage;
     private int numberAssessments;
 
-    public Professional(String name,String cpf, String phone, String neighborhood, String street,
-                        String number, String site, String socialNetwork,
-                        String email, String password, String[] services) throws Exception {
+    public Professional(String name, String cpf, String phone, String street, String number,
+                        String neighborhood, String city, String state, String site,
+                        String socialNetwork, String email, String password,
+                        String[] services) throws Exception {
         if(name == null || name.equals("")){
             throw new Exception("Professional name is invalid.");
         }
@@ -52,12 +55,20 @@ public class Professional implements Parcelable {
         if(password == null || password.equals("")){
             throw new Exception("Password is invalid.");
         }
+        if(city == null || city.equals("")){
+            throw new Exception("City is invalid.");
+        }
+        if(state == null || state.equals("")){
+            throw new Exception("State is invalid.");
+        }
         this.name = name;
         this.cpf = cpf;
         this.phone = phone;
         this.neighborhood = neighborhood;
         this.street = street;
         this.number = number;
+        this.city = city;
+        this.state = state;
         this.site = site;
         this.socialNetwork = socialNetwork;
         //this.pictury = pictury;
@@ -70,9 +81,11 @@ public class Professional implements Parcelable {
         name = in.readString();
         cpf = in.readString();
         phone = in.readString();
-        neighborhood = in.readString();
         street = in.readString();
         number = in.readString();
+        neighborhood = in.readString();
+        city = in.readString();
+        state = in.readString();
         site = in.readString();
         socialNetwork = in.readString();
         email = in.readString();
@@ -157,6 +170,24 @@ public class Professional implements Parcelable {
             throw new Exception("Number is invalid.");
         }
         this.number = number;
+    }
+
+    public String getCity() { return city; }
+
+    public void setCity(String city) throws Exception {
+        if(city == null || city.equals("")){
+            throw new Exception("City is invalid.");
+        }
+        this.city = city;
+    }
+
+    public String getState() { return state; }
+
+    public void setState(String state) throws Exception {
+        if(state == null || state.equals("")){
+            throw new Exception("State is invalid.");
+        }
+        this.state = state;
     }
 
     public String getSite() {
@@ -256,9 +287,11 @@ public class Professional implements Parcelable {
         parcel.writeString(name);
         parcel.writeString(cpf);
         parcel.writeString(phone);
-        parcel.writeString(neighborhood);
         parcel.writeString(street);
         parcel.writeString(number);
+        parcel.writeString(neighborhood);
+        parcel.writeString(city);
+        parcel.writeString(state);
         parcel.writeString(site);
         parcel.writeString(socialNetwork);
         parcel.writeString(email);

@@ -46,8 +46,7 @@ public class ProfessionalsAdapter extends BaseAdapter {
         Professional item = items.get(position);
         convertView = mInflater.inflate(R.layout.my_item_professional, null);
 
-        String address = item.getStreet() + ", " + item.getNumber() + ", " + item.getNeighborhood()
-                + " Campina Grande - PB";
+        String address = item.getNeighborhood() + " - " + item.getCity() ;
 
         ((TextView) convertView.findViewById(R.id.tv_name)).setText(item.getName());
         ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);

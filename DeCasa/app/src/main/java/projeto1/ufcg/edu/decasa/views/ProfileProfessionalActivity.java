@@ -112,7 +112,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private void setProfile() {
         String address = professional.getStreet() + ", " + professional.getNumber() + ", " +
                 professional.getNeighborhood()
-                + " Campina Grande - PB";
+                + " " + professional.getCity() + " - " + professional.getState();
 
         tv_professional_name.setText(professional.getName());
         tv_address_professional.setText(address);
