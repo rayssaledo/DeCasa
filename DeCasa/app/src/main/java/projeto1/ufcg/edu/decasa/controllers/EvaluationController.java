@@ -107,9 +107,7 @@ public class EvaluationController {
             json.put("avaliacao", evaluationValue);
             json.put("comentario", comment);
             json.put("data", date);
-            //Log.d("USERPHOTOEVALUATION", photo + "");
             json.put("fotoUsuario", photo);
-//            Log.d("USERPHOTOEVALUATION", photo + "");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -185,7 +183,6 @@ public class EvaluationController {
                         String comment = jsonEvaluation.getString("comentario");
                         String date = jsonEvaluation.getString("data");
                         String photo = jsonEvaluation.getString("fotoUsuario");
-                        Log.d("PHOTOUSER3", photo+"");
                         try{
                             float evaluationValueFloat = Float.valueOf(evaluationValue);
                             Evaluation evaluation = new Evaluation(professionalEmail,

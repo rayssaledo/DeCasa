@@ -102,7 +102,7 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 100, b);
         byte[] photo_user_byte = b.toByteArray();
-        photo_user = Base64.encodeToString(photo_user_byte, Base64.NO_WRAP);
+        photo_user = Base64.encodeToString(photo_user_byte, Base64.DEFAULT);
 
         iv_photo_user = (ImageView) findViewById(R.id.iv_user_photo);
 
@@ -505,7 +505,7 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 100, b);
             byte[] photo_user_byte = b.toByteArray();
-            photo_user = Base64.encodeToString(photo_user_byte, Base64.NO_WRAP);
+            photo_user = Base64.encodeToString(photo_user_byte, Base64.DEFAULT);
         }
     }
 
