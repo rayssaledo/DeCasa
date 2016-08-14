@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -94,7 +95,7 @@ public class EvaluationController {
 
     public void addEvaluation(final String professionalValued, final String usernameValuer,
                               final String evaluationValue, final String comment,
-                              final String date, final Class classDest,
+                              final String date, final String photo, final Class classDest,
                               final Professional professional) {
 
         EvaluationProfessionalActivity.mLoadingEvaluation.setVisibility(View.VISIBLE);
@@ -106,6 +107,7 @@ public class EvaluationController {
             json.put("avaliacao", evaluationValue);
             json.put("comentario", comment);
             json.put("data", date);
+            json.put("fotoUsuario", photo);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -180,10 +182,11 @@ public class EvaluationController {
                         String evaluationValue = jsonEvaluation.getString("avaliacao");
                         String comment = jsonEvaluation.getString("comentario");
                         String date = jsonEvaluation.getString("data");
+                        String photo = jsonEvaluation.getString("fotoUsuario");
                         try{
                             float evaluationValueFloat = Float.valueOf(evaluationValue);
                             Evaluation evaluation = new Evaluation(professionalEmail,
-                                    usernameValuer, evaluationValueFloat, comment, date);
+                                    usernameValuer, evaluationValueFloat, comment, date, photo);
                             evaluationsList.add(evaluation);
                         } catch (Exception e) {
                             e.printStackTrace();

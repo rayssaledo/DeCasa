@@ -1,8 +1,11 @@
 package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,15 +16,19 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
+import projeto1.ufcg.edu.decasa.controllers.UserController;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class EvaluationProfessionalActivity extends AppCompatActivity {
 
     private EvaluationController evaluationController;
+    private UserController userController;
     private MySharedPreferences mySharedPreferences;
 
     private Professional professional;
@@ -29,7 +36,24 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
     private RatingBar rbEvaluation;
     private EditText edComment;
 
+    private List<User> userList;
+    private User user;
+
+    private String username;
+    private String photoUser;
+
     public static View mLoadingEvaluation;
+
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 103) {
+                user = userList.get(0);
+                photoUser = user.getPhoto();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +63,7 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
         mLoadingEvaluation =  findViewById(R.id.loadingEvaluation);
 
         evaluationController = new EvaluationController(EvaluationProfessionalActivity.this);
+        userController = new UserController(EvaluationProfessionalActivity.this);
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
 
         Intent it = getIntent();
@@ -61,9 +86,15 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
 
     }
 
-    private void addEvaluation() {
+    @Override
+    protected void onResume() {
+        super.onResume();
         HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
-        String username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
+        username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
+        userList = userController.getUser(username, handler);
+    }
+
+    private void addEvaluation() {
         float evaluationValue = rbEvaluation.getRating();
         String stringEvaluationValue = String.valueOf(evaluationValue);
         String comment = edComment.getText().toString();
@@ -71,7 +102,8 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
         Date date = new Date();
         String stringEvaluationDate = dateFormat.format(date);
         evaluationController.addEvaluation(professional.getEmail(), username, stringEvaluationValue,
-                comment, stringEvaluationDate, AssessmentsActivity.class, professional);
+                comment, stringEvaluationDate, photoUser,
+                AssessmentsActivity.class, professional);
     }
 
 

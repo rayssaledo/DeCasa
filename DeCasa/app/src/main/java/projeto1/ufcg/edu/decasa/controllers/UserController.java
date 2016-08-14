@@ -4,10 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
@@ -51,6 +57,7 @@ public class UserController {
             json.put("city", city);
             json.put("state", state);
             json.put("photo", photo);
+            Log.d("PHOTOCADASTRE1", photo + "");
             json.put("username", username);
             json.put("password", password);
         } catch (JSONException e) {
@@ -59,6 +66,7 @@ public class UserController {
         mHttp.post(urlCadastre, json.toString(), new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException{
+                Log.d("PHOTOCADASTRE2", photo + "");
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
@@ -90,6 +98,7 @@ public class UserController {
                             .create()
                             .show();
                 }
+                Log.d("PHOTOCADASTRE3", photo + "");
             }
             @Override
             public void onTimeout() {
@@ -168,31 +177,36 @@ public class UserController {
         });
     }
 
-    public User getUser(final String login){
-            User user = null;
-            String urlGetUser = "http://decasa-decasa.rhcloud.com/getUser?login=" + login ;
+    public List<User> getUser(final String login, final Handler handler){
+            final List<User> userList = new ArrayList<>();
+            String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
             mHttp.get(urlGetUser, new HttpListener() {
                 @Override
-                public void onSucess(JSONObject response) throws JSONException {
-                    if (response.getInt("ok") == 1) {
-                     //TODO conferir nome dos campos
-                        String name = response.getString("name");
-                        String date_of_birth = response.getString("birth");
-                        String gender = response.getString("gender");
-                        String street = response.getString("street");
-                        String number = response.getString("number");
-                        String neighborhood = response.getString("neighborhood");
-                        String city = response.getString("city");
-                        String state = response.getString("state");
-                        String username = response.getString("username");
-                        String password = response.getString("password");
-
+                public void onSucess(JSONObject result) throws JSONException {
+                    if (result.getInt("ok") == 1) {
+                        JSONObject jsonResult = result.getJSONObject("result");
+                        String name = jsonResult.getString("name");
+                        String date_of_birth = jsonResult.getString("birthDate");
+                        String gender = jsonResult.getString("gender");
+                        String street = jsonResult.getString("street");
+                        String number = jsonResult.getString("number");
+                        String neighborhood = jsonResult.getString("neighborhood");
+                        String city = jsonResult.getString("city");
+                        String state = jsonResult.getString("state");
+                        String username = jsonResult.getString("username");
+                        String password = jsonResult.getString("password");
+                        String photo = jsonResult.getString("photo");
                         try {
                             User user = new User(name, date_of_birth, gender, street, number,
-                                    neighborhood, city, state, username, password);
+                                    neighborhood, city, state, username, password, photo);
+                            userList.add(user);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        Log.d("PHOTOUSER2", photo+"");
+                        Message message = new Message();
+                        message.what = 103;
+                        handler.sendMessage(message);
                     } else {
                             new AlertDialog.Builder(mActivity)
                                     .setTitle("Erro")
@@ -224,7 +238,7 @@ public class UserController {
                 }
             });
 
-            return user;
+            return userList;
     }
 
 }
