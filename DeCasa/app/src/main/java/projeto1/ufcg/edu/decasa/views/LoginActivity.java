@@ -1,8 +1,5 @@
 package projeto1.ufcg.edu.decasa.views;
 
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Button;
 
@@ -62,13 +59,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (validateUsername() && validatePassword()) {
                     if (professional == null){
                         userController.login(username, password, MainActivity.class, null);
-                        //userController.getUser(username, null);
-                        //Log.d("NOMEDOUSUARIO", userController.getUser(username, myHandler).get(0).getName());
-
                     } else {
                         userController.login(username, password, ProfileProfessionalActivity.class,
                                 professional);
-                        userController.getUser(username, null);
                     }
                 } else if (!validateUsername()){
                     return;

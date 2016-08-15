@@ -42,7 +42,7 @@ public class ProfessionalController {
 
         ProfessionalsActivity.mLoadingProfessionals.setVisibility(View.VISIBLE);
         final List<Professional> professionals = new ArrayList<>();
-        String urlGetByService = url + "get-by-service?service=" + service;
+        String urlGetByService = url + "sort-profissionais-servico?service=" + service;
         mHttp.get(urlGetByService, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
