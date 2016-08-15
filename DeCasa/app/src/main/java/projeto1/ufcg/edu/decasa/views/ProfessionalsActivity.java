@@ -284,16 +284,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public void setmDrawer(ArrayList<NavItem> mNavItems) {
-        mNavItems.add(new NavItem(getApplication().getString(R.string.text_my_favorites),
-                R.mipmap.ic_favorite_black_24dp));
-        mNavItems.add(new NavItem(getApplication().getString(R.string.text_instructions_for_use),
-                R.mipmap.ic_class_black_24dp));
-        mNavItems.add(new NavItem(getApplication().getString(R.string.text_about),
-                R.mipmap.ic_info_black_24dp));
-        if (mySharedPreferences.isUserLoggedIn()) {
-            mNavItems.add(new NavItem(getApplication().getString(R.string.text_logout),
-                    R.mipmap.ic_exit_to_app_black_24dp));
-        }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
@@ -301,27 +291,46 @@ public class ProfessionalsActivity extends AppCompatActivity {
         DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter2);
 
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (mySharedPreferences.isUserLoggedIn()) {
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_my_favorites),
+                    R.mipmap.ic_favorite_black_24dp));
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_about),
+                    R.mipmap.ic_info_black_24dp));
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_logout),
+                    R.mipmap.ic_exit_to_app_black_24dp));
 
-                if (position == 0) { // Favoritos
+            mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) { // My favorites
 //                    mDrawerLayout.closeDrawer(mDrawerPane);
 //                    setView(ProfessionalsActivity.this, DonorsActivity.class);
-                } else if (position == 1) { // Instruções de Uso
-//                    mDrawerLayout.closeDrawer(mDrawerPane);
-//                    setView(ProfessionalsActivity.this, InformationActivity.class);
-                } else if (position == 2) { // Sobre
-//                    mDrawerLayout.closeDrawer(mDrawerPane);
-//                    setView(MyRequestsActivity.this, UserCadastreActivity.class);
-                } else if (position == 3) { // Sair
-                    mDrawerLayout.closeDrawer(mDrawerPane);
-                    mySharedPreferences.logoutUser();
-                    setView(ProfessionalsActivity.this, MainActivity.class);
-                    finish();
+                    } else if (position == 1) { // About
+                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        setView(ProfessionalsActivity.this, AboutActivity.class);
+                    } else if (position == 2) { // Logout
+                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mySharedPreferences.logoutUser();
+                        setView(ProfessionalsActivity.this, MainActivity.class);
+                        finish();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_about),
+                    R.mipmap.ic_info_black_24dp));
+
+            mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) { // About
+                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        setView(ProfessionalsActivity.this, AboutActivity.class);
+                    }
+                }
+            });
+        }
+
 
         ActionBar actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

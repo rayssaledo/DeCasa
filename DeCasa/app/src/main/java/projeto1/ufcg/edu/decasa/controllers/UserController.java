@@ -30,11 +30,6 @@ public class UserController {
     private String url;
     private MySharedPreferences mySharedPreferences;
 
-    private Handler myHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-        }
-    };
 
     public UserController(Activity activity) {
         mActivity = activity;
@@ -62,6 +57,7 @@ public class UserController {
             json.put("city", city);
             json.put("state", state);
             json.put("photo", photo);
+            Log.d("PHOTOCADASTRE1", photo + "");
             json.put("username", username);
             json.put("password", password);
         } catch (JSONException e) {
@@ -70,6 +66,7 @@ public class UserController {
         mHttp.post(urlCadastre, json.toString(), new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException{
+                Log.d("PHOTOCADASTRE2", photo + "");
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
@@ -101,6 +98,7 @@ public class UserController {
                             .create()
                             .show();
                 }
+                Log.d("PHOTOCADASTRE3", photo + "");
             }
             @Override
             public void onTimeout() {
@@ -185,14 +183,9 @@ public class UserController {
         mHttp.get(urlGetUser, new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException {
-                Log.d("USERPHOTOGETUSER", "passou aqui 1");
                 if (result.getInt("ok") == 1) {
-                    Log.d("USERPHOTOGETUSER", result.toString()+"");
                     JSONObject jsonResult = result.getJSONObject("result");
-                    Log.d("USERPHOTOGETUSER", "passou aqui 2");
-                    //TODO conferir nome dos campos
                     String name = jsonResult.getString("name");
-                    Log.d("USERPHOTOGETUSER", "passou aqui 3");
                     String date_of_birth = jsonResult.getString("birthDate");
                     String gender = jsonResult.getString("gender");
                     String street = jsonResult.getString("street");
@@ -200,13 +193,9 @@ public class UserController {
                     String neighborhood = jsonResult.getString("neighborhood");
                     String city = jsonResult.getString("city");
                     String state = jsonResult.getString("state");
-
                     String username = jsonResult.getString("username");
                     String password = jsonResult.getString("password");
-
                     String photo = jsonResult.getString("photo");
-                    Log.d("PHOTOUSER1", photo+"");
-
                     try {
                         User user = new User(name, date_of_birth, gender, street, number,
                                 neighborhood, city, state, username, password, photo);
