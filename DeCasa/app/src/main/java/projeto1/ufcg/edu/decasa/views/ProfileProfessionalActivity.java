@@ -31,6 +31,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private RatingBar rb_evaluation;
     private TextView tv_number_assessments;
     private List<Evaluation> assessments;
+    private List<Float> assessmentsAverage;
+    private float assessmentsAverageValue;
 
     public static View mLoadingProfileProfessional;
 
@@ -46,6 +48,12 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 } else {
                     tv_number_assessments.setText(numAssessmentsProfessional + " " +
                             getApplication().getString(R.string.text_number_assessments));
+                }
+            }
+            if (msg.what == 104) {
+                if (assessmentsAverage != null) {
+                    assessmentsAverageValue = assessmentsAverage.get(0);
+                    rb_evaluation.setRating(assessmentsAverageValue);
                 }
             }
         }
@@ -108,6 +116,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         super.onResume();
         assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(),
                 handler);
+        assessmentsAverage = evaluationController.getAssessmentsAverageByProfessional(professional.
+                getEmail(), handler);
     }
 
     private void setProfile() {
@@ -137,7 +147,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
             }
         }
         tv_services.setText(services);
-        rb_evaluation.setRating(professional.getEvaluationsAverage());
+        rb_evaluation.setRating(assessmentsAverageValue);
     }
 
     @Override

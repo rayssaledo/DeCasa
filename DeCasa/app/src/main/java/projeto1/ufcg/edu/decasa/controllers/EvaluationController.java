@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,7 +106,7 @@ public class EvaluationController {
                                                          final Handler handler) {
 
 
-            final List<Evaluation> evaluationsList = new ArrayList<Evaluation>();
+        final List<Evaluation> evaluationsList = new ArrayList<Evaluation>();
         String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
                 professionalEmail;
         mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
@@ -182,5 +181,64 @@ public class EvaluationController {
         });
 
         return evaluationsList;
+    }
+
+    public List<Float> getAssessmentsAverageByProfessional(final String professionalEmail,
+                                                    final Handler handler) {
+        final List<Float> assessmentsAverageList = new ArrayList<Float>();
+
+        String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
+                professionalEmail;
+        mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
+            @Override
+            public void onSucess(JSONObject response) throws JSONException {
+                if (response.getInt("ok") == 1) {
+                    JSONArray jsonResult = response.getJSONArray("result");
+                    JSONObject jsonObjectEvaluation = jsonResult.getJSONObject(0);
+                    try{
+                        float assessmentsAverageFloat = Float.valueOf(jsonObjectEvaluation.
+                                getString("avg"));
+                        assessmentsAverageList.add(assessmentsAverageFloat);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Message message = new Message();
+                    message.what = 104;
+                    handler.sendMessage(message);
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage("") //TODO internacionalizar com mensagem certa
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if (AssessmentsActivity.mLoadingAssessments != null) {
+                                        AssessmentsActivity.mLoadingAssessments.
+                                                setVisibility(View.GONE);
+                                    }
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            }
+
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mActivity.finish();
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+
+        return assessmentsAverageList;
     }
 }

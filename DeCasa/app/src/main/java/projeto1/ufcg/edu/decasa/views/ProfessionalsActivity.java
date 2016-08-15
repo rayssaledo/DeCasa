@@ -49,16 +49,19 @@ public class ProfessionalsActivity extends AppCompatActivity {
     private TextInputLayout til_address;
     private String address;
     private MySharedPreferences mySharedPreferences;
-
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private RelativeLayout mDrawerPane;
+    private List<Professional> listProfessionals;
+    private String service;
 
     private Handler handler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 100) {
+                professionalsAdapter = new ProfessionalsAdapter(ProfessionalsActivity.this,
+                        listProfessionals);
                 listViewProfessionals.setAdapter(professionalsAdapter);
             }
         }
@@ -75,13 +78,13 @@ public class ProfessionalsActivity extends AppCompatActivity {
 
         listViewProfessionals = (ListView) findViewById(R.id.lv_professionals);
         Button btnFindNearest = (Button) findViewById(R.id.btn_find_nearest);
+
         Intent it = getIntent();
-        String service = (String) it.getSerializableExtra("SERVICE");
+        service = (String) it.getSerializableExtra("SERVICE");
+
         setTitle(service);
 
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
-
-        setList(service);
 
         listViewProfessionals.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -114,6 +117,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setList(service);
         updateNavigationMenu();
     }
 
@@ -242,7 +246,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     }
 
     public void setList(String service){
-        List<Professional> listProfessionals = new ArrayList<>();
+        listProfessionals = new ArrayList<>();
         if (service.equals(getApplication().getString(R.string.title_electricians))){
             listProfessionals = professionalController.getProfessionalsByService("Eletricista",
                     handler);
