@@ -4,10 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
@@ -24,6 +30,11 @@ public class UserController {
     private String url;
     private MySharedPreferences mySharedPreferences;
 
+    private Handler myHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+        }
+    };
 
     public UserController(Activity activity) {
         mActivity = activity;
@@ -131,7 +142,7 @@ public class UserController {
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                      LoginActivity.loading.setVisibility(View.GONE);
+                                        LoginActivity.loading.setVisibility(View.GONE);
                                     }
                                 })
                                 .create()
@@ -168,63 +179,77 @@ public class UserController {
         });
     }
 
-    public User getUser(final String login){
-            User user = null;
-            String urlGetUser = "http://decasa-decasa.rhcloud.com/getUser?login=" + login ;
-            mHttp.get(urlGetUser, new HttpListener() {
-                @Override
-                public void onSucess(JSONObject response) throws JSONException {
-                    if (response.getInt("ok") == 1) {
-                     //TODO conferir nome dos campos
-                        String name = response.getString("name");
-                        String date_of_birth = response.getString("birth");
-                        String gender = response.getString("gender");
-                        String street = response.getString("street");
-                        String number = response.getString("number");
-                        String neighborhood = response.getString("neighborhood");
-                        String city = response.getString("city");
-                        String state = response.getString("state");
-                        String username = response.getString("username");
-                        String password = response.getString("password");
+    public List<User> getUser(final String login, final Handler handler){
+        final List<User> userList = new ArrayList<>();
+        String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
+        mHttp.get(urlGetUser, new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) throws JSONException {
+                Log.d("USERPHOTOGETUSER", "passou aqui 1");
+                if (result.getInt("ok") == 1) {
+                    Log.d("USERPHOTOGETUSER", result.toString()+"");
+                    JSONObject jsonResult = result.getJSONObject("result");
+                    Log.d("USERPHOTOGETUSER", "passou aqui 2");
+                    //TODO conferir nome dos campos
+                    String name = jsonResult.getString("name");
+                    Log.d("USERPHOTOGETUSER", "passou aqui 3");
+                    String date_of_birth = jsonResult.getString("birthDate");
+                    String gender = jsonResult.getString("gender");
+                    String street = jsonResult.getString("street");
+                    String number = jsonResult.getString("number");
+                    String neighborhood = jsonResult.getString("neighborhood");
+                    String city = jsonResult.getString("city");
+                    String state = jsonResult.getString("state");
 
-                        try {
-                            User user = new User(name, date_of_birth, gender, street, number,
-                                    neighborhood, city, state, username, password);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                            new AlertDialog.Builder(mActivity)
-                                    .setTitle("Erro")
-                                    .setMessage("") //TODO internacionalizar com mensagem certa
-                                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            //mActivity.mLoadingLogin.setVisibility(View.GONE);
-                                        }
-                                    })
-                                    .create()
-                                    .show();
+                    String username = jsonResult.getString("username");
+                    String password = jsonResult.getString("password");
+
+                    String photo = jsonResult.getString("photo");
+                    Log.d("PHOTOUSER1", photo+"");
+
+                    try {
+                        User user = new User(name, date_of_birth, gender, street, number,
+                                neighborhood, city, state, username, password, photo);
+                        userList.add(user);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }
-
-                @Override
-                public void onTimeout() {
+                    Log.d("PHOTOUSER2", photo+"");
+                    Message message = new Message();
+                    message.what = 103;
+                    handler.sendMessage(message);
+                } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage("Conexão não disponível.") //TODO internacionalizar
+                            .setMessage("") //TODO internacionalizar com mensagem certa
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                    //mActivity.mLoadingLogin.setVisibility(View.GONE);
                                 }
                             })
                             .create()
                             .show();
                 }
-            });
+            }
 
-            return user;
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+
+        return userList;
     }
 
 }

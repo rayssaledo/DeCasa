@@ -38,7 +38,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 101) {
                 if (assessments.size() == 0) {
-                     btn_first_evaluate.setVisibility(View.VISIBLE);
+                    btn_first_evaluate.setVisibility(View.VISIBLE);
                     listViewAssessments.setVisibility(View.GONE);
                 }
                 assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);

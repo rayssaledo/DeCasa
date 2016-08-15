@@ -120,4 +120,6 @@
     <string name="text_about">About</string>
     <string name="text_logout">Logout</string>
     <string name="title_activity_about">About</string>
+    <string name="begin_welcome">Welcome, </string>
+    <string name="end_welcome"> \nChoose here the service you want.</string>
 </resources>

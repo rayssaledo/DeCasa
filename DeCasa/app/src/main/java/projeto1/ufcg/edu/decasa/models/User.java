@@ -1,6 +1,5 @@
 package projeto1.ufcg.edu.decasa.models;
 
-
 public class User {
     private String name;
     private String date_of_birth;
@@ -12,10 +11,11 @@ public class User {
     private String state;
     private String username;
     private String password;
-
+    private String photo;
 
     public User(String name, String date_of_birth, String gender, String street, String number,
-                    String neighborhood, String city, String state, String username, String password) throws Exception{
+                String neighborhood, String city, String state, String username, String password,
+                String photo) throws Exception{
 
 
         if(name == null || name.equals("")){
@@ -48,6 +48,9 @@ public class User {
         if(password == null || password.equals("")){
             throw new Exception("Password is invalid.");
         }
+        if(photo == null || photo.equals("")){
+            throw new Exception("Photo is invalid.");
+        }
 
         this.name = name;
         this.date_of_birth = date_of_birth;
@@ -59,6 +62,7 @@ public class User {
         this.state = state;
         this.username = username;
         this.password = password;
+        this.photo = photo;
     }
 
     public String getName(){
@@ -91,6 +95,7 @@ public class User {
     public String getPassword(){
         return password;
     }
+    public String getPhoto() { return photo; }
 
     public void setName(String name){
         this.name = name;
@@ -116,9 +121,6 @@ public class User {
     public void setState(String state){
         this.state = state;
     }
-
-
-
-
+    public void setPhoto(String photo) { this.photo = photo; }
 
 }

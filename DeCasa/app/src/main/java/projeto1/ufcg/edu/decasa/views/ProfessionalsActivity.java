@@ -133,7 +133,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
             btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Setar par a tela de perfil do usuário
+                    //Setar para a tela de perfil do usuário
                 }
             });
         } else {
