@@ -57,7 +57,6 @@ public class UserController {
             json.put("city", city);
             json.put("state", state);
             json.put("photo", photo);
-            Log.d("PHOTOCADASTRE1", photo + "");
             json.put("username", username);
             json.put("password", password);
         } catch (JSONException e) {
@@ -66,7 +65,6 @@ public class UserController {
         mHttp.post(urlCadastre, json.toString(), new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException{
-                Log.d("PHOTOCADASTRE2", photo + "");
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
@@ -98,7 +96,6 @@ public class UserController {
                             .create()
                             .show();
                 }
-                Log.d("PHOTOCADASTRE3", photo + "");
             }
             @Override
             public void onTimeout() {
@@ -140,7 +137,7 @@ public class UserController {
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                      LoginActivity.loading.setVisibility(View.GONE);
+                                        LoginActivity.loading.setVisibility(View.GONE);
                                     }
                                 })
                                 .create()
@@ -178,67 +175,66 @@ public class UserController {
     }
 
     public List<User> getUser(final String login, final Handler handler){
-            final List<User> userList = new ArrayList<>();
-            String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
-            mHttp.get(urlGetUser, new HttpListener() {
-                @Override
-                public void onSucess(JSONObject result) throws JSONException {
-                    if (result.getInt("ok") == 1) {
-                        JSONObject jsonResult = result.getJSONObject("result");
-                        String name = jsonResult.getString("name");
-                        String date_of_birth = jsonResult.getString("birthDate");
-                        String gender = jsonResult.getString("gender");
-                        String street = jsonResult.getString("street");
-                        String number = jsonResult.getString("number");
-                        String neighborhood = jsonResult.getString("neighborhood");
-                        String city = jsonResult.getString("city");
-                        String state = jsonResult.getString("state");
-                        String username = jsonResult.getString("username");
-                        String password = jsonResult.getString("password");
-                        String photo = jsonResult.getString("photo");
-                        try {
-                            User user = new User(name, date_of_birth, gender, street, number,
-                                    neighborhood, city, state, username, password, photo);
-                            userList.add(user);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        Log.d("PHOTOUSER2", photo+"");
-                        Message message = new Message();
-                        message.what = 103;
-                        handler.sendMessage(message);
-                    } else {
-                            new AlertDialog.Builder(mActivity)
-                                    .setTitle("Erro")
-                                    .setMessage("") //TODO internacionalizar com mensagem certa
-                                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            //mActivity.mLoadingLogin.setVisibility(View.GONE);
-                                        }
-                                    })
-                                    .create()
-                                    .show();
+        final List<User> userList = new ArrayList<>();
+        String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
+        mHttp.get(urlGetUser, new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) throws JSONException {
+                if (result.getInt("ok") == 1) {
+                    JSONObject jsonResult = result.getJSONObject("result");
+                    String name = jsonResult.getString("name");
+                    String date_of_birth = jsonResult.getString("birthDate");
+                    String gender = jsonResult.getString("gender");
+                    String street = jsonResult.getString("street");
+                    String number = jsonResult.getString("number");
+                    String neighborhood = jsonResult.getString("neighborhood");
+                    String city = jsonResult.getString("city");
+                    String state = jsonResult.getString("state");
+                    String username = jsonResult.getString("username");
+                    String password = jsonResult.getString("password");
+                    String photo = jsonResult.getString("photo");
+                    try {
+                        User user = new User(name, date_of_birth, gender, street, number,
+                                neighborhood, city, state, username, password, photo);
+                        userList.add(user);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }
-
-                @Override
-                public void onTimeout() {
+                    Message message = new Message();
+                    message.what = 103;
+                    handler.sendMessage(message);
+                } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage("Conexão não disponível.") //TODO internacionalizar
+                            .setMessage("") //TODO internacionalizar com mensagem certa
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                    //mActivity.mLoadingLogin.setVisibility(View.GONE);
                                 }
                             })
                             .create()
                             .show();
                 }
-            });
+            }
 
-            return userList;
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+
+        return userList;
     }
 
 }

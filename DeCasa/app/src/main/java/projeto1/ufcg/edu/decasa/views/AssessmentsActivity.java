@@ -36,7 +36,7 @@ public class AssessmentsActivity extends AppCompatActivity {
             if (msg.what == 101) {
                 int numAssessmentsProfessional = assessments.size();
                 if (numAssessmentsProfessional == 0) {
-                     btn_first_evaluate.setVisibility(View.VISIBLE);
+                    btn_first_evaluate.setVisibility(View.VISIBLE);
                     listViewAssessments.setVisibility(View.GONE);
                 }
                 AssessmentsAdapter assessmentsAdapter =

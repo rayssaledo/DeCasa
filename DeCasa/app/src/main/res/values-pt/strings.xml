@@ -109,4 +109,6 @@
     <string name="text_about">Sobre</string>
     <string name="text_logout">Sair</string>
     <string name="title_activity_about">Sobre</string>
+    <string name="begin_welcome">Seja bem-vindo</string>
+    <string name="end_welcome">\nEscolha aqui o serviço que deseja.</string>
 </resources>

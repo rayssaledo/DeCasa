@@ -27,12 +27,10 @@ public class MySharedPreferences {
         mEditor = mPref.edit();
     }
 
-
     public void saveService(String service){
         mEditor.putString(KEY_SERVICE_ACTIVE, service);
         mEditor.commit();
     }
-
 
     public String getService(){
         String service = mPref.getString(KEY_SERVICE_ACTIVE, null);
