@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
+import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
 
 public class ProfileProfessionalActivity extends AppCompatActivity {
@@ -30,7 +30,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private TextView tv_website;
     private RatingBar rb_evaluation;
     private TextView tv_number_assessments;
-    private List<Integer> numAssessmentsProfessional;
+    private List<Evaluation> assessments;
 
     public static View mLoadingProfileProfessional;
 
@@ -38,12 +38,13 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 102) {
-                if (numAssessmentsProfessional.get(0) == 1) {
-                    tv_number_assessments.setText(numAssessmentsProfessional.get(0) + " " +
+            int numAssessmentsProfessional = assessments.size();
+            if (msg.what == 101) {
+                if (numAssessmentsProfessional == 1) {
+                    tv_number_assessments.setText(numAssessmentsProfessional + " " +
                             getApplication().getString(R.string.text_number_evaluation));
                 } else {
-                    tv_number_assessments.setText(numAssessmentsProfessional.get(0) + " " +
+                    tv_number_assessments.setText(numAssessmentsProfessional + " " +
                             getApplication().getString(R.string.text_number_assessments));
                 }
             }
@@ -105,8 +106,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        numAssessmentsProfessional = evaluationController.getNumAssessments(professional.
-                getEmail(), handler);
+        assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(),
+                handler);
     }
 
     private void setProfile() {

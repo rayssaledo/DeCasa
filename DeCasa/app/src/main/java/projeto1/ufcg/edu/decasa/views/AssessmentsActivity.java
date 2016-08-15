@@ -24,11 +24,8 @@ public class AssessmentsActivity extends AppCompatActivity {
     private ListView listViewAssessments;
     private TextView tv_no_assessments;
     private TextView tv_label_assessments;
-    private AssessmentsAdapter assessmentsAdapter;
     private List<Evaluation> assessments;
-    private List<Integer> numAssessmentsProfessional;
     private Button btn_first_evaluate;
-
 
     public static View mLoadingAssessments;
 
@@ -37,21 +34,21 @@ public class AssessmentsActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 101) {
-                if (assessments.size() == 0) {
+                int numAssessmentsProfessional = assessments.size();
+                if (numAssessmentsProfessional == 0) {
                      btn_first_evaluate.setVisibility(View.VISIBLE);
                     listViewAssessments.setVisibility(View.GONE);
                 }
-                assessmentsAdapter = new AssessmentsAdapter(AssessmentsActivity.this, assessments);
+                AssessmentsAdapter assessmentsAdapter =
+                        new AssessmentsAdapter(AssessmentsActivity.this, assessments);
                 listViewAssessments.setAdapter(assessmentsAdapter);
-            }
-            if (msg.what == 102) {
-                if (numAssessmentsProfessional.get(0) == 1) {
+                if (numAssessmentsProfessional == 1) {
                     tv_label_assessments.setText(getApplication().getString(R.string.
-                            text_number_evaluation) + " (" + numAssessmentsProfessional.get(0)
+                            text_number_evaluation) + " (" + numAssessmentsProfessional
                             + ")");
                 } else {
                     tv_label_assessments.setText(getApplication().getString(R.string.
-                            text_number_assessments) + " (" + numAssessmentsProfessional.get(0)
+                            text_number_assessments) + " (" + numAssessmentsProfessional
                             + ")");
                 }
             }
@@ -104,8 +101,8 @@ public class AssessmentsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(), handler);
-        numAssessmentsProfessional = evaluationController.getNumAssessments(professional.getEmail(), handler);
+        assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(),
+                handler);
     }
 
     @Override
