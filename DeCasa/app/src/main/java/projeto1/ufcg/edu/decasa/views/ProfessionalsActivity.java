@@ -317,6 +317,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                         mySharedPreferences.logoutUser();
                         setView(ProfessionalsActivity.this, MainActivity.class);
                         finish();
+                        finish();
                     }
                 }
             });

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,14 +14,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
-import projeto1.ufcg.edu.decasa.adapters.AssessmentsAdapter;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
-import projeto1.ufcg.edu.decasa.models.NavItem;
 import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
@@ -38,16 +35,20 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_register;
     private TextView tv_welcome;
 
-    private HashMap<String, String> userDetails;
-    String username;
+    private String username;
 
     private Handler myHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 103) {
                 if (listUser.size() == 1) {
-                    tv_welcome.setText(getApplication().getString(R.string.begin_welcome) + " " + listUser.get(0).getName() +", " + getApplication().getString(R.string.end_welcome) );
-                    //tv_welcome.setText( "Welcome " + listUser.get(0).getName());
+                    String fullName = listUser.get(0).getName();
+                    String[] name = fullName.split(" ");
+                    String firstName = name[0];
+                    tv_welcome.setText(getApplication().getString(R.string.begin_welcome) + " " +
+                            firstName +", " + getApplication().getString(R.string.end_welcome));
+                } else {
+                    tv_welcome.setText(getApplication().getString(R.string.text_welcome));
                 }
             }
         }
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_register = (Button) findViewById(R.id.btn_register);
         tv_welcome = (TextView) findViewById(R.id.welcome);
-        userDetails = mySharedPreferences.getUserDetails();
+        HashMap<String, String> userDetails = mySharedPreferences.getUserDetails();
         username = userDetails.get(MySharedPreferences.KEY_USERNAME_USER);
 
         ImageButton ib_electrician = (ImageButton) findViewById(R.id.ib_electrician);
@@ -111,23 +112,18 @@ public class MainActivity extends AppCompatActivity {
                 setView(MainActivity.this, UserCadastreActivity.class);
             }
         });
-
-        updateInformationMenu();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        updateInformationMenu();
         if (mySharedPreferences.isUserLoggedIn()){
             listUser = userController.getUser(username, myHandler);
         }
-        //assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(), handler);
-        //numAssessmentsProfessional = evaluationController.getNumAssessments(professional.getEmail(), handler);
     }
 
     public void updateInformationMenu() {
-
         if (mySharedPreferences.isUserLoggedIn()) {
             btn_register.setVisibility(View.GONE);
         }
