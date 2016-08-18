@@ -122,4 +122,6 @@
     <string name="title_activity_about">About</string>
     <string name="begin_welcome">Welcome</string>
     <string name="end_welcome">\nChoose here the service you want.</string>
+    <string name="title_activity_edit_user_profile">Editing profile</string>
+    <string name="btn_edit">Edit</string>
 </resources>

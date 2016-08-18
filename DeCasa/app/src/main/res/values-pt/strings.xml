@@ -111,4 +111,6 @@
     <string name="title_activity_about">Sobre</string>
     <string name="begin_welcome">Seja bem-vindo</string>
     <string name="end_welcome">\nEscolha aqui o serviço que deseja.</string>
+    <string name="title_activity_edit_user_profile">Editando perfil</string>
+    <string name="btn_edit">Editar</string>
 </resources>
