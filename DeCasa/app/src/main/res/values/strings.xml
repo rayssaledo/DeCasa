@@ -70,6 +70,9 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_password_confirm">Confirm password</string>
+    <string name="hint_current_password">Current password</string>
+    <string name="hint_new_password">New password</string>
+    <string name="hint_confirm_new_password">Confirm new password</string>
     <string name="hint_address">Address</string>
     <string name="female">Female</string>
     <string name="male">Male</string>

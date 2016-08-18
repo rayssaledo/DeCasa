@@ -60,6 +60,9 @@
     <string name="hint_username">Nome de usuário</string>
     <string name="hint_password">Senha</string>
     <string name="hint_password_confirm">Confirmar senha</string>
+    <string name="hint_current_password">Senha atual</string>
+    <string name="hint_new_password">Nova senha</string>
+    <string name="hint_confirm_new_password">Confirmar nova senha</string>
     <string name="hint_address">Endereço</string>
     <string name="female">Feminino</string>
     <string name="male">Masculino</string>
