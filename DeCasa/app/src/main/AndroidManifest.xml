@@ -78,7 +78,7 @@
             android:theme="@style/AppThemeCustom" />
         <activity
             android:name=".views.ImageCropActivity"
-            android:label="@string/app_name"
+            android:label="@string/crop_your_picture"
             android:screenOrientation="portrait" />
         <activity
             android:name=".views.AboutActivity"

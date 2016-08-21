@@ -35,7 +35,7 @@
                     <com.pkmmte.view.CircularImageView
                         android:layout_width="150dp"
                         android:layout_height="150dp"
-                        android:id="@+id/iv_user_photo"
+                        android:id="@+id/iv_photo_user"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:layout_margin="10dp"
@@ -46,14 +46,14 @@
                         app:shadow="true"/>
 
                     <ImageButton
-                        android:id="@+id/ib_camera"
+                        android:id="@+id/ib_camera_edit_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/ic_camera"
                         android:background="@color/white"
                         android:layout_marginTop="20dp"
-                        android:layout_below="@+id/iv_user_photo"
-                        android:layout_toEndOf="@+id/iv_user_photo"
+                        android:layout_below="@+id/iv_photo_user"
+                        android:layout_toEndOf="@+id/iv_photo_user"
                         android:contentDescription="@string/desc_cam"/>
 
                 </RelativeLayout>
