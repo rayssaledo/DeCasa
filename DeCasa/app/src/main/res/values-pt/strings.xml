@@ -118,4 +118,6 @@
     <string name="title_activity_favorite">Meus favoritos</string>
     <string name="btn_edit">Editar</string>
     <string name="crop_your_picture">Recorte sua foto</string>
+    <string name="add_favorite">Adicionado aos seus favoritos</string>
+    <string name="remove_favorite">Removido dos seus favoritos</string>
 </resources>

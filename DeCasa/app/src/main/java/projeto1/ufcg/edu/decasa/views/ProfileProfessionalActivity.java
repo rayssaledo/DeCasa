@@ -4,19 +4,26 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
+import projeto1.ufcg.edu.decasa.controllers.UserController;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class ProfileProfessionalActivity extends AppCompatActivity {
 
@@ -33,6 +40,12 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private List<Evaluation> assessments;
     private List<Float> assessmentsAverage;
     private float assessmentsAverageValue;
+    private UserController userController;
+    private  List<Integer> list_favorite;
+    private MySharedPreferences mySharedPreferences;
+    private String username;
+    private  ImageButton ib_favorite;
+    private List<Integer> list_is_favorite;
 
     public static View mLoadingProfileProfessional;
 
@@ -45,7 +58,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 if (numAssessmentsProfessional == 1) {
                     tv_number_assessments.setText(numAssessmentsProfessional + " " +
                             getApplication().getString(R.string.text_number_evaluation));
-                } else {
+                } else  {
                     tv_number_assessments.setText(numAssessmentsProfessional + " " +
                             getApplication().getString(R.string.text_number_assessments));
                 }
@@ -56,6 +69,25 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                     rb_evaluation.setRating(assessmentsAverageValue);
                 }
             }
+            if (msg.what == 105) {
+                if (list_favorite.size() == 1 && list_favorite.get(0) == 1){
+                    Toast.makeText(ProfileProfessionalActivity.this, getApplication().getString(
+                            R.string.add_favorite), Toast.LENGTH_LONG).show();
+                    ib_favorite.setImageResource(R.mipmap.ic_favorite_red_24dp);
+                }
+            }
+            if (msg.what == 106) {
+                if (list_is_favorite.size() == 1 && list_is_favorite.get(0) == 1){
+                    ib_favorite.setImageResource(R.mipmap.ic_favorite_red_24dp);
+                } else {
+                    ib_favorite.setImageResource(R.mipmap.ic_favorite_border_black_24dp);
+                }
+            }
+            if (msg.what == 107) {
+                Toast.makeText(ProfileProfessionalActivity.this,getApplication().getString(
+                        R.string.remove_favorite), Toast.LENGTH_LONG).show();
+                ib_favorite.setImageResource(R.mipmap.ic_favorite_border_black_24dp);
+            }
         }
     };
 
@@ -65,9 +97,9 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_professional);
 
         mLoadingProfileProfessional =  findViewById(R.id.loadingProfileProfessional);
-
+        mySharedPreferences = new MySharedPreferences(getApplicationContext());
         evaluationController = new EvaluationController(ProfileProfessionalActivity.this);
-
+        userController = new UserController(ProfileProfessionalActivity.this);
         tv_professional_name = (TextView) findViewById(R.id.tv_professional_name);
         tv_services = (TextView) findViewById(R.id.tv_services);
         tv_address_professional = (TextView) findViewById(R.id.tv_address_professional);
@@ -77,11 +109,14 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         rb_evaluation = (RatingBar) findViewById(R.id.rb_evaluation);
         tv_number_assessments = (TextView) findViewById(R.id.tv_number_assessments);
 
+        username = mySharedPreferences.getUserLogged();
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
-        setTitle(professional.getName());
+        list_is_favorite = new ArrayList<>();
+        list_is_favorite = userController.getIsFavorite(username, professional.getEmail(), handler);
 
+        setTitle(professional.getName());
         setProfile();
 
         ImageButton ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);
@@ -95,6 +130,26 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ib_favorite = (ImageButton) findViewById(R.id.ib_favorite);
+        ib_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if(list_is_favorite.get(0) == 0) {
+                   list_favorite = userController.addFavorite(username, professional.getEmail(),
+                           professional.getName(), professional.getCpf(), professional.getPhone(),
+                           professional.getStreet(), professional.getNumber(),
+                           professional.getNeighborhood(), professional.getCity(),
+                           professional.getState(), professional.getSite(),
+                           professional.getSocialNetwork(), "" , handler);//TODO ENVIAR SERVICES CORRETAMENTE
+                   list_is_favorite.add(0,1);
+               } else {
+                   userController.removeFavorite(username, professional.getEmail(), handler);
+                   list_is_favorite.add(0,0);
+               }
+            }
+        });
+
 
         Button btn_evaluations = (Button) findViewById(R.id.btn_evaluations);
         btn_evaluations.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +173,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 handler);
         assessmentsAverage = evaluationController.getAssessmentsAverageByProfessional(professional.
                 getEmail(), handler);
+
     }
 
     private void setProfile() {

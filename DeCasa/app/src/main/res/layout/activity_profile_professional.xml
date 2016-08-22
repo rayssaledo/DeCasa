@@ -62,7 +62,6 @@
                         android:layout_height="36dp"
                         android:layout_alignBottom="@+id/iv_professional"
                         android:layout_alignEnd="@+id/tv_professional_name"
-                        android:src="@mipmap/ic_favorite_border_black_24dp"
                         android:background="@color/white"
                         android:contentDescription="@string/desc_favorite" />
                 </RelativeLayout>

@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -172,6 +171,173 @@ public class UserController {
                         .show();
             }
         });
+    }
+
+
+    public List<Integer> addFavorite(final String login_user,final String email, final String name,
+                                     final String cpf, final String phone, final String street,
+                                     final String number, final String neighborhood,
+                                     final String city, final String state, final String site,
+                                     final String social_network, final String services,
+                                     final Handler handler) {
+
+        //ProfileProfessionalActivity.loading.setVisibility(View.VISIBLE);
+        final List<Integer> list_is_favorite = new ArrayList<>();
+        String rout_add_favorite = url + "add-favorite";
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("username", login_user);
+            json.put("emailProfessional", email);
+            json.put("nameProfessional", name);
+            json.put("cpfProfessional", cpf);
+            json.put("phoneProfessional", phone);
+            json.put("streetProfessional", street);
+            json.put("numberProfessional", number);
+            json.put("neighborhoodProfessional", neighborhood);
+            json.put("cityProfessional", city);
+            json.put("stateProfessional", state);
+            json.put("siteProfessional", site);
+            json.put("socialNetworkProfessionalProfessional", social_network);
+            json.put("servicesProfessional", services);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mHttp.post(rout_add_favorite, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) {
+                try {
+                    if (result.getInt("ok") == 0) {
+                        new AlertDialog.Builder(mActivity)
+                                .setTitle("Erro")
+                                .setMessage("Usuário não cadastrado") //TODO internacionalizar
+                                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                       // LoginActivity.loading.setVisibility(View.GONE);
+                                    }
+                                })
+                                .create()
+                                .show();
+
+                    } else {
+                        list_is_favorite.add(1);
+                        Message message = new Message();
+                        message.what = 105;
+                        handler.sendMessage(message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                LoginActivity.loading.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+        return  list_is_favorite;
+    }
+
+    public void removeFavorite(final String username,final String email_professional, final Handler handler) {
+        //ProfileProfessionalActivity.loading.setVisibility(View.VISIBLE);
+        final List<Integer> list_remove_favorite = new ArrayList<>();
+        String rout_add_favorite = url + "remove-favorite";
+        final JSONObject json = new JSONObject();
+        try {
+            json.put("username", username);
+            json.put("emailProfessional", email_professional);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mHttp.post(rout_add_favorite, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) {
+                try {
+                    if (result.getInt("ok") == 0) {
+                        new AlertDialog.Builder(mActivity)
+                                .setTitle("Erro")
+                                .setMessage("Usuário não cadastrado") //TODO internacionalizar
+                                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        // LoginActivity.loading.setVisibility(View.GONE);
+                                    }
+                                })
+                                .create()
+                                .show();
+
+                    } else {
+                        Message message = new Message();
+                        message.what = 107;
+                        handler.sendMessage(message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                LoginActivity.loading.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+    }
+
+    public List<Integer> getIsFavorite(final String login, final String email_professional, final Handler handler){
+        final List<Integer> list_is_favorite = new ArrayList<>();
+        String urlGetUser = "http://decasa-decasa.rhcloud.com/get-is-favorite?username=" + login +
+                "&emailProfessional=" + email_professional ;
+        mHttp.get(urlGetUser, new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) throws JSONException {
+                if (result.getInt("ok") == 1) {
+                    list_is_favorite.add(1);
+                } else {
+                    list_is_favorite.add(0);
+                }
+                Message message = new Message();
+                message.what = 106;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+
+        return list_is_favorite;
     }
 
     public List<User> getUser(final String login, final Handler handler){

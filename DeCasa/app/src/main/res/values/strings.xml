@@ -129,4 +129,6 @@
     <string name="title_activity_favorite">My favorites</string>
     <string name="btn_edit">Edit</string>
     <string name="crop_your_picture">Crop your picture</string>
+    <string name="add_favorite">Added to Favorites</string>
+    <string name="remove_favorite">Removed from Favorites</string>
 </resources>
