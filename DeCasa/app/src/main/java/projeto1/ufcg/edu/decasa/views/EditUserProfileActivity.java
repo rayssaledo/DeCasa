@@ -1,7 +1,6 @@
 package projeto1.ufcg.edu.decasa.views;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -92,7 +91,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
     private UserController userController;
     private List<User> userList;
     private User user;
-    private String password_new;
+    private String passwordNew;
 
     private Bitmap bitmapPhoto;
     public static final int REQUEST_CODE_UPDATE_PIC = 0x1;
@@ -143,9 +142,9 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         layout_number = (TextInputLayout) findViewById(R.id.input_layout_number);
         layout_username = (TextInputLayout) findViewById(R.id.input_layout_username);
         layout_current_password = (TextInputLayout) findViewById(R.id.input_layout_current_password);
-        layout_password = (TextInputLayout) findViewById(R.id.input_layout_password);
+        layout_password = (TextInputLayout) findViewById(R.id.input_layout_new_password);
         layout_password_confirm = (TextInputLayout) findViewById(R.id.
-                input_layout_password_confirm);
+                input_layout_confirm_new_password);
 
         MaskEditTextChangedListener maskDateOfBirth = new MaskEditTextChangedListener("##/##/####",
                 etDateOfBirth);
@@ -178,8 +177,8 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         etStreetUser.setText(user.getStreet());
         etNumber.setText(user.getNumber());
 
-        String photoUserString = user.getPhoto();
-        byte[] photoByte = Base64.decode(photoUserString, Base64.DEFAULT);
+        photoUser = user.getPhoto();
+        byte[] photoByte = Base64.decode(photoUser, Base64.DEFAULT);
         bitmapPhoto = BitmapFactory.decodeByteArray(photoByte, 0, photoByte.length);
         ivPhotoUser.setImageBitmap(bitmapPhoto);
 
@@ -231,16 +230,14 @@ public class EditUserProfileActivity extends AppCompatActivity implements
                 streetUser = etStreetUser.getText().toString();
                 numberUser = etNumber.getText().toString();
                 passwordCurrent = etCurrentPassword.getText().toString();
-                password_new = user.getPassword();
-                Log.d("senha", password_new);
+                passwordNew = user.getPassword();
+                Log.d("senha", passwordNew);
                 passwordUserNew = etNewPassword.getText().toString();
                 passwordConfirmUser = etConfirmNewPassword.getText().toString();
 
                 updateUser(nameUser, dateOfBirth, gender, streetUser, numberUser,
                         neighborhoodUser, cityUser, state, photoUser, username,
                         passwordUserNew);
-                //setView(EditUserProfileActivity.this, UserProfileActivity.class); SETAR PARA A TELA DE PERFIL
-                //finish();
             }
         });
 
@@ -314,11 +311,11 @@ public class EditUserProfileActivity extends AppCompatActivity implements
                             String photo, String username, String password) {
         if (validateName() && validateDateOfBirth() && validateCity() &&  validateNeighborhood()
                 && validateStreet()&& validateNumber() && validatePasswords()) {
-            if (passwordConfirmUser != null && !passwordConfirmUser.equals("")) {
-                password_new = passwordConfirmUser;
+            if (passwordConfirmUser != null && !passwordConfirmUser.trim().equals("")) {
+                passwordNew = passwordConfirmUser;
             }
             userController.update(name, birthDate, gender, street, number, neighborhood, city,
-                        state, photo, username, password);
+                        state, photo, username, passwordNew, MainActivity.class); //Passar class do perfil do usuário
         } else if (!validateName()) {
             return;
         } else if (!validateDateOfBirth()) {
@@ -332,6 +329,18 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         } else if (!validateNumber()) {
             return;
         } else if (!validatePasswords()) {
+            new AlertDialog.Builder(EditUserProfileActivity.this)
+                    .setMessage(getString(R.string.err_passwords_do_not_match))
+                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            etNewPassword.setText("");
+                            etConfirmNewPassword.setText("");
+                            requestFocus(etNewPassword);
+
+                        }
+                    })
+                    .create()
+                    .show();
             return;
         }
     }
@@ -445,8 +454,8 @@ public class EditUserProfileActivity extends AppCompatActivity implements
     }
 
     private boolean validateCurrentPassword() {
-        if (passwordCurrent.equals(user.getPassword())) {
-            layout_current_password.setError(getString(R.string.err_passwords_do_not_match));
+        if (!passwordCurrent.equals(user.getPassword())) {
+            layout_current_password.setError(getString(R.string.err_incorrect_current_password));
             requestFocus(etCurrentPassword);
             return false;
         } else {
@@ -491,39 +500,22 @@ public class EditUserProfileActivity extends AppCompatActivity implements
 
     private  boolean validatePasswords(){
         if (passwordCurrent != null && !passwordCurrent.trim().isEmpty()) {
-            Log.d("passouaquii", passwordCurrent+"");
-            validateCurrentPassword();
-            validateNewPassword();
-            validatePasswordConfirm();
-            if (!confirmationPassword()){
-                layout_password.setError(getString(R.string.err_passwords_do_not_match));
-                requestFocus(etNewPassword);
-                return false;
+            if (validateCurrentPassword() && validateNewPassword() && validatePasswordConfirm()) {
+                if (confirmationPassword()) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        } else if(passwordUserNew != null && !passwordUserNew.trim().isEmpty()) {
-            layout_password.setError(getString(R.string.err_current_password_is_not_entered));
-            requestFocus(etNewPassword);
-            return false;
-        } else  if(passwordConfirmUser != null && !passwordConfirmUser.equals("")) {
-            layout_password_confirm.setError(getString(R.string.err_current_password_is_not_entered));
-            requestFocus(etConfirmNewPassword);
-            return false;
         }
         return true;
     }
-
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.
                     SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
-    }
-
-    public static void setView(Context context, Class classe){
-        Intent it = new Intent();
-        it.setClass(context, classe);
-        context.startActivity(it);
     }
 
     @Override

@@ -118,9 +118,9 @@ public class UserController {
     public void update(final String name, final String birthDate, final String gender,
                          final String street, final String number, final String neighborhood,
                          final String city, final String state, final String photo,
-                         final String username, final String password) {
+                         final String username, final String password, final Class classDest) {
 
-        UserCadastreActivity.mLoadingCadastre.setVisibility(View.VISIBLE);
+        EditUserProfileActivity.loadingEdit.setVisibility(View.VISIBLE);
         String urlUpdate = url + "update-user";
         JSONObject json = new JSONObject();
         try {
@@ -148,7 +148,7 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
+                                    EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -159,7 +159,11 @@ public class UserController {
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //UserCadastreActivity.mLoadingCadastre.setVisibility(View.GONE);
+                                    EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
+                                    Intent intent = new Intent(mActivity,
+                                            classDest);
+                                    mActivity.startActivity(intent);
+                                    mActivity.finish();
                                 }
                             })
                             .create()
@@ -174,7 +178,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //UserCadastreActivity.mLoadingCadastre.setVisibility(View.GONE);
+                                EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
                             }
                         })
                         .create()
