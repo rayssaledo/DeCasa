@@ -116,4 +116,6 @@
     <string name="end_welcome">\nEscolha aqui o serviço que deseja.</string>
     <string name="title_activity_edit_user_profile">Editando perfil</string>
     <string name="btn_edit">Editar</string>
+    <string name="add_favorite">Adicionado aos seus favoritos</string>
+    <string name="remove_favorite">Removido dos seus favoritos</string>
 </resources>

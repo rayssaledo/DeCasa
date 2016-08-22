@@ -173,14 +173,33 @@ public class UserController {
         });
     }
 
-    public List<Integer> addFavorite(final String username,final String email_professional, final Handler handler) {
+
+    public List<Integer> addFavorite(final String login_user,final String email, final String name,
+                                     final String cpf, final String phone, final String street,
+                                     final String number, final String neighborhood,
+                                     final String city, final String state, final String site,
+                                     final String social_network, final String services,
+                                     final Handler handler) {
+
         //ProfileProfessionalActivity.loading.setVisibility(View.VISIBLE);
         final List<Integer> list_is_favorite = new ArrayList<>();
         String rout_add_favorite = url + "add-favorite";
         final JSONObject json = new JSONObject();
         try {
-            json.put("username", username);
-            json.put("emailProfessional", email_professional);
+            json.put("username", login_user);
+            json.put("emailProfessional", email);
+            json.put("nameProfessional", name);
+            json.put("cpfProfessional", cpf);
+            json.put("phoneProfessional", phone);
+            json.put("streetProfessional", street);
+            json.put("numberProfessional", number);
+            json.put("neighborhoodProfessional", neighborhood);
+            json.put("cityProfessional", city);
+            json.put("stateProfessional", state);
+            json.put("siteProfessional", site);
+            json.put("socialNetworkProfessionalProfessional", social_network);
+            json.put("servicesProfessional", services);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

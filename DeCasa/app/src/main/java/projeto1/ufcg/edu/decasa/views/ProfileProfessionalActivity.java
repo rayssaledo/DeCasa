@@ -71,7 +71,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
             }
             if (msg.what == 105) {
                 if (list_favorite.size() == 1 && list_favorite.get(0) == 1){
-                    Toast.makeText(ProfileProfessionalActivity.this, "Adicionado a seus favoritos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileProfessionalActivity.this, getApplication().getString(
+                            R.string.add_favorite), Toast.LENGTH_LONG).show();
                     ib_favorite.setImageResource(R.mipmap.ic_favorite_red_24dp);
                 }
             }
@@ -83,7 +84,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 }
             }
             if (msg.what == 107) {
-                Toast.makeText(ProfileProfessionalActivity.this, "Removido dos seus favoritos", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileProfessionalActivity.this,getApplication().getString(
+                        R.string.remove_favorite), Toast.LENGTH_LONG).show();
                 ib_favorite.setImageResource(R.mipmap.ic_favorite_border_black_24dp);
             }
         }
@@ -134,7 +136,12 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                if(list_is_favorite.get(0) == 0) {
-                   list_favorite = userController.addFavorite(username, professional.getEmail(), handler);
+                   list_favorite = userController.addFavorite(username, professional.getEmail(),
+                           professional.getName(), professional.getCpf(), professional.getPhone(),
+                           professional.getStreet(), professional.getNumber(),
+                           professional.getNeighborhood(), professional.getCity(),
+                           professional.getState(), professional.getSite(),
+                           professional.getSocialNetwork(), "" , handler);//TODO ENVIAR SERVICES CORRETAMENTE
                    list_is_favorite.add(0,1);
                } else {
                    userController.removeFavorite(username, professional.getEmail(), handler);
@@ -142,6 +149,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                }
             }
         });
+
 
         Button btn_evaluations = (Button) findViewById(R.id.btn_evaluations);
         btn_evaluations.setOnClickListener(new View.OnClickListener() {
