@@ -20,6 +20,7 @@ import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.views.EditUserProfileActivity;
 import projeto1.ufcg.edu.decasa.views.LoginActivity;
 import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
 
@@ -114,6 +115,73 @@ public class UserController {
         });
     }
 
+    public void update(final String name, final String birthDate, final String gender,
+                         final String street, final String number, final String neighborhood,
+                         final String city, final String state, final String photo,
+                         final String username, final String password) {
+
+        UserCadastreActivity.mLoadingCadastre.setVisibility(View.VISIBLE);
+        String urlUpdate = url + "update-user";
+        JSONObject json = new JSONObject();
+        try {
+            json.put("name", name);
+            json.put("birthDate", birthDate);
+            json.put("gender", gender);
+            json.put("street", street);
+            json.put("number", number);
+            json.put("neighborhood", neighborhood);
+            json.put("city", city);
+            json.put("state", state);
+            json.put("photo", photo);
+            json.put("username", username);
+            json.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mHttp.post(urlUpdate, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) throws JSONException{
+                if (result.getInt("ok") == 0) {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage(result.getString("msg")) //TODO internacionalizar
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
+                                }
+                            })
+                            .create()
+                            .show();
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setMessage("Atualizado com sucesso!") //TODO internacionalizar
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //UserCadastreActivity.mLoadingCadastre.setVisibility(View.GONE);
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            }
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível") //TODO intercionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //UserCadastreActivity.mLoadingCadastre.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+    }
 
     public void login(final String login, final String password, final Class classDest,
                       final Professional professional) {

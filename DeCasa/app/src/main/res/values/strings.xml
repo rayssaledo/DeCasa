@@ -107,6 +107,7 @@
     <string name="btn_view_profile">View profile</string>
     <string name="btn_enter">Enter</string>
     <string name="err_passwords_do_not_match">Passwords do not match!</string>
+    <string name="err_current_password_is_not_entered">Enter your current password</string>
     <string name="err_invalid_day">Invalid day</string>
     <string name="err_invalid_month">Invalid month</string>
     <string name="err_invalid_year">Invalid year</string>
