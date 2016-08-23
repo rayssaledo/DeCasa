@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -97,8 +96,7 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
 
         mLoadingCadastre = findViewById(R.id.rl_loading_cadastre);
 
-        Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.photo_default);
-        bitmapPhoto = avatar;
+        bitmapPhoto = BitmapFactory.decodeResource(getResources(), R.drawable.photo_default);
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 100, b);
         byte[] photo_user_byte = b.toByteArray();
@@ -337,7 +335,6 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int currentYear = cal.get(Calendar.YEAR);
-        Log.d("YEAR", currentYear +"");
         if (date_birth_user.trim().isEmpty()) {
             layout_date_birth.setError(getString(R.string.err_msg_birth));
             requestFocus(mDate_of_birth);
@@ -539,7 +536,5 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
                 Constants.IntentExtras.ACTION_CAMERA : Constants.IntentExtras.ACTION_GALLERY;
         actionProfilePic(action);
     }
-
-
 
 }

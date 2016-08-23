@@ -57,13 +57,15 @@
     <string name="title_my_location">My location</string>
     <string name="message_dialog_gps">Do you want to turn on your GPS?</string>
     <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="title_activity_cadastre_or_login">CadastreOrLoginActivity</string>
     <string name="title_activity_user_cadastre">UserCadastreActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="hint_name">Name</string>
     <string name="hint_date_of_birth">Date of birth</string>
+    <string name="hint_gender">Gender</string>
     <string name="hint_city">City</string>
+    <string name="hint_state">State</string>
     <string name="hint_neighborhood">Neighborhood</string>
     <string name="hint_street">Street</string>
     <string name="hint_number">Number</string>
@@ -105,8 +107,10 @@
     <string name="welcome">Welcome</string>
     <string name="btn_to_evaluate">To evaluate</string>
     <string name="btn_view_profile">View profile</string>
-    <string name="btn_enter">Enter</string>
+    <string name="btn_enter">Sign in</string>
     <string name="err_passwords_do_not_match">Passwords do not match!</string>
+    <string name="err_incorrect_current_password">Incorrect current password!</string>
+    <string name="err_current_password_is_not_entered">Enter your current password</string>
     <string name="err_invalid_day">Invalid day</string>
     <string name="err_invalid_month">Invalid month</string>
     <string name="err_invalid_year">Invalid year</string>
@@ -131,4 +135,5 @@
     <string name="crop_your_picture">Crop your picture</string>
     <string name="add_favorite">Added to Favorites</string>
     <string name="remove_favorite">Removed from Favorites</string>
+    <string name="title_activity_user_profile">My profile</string>
 </resources>

@@ -1,6 +1,9 @@
 package projeto1.ufcg.edu.decasa.models;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
     private String name;
     private String date_of_birth;
     private String gender;
@@ -65,6 +68,32 @@ public class User {
         this.photo = photo;
     }
 
+    protected User(Parcel in) {
+        name = in.readString();
+        date_of_birth = in.readString();
+        gender = in.readString();
+        street = in.readString();
+        number = in.readString();
+        neighborhood = in.readString();
+        city = in.readString();
+        state = in.readString();
+        username = in.readString();
+        password = in.readString();
+        photo = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
     public String getName(){
         return name;
     }
@@ -124,5 +153,24 @@ public class User {
     public void setPhoto(String photo) { this.photo = photo; }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(date_of_birth);
+        parcel.writeString(gender);
+        parcel.writeString(street);
+        parcel.writeString(number);
+        parcel.writeString(neighborhood);
+        parcel.writeString(city);
+        parcel.writeString(state);
+        parcel.writeString(username);
+        parcel.writeString(password);
+        parcel.writeString(photo);
+    }
 }
 

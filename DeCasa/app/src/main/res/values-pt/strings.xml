@@ -50,10 +50,12 @@
     <string name="title_my_location">Minha localização</string>
     <string name="message_dialog_gps">Você deseja ativar o seu GPS?</string>
     <string name="cancel">Cancelar</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="hint_name">Nome</string>
     <string name="hint_date_of_birth">Data de nascimento</string>
+    <string name="hint_gender">Sexo</string>
     <string name="hint_city">Cidade</string>
+    <string name="hint_state">Estado</string>
     <string name="hint_neighborhood">Bairro</string>
     <string name="hint_street">Rua</string>
     <string name="hint_number">Número</string>
@@ -96,6 +98,8 @@
     <string name="btn_view_profile">Ver perfil</string>
     <string name="btn_enter">Entrar</string>
     <string name="err_passwords_do_not_match">As senhas não coincidem!</string>
+    <string name="err_incorrect_current_password">Senha atual incorreta!</string>
+    <string name="err_current_password_is_not_entered">Digite a senha atual</string>
     <string name="err_invalid_day">Dia inválido</string>
     <string name="err_invalid_month">Mês inválido</string>
     <string name="err_invalid_year">Ano inválido</string>
@@ -120,4 +124,5 @@
     <string name="crop_your_picture">Recorte sua foto</string>
     <string name="add_favorite">Adicionado aos seus favoritos</string>
     <string name="remove_favorite">Removido dos seus favoritos</string>
+    <string name="title_activity_user_profile">Meu perfil</string>
 </resources>

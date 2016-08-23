@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONArray;
@@ -22,6 +21,7 @@ import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.views.EditUserProfileActivity;
 import projeto1.ufcg.edu.decasa.views.LoginActivity;
 import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
 
@@ -31,7 +31,6 @@ public class UserController {
     private Activity mActivity;
     private String url;
     private MySharedPreferences mySharedPreferences;
-
 
     public UserController(Activity activity) {
         mActivity = activity;
@@ -116,6 +115,74 @@ public class UserController {
         });
     }
 
+    public void update(final String name, final String birthDate, final String gender,
+                         final String street, final String number, final String neighborhood,
+                         final String city, final String state, final String photo,
+                         final String username, final String password, final Class classDest) {
+
+        EditUserProfileActivity.loadingEdit.setVisibility(View.VISIBLE);
+        String urlUpdate = url + "update-user";
+        JSONObject json = new JSONObject();
+        try {
+            json.put("name", name);
+            json.put("birthDate", birthDate);
+            json.put("gender", gender);
+            json.put("street", street);
+            json.put("number", number);
+            json.put("neighborhood", neighborhood);
+            json.put("city", city);
+            json.put("state", state);
+            json.put("photo", photo);
+            json.put("username", username);
+            json.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mHttp.post(urlUpdate, json.toString(), new HttpListener() {
+            @Override
+            public void onSucess(JSONObject result) throws JSONException{
+                if (result.getInt("ok") == 0) {
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage(result.getString("msg")) //TODO internacionalizar
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
+                                }
+                            })
+                            .create()
+                            .show();
+                } else {
+                    new AlertDialog.Builder(mActivity)
+                            .setMessage("Atualizado com sucesso!") //TODO internacionalizar
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
+                                    mActivity.finish();
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            }
+            @Override
+            public void onTimeout() {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("Erro")
+                        .setMessage("Conexão não disponível") //TODO intercionalizar
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
+    }
 
     public void login(final String login, final String password, final Class classDest,
                       final Professional professional) {
@@ -376,17 +443,6 @@ public class UserController {
                             //services = services.replace("]", "");
                            // services = services.replaceAll("\"", "");
                             //String[] listServices = services.split(",");
-                            Log.d("NAME", name);
-                            Log.d("CPF", cpf);
-                            Log.d("PHONE", phone);
-                            Log.d("RUA", street);
-                            Log.d("NUM", number);
-                            Log.d("BAIRRO", neighborhood);
-                            Log.d("CITY", city);
-                            Log.d("STATE", state);
-                            Log.d("SITE", site);
-                            Log.d("REDE", socialNetwork);
-                            Log.d("EMAIL", email);
 
                            // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
@@ -473,17 +529,7 @@ public class UserController {
                             //services = services.replace("]", "");
                             // services = services.replaceAll("\"", "");
                             //String[] listServices = services.split(",");
-                            Log.d("NAME", name);
-                            Log.d("CPF", cpf);
-                            Log.d("PHONE", phone);
-                            Log.d("RUA", street);
-                            Log.d("NUM", number);
-                            Log.d("BAIRRO", neighborhood);
-                            Log.d("CITY", city);
-                            Log.d("STATE", state);
-                            Log.d("SITE", site);
-                            Log.d("REDE", socialNetwork);
-                            Log.d("EMAIL", email);
+
                            // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
                                 Professional professional = new Professional(name, cpf, phone,
@@ -546,22 +592,14 @@ public class UserController {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    Log.d("RESPONSE", response + "");
                     JSONArray  jsonArray = response.getJSONArray("result");
-                    Log.d("RESULT", jsonArray + "");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonFavorites = jsonArray.getJSONObject(i);
-                        Log.d("JSONFAVORITES", jsonFavorites + "");
                         String favorites = jsonFavorites.getString("favoritesElectricians");
-                        Log.d("FAVORITES", favorites + "");
                         JSONArray jsonArrayFavorites = new JSONArray(favorites);
-                        Log.d("FAVORITESARRAY", jsonArrayFavorites + "");
                         for (int j = 0; j < jsonArrayFavorites.length(); j++) {
-                            Log.d("FAVORITE_ARRAY_SIZE", jsonArrayFavorites.length() + "");
                             JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
-                            Log.d("FAVORITE", jsonFavorite + "");
                             String name = jsonFavorite.getString("name");
-                            Log.d("FAVORITE_NAME", name + "");
                             String cpf = jsonFavorite.getString("cpf");
                             String phone = jsonFavorite.getString("phone");
                             String street = jsonFavorite.getString("street");
@@ -578,17 +616,6 @@ public class UserController {
                             //services = services.replace("]", "");
                             // services = services.replaceAll("\"", "");
                             //String[] listServices = services.split(",");
-                            Log.d("NAME", name);
-                            Log.d("CPF", cpf);
-                            Log.d("TELEFONE", phone);
-                            Log.d("RUA", street);
-                            Log.d("NUM", number);
-                            Log.d("BAIRRO", neighborhood);
-                            Log.d("CITY", city);
-                            Log.d("STATE", state);
-                            Log.d("WSITE", site + "NÃO TEM");
-                            Log.d("REDE", socialNetwork + "não tem");
-                            Log.d("EMAIL", email);
 
                            // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
@@ -648,6 +675,7 @@ public class UserController {
 
 
     public List<User> getUser(final String login, final Handler handler){
+        //UserProfileActivity.loadingUserProfile.setVisibility(View.VISIBLE);
         final List<User> userList = new ArrayList<>();
         String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
         mHttp.get(urlGetUser, new HttpListener() {
@@ -683,7 +711,7 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                    //UserProfileActivity.loadingUserProfile.setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -699,7 +727,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                //UserProfileActivity.loadingUserProfile.setVisibility(View.GONE);
                             }
                         })
                         .create()
