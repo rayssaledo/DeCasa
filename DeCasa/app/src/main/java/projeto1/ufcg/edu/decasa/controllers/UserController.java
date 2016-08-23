@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -23,6 +22,7 @@ import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 import projeto1.ufcg.edu.decasa.views.EditUserProfileActivity;
 import projeto1.ufcg.edu.decasa.views.LoginActivity;
 import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
+import projeto1.ufcg.edu.decasa.views.UserProfileActivity;
 
 public class UserController {
 
@@ -30,7 +30,6 @@ public class UserController {
     private Activity mActivity;
     private String url;
     private MySharedPreferences mySharedPreferences;
-
 
     public UserController(Activity activity) {
         mActivity = activity;
@@ -247,6 +246,7 @@ public class UserController {
     }
 
     public List<User> getUser(final String login, final Handler handler){
+        //UserProfileActivity.loadingUserProfile.setVisibility(View.VISIBLE);
         final List<User> userList = new ArrayList<>();
         String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
         mHttp.get(urlGetUser, new HttpListener() {
@@ -282,7 +282,7 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                    //UserProfileActivity.loadingUserProfile.setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -298,7 +298,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+                                //UserProfileActivity.loadingUserProfile.setVisibility(View.GONE);
                             }
                         })
                         .create()

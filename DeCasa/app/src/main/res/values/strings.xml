@@ -63,7 +63,9 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="hint_name">Name</string>
     <string name="hint_date_of_birth">Date of birth</string>
+    <string name="hint_gender">Gender</string>
     <string name="hint_city">City</string>
+    <string name="hint_state">State</string>
     <string name="hint_neighborhood">Neighborhood</string>
     <string name="hint_street">Street</string>
     <string name="hint_number">Number</string>
@@ -130,4 +132,5 @@
     <string name="title_activity_edit_user_profile">Editing profile</string>
     <string name="btn_edit">Edit</string>
     <string name="crop_your_picture">Crop your picture</string>
+    <string name="title_activity_user_profile">My profile</string>
 </resources>

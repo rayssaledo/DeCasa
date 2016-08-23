@@ -138,7 +138,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     //Setar para tela de perfil
-                    setView(ProfessionalsActivity.this, EditUserProfileActivity.class);
+                    setView(ProfessionalsActivity.this, UserProfileActivity.class);
                 }
             });
         } else {
@@ -292,7 +292,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
-        ListView mDrawerList = (ListView) findViewById(R.id.navList);
+        final ListView mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter2);
 

@@ -53,7 +53,9 @@
     <string name="ok">Ok</string>
     <string name="hint_name">Nome</string>
     <string name="hint_date_of_birth">Data de nascimento</string>
+    <string name="hint_gender">Sexo</string>
     <string name="hint_city">Cidade</string>
+    <string name="hint_state">Estado</string>
     <string name="hint_neighborhood">Bairro</string>
     <string name="hint_street">Rua</string>
     <string name="hint_number">Número</string>
@@ -119,4 +121,5 @@
     <string name="title_activity_edit_user_profile">Editando perfil</string>
     <string name="btn_edit">Editar</string>
     <string name="crop_your_picture">Recorte sua foto</string>
+    <string name="title_activity_user_profile">Meu perfil</string>
 </resources>

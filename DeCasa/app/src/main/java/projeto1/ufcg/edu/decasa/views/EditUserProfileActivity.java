@@ -1,5 +1,6 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -89,7 +90,6 @@ public class EditUserProfileActivity extends AppCompatActivity implements
 
     private MySharedPreferences mySharedPreferences;
     private UserController userController;
-    private List<User> userList;
     private User user;
     private String passwordNew;
 
@@ -98,27 +98,18 @@ public class EditUserProfileActivity extends AppCompatActivity implements
 
     public static View loadingEdit;
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 103) {
-                if (userList.size() == 1) {
-                    user = userList.get(0);
-                    setFields();
-                }
-            }
-        }
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user_profile);
 
+        loadingEdit = findViewById(R.id.rl_loading_edit_user_profile);
+
+        Intent it = getIntent();
+        user = it.getParcelableExtra("USER");
+
         userController = new UserController(EditUserProfileActivity.this);
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
-        loadingEdit =  findViewById(R.id.rl_loading_edit_user_profile);
 
         ivPhotoUser = (ImageView) findViewById(R.id.iv_photo_user);
         etNameUser = (EditText) findViewById(R.id.et_name_user);
@@ -146,6 +137,10 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         layout_password_confirm = (TextInputLayout) findViewById(R.id.
                 input_layout_confirm_new_password);
 
+        photoUser = user.getPhoto();
+        byte[] photoByte = Base64.decode(photoUser, Base64.DEFAULT);
+        bitmapPhoto = BitmapFactory.decodeByteArray(photoByte, 0, photoByte.length);
+
         MaskEditTextChangedListener maskDateOfBirth = new MaskEditTextChangedListener("##/##/####",
                 etDateOfBirth);
         etDateOfBirth.addTextChangedListener(maskDateOfBirth);
@@ -166,7 +161,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         username = mySharedPreferences.getUserLogged();
-        userList = userController.getUser(username, handler);
+        setFields();
     }
 
     private void setFields() {
@@ -177,10 +172,10 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         etStreetUser.setText(user.getStreet());
         etNumber.setText(user.getNumber());
 
-        photoUser = user.getPhoto();
-        byte[] photoByte = Base64.decode(photoUser, Base64.DEFAULT);
-        bitmapPhoto = BitmapFactory.decodeByteArray(photoByte, 0, photoByte.length);
-        ivPhotoUser.setImageBitmap(bitmapPhoto);
+//        photoUser = user.getPhoto();
+//        byte[] photoByte = Base64.decode(photoUser, Base64.DEFAULT);
+//        bitmapPhoto = BitmapFactory.decodeByteArray(photoByte, 0, photoByte.length);
+        setBitmapPhotoUser(bitmapPhoto);
 
         putGenderElementsOnSpinnerArray();
         spGenderUser.setAdapter(createArrayAdapterGender());
@@ -231,7 +226,6 @@ public class EditUserProfileActivity extends AppCompatActivity implements
                 numberUser = etNumber.getText().toString();
                 passwordCurrent = etCurrentPassword.getText().toString();
                 passwordNew = user.getPassword();
-                Log.d("senha", passwordNew);
                 passwordUserNew = etNewPassword.getText().toString();
                 passwordConfirmUser = etConfirmNewPassword.getText().toString();
 
@@ -241,6 +235,10 @@ public class EditUserProfileActivity extends AppCompatActivity implements
             }
         });
 
+    }
+
+    private void setBitmapPhotoUser(Bitmap bitmapPhotoUser) {
+        ivPhotoUser.setImageBitmap(bitmapPhotoUser);
     }
 
     private SpinnerAdapter createArrayAdapterState() {
@@ -315,7 +313,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
                 passwordNew = passwordConfirmUser;
             }
             userController.update(name, birthDate, gender, street, number, neighborhood, city,
-                        state, photo, username, passwordNew, MainActivity.class); //Passar class do perfil do usuário
+                        state, photo, username, passwordNew, UserProfileActivity.class);
         } else if (!validateName()) {
             return;
         } else if (!validateDateOfBirth()) {
@@ -551,7 +549,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         if (mImagePath != null) {
             Bitmap myBitmap = BitmapFactory.decodeFile(mImagePath);
             bitmapPhoto = myBitmap;
-            ivPhotoUser.setImageBitmap(bitmapPhoto);
+            setBitmapPhotoUser(bitmapPhoto);
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 50, b);
             byte[] photo_user_byte = b.toByteArray();
