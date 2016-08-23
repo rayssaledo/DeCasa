@@ -37,19 +37,15 @@ public class MyFavoritesActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 108) {
-                Log.d("LISTA", list_fitter_professionals.size() + "");
+
                 adapter_fitter = new ProfessionalsAdapter(MyFavoritesActivity.this,
                         list_fitter_professionals);
                 lv_fitter.setAdapter(adapter_fitter);
-          //  }
-          //  if (msg.what == 109) {
-                Log.d("LISTA_p", list_plumber_professionals.size() + "");
+
                 adapter_plumber = new ProfessionalsAdapter(MyFavoritesActivity.this,
                         list_plumber_professionals);
-                lv_fitter.setAdapter(adapter_fitter);
-           // }
-           // if (msg.what == 110) {
-                Log.d("LISTA", list_electrician_professionals.size() + "");
+                lv_plumber.setAdapter(adapter_plumber);
+
                 adapter_electrictian = new ProfessionalsAdapter(MyFavoritesActivity.this,
                         list_electrician_professionals);
                 lv_electrician.setAdapter(adapter_electrictian);
@@ -72,17 +68,17 @@ public class MyFavoritesActivity extends AppCompatActivity {
 
         TabHost.TabSpec descritor = mTabHost.newTabSpec("aba1");
         descritor.setContent(R.id.tab_plumber);
-        descritor.setIndicator("Plumber");
+        descritor.setIndicator(getApplication().getString(R.string.title_plumbers));
         mTabHost.addTab(descritor);
 
         descritor = mTabHost.newTabSpec("aba2");
         descritor.setContent(R.id.tab_electrician);
-        descritor.setIndicator("Electrician");
+        descritor.setIndicator(getApplication().getString(R.string.title_electricians));
         mTabHost.addTab(descritor);
 
         descritor = mTabHost.newTabSpec("aba3");
         descritor.setContent(R.id.tab_fitter);
-        descritor.setIndicator("Fitter");
+        descritor.setIndicator(getApplication().getString(R.string.title_fitters));
         mTabHost.addTab(descritor);
 
         lv_fitter = (ListView) findViewById(R.id.lvf_fitter);

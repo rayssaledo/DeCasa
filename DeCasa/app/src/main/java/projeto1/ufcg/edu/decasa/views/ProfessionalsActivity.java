@@ -299,6 +299,8 @@ public class ProfessionalsActivity extends AppCompatActivity {
         mDrawerList.setAdapter(adapter2);
 
         if (mySharedPreferences.isUserLoggedIn()) {
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_services),
+                    R.mipmap.ic_home_black_24dp));
             mNavItems.add(new NavItem(getApplication().getString(R.string.text_my_favorites),
                     R.mipmap.ic_favorite_black_24dp));
             mNavItems.add(new NavItem(getApplication().getString(R.string.text_about),
@@ -309,13 +311,16 @@ public class ProfessionalsActivity extends AppCompatActivity {
             mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (position == 0) { // My favorites
+                    if (position == 0) { // Home
+                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        setView(ProfessionalsActivity.this, MainActivity.class);
+                    } else if (position == 1) { // My favorites
                       mDrawerLayout.closeDrawer(mDrawerPane);
                      setView(ProfessionalsActivity.this, MyFavoritesActivity.class);
-                    } else if (position == 1) { // About
+                    } else if (position == 2) { // About
                         mDrawerLayout.closeDrawer(mDrawerPane);
                         setView(ProfessionalsActivity.this, AboutActivity.class);
-                    } else if (position == 2) { // Logout
+                    } else if (position == 3) { // Logout
                         mDrawerLayout.closeDrawer(mDrawerPane);
                         mySharedPreferences.logoutUser();
                         setView(ProfessionalsActivity.this, MainActivity.class);
@@ -325,13 +330,18 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 }
             });
         } else {
+            mNavItems.add(new NavItem(getApplication().getString(R.string.text_services),
+                    R.mipmap.ic_home_black_24dp));
             mNavItems.add(new NavItem(getApplication().getString(R.string.text_about),
                     R.mipmap.ic_info_black_24dp));
 
             mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (position == 0) { // About
+                    if (position == 0) { //Home
+                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        setView(ProfessionalsActivity.this, MainActivity.class);
+                    } else if (position == 1) { // About
                         mDrawerLayout.closeDrawer(mDrawerPane);
                         setView(ProfessionalsActivity.this, AboutActivity.class);
                     }
