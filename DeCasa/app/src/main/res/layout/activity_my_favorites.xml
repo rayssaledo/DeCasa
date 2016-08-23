@@ -40,68 +40,48 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
-                    <ScrollView
-                        android:id="@+id/tab_plumber"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
                         <LinearLayout
+                            android:id="@+id/tab_plumber"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_height="fill_parent">
 
                             <ListView
                                 android:id="@+id/lvf_plumber"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginTop="10dp">
                             </ListView>
 
                         </LinearLayout>
 
-                    </ScrollView>
-
-                    <ScrollView
-                        android:id="@+id/tab_electrician"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
                         <LinearLayout
+                            android:id="@+id/tab_electrician"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_height="fill_parent">
 
                             <ListView
                                 android:id="@+id/lvf_electrician"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginTop="10dp">
                             </ListView>
 
                         </LinearLayout>
-
-                    </ScrollView>
-
-                    <ScrollView
-                        android:id="@+id/tab_fitter"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
+                    
                         <LinearLayout
+                            android:id="@+id/tab_fitter"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_height="fill_parent">
 
                             <ListView
                                 android:id="@+id/lvf_fitter"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_marginTop="10dp">
                             </ListView>
 
                         </LinearLayout>
 
-                    </ScrollView>
 
                 </FrameLayout>
 

@@ -388,12 +388,12 @@ public class UserController {
                             Log.d("REDE", socialNetwork);
                             Log.d("EMAIL", email);
 
-                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
+                           // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
                                 Professional professional = new Professional(name, cpf, phone,
                                         street, number, neighborhood, city, state, site, socialNetwork,
                                         email);
-                                professional.setEvaluationsAverage(evaluationAverage);
+                               // professional.setEvaluationsAverage(evaluationAverage);
                                 professional.setLocation(new Location(street + ", " + number + " " +
                                         city + " " + state));
 
@@ -405,7 +405,7 @@ public class UserController {
                         }
                     }
                     Message message = new Message();
-                    message.what = 109;
+                    message.what = 108;
                     handler.sendMessage(message);
                 } else {
                     new AlertDialog.Builder(mActivity)
@@ -484,12 +484,12 @@ public class UserController {
                             Log.d("SITE", site);
                             Log.d("REDE", socialNetwork);
                             Log.d("EMAIL", email);
-                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
+                           // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
                                 Professional professional = new Professional(name, cpf, phone,
                                         street, number, neighborhood, city, state, site, socialNetwork,
                                         email);
-                                professional.setEvaluationsAverage(evaluationAverage);
+                            //    professional.setEvaluationsAverage(evaluationAverage);
                                 professional.setLocation(new Location(street + ", " + number + " " +
                                         city + " " + state));
 
@@ -557,6 +557,7 @@ public class UserController {
                         JSONArray jsonArrayFavorites = new JSONArray(favorites);
                         Log.d("FAVORITESARRAY", jsonArrayFavorites + "");
                         for (int j = 0; j < jsonArrayFavorites.length(); j++) {
+                            Log.d("FAVORITE_ARRAY_SIZE", jsonArrayFavorites.length() + "");
                             JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
                             Log.d("FAVORITE", jsonFavorite + "");
                             String name = jsonFavorite.getString("name");
@@ -589,12 +590,12 @@ public class UserController {
                             Log.d("REDE", socialNetwork + "não tem");
                             Log.d("EMAIL", email);
 
-                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
+                           // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
                                 Professional professional = new Professional(name, cpf, phone,
                                         street, number, neighborhood, city, state, site, socialNetwork,
                                         email);
-                                professional.setEvaluationsAverage(evaluationAverage);
+                             //   professional.setEvaluationsAverage(evaluationAverage);
                                 professional.setLocation(new Location(street + ", " + number + " " +
                                         city + " " + state));
 
@@ -603,11 +604,13 @@ public class UserController {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
                         }
+                        Message message = new Message();
+                        message.what = 108;
+                        handler.sendMessage(message);
                     }
-                    Message message = new Message();
-                    message.what = 110;
-                    handler.sendMessage(message);
+
                 } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")

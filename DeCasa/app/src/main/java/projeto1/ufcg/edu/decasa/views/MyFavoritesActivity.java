@@ -41,14 +41,14 @@ public class MyFavoritesActivity extends AppCompatActivity {
                 adapter_fitter = new ProfessionalsAdapter(MyFavoritesActivity.this,
                         list_fitter_professionals);
                 lv_fitter.setAdapter(adapter_fitter);
-            }
-            if (msg.what == 109) {
+          //  }
+          //  if (msg.what == 109) {
                 Log.d("LISTA_p", list_plumber_professionals.size() + "");
                 adapter_plumber = new ProfessionalsAdapter(MyFavoritesActivity.this,
                         list_plumber_professionals);
                 lv_fitter.setAdapter(adapter_fitter);
-            }
-            if (msg.what == 110) {
+           // }
+           // if (msg.what == 110) {
                 Log.d("LISTA", list_electrician_professionals.size() + "");
                 adapter_electrictian = new ProfessionalsAdapter(MyFavoritesActivity.this,
                         list_electrician_professionals);
