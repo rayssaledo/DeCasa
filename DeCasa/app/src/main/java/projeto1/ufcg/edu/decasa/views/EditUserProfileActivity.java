@@ -1,14 +1,11 @@
 package projeto1.ufcg.edu.decasa.views;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -67,7 +64,6 @@ public class EditUserProfileActivity extends AppCompatActivity implements
     private TextInputLayout layout_neighborhood;
     private TextInputLayout layout_street;
     private TextInputLayout layout_number;
-    private TextInputLayout layout_username;
     private TextInputLayout layout_current_password;
     private TextInputLayout layout_password;
     private TextInputLayout layout_password_confirm;
@@ -131,7 +127,6 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         layout_neighborhood = (TextInputLayout) findViewById(R.id.input_layout_neighborhood);
         layout_street = (TextInputLayout) findViewById(R.id.input_layout_street);
         layout_number = (TextInputLayout) findViewById(R.id.input_layout_number);
-        layout_username = (TextInputLayout) findViewById(R.id.input_layout_username);
         layout_current_password = (TextInputLayout) findViewById(R.id.input_layout_current_password);
         layout_password = (TextInputLayout) findViewById(R.id.input_layout_new_password);
         layout_password_confirm = (TextInputLayout) findViewById(R.id.
@@ -172,9 +167,6 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         etStreetUser.setText(user.getStreet());
         etNumber.setText(user.getNumber());
 
-//        photoUser = user.getPhoto();
-//        byte[] photoByte = Base64.decode(photoUser, Base64.DEFAULT);
-//        bitmapPhoto = BitmapFactory.decodeByteArray(photoByte, 0, photoByte.length);
         setBitmapPhotoUser(bitmapPhoto);
 
         putGenderElementsOnSpinnerArray();
@@ -313,7 +305,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
                 passwordNew = passwordConfirmUser;
             }
             userController.update(name, birthDate, gender, street, number, neighborhood, city,
-                        state, photo, username, passwordNew, UserProfileActivity.class);
+                    state, photo, username, passwordNew, UserProfileActivity.class);
         } else if (!validateName()) {
             return;
         } else if (!validateDateOfBirth()) {
@@ -327,18 +319,6 @@ public class EditUserProfileActivity extends AppCompatActivity implements
         } else if (!validateNumber()) {
             return;
         } else if (!validatePasswords()) {
-            new AlertDialog.Builder(EditUserProfileActivity.this)
-                    .setMessage(getString(R.string.err_passwords_do_not_match))
-                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            etNewPassword.setText("");
-                            etConfirmNewPassword.setText("");
-                            requestFocus(etNewPassword);
-
-                        }
-                    })
-                    .create()
-                    .show();
             return;
         }
     }
@@ -463,7 +443,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
     }
 
     private boolean validateNewPassword(){
-        if (passwordUserNew.trim().isEmpty()) {
+        if (passwordUserNew == null || passwordUserNew.trim().isEmpty()) {
             layout_password.setError(getString(R.string.err_msg_password));
             requestFocus(etNewPassword);
             return false;
@@ -478,7 +458,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
     }
 
     private boolean validatePasswordConfirm(){
-        if (passwordConfirmUser.trim().isEmpty()) {
+        if (passwordConfirmUser == null || passwordConfirmUser.trim().isEmpty()) {
             layout_password_confirm.setError(getString(R.string.err_msg_password_confirm));
             requestFocus(etConfirmNewPassword);
             return false;
@@ -497,16 +477,29 @@ public class EditUserProfileActivity extends AppCompatActivity implements
     }
 
     private  boolean validatePasswords(){
-        if (passwordCurrent != null && !passwordCurrent.trim().isEmpty()) {
+        if (passwordCurrent == null || passwordCurrent.trim().isEmpty()) {
+            return true;
+        } else {
             if (validateCurrentPassword() && validateNewPassword() && validatePasswordConfirm()) {
-                if (confirmationPassword()) {
-                    return true;
+                if (!confirmationPassword()) {
+                    new AlertDialog.Builder(EditUserProfileActivity.this)
+                            .setMessage(getString(R.string.err_passwords_do_not_match))
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    etNewPassword.setText("");
+                                    etConfirmNewPassword.setText("");
+                                    requestFocus(etNewPassword);
+                                }
+                            })
+                            .create()
+                            .show();
                 } else {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+
+        return false;
     }
 
     private void requestFocus(View view) {
@@ -547,8 +540,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
 
     private void showCroppedImage(String mImagePath) {
         if (mImagePath != null) {
-            Bitmap myBitmap = BitmapFactory.decodeFile(mImagePath);
-            bitmapPhoto = myBitmap;
+            bitmapPhoto = BitmapFactory.decodeFile(mImagePath);
             setBitmapPhotoUser(bitmapPhoto);
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             bitmapPhoto.compress(Bitmap.CompressFormat.JPEG, 50, b);

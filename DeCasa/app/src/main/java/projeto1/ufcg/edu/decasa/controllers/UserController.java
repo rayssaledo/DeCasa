@@ -159,9 +159,6 @@ public class UserController {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     EditUserProfileActivity.loadingEdit.setVisibility(View.GONE);
-                                    Intent intent = new Intent(mActivity,
-                                            classDest);
-                                    mActivity.startActivity(intent);
                                     mActivity.finish();
                                 }
                             })
