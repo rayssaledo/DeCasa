@@ -58,8 +58,9 @@
 
                     <ImageButton
                         android:id="@+id/ib_favorite"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="24dp"
                         android:layout_alignBottom="@+id/iv_professional"
                         android:layout_alignEnd="@+id/tv_professional_name"
                         android:background="@color/white"

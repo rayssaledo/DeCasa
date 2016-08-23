@@ -46,6 +46,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private String username;
     private  ImageButton ib_favorite;
     private List<Integer> list_is_favorite;
+    private String service;
+    private String myService;
 
     public static View mLoadingProfileProfessional;
 
@@ -113,8 +115,20 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
+        Intent i = getIntent();
+        service = (String) i.getSerializableExtra("SERVICETWO");
+        if (service.equals(getApplication().getString(R.string.title_electricians))){
+            service = "Electrician";
+        } else if (service.equals(getApplication().getString(R.string.title_plumbers))){
+            service = "Plumber";
+        } else if (service.equals(getApplication().getString(R.string.title_fitters))){
+            service = "Fitter";
+        }
+
+        Log.d("Service", service);
         list_is_favorite = new ArrayList<>();
-        list_is_favorite = userController.getIsFavorite(username, professional.getEmail(), handler);
+        list_is_favorite = userController.getIsFavorite(username, professional.getEmail(), service, handler);
+
 
         setTitle(professional.getName());
         setProfile();
@@ -135,16 +149,16 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         ib_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(list_is_favorite.get(0) == 0) {
+               if(list_is_favorite.size() != 0 && list_is_favorite.get(0) == 0) {
                    list_favorite = userController.addFavorite(username, professional.getEmail(),
                            professional.getName(), professional.getCpf(), professional.getPhone(),
                            professional.getStreet(), professional.getNumber(),
                            professional.getNeighborhood(), professional.getCity(),
                            professional.getState(), professional.getSite(),
-                           professional.getSocialNetwork(), "" , handler);//TODO ENVIAR SERVICES CORRETAMENTE
+                           professional.getSocialNetwork(), service , handler);//TODO ENVIAR SERVICES CORRETAMENTE
                    list_is_favorite.add(0,1);
-               } else {
-                   userController.removeFavorite(username, professional.getEmail(), handler);
+               } else if (list_is_favorite.size() != 0 && list_is_favorite.get(0) == 1) {
+                   userController.removeFavorite(username, professional.getEmail(),service, handler);
                    list_is_favorite.add(0,0);
                }
             }

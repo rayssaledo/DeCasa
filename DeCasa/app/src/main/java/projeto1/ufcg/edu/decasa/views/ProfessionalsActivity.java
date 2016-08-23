@@ -82,6 +82,8 @@ public class ProfessionalsActivity extends AppCompatActivity {
         Intent it = getIntent();
         service = (String) it.getSerializableExtra("SERVICE");
 
+
+
         setTitle(service);
 
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
@@ -95,6 +97,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                     Intent intent = new Intent(ProfessionalsActivity.this,
                             ProfileProfessionalActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
+                    intent.putExtra("SERVICETWO", service);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(ProfessionalsActivity.this,
@@ -307,8 +310,8 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (position == 0) { // My favorites
-//                    mDrawerLayout.closeDrawer(mDrawerPane);
-//                    setView(ProfessionalsActivity.this, DonorsActivity.class);
+                      mDrawerLayout.closeDrawer(mDrawerPane);
+                     setView(ProfessionalsActivity.this, MyFavoritesActivity.class);
                     } else if (position == 1) { // About
                         mDrawerLayout.closeDrawer(mDrawerPane);
                         setView(ProfessionalsActivity.this, AboutActivity.class);

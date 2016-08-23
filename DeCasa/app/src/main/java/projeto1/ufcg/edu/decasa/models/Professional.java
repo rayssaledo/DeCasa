@@ -77,6 +77,58 @@ public class Professional implements Parcelable {
         this.services = services;
     }
 
+    public Professional(String name, String cpf, String phone, String street, String number,
+                        String neighborhood, String city, String state, String site,
+                        String socialNetwork, String email) throws Exception {
+        if(name == null || name.equals("")){
+            throw new Exception("Professional name is invalid.");
+        }
+        if(cpf == null || cpf.equals("")){
+            throw new Exception("CPF is invalid.");
+        }
+        if(phone == null || phone.equals("")){
+            throw new Exception("Phone is invalid.");
+        }
+        if(neighborhood == null || neighborhood.equals("")){
+            throw new Exception("Neighborhood is invalid.");
+        }
+        if(street == null || street.equals("")){
+            throw new Exception("Street is invalid.");
+        }
+        if(number == null || number.equals("")){
+            throw new Exception("Number is invalid.");
+        }
+//        if(pictury == null || pictury.equals("")){
+//            throw new Exception("Pictury is invalid.");
+//        }
+        if(email == null || email.equals("")){
+            throw new Exception("Email is invalid.");
+        }
+       // if(password == null || password.equals("")){
+         //   throw new Exception("Password is invalid.");
+       // }
+        if(city == null || city.equals("")){
+            throw new Exception("City is invalid.");
+        }
+        if(state == null || state.equals("")){
+            throw new Exception("State is invalid.");
+        }
+        this.name = name;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.neighborhood = neighborhood;
+        this.street = street;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+        this.site = site;
+        this.socialNetwork = socialNetwork;
+        //this.pictury = pictury;
+        this.email = email;
+        //this.password = password;
+       // this.services = services;
+    }
+
     protected Professional(Parcel in) {
         name = in.readString();
         cpf = in.readString();

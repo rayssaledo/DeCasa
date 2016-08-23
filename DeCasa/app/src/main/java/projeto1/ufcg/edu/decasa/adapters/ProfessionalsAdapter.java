@@ -50,7 +50,7 @@ public class ProfessionalsAdapter extends BaseAdapter {
 
         ((TextView) convertView.findViewById(R.id.tv_name)).setText(item.getName());
         ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
-        ((RatingBar) convertView.findViewById(R.id.rb_evaluation_professionals)).
+       ((RatingBar) convertView.findViewById(R.id.rb_evaluation_professionals)).
                 setRating(item.getEvaluationsAverage());
 
         return convertView;

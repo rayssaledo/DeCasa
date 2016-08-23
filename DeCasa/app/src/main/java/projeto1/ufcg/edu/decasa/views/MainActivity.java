@@ -20,6 +20,7 @@ import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
+import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
