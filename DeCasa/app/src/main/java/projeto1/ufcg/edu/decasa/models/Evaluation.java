@@ -10,9 +10,10 @@ public class Evaluation {
     private String comment;
     private String date;
     private String photo;
+    private String service;
 
     public Evaluation(String professionalValued, String usernameValuer, float evaluationValue,
-                      String comment, String date, String photo) throws Exception {
+                      String comment, String date, String photo, String service) throws Exception {
 
         if(professionalValued == null || professionalValued.equals("")){
             throw new Exception("Professional valued is invalid.");
@@ -23,11 +24,14 @@ public class Evaluation {
         if(evaluationValue <= 0){
             throw new Exception("Evaluation value is invalid.");
         }
-        if(date == null || professionalValued.equals("")){
+        if(date == null || date.equals("")){
             throw new Exception("Date is invalid.");
         }
         if(photo == null || photo.equals("")){
             throw new Exception("Photo is invalid.");
+        }
+        if(service == null || service.equals("")){
+            throw new Exception("Service is invalid.");
         }
 
         this.professionalValued = professionalValued;
@@ -36,6 +40,7 @@ public class Evaluation {
         this.comment = comment;
         this.date = date;
         this.photo = photo;
+        this.service = service;
     }
 
     public String getUsernameValuer() {
@@ -84,7 +89,7 @@ public class Evaluation {
     }
 
     public void setDate(String date) throws Exception {
-        if(date == null || professionalValued.equals("")){
+        if(date == null || date.equals("")){
             throw new Exception("Date is invalid.");
         }
         this.date = date;
@@ -99,5 +104,16 @@ public class Evaluation {
             throw new Exception("Photo is invalid.");
         }
         this.photo = photo;
+    }
+
+    public String gerService() {
+        return service;
+    }
+
+    public void serService(String service) throws Exception {
+        if(service == null || service.equals("")){
+            throw new Exception("Service is invalid.");
+        }
+        this.service = service;
     }
 }

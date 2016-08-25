@@ -115,8 +115,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
-        Intent i = getIntent();
-        service = (String) i.getSerializableExtra("SERVICETWO");
+        service = mySharedPreferences.getService();
         if (service.equals(getApplication().getString(R.string.title_electricians))){
             service = "Electrician";
         } else if (service.equals(getApplication().getString(R.string.title_plumbers))){
@@ -183,10 +182,18 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        String service = mySharedPreferences.getService();
+        if (service.equals(getApplication().getString(R.string.title_electricians))){
+            service = "Eletricista";
+        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
+            service = "Encanador";
+        } else {
+            service = "Montador";
+        }
         assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(),
-                handler);
+                service, handler);
         assessmentsAverage = evaluationController.getAssessmentsAverageByProfessional(professional.
-                getEmail(), handler);
+                getEmail(), service, handler);
 
     }
 

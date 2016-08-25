@@ -81,8 +81,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         Intent it = getIntent();
         service = (String) it.getSerializableExtra("SERVICE");
 
-
-
         setTitle(service);
 
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
@@ -96,7 +94,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
                     Intent intent = new Intent(ProfessionalsActivity.this,
                             ProfileProfessionalActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
-                    intent.putExtra("SERVICETWO", service);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(ProfessionalsActivity.this,

@@ -101,8 +101,16 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String stringEvaluationDate = dateFormat.format(date);
+        String service = mySharedPreferences.getService();
+        if (service.equals(getApplication().getString(R.string.title_electricians))){
+            service = "Eletricista";
+        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
+            service = "Encanador";
+        } else {
+            service = "Montador";
+        }
         evaluationController.addEvaluation(professional.getEmail(), username, stringEvaluationValue,
-                comment, stringEvaluationDate, photoUser,
+                comment, stringEvaluationDate, photoUser, service,
                 AssessmentsActivity.class, professional);
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import projeto1.ufcg.edu.decasa.adapters.AssessmentsAdapter;
 import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class AssessmentsActivity extends AppCompatActivity {
 
@@ -27,6 +29,8 @@ public class AssessmentsActivity extends AppCompatActivity {
     private List<Evaluation> assessments;
     private Button btn_first_evaluate;
 
+    private MySharedPreferences mySharedPreferences;
+
     public static View mLoadingAssessments;
 
     private Handler handler = new Handler() {
@@ -36,7 +40,7 @@ public class AssessmentsActivity extends AppCompatActivity {
             if (msg.what == 101) {
                 int numAssessmentsProfessional = assessments.size();
                 if (numAssessmentsProfessional == 0) {
-                    btn_first_evaluate.setVisibility(View.VISIBLE);
+                    tv_no_assessments.setVisibility(View.VISIBLE);
                     listViewAssessments.setVisibility(View.GONE);
                 }
                 AssessmentsAdapter assessmentsAdapter =
@@ -62,6 +66,9 @@ public class AssessmentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_assessments);
 
         mLoadingAssessments =  findViewById(R.id.loadingAssessments);
+
+        mySharedPreferences = new MySharedPreferences(getApplicationContext());
+
         listViewAssessments = (ListView) findViewById(R.id.lv_assessments);
         tv_no_assessments = (TextView) findViewById(R.id.tv_no_assessments);
         tv_label_assessments = (TextView) findViewById(R.id.tv_label_assessments);
@@ -82,17 +89,6 @@ public class AssessmentsActivity extends AppCompatActivity {
             }
         });
 
-        btn_first_evaluate = (Button) findViewById(R.id.btn_first_evaluate);
-        btn_first_evaluate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AssessmentsActivity.this,
-                        EvaluationProfessionalActivity.class);
-                intent.putExtra("PROFESSIONAL", professional);
-                startActivity(intent);
-            }
-        });
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -101,8 +97,18 @@ public class AssessmentsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        tv_no_assessments.setVisibility(View.GONE);
+        listViewAssessments.setVisibility(View.VISIBLE);
+        String service = mySharedPreferences.getService();
+        if (service.equals(getApplication().getString(R.string.title_electricians))){
+            service = "Eletricista";
+        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
+            service = "Encanador";
+        } else {
+            service = "Montador";
+        }
         assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(),
-                handler);
+                service, handler);
     }
 
     @Override
