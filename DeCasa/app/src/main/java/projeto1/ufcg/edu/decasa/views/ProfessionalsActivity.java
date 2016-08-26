@@ -136,7 +136,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
             btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Setar para tela de perfil
                     setView(ProfessionalsActivity.this, UserProfileActivity.class);
                 }
             });

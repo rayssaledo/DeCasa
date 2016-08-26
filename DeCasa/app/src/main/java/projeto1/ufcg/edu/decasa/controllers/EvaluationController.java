@@ -136,18 +136,7 @@ public class EvaluationController {
                     message.what = 101;
                     handler.sendMessage(message);
                 } else {
-//                    Log.d("TESTE", professionalEmail);
-//                    Log.d("TESTEE", service);
-//                    new AlertDialog.Builder(mActivity)
-//                            .setTitle("Erro")
-//                            .setMessage(response.getString("msg")) //TODO internacionalizar com mensagem certa
-//                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                }
-//                            })
-//                            .create()
-//                            .show();
+
                 }
                 Message message = new Message();
                 message.what = 101;
@@ -185,7 +174,6 @@ public class EvaluationController {
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
                     try{
-                        Log.d("AVG", response.getString("avg"));
                         float assessmentsAverageFloat = Float.valueOf(response.
                                 getString("avg"));
                         assessmentsAverageList.add(assessmentsAverageFloat);
@@ -196,17 +184,7 @@ public class EvaluationController {
                     message.what = 104;
                     handler.sendMessage(message);
                 } else {
-//                    new AlertDialog.Builder(mActivity)
-//                            .setTitle("Erro")
-//                            .setMessage("") //TODO internacionalizar com mensagem certa
-//                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                                }
-//                            })
-//                            .create()
-//                            .show();
+
                 }
             }
 

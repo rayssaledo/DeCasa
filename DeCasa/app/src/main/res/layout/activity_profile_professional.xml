@@ -122,14 +122,17 @@
                             android:background="@color/white"
                             android:contentDescription="@string/desc_evaluators"/>
 
-                        <TextView
-                            android:id="@+id/tv_number_assessments"
+                        <Button
+                            android:id="@+id/btn_evaluations"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:hint="@string/text_number_assessments"
-                            android:textAlignment="center"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_number_assessments"
+                            android:textAllCaps="false"
+                            android:layout_marginTop="10dp"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="16sp"
-                            android:layout_gravity="center_horizontal" />
+                            android:gravity="center_horizontal"/>
 
                     </LinearLayout>
 
@@ -251,19 +254,6 @@
                         android:layout_marginTop="10dp"
                         android:textSize="16sp"
                         android:hint="@string/hint_website" />
-
-                    <Button
-                        android:id="@+id/btn_evaluations"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_see_evaluations"
-                        android:textAllCaps="false"
-                        android:layout_marginTop="10dp"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal" />
 
                 </LinearLayout>
 

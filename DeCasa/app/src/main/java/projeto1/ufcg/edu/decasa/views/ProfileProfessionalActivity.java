@@ -36,7 +36,6 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private TextView tv_social_network;
     private TextView tv_website;
     private RatingBar rb_evaluation;
-    private TextView tv_number_assessments;
     private List<Evaluation> assessments;
     private List<Float> assessmentsAverage;
     private float assessmentsAverageValue;
@@ -48,6 +47,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private List<Integer> list_is_favorite;
     private String service;
     private String myService;
+    private Button btn_evaluations;
 
     public static View mLoadingProfileProfessional;
 
@@ -58,10 +58,10 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
             int numAssessmentsProfessional = assessments.size();
             if (msg.what == 101) {
                 if (numAssessmentsProfessional == 1) {
-                    tv_number_assessments.setText(numAssessmentsProfessional + " " +
+                    btn_evaluations.setText(numAssessmentsProfessional + " " +
                             getApplication().getString(R.string.text_number_evaluation));
                 } else  {
-                    tv_number_assessments.setText(numAssessmentsProfessional + " " +
+                    btn_evaluations.setText(numAssessmentsProfessional + " " +
                             getApplication().getString(R.string.text_number_assessments));
                 }
             }
@@ -109,7 +109,6 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         tv_social_network = (TextView) findViewById(R.id.tv_social_network);
         tv_website = (TextView) findViewById(R.id.tv_website);
         rb_evaluation = (RatingBar) findViewById(R.id.rb_evaluation);
-        tv_number_assessments = (TextView) findViewById(R.id.tv_number_assessments);
 
         username = mySharedPreferences.getUserLogged();
         Intent it = getIntent();
@@ -164,7 +163,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         });
 
 
-        Button btn_evaluations = (Button) findViewById(R.id.btn_evaluations);
+        btn_evaluations = (Button) findViewById(R.id.btn_evaluations);
         btn_evaluations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
