@@ -21,7 +21,6 @@ import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 public class ProfessionalController {

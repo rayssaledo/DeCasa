@@ -227,7 +227,8 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
                 infoWindow = null;
 
-                if (!marker.getTitle().equals("Minha localização")) { //TODO internacionalizar
+                if (!marker.getTitle().equals(getApplication().
+                        getString(R.string.text_my_location))) {
                     infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.
                             infowindow_professional, null);
 

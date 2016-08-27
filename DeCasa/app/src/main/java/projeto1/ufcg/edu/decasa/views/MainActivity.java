@@ -1,5 +1,6 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import java.util.HashMap;
@@ -20,11 +20,12 @@ import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
-import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static Activity mMainActivity;
 
     private Intent it;
     private String service;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mMainActivity = this;
+
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
         userController = new UserController(MainActivity.this);
 
@@ -72,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
         ImageButton ib_plumber = (ImageButton) findViewById(R.id.ib_plumber);
         ImageButton ib_fitter = (ImageButton) findViewById(R.id.ib_fitter);
         Button btn_register = (Button)  findViewById(R.id.btn_register);
-
-        Toast.makeText(MainActivity.this, mySharedPreferences.isUserLoggedIn() + "", Toast.LENGTH_SHORT).show();
 
         it = new Intent(MainActivity.this, ProfessionalsActivity.class);
 

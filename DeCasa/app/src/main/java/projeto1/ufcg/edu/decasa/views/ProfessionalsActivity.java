@@ -321,7 +321,9 @@ public class ProfessionalsActivity extends AppCompatActivity {
                         mDrawerLayout.closeDrawers();
                         mySharedPreferences.logoutUser();
                         setView(ProfessionalsActivity.this, MainActivity.class);
-                        finish();
+                        if (MainActivity.mMainActivity != null){
+                            MainActivity.mMainActivity.finish();
+                        }
                         finish();
                     }
                 }
