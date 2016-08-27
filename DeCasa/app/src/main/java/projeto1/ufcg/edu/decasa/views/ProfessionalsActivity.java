@@ -136,6 +136,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
             btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    mDrawerLayout.closeDrawers();
                     setView(ProfessionalsActivity.this, UserProfileActivity.class);
                 }
             });
@@ -145,6 +146,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
             btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    mDrawerLayout.closeDrawers();
                     setView(ProfessionalsActivity.this, LoginActivity.class);
                 }
             });
@@ -307,16 +309,16 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (position == 0) { // Home
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, MainActivity.class);
                     } else if (position == 1) { // My favorites
-                      mDrawerLayout.closeDrawer(mDrawerPane);
-                     setView(ProfessionalsActivity.this, MyFavoritesActivity.class);
+                        mDrawerLayout.closeDrawers();
+                        setView(ProfessionalsActivity.this, MyFavoritesActivity.class);
                     } else if (position == 2) { // About
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, AboutActivity.class);
                     } else if (position == 3) { // Logout
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         mySharedPreferences.logoutUser();
                         setView(ProfessionalsActivity.this, MainActivity.class);
                         finish();
@@ -334,10 +336,10 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (position == 0) { //Home
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, MainActivity.class);
                     } else if (position == 1) { // About
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, AboutActivity.class);
                     }
                 }
