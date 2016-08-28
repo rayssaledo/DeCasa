@@ -1,12 +1,15 @@
 package projeto1.ufcg.edu.decasa.views;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 
@@ -84,6 +87,41 @@ public class MyFavoritesActivity extends AppCompatActivity {
         lv_fitter = (ListView) findViewById(R.id.lvf_fitter);
         lv_plumber = (ListView) findViewById(R.id.lvf_plumber);
         lv_electrician = (ListView) findViewById(R.id.lvf_electrician);
+
+
+        lv_fitter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Professional professional = (Professional) adapter_fitter.getItem(position);
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfileProfessionalActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+            }
+        });
+
+        lv_plumber.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Professional professional = (Professional) adapter_plumber.getItem(position);
+                Intent intent = new Intent(MyFavoritesActivity.this,
+                        ProfileProfessionalActivity.class);
+                intent.putExtra("PROFESSIONAL", professional);
+                startActivity(intent);
+            }
+        });
+
+        lv_electrician.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Professional professional = (Professional) adapter_electrictian.getItem(position);
+                Intent intent = new Intent(MyFavoritesActivity.this,
+                        ProfileProfessionalActivity.class);
+                intent.putExtra("PROFESSIONAL", professional);
+                startActivity(intent);
+            }
+        });
+
 
         setList();
 

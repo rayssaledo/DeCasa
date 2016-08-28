@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 import org.json.JSONArray;
@@ -250,7 +251,8 @@ public class UserController {
                                      final String cpf, final String phone, final String street,
                                      final String number, final String neighborhood,
                                      final String city, final String state, final String site,
-                                     final String social_network, final String service,
+                                     final String social_network, final String avg,
+                                     final String services, final String service,
                                      final Handler handler) {
 
         //ProfileProfessionalActivity.loading.setVisibility(View.VISIBLE);
@@ -271,6 +273,8 @@ public class UserController {
             json.put("siteProfessional", site);
             json.put("socialNetworkProfessional", social_network);
             json.put("serviceProfessional", service);
+            json.put("avgProfessional", avg);
+            json.put("servicesProfessional", services);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -440,18 +444,18 @@ public class UserController {
                             String socialNetwork = jsonFavorite.getString("socialNetwork");
                             //String pictury = jsonProfessional.getString("pictury");
                             String email = jsonFavorite.getString("email");
-                           // String services = jsonFavorite.getString("services");
-                           // services = services.replace("[", "");
-                            //services = services.replace("]", "");
-                           // services = services.replaceAll("\"", "");
-                            //String[] listServices = services.split(",");
+                            String services = jsonFavorite.getString("services");
+                            services = services.replace("[", "");
+                            services = services.replace("]", "");
+                            services = services.replaceAll("\"", "");
+                            String[] listServices = services.split(",");
 
-                           // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
+                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
                                 Professional professional = new Professional(name, cpf, phone,
                                         street, number, neighborhood, city, state, site, socialNetwork,
-                                        email);
-                               // professional.setEvaluationsAverage(evaluationAverage);
+                                        email, listServices);
+                                professional.setEvaluationsAverage(evaluationAverage);
                                 professional.setLocation(new Location(street + ", " + number + " " +
                                         city + " " + state));
 
@@ -526,18 +530,18 @@ public class UserController {
                             String socialNetwork = jsonFavorite.getString("socialNetwork");
                             //String pictury = jsonProfessional.getString("pictury");
                             String email = jsonFavorite.getString("email");
-                            // String services = jsonFavorite.getString("services");
-                            // services = services.replace("[", "");
-                            //services = services.replace("]", "");
-                            // services = services.replaceAll("\"", "");
-                            //String[] listServices = services.split(",");
+                            String services = jsonFavorite.getString("services");
+                            services = services.replace("[", "");
+                            services = services.replace("]", "");
+                            services = services.replaceAll("\"", "");
+                            String[] listServices = services.split(",");
 
-                           // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
+                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
                                 Professional professional = new Professional(name, cpf, phone,
                                         street, number, neighborhood, city, state, site, socialNetwork,
-                                        email);
-                            //    professional.setEvaluationsAverage(evaluationAverage);
+                                        email, listServices);
+                                professional.setEvaluationsAverage(evaluationAverage);
                                 professional.setLocation(new Location(street + ", " + number + " " +
                                         city + " " + state));
 
@@ -613,18 +617,18 @@ public class UserController {
                             String socialNetwork = jsonFavorite.getString("socialNetwork");
                             //String pictury = jsonProfessional.getString("pictury");
                             String email = jsonFavorite.getString("email");
-                            // String services = jsonFavorite.getString("services");
-                            // services = services.replace("[", "");
-                            //services = services.replace("]", "");
-                            // services = services.replaceAll("\"", "");
-                            //String[] listServices = services.split(",");
+                            String services = jsonFavorite.getString("services");
+                            services = services.replace("[", "");
+                            services = services.replace("]", "");
+                            services = services.replaceAll("\"", "");
+                            String[] listServices = services.split(",");
 
-                           // float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
+                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
                                 Professional professional = new Professional(name, cpf, phone,
                                         street, number, neighborhood, city, state, site, socialNetwork,
-                                        email);
-                             //   professional.setEvaluationsAverage(evaluationAverage);
+                                        email, listServices);
+                                professional.setEvaluationsAverage(evaluationAverage);
                                 professional.setLocation(new Location(street + ", " + number + " " +
                                         city + " " + state));
 

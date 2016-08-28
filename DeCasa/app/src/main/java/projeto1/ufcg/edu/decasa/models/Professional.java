@@ -79,7 +79,7 @@ public class Professional implements Parcelable {
 
     public Professional(String name, String cpf, String phone, String street, String number,
                         String neighborhood, String city, String state, String site,
-                        String socialNetwork, String email) throws Exception {
+                        String socialNetwork, String email, String[] services) throws Exception {
         if(name == null || name.equals("")){
             throw new Exception("Professional name is invalid.");
         }
@@ -126,7 +126,7 @@ public class Professional implements Parcelable {
         //this.pictury = pictury;
         this.email = email;
         //this.password = password;
-       // this.services = services;
+         this.services = services;
     }
 
     protected Professional(Parcel in) {

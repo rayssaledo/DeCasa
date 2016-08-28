@@ -477,28 +477,31 @@ public class EditUserProfileActivity extends AppCompatActivity implements
 
     private  boolean validatePasswords(){
         if (passwordCurrent == null || passwordCurrent.trim().isEmpty()) {
+            if (passwordUserNew != null || !passwordUserNew.trim().isEmpty() ||
+                    passwordConfirmUser != null || !passwordConfirmUser.trim().isEmpty()){
+                setTextEmpty();
+                layout_current_password.setError(getString(R.string.err_current_password_is_not_entered));
+                requestFocus(etCurrentPassword);
+                return false;
+            }
             return true;
         } else {
             if (validateCurrentPassword() && validateNewPassword() && validatePasswordConfirm()) {
                 if (!confirmationPassword()) {
-                    new AlertDialog.Builder(EditUserProfileActivity.this)
-                            .setMessage(getString(R.string.err_passwords_do_not_match))
-                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                    etNewPassword.setText("");
-                                    etConfirmNewPassword.setText("");
-                                    requestFocus(etNewPassword);
-                                }
-                            })
-                            .create()
-                            .show();
-                } else {
-                    return true;
+                    setTextEmpty();
+                    layout_password.setError(getString(R.string.err_passwords_do_not_match));
+                    requestFocus(etNewPassword);
+                    return false;
                 }
+                return true;
             }
         }
-
         return false;
+    }
+
+    private void setTextEmpty() {
+        etNewPassword.setText("");
+        etConfirmNewPassword.setText("");
     }
 
     private void requestFocus(View view) {

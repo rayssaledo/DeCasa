@@ -153,7 +153,9 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                            professional.getStreet(), professional.getNumber(),
                            professional.getNeighborhood(), professional.getCity(),
                            professional.getState(), professional.getSite(),
-                           professional.getSocialNetwork(), service , handler);//TODO ENVIAR SERVICES CORRETAMENTE
+                           professional.getSocialNetwork(),
+                           String.valueOf(professional.getEvaluationsAverage()),
+                           professional.getServices().toString(), service , handler);
                    list_is_favorite.add(0,1);
                } else if (list_is_favorite.size() != 0 && list_is_favorite.get(0) == 1) {
                    userController.removeFavorite(username, professional.getEmail(),service, handler);
