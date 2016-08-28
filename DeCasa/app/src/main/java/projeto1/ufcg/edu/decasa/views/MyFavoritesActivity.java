@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TabHost;
 
@@ -62,7 +63,6 @@ public class MyFavoritesActivity extends AppCompatActivity {
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
         username = mySharedPreferences.getUserLogged();
 
-//TODO colocar strings do arquivo de string
         TabHost mTabHost = (TabHost) findViewById(R.id.tabHost);
         mTabHost.setup();
 
@@ -86,6 +86,9 @@ public class MyFavoritesActivity extends AppCompatActivity {
         lv_electrician = (ListView) findViewById(R.id.lvf_electrician);
 
         setList();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
     }
 
@@ -111,15 +114,14 @@ public class MyFavoritesActivity extends AppCompatActivity {
         }
     }
     @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }
