@@ -81,8 +81,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         Intent it = getIntent();
         service = (String) it.getSerializableExtra("SERVICE");
 
-
-
         setTitle(service);
 
         professionalController = new ProfessionalController(ProfessionalsActivity.this);
@@ -96,7 +94,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
                     Intent intent = new Intent(ProfessionalsActivity.this,
                             ProfileProfessionalActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
-                    intent.putExtra("SERVICETWO", service);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(ProfessionalsActivity.this,
@@ -139,7 +136,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
             btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Setar para tela de perfil
+                    mDrawerLayout.closeDrawers();
                     setView(ProfessionalsActivity.this, UserProfileActivity.class);
                 }
             });
@@ -149,6 +146,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
             btn_profile_or_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    mDrawerLayout.closeDrawers();
                     setView(ProfessionalsActivity.this, LoginActivity.class);
                 }
             });
@@ -311,19 +309,21 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (position == 0) { // Home
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, MainActivity.class);
                     } else if (position == 1) { // My favorites
-                      mDrawerLayout.closeDrawer(mDrawerPane);
-                     setView(ProfessionalsActivity.this, MyFavoritesActivity.class);
+                        mDrawerLayout.closeDrawers();
+                        setView(ProfessionalsActivity.this, MyFavoritesActivity.class);
                     } else if (position == 2) { // About
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, AboutActivity.class);
                     } else if (position == 3) { // Logout
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         mySharedPreferences.logoutUser();
                         setView(ProfessionalsActivity.this, MainActivity.class);
-                        finish();
+                        if (MainActivity.mMainActivity != null){
+                            MainActivity.mMainActivity.finish();
+                        }
                         finish();
                     }
                 }
@@ -338,10 +338,10 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     if (position == 0) { //Home
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, MainActivity.class);
                     } else if (position == 1) { // About
-                        mDrawerLayout.closeDrawer(mDrawerPane);
+                        mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, AboutActivity.class);
                     }
                 }

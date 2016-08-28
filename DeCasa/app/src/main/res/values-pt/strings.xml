@@ -125,4 +125,5 @@
     <string name="add_favorite">Adicionado aos seus favoritos</string>
     <string name="remove_favorite">Removido dos seus favoritos</string>
     <string name="title_activity_user_profile">Meu perfil</string>
+    <string name="text_my_location">Minha localização</string>
 </resources>

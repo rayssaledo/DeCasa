@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,9 +18,7 @@ import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
-import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
 import projeto1.ufcg.edu.decasa.views.EvaluationProfessionalActivity;
-import projeto1.ufcg.edu.decasa.views.ProfileProfessionalActivity;
 
 public class EvaluationController {
 
@@ -35,8 +34,8 @@ public class EvaluationController {
 
     public void addEvaluation(final String professionalValued, final String usernameValuer,
                               final String evaluationValue, final String comment,
-                              final String date, final String photo, final Class classDest,
-                              final Professional professional) {
+                              final String date, final String photo, final String service,
+                              final Class classDest, final Professional professional) {
 
         EvaluationProfessionalActivity.mLoadingEvaluation.setVisibility(View.VISIBLE);
         String urlAddEvaluation = url + "/add-avaliacao";
@@ -48,6 +47,7 @@ public class EvaluationController {
             json.put("comentario", comment);
             json.put("data", date);
             json.put("fotoUsuario", photo);
+            json.put("service", service);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -103,20 +103,17 @@ public class EvaluationController {
     }
 
     public List<Evaluation> getEvaluationsByProfessional(final String professionalEmail,
+                                                         final String service,
                                                          final Handler handler) {
-
 
         final List<Evaluation> evaluationsList = new ArrayList<Evaluation>();
         String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
-                professionalEmail;
+                professionalEmail + "&service=" + service;
         mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    JSONArray jsonResult = response.getJSONArray("result");
-                    JSONObject jsonObjectEvaluation = jsonResult.getJSONObject(0);
-                    //Recuperando a lista de avaliações
-                    JSONArray jsonArrayEvaluation = jsonObjectEvaluation.getJSONArray("avaliacoes");
+                    JSONArray jsonArrayEvaluation = response.getJSONArray("avaliacoes");
                     for (int i = 0; i < jsonArrayEvaluation.length(); i++) {
                         JSONObject jsonEvaluation = jsonArrayEvaluation.getJSONObject(i);
                         String usernameValuer = jsonEvaluation.getString("emailAvaliador");
@@ -124,10 +121,12 @@ public class EvaluationController {
                         String comment = jsonEvaluation.getString("comentario");
                         String date = jsonEvaluation.getString("data");
                         String photo = jsonEvaluation.getString("fotoUsuario");
+                        String service = jsonEvaluation.getString("service");
                         try{
                             float evaluationValueFloat = Float.valueOf(evaluationValue);
                             Evaluation evaluation = new Evaluation(professionalEmail,
-                                    usernameValuer, evaluationValueFloat, comment, date, photo);
+                                    usernameValuer, evaluationValueFloat, comment, date, photo,
+                                    service);
                             evaluationsList.add(evaluation);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -136,28 +135,12 @@ public class EvaluationController {
                     Message message = new Message();
                     message.what = 101;
                     handler.sendMessage(message);
-                    if (AssessmentsActivity.mLoadingAssessments != null) {
-                        AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
-                    }
                 } else {
-                    new AlertDialog.Builder(mActivity)
-                            .setTitle("Erro")
-                            .setMessage("") //TODO internacionalizar com mensagem certa
-                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    if (AssessmentsActivity.mLoadingAssessments != null) {
-                                        AssessmentsActivity.mLoadingAssessments.
-                                                setVisibility(View.GONE);
-                                    }
-                                }
-                            })
-                            .create()
-                            .show();
+
                 }
-                if (AssessmentsActivity.mLoadingAssessments != null) {
-                    AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
-                }
+                Message message = new Message();
+                message.what = 101;
+                handler.sendMessage(message);
             }
 
             @Override
@@ -168,10 +151,6 @@ public class EvaluationController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (AssessmentsActivity.mLoadingAssessments != null) {
-                                    AssessmentsActivity.mLoadingAssessments.
-                                            setVisibility(View.GONE);
-                                }
                                 mActivity.finish();
                             }
                         })
@@ -184,19 +163,18 @@ public class EvaluationController {
     }
 
     public List<Float> getAssessmentsAverageByProfessional(final String professionalEmail,
-                                                    final Handler handler) {
+                                                           final String service,
+                                                           final Handler handler) {
         final List<Float> assessmentsAverageList = new ArrayList<Float>();
 
         String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
-                professionalEmail;
+                professionalEmail + "&service=" + service;
         mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    JSONArray jsonResult = response.getJSONArray("result");
-                    JSONObject jsonObjectEvaluation = jsonResult.getJSONObject(0);
                     try{
-                        float assessmentsAverageFloat = Float.valueOf(jsonObjectEvaluation.
+                        float assessmentsAverageFloat = Float.valueOf(response.
                                 getString("avg"));
                         assessmentsAverageList.add(assessmentsAverageFloat);
                     } catch (Exception e) {
@@ -206,20 +184,7 @@ public class EvaluationController {
                     message.what = 104;
                     handler.sendMessage(message);
                 } else {
-                    new AlertDialog.Builder(mActivity)
-                            .setTitle("Erro")
-                            .setMessage("") //TODO internacionalizar com mensagem certa
-                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    if (AssessmentsActivity.mLoadingAssessments != null) {
-                                        AssessmentsActivity.mLoadingAssessments.
-                                                setVisibility(View.GONE);
-                                    }
-                                }
-                            })
-                            .create()
-                            .show();
+
                 }
             }
 

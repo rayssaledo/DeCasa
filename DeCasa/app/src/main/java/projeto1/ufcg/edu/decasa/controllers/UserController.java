@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
@@ -23,6 +24,7 @@ import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 import projeto1.ufcg.edu.decasa.views.EditUserProfileActivity;
 import projeto1.ufcg.edu.decasa.views.LoginActivity;
+import projeto1.ufcg.edu.decasa.views.MainActivity;
 import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
 
 public class UserController {
@@ -219,7 +221,7 @@ public class UserController {
                         intent.putExtra("PROFESSIONAL", professional);
                         mActivity.startActivity(intent);
                         mActivity.finish();
-                        mActivity.finish();
+                        MainActivity.mMainActivity.finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -230,7 +232,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -305,7 +307,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -362,7 +364,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -397,7 +399,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -466,7 +468,7 @@ public class UserController {
                 } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage("msg") //TODO internacionalizar
+                            .setMessage(response.getString("msg")) //TODO internacionalizar
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -483,7 +485,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -553,7 +555,7 @@ public class UserController {
                 } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage("msg") //TODO internacionalizar
+                            .setMessage(response.getString("msg")) //TODO internacionalizar
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -570,7 +572,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -641,7 +643,7 @@ public class UserController {
                 } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage("msg") //TODO internacionalizar
+                            .setMessage(response.getString("msg")) //TODO internacionalizar
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -658,7 +660,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -707,7 +709,7 @@ public class UserController {
                 } else {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage("") //TODO internacionalizar com mensagem certa
+                            .setMessage(result.getString("msg")) //TODO internacionalizar com mensagem certa
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -723,7 +725,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível.") //TODO internacionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

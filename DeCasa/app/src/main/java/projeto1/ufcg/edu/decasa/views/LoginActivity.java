@@ -116,6 +116,4 @@ public class LoginActivity extends AppCompatActivity {
                     SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
-
-
 }
