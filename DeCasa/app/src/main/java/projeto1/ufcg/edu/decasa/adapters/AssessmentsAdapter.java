@@ -1,6 +1,7 @@
 package projeto1.ufcg.edu.decasa.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.PopupMenu;
@@ -20,12 +21,15 @@ import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
+import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
+import projeto1.ufcg.edu.decasa.views.EvaluationProfessionalActivity;
 
 public class AssessmentsAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<Evaluation> items;
     private ImageView option;
+    private Evaluation item;
     Context context;
 
     public AssessmentsAdapter(Context context, List<Evaluation> items) {
@@ -51,7 +55,7 @@ public class AssessmentsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Evaluation item = items.get(position);
+        item = items.get(position);
         convertView = mInflater.inflate(R.layout.my_item_evaluation, null);
 
         String stringPhoto = item.getPhoto();
@@ -100,10 +104,10 @@ public class AssessmentsAdapter extends BaseAdapter {
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_edit_evaluation:
-                    Toast.makeText(context, "Edit evaluation", Toast.LENGTH_SHORT).show();
-                    return true;
-                case R.id.action_play_next:
-                    Toast.makeText(context, "Delete evaluation", Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(AssessmentsActivity.mAssessmentsActivity,
+                            EvaluationProfessionalActivity.class);
+                    it.putExtra("EVALUATION", item);
+                    AssessmentsActivity.mAssessmentsActivity.startActivity(it);
                     return true;
                 default:
             }

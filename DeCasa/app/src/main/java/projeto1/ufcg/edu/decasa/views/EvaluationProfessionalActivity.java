@@ -21,6 +21,7 @@ import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
+import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
@@ -32,6 +33,7 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
     private MySharedPreferences mySharedPreferences;
 
     private Professional professional;
+    private String professionalEmail;
 
     private RatingBar rbEvaluation;
     private EditText edComment;
@@ -69,6 +71,10 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
+        if (professional != null) {
+            professionalEmail = professional.getEmail();
+        }
+
         rbEvaluation = (RatingBar) findViewById(R.id.rb_evaluation);
         edComment = (EditText) findViewById(R.id.ed_comment);
 
@@ -83,6 +89,17 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        setFields();
+    }
+
+    private void setFields() {
+        Intent it = getIntent();
+        Evaluation evaluation = it.getParcelableExtra("EVALUATION");
+        if (evaluation != null) {
+            professionalEmail = evaluation.getProfessionalValued();
+            rbEvaluation.setRating(evaluation.getEvaluationValue());
+            edComment.setText(evaluation.getComment());
+        }
 
     }
 
@@ -109,7 +126,7 @@ public class EvaluationProfessionalActivity extends AppCompatActivity {
         } else {
             service = "Montador";
         }
-        evaluationController.addEvaluation(professional.getEmail(), username, stringEvaluationValue,
+        evaluationController.addEvaluation(professionalEmail, username, stringEvaluationValue,
                 comment, stringEvaluationDate, photoUser, service,
                 AssessmentsActivity.class, professional);
     }

@@ -1,8 +1,9 @@
 package projeto1.ufcg.edu.decasa.models;
 
-import java.util.Date;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Evaluation {
+public class Evaluation implements Parcelable{
 
     private String professionalValued;
     private String usernameValuer;
@@ -42,6 +43,28 @@ public class Evaluation {
         this.photo = photo;
         this.service = service;
     }
+
+    protected Evaluation(Parcel in) {
+        professionalValued = in.readString();
+        usernameValuer = in.readString();
+        evaluationValue = in.readFloat();
+        comment = in.readString();
+        date = in.readString();
+        photo = in.readString();
+        service = in.readString();
+    }
+
+    public static final Creator<Evaluation> CREATOR = new Creator<Evaluation>() {
+        @Override
+        public Evaluation createFromParcel(Parcel in) {
+            return new Evaluation(in);
+        }
+
+        @Override
+        public Evaluation[] newArray(int size) {
+            return new Evaluation[size];
+        }
+    };
 
     public String getUsernameValuer() {
         return usernameValuer;
@@ -115,5 +138,21 @@ public class Evaluation {
             throw new Exception("Service is invalid.");
         }
         this.service = service;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(professionalValued);
+        parcel.writeString(usernameValuer);
+        parcel.writeFloat(evaluationValue);
+        parcel.writeString(comment);
+        parcel.writeString(date);
+        parcel.writeString(photo);
+        parcel.writeString(service);
     }
 }

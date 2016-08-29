@@ -127,5 +127,4 @@
     <string name="title_activity_user_profile">Meu perfil</string>
     <string name="text_my_location">Minha localização</string>
     <string name="edit_evaluation">Editar avaliação</string>
-    <string name="delete_evaluation">Excluir avaliação</string>
 </resources>

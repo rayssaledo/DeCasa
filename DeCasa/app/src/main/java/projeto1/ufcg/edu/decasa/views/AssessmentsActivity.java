@@ -1,5 +1,6 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,8 @@ import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class AssessmentsActivity extends AppCompatActivity {
+
+    public static Activity mAssessmentsActivity;
 
     private EvaluationController evaluationController;
     private Professional professional;
@@ -64,6 +67,8 @@ public class AssessmentsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessments);
+
+        mAssessmentsActivity = this;
 
         mLoadingAssessments =  findViewById(R.id.loadingAssessments);
 
