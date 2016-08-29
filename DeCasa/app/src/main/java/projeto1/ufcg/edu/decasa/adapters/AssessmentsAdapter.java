@@ -21,6 +21,7 @@ import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
+import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
 import projeto1.ufcg.edu.decasa.views.EvaluationProfessionalActivity;
 
@@ -30,6 +31,7 @@ public class AssessmentsAdapter extends BaseAdapter {
     private List<Evaluation> items;
     private ImageView option;
     private Evaluation item;
+    private String usernameValuer;
     Context context;
 
     public AssessmentsAdapter(Context context, List<Evaluation> items) {
@@ -58,18 +60,24 @@ public class AssessmentsAdapter extends BaseAdapter {
         item = items.get(position);
         convertView = mInflater.inflate(R.layout.my_item_evaluation, null);
 
+        usernameValuer = item.getUsernameValuer();
+
         String stringPhoto = item.getPhoto();
         byte[] photoByte = Base64.decode(stringPhoto, Base64.DEFAULT);
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photoByte, 0, photoByte.length);
 
         ((ImageView) convertView.findViewById(R.id.iv_user)).setImageBitmap(photoBitmap);
-        ((TextView) convertView.findViewById(R.id.tv_user_name)).setText(item.getUsernameValuer());
+        ((TextView) convertView.findViewById(R.id.tv_user_name)).setText(usernameValuer);
         ((TextView) convertView.findViewById(R.id.tv_date_evaluation)).setText(item.getDate());
         ((RatingBar) convertView.findViewById(R.id.rb_evaluation_user)).setRating(item.
                 getEvaluationValue());
         ((TextView) convertView.findViewById(R.id.tv_comment)).setText(item.getComment());
 
         option = (ImageView) convertView.findViewById(R.id.option);
+        MySharedPreferences mySharedPreferences = new MySharedPreferences(context);
+        if (usernameValuer.equals(mySharedPreferences.getUserLogged())) {
+            option.setVisibility(View.VISIBLE);
+        }
         option.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
