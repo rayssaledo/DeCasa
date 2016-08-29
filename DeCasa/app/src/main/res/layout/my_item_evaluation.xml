@@ -58,6 +58,16 @@
         android:layout_below="@+id/iv_user"
         android:layout_toEndOf="@+id/iv_user" />
 
+    <ImageView
+        android:id="@+id/option"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/rb_evaluation_user"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_dots" />
+
 </RelativeLayout>
 
 

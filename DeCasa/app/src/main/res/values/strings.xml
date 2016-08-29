@@ -137,4 +137,6 @@
     <string name="remove_favorite">Removed from Favorites</string>
     <string name="title_activity_user_profile">My profile</string>
     <string name="text_my_location">My location</string>
+    <string name="edit_evaluation">Edit evaluation</string>
+    <string name="delete_evaluation">Delete evaluation</string>
 </resources>
