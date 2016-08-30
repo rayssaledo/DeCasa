@@ -31,6 +31,7 @@ public class AssessmentsActivity extends AppCompatActivity {
     private TextView tv_label_assessments;
     private List<Evaluation> assessments;
     private Button btn_first_evaluate;
+    public static Button btn_to_evaluate;
 
     private MySharedPreferences mySharedPreferences;
 
@@ -83,7 +84,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
-        Button btn_to_evaluate = (Button) findViewById(R.id.btn_to_evaluate);
+        btn_to_evaluate = (Button) findViewById(R.id.btn_to_evaluate);
         btn_to_evaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -77,6 +77,7 @@ public class AssessmentsAdapter extends BaseAdapter {
         MySharedPreferences mySharedPreferences = new MySharedPreferences(context);
         if (usernameValuer.equals(mySharedPreferences.getUserLogged())) {
             option.setVisibility(View.VISIBLE);
+            AssessmentsActivity.btn_to_evaluate.setVisibility(View.GONE);
         }
         option.setOnClickListener(new View.OnClickListener() {
             @Override
