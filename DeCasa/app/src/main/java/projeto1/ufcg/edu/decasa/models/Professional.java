@@ -16,7 +16,7 @@ public class Professional implements Parcelable {
     private String state;
     private String site;
     private String socialNetwork;
-    //private String pictury;
+    private String pathPicture;
     private String email;
     private String password;
     private String[] services;
@@ -27,7 +27,7 @@ public class Professional implements Parcelable {
     public Professional(String name, String cpf, String phone, String street, String number,
                         String neighborhood, String city, String state, String site,
                         String socialNetwork, String email, String password,
-                        String[] services) throws Exception {
+                        String[] services, String pathPicture) throws Exception {
         if(name == null || name.equals("")){
             throw new Exception("Professional name is invalid.");
         }
@@ -71,7 +71,7 @@ public class Professional implements Parcelable {
         this.state = state;
         this.site = site;
         this.socialNetwork = socialNetwork;
-        //this.pictury = pictury;
+        this.pathPicture = pathPicture;
         this.email = email;
         this.password = password;
         this.services = services;
@@ -329,6 +329,10 @@ public class Professional implements Parcelable {
         this.numberAssessments = numberAssessments;
     }
 
+    public String getPathPicture() {
+        return this.pathPicture;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -348,6 +352,7 @@ public class Professional implements Parcelable {
         parcel.writeString(socialNetwork);
         parcel.writeString(email);
         parcel.writeString(password);
+        parcel.writeString(pathPicture);
         parcel.writeStringArray(services);
         parcel.writeParcelable(location, i);
         parcel.writeFloat(evaluationsAverage);

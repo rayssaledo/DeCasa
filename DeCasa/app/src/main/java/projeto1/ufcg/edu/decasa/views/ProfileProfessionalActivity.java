@@ -1,7 +1,9 @@
 package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.BoolRes;
@@ -16,6 +18,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pkmmte.view.CircularImageView;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
@@ -24,6 +29,7 @@ import projeto1.ufcg.edu.decasa.controllers.UserController;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.utils.Utils;
 
 public class ProfileProfessionalActivity extends AppCompatActivity {
 
@@ -48,6 +54,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private String service;
     private String myService;
     private Button btn_evaluations;
+    private CircularImageView iv_professional;
 
     public static View mLoadingProfileProfessional;
 
@@ -143,6 +150,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
             }
         });
 
+        iv_professional = (CircularImageView) findViewById(R.id.iv_professional);
+
         ib_favorite = (ImageButton) findViewById(R.id.ib_favorite);
         ib_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +187,10 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        if (professional.getPathPicture() != null) {
+            new DownloadFile().execute("http://decasa-decasa.rhcloud.com/uploads/" + professional.getPathPicture());
+        }
     }
 
     @Override
@@ -197,6 +210,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 getEmail(), service, handler);
 
     }
+
+
 
     private void setProfile() {
         String address = professional.getStreet() + ", " + professional.getNumber() + ", " +
@@ -226,6 +241,39 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         }
         tv_services.setText(services);
         rb_evaluation.setRating(assessmentsAverageValue);
+    }
+
+    class DownloadFile extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected void onPreExecute(){
+            Log.i("AsyncTask", "Exibindo ProgressDialog na tela Thread: " + Thread.currentThread().getName());
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap imagemBitmap = null;
+            try{
+                Log.i("AsyncTask", "Baixando a imagem Thread: " + Thread.currentThread().getName());
+
+                imagemBitmap = Utils.downloadImage(params[0]);
+            }catch (IOException e){
+                Log.i("AsyncTask", e.getMessage());
+            }
+
+            return imagemBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap){
+            if(bitmap!=null) {
+                iv_professional.setImageBitmap(bitmap);
+                Log.i("AsyncTask", "Exibindo Bitmap Thread: " + Thread.currentThread().getName());
+            }else{
+                Log.i("AsyncTask", "Erro ao baixar a imagem " + Thread.currentThread().getName());
+            }
+            Log.i("AsyncTask", "Tirando ProgressDialog da tela Thread: " + Thread.currentThread().getName());
+        }
     }
 
     @Override
