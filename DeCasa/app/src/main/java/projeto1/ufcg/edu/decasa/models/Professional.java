@@ -4,6 +4,8 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Arrays;
+
 public class Professional implements Parcelable {
 
     private String name;
@@ -16,7 +18,7 @@ public class Professional implements Parcelable {
     private String state;
     private String site;
     private String socialNetwork;
-    private String pathPicture;
+    private String namePicture;
     private String email;
     private String password;
     private String[] services;
@@ -27,7 +29,7 @@ public class Professional implements Parcelable {
     public Professional(String name, String cpf, String phone, String street, String number,
                         String neighborhood, String city, String state, String site,
                         String socialNetwork, String email, String password,
-                        String[] services, String pathPicture) throws Exception {
+                        String[] services, String NamePicture) throws Exception {
         if(name == null || name.equals("")){
             throw new Exception("Professional name is invalid.");
         }
@@ -71,7 +73,7 @@ public class Professional implements Parcelable {
         this.state = state;
         this.site = site;
         this.socialNetwork = socialNetwork;
-        this.pathPicture = pathPicture;
+        this.namePicture = NamePicture;
         this.email = email;
         this.password = password;
         this.services = services;
@@ -142,6 +144,7 @@ public class Professional implements Parcelable {
         socialNetwork = in.readString();
         email = in.readString();
         password = in.readString();
+        namePicture = in.readString();
         services = in.createStringArray();
         location = in.readParcelable(Location.class.getClassLoader());
         evaluationsAverage = in.readFloat();
@@ -329,8 +332,12 @@ public class Professional implements Parcelable {
         this.numberAssessments = numberAssessments;
     }
 
-    public String getPathPicture() {
-        return this.pathPicture;
+    public String getNamePicture() {
+        return this.namePicture;
+    }
+
+    public void setNamePicture(String namePicture) {
+        this.namePicture = namePicture;
     }
 
     @Override
@@ -352,10 +359,33 @@ public class Professional implements Parcelable {
         parcel.writeString(socialNetwork);
         parcel.writeString(email);
         parcel.writeString(password);
-        parcel.writeString(pathPicture);
+        parcel.writeString(namePicture);
         parcel.writeStringArray(services);
         parcel.writeParcelable(location, i);
         parcel.writeFloat(evaluationsAverage);
         parcel.writeInt(numberAssessments);
+    }
+
+    @Override
+    public String toString() {
+        return "Professional{" +
+                "name='" + name + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", phone='" + phone + '\'' +
+                ", neighborhood='" + neighborhood + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", site='" + site + '\'' +
+                ", socialNetwork='" + socialNetwork + '\'' +
+                ", namePicture='" + namePicture + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", services=" + Arrays.toString(services) +
+                ", location=" + location +
+                ", evaluationsAverage=" + evaluationsAverage +
+                ", numberAssessments=" + numberAssessments +
+                '}';
     }
 }

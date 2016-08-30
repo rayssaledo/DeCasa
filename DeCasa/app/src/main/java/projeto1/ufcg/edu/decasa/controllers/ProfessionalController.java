@@ -21,6 +21,7 @@ import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 
 public class ProfessionalController {
@@ -67,12 +68,12 @@ public class ProfessionalController {
                         services = services.replace("]", "");
                         services = services.replaceAll("\"", "");
                         String[] listServices = services.split(",");
-                        String pathPicture = jsonProfessional.getString("picture");
+                        String namePicture = jsonProfessional.getString("picture");
                         float evaluationAverage = Float.valueOf(jsonProfessional.getString("avg"));
                         try {
                             Professional professional = new Professional(name, cpf, phone,
                                     street, number, neighborhood, city, state, site, socialNetwork,
-                                    email, password, listServices, pathPicture);
+                                    email, password, listServices, namePicture);
                             professional.setEvaluationsAverage(evaluationAverage);
                             professional.setLocation(new Location(street + ", " + number + " " +
                                     city + " " + state));

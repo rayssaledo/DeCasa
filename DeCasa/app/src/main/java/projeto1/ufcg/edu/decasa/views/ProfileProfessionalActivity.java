@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +27,7 @@ import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.DownloadFile;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 import projeto1.ufcg.edu.decasa.utils.Utils;
 
@@ -188,8 +188,11 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        if (professional.getPathPicture() != null) {
-            new DownloadFile().execute("http://decasa-decasa.rhcloud.com/uploads/" + professional.getPathPicture());
+        Log.d("professional", professional.toString()+"");
+
+        if (professional.getNamePicture() != null) {
+            Log.d("NULL", "FALSE");
+            new DownloadFile(iv_professional).execute("http://decasa-decasa.rhcloud.com/uploads/" + professional.getNamePicture());
         }
     }
 
@@ -241,39 +244,6 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         }
         tv_services.setText(services);
         rb_evaluation.setRating(assessmentsAverageValue);
-    }
-
-    class DownloadFile extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected void onPreExecute(){
-            Log.i("AsyncTask", "Exibindo ProgressDialog na tela Thread: " + Thread.currentThread().getName());
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            Bitmap imagemBitmap = null;
-            try{
-                Log.i("AsyncTask", "Baixando a imagem Thread: " + Thread.currentThread().getName());
-
-                imagemBitmap = Utils.downloadImage(params[0]);
-            }catch (IOException e){
-                Log.i("AsyncTask", e.getMessage());
-            }
-
-            return imagemBitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap){
-            if(bitmap!=null) {
-                iv_professional.setImageBitmap(bitmap);
-                Log.i("AsyncTask", "Exibindo Bitmap Thread: " + Thread.currentThread().getName());
-            }else{
-                Log.i("AsyncTask", "Erro ao baixar a imagem " + Thread.currentThread().getName());
-            }
-            Log.i("AsyncTask", "Tirando ProgressDialog da tela Thread: " + Thread.currentThread().getName());
-        }
     }
 
     @Override
