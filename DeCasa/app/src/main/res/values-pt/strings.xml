@@ -2,7 +2,7 @@
 <resources>
     <string name="btn_register">Cadastre-se</string>
     <string name="btn_login">Login</string>
-    <string name="text_welcome">Seja bem-vindo.\nEscolha aqui o serviço que deseja.</string>
+    <string name="text_welcome">Seja bem-vindo(a).\nEscolha aqui o serviço que deseja.</string>
     <string name="text_electrician">Eletricista</string>
     <string name="text_plumber">Encanador</string>
     <string name="text_fitter">Montador</string>
@@ -93,7 +93,7 @@
     <string name="title_dialog_address_form">Digite o endereço:</string>
     <string name="drawer_open">Abre drawer</string>
     <string name="drawer_close">Fecha drawer</string>
-    <string name="welcome">Bem-vindo</string>
+    <string name="welcome">Bem-vindo(a)</string>
     <string name="btn_to_evaluate">Avaliar</string>
     <string name="btn_view_profile">Ver perfil</string>
     <string name="btn_enter">Entrar</string>
@@ -116,7 +116,8 @@
     <string name="text_about">Sobre</string>
     <string name="text_logout">Sair</string>
     <string name="title_activity_about">Sobre</string>
-    <string name="begin_welcome">Seja bem-vindo</string>
+    <string name="begin_welcome_male">Seja bem-vindo</string>
+    <string name="begin_welcome_female">Seja bem-vinda</string>
     <string name="end_welcome">\nEscolha aqui o serviço que deseja.</string>
     <string name="title_activity_edit_user_profile">Editando perfil</string>
     <string name="title_activity_favorite">Meus favoritos</string>

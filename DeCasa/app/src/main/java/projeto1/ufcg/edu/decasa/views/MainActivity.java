@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,8 +48,14 @@ public class MainActivity extends AppCompatActivity {
                     String fullName = listUser.get(0).getName();
                     String[] name = fullName.split(" ");
                     String firstName = name[0];
-                    tv_welcome.setText(getApplication().getString(R.string.begin_welcome) + " " +
-                            firstName +", " + getApplication().getString(R.string.end_welcome));
+                    String gender = listUser.get(0).getGender();
+                    if (gender.equals("F")) {
+                        tv_welcome.setText(getApplication().getString(R.string.begin_welcome_female) + " " +
+                                firstName +", " + getApplication().getString(R.string.end_welcome));
+                    } else {
+                        tv_welcome.setText(getApplication().getString(R.string.begin_welcome_male) + " " +
+                                firstName +", " + getApplication().getString(R.string.end_welcome));
+                    }
                 } else {
                     tv_welcome.setText(getApplication().getString(R.string.text_welcome));
                 }
