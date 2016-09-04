@@ -14,6 +14,8 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -26,9 +28,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -237,8 +241,10 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
                     iv_professional = (CircularImageView) infoWindow.findViewById(R.id.iv_professional);
                     Log.d("IMAGEVIEW", professionalInfo.getNamePicture()+"");
-                    if (professionalInfo.getNamePicture() !== null && !professionalInfo.getNamePicture().equals("null")) {
-                        new DownloadFile(iv_professional).execute("http://decasa-decasa.rhcloud.com/uploads/" + professionalInfo.getNamePicture());
+                    if (professionalInfo.getNamePicture() != null && !professionalInfo.getNamePicture().equals("null")) {
+                        File f = new File(DownloadFile.getPathDownload() + File.separator + professionalInfo.getNamePicture());
+                        Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+                        iv_professional.setImageBitmap(bmp);
                     }
 
                     tv_profession = (TextView) infoWindow.findViewById(R.id.tv_profession);

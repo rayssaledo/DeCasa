@@ -15,6 +15,7 @@ import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.DownloadFile;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
@@ -35,6 +36,7 @@ public class ProfessionalController {
         mActivity = activity;
         mHttp = new HttpUtils(mActivity);
         url = "http://decasa-decasa.rhcloud.com/";
+        DownloadFile.verifyStoragePermissions(mActivity);
     }
 
     public List<Professional> getProfessionalsByService(final String service,
@@ -77,6 +79,9 @@ public class ProfessionalController {
                             professional.setEvaluationsAverage(evaluationAverage);
                             professional.setLocation(new Location(street + ", " + number + " " +
                                     city + " " + state));
+                            if (namePicture != null && !namePicture.equals("null")) {
+                                new DownloadFile(namePicture).execute("http://decasa-decasa.rhcloud.com/uploads/" + namePicture);
+                            }
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();

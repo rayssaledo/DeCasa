@@ -2,6 +2,7 @@ package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -13,12 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pkmmte.view.CircularImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,8 +194,9 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         Log.d("professional", professional.toString()+"");
 
         if (professional.getNamePicture() != null) {
-            Log.d("NULL", "FALSE");
-            new DownloadFile(iv_professional).execute("http://decasa-decasa.rhcloud.com/uploads/" + professional.getNamePicture());
+            File f = new File(DownloadFile.getPathDownload() + File.separator + professional.getNamePicture());
+            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+            iv_professional.setImageBitmap(bmp);
         }
     }
 

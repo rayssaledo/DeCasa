@@ -55,6 +55,7 @@ import projeto1.ufcg.edu.decasa.utils.Utils;
 
 public class ProfessionalsActivity extends AppCompatActivity {
 
+
     private ListView listViewProfessionals;
     private ProfessionalsAdapter professionalsAdapter;
     private ProfessionalController professionalController;
