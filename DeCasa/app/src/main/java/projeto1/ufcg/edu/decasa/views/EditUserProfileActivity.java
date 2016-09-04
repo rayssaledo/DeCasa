@@ -477,8 +477,7 @@ public class EditUserProfileActivity extends AppCompatActivity implements
 
     private  boolean validatePasswords(){
         if (passwordCurrent == null || passwordCurrent.trim().isEmpty()) {
-            if (passwordUserNew != null || !passwordUserNew.trim().isEmpty() ||
-                    passwordConfirmUser != null || !passwordConfirmUser.trim().isEmpty()){
+            if (!passwordUserNew.trim().isEmpty() || !passwordConfirmUser.trim().isEmpty()){
                 setTextEmpty();
                 layout_current_password.setError(getString(R.string.err_current_password_is_not_entered));
                 requestFocus(etCurrentPassword);
