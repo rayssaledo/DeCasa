@@ -7,12 +7,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.pkmmte.view.CircularImageView;
 
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,9 +28,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +40,7 @@ import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.ProfessionalController;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.DownloadFile;
 import projeto1.ufcg.edu.decasa.utils.MainMapFragment;
 import projeto1.ufcg.edu.decasa.utils.MapWrapperLayout;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
@@ -50,6 +56,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
     public static final String TAG = MainActivity.class.getSimpleName();
     private List<Professional> professionals;
     private TextView tv_profession;
+    private CircularImageView iv_professional;
     private TextView tv_name_professional;
     private RatingBar rb_evaluation;
     private Button btn_more_information;
@@ -231,6 +238,14 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                         getString(R.string.text_my_location))) {
                     infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.
                             infowindow_professional, null);
+
+                    iv_professional = (CircularImageView) infoWindow.findViewById(R.id.iv_professional);
+                    Log.d("IMAGEVIEW", professionalInfo.getNamePicture()+"");
+                    if (professionalInfo.getNamePicture() != null && !professionalInfo.getNamePicture().equals("null")) {
+                        File f = new File(DownloadFile.getPathDownload() + File.separator + professionalInfo.getNamePicture());
+                        Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+                        iv_professional.setImageBitmap(bmp);
+                    }
 
                     tv_profession = (TextView) infoWindow.findViewById(R.id.tv_profession);
                     service = mySharedPreferences.getService();

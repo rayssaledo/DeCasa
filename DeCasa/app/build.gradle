@@ -28,6 +28,7 @@ dependencies {
     compile 'com.pkmmte.view:circularimageview:1.1'
     compile 'br.com.jansenfelipe:androidmask:1.0.1'
     compile 'com.albinmathew:photo-crop-library:1.0.3'
+    testCompile 'junit:junit:4.12'
 }
 
 

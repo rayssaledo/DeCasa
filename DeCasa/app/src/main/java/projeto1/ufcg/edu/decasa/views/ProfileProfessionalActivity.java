@@ -1,10 +1,12 @@
 package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pkmmte.view.CircularImageView;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
@@ -23,7 +30,9 @@ import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.DownloadFile;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.utils.Utils;
 
 public class ProfileProfessionalActivity extends AppCompatActivity {
 
@@ -48,6 +57,7 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
     private String service;
     private String myService;
     private Button btn_evaluations;
+    private CircularImageView iv_professional;
 
     public static View mLoadingProfileProfessional;
 
@@ -143,6 +153,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
             }
         });
 
+        iv_professional = (CircularImageView) findViewById(R.id.iv_professional);
+
         ib_favorite = (ImageButton) findViewById(R.id.ib_favorite);
         ib_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +190,14 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        Log.d("professional", professional.toString()+"");
+
+        if (professional.getNamePicture() != null) {
+            File f = new File(DownloadFile.getPathDownload() + File.separator + professional.getNamePicture());
+            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+            iv_professional.setImageBitmap(bmp);
+        }
     }
 
     @Override
@@ -197,6 +217,8 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
                 getEmail(), service, handler);
 
     }
+
+
 
     private void setProfile() {
         String address = professional.getStreet() + ", " + professional.getNumber() + ", " +

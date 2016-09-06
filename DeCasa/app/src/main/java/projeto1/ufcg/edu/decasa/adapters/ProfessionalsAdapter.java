@@ -1,17 +1,26 @@
 package projeto1.ufcg.edu.decasa.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.pkmmte.view.CircularImageView;
+
+import java.io.File;
 import java.util.List;
 
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.DownloadFile;
+import projeto1.ufcg.edu.decasa.utils.Utils;
 
 public class ProfessionalsAdapter extends BaseAdapter {
 
@@ -52,6 +61,13 @@ public class ProfessionalsAdapter extends BaseAdapter {
         ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
        ((RatingBar) convertView.findViewById(R.id.rb_evaluation_professionals)).
                 setRating(item.getEvaluationsAverage());
+        CircularImageView iv_professional = ((CircularImageView) convertView.findViewById(R.id.iv_professional));
+
+        if (item.getNamePicture() != null && !item.getNamePicture().equals("null")) {
+            File f = new File(DownloadFile.getPathDownload() + item.getNamePicture());
+            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+            iv_professional.setImageBitmap(bmp);
+        }
 
         return convertView;
     }
