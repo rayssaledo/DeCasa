@@ -85,19 +85,20 @@
         <activity
             android:name=".views.AboutActivity"
             android:label="@string/title_activity_about"
-            android:theme="@style/AppThemeCustom"/>
+            android:theme="@style/AppThemeCustom" />
         <activity
             android:name=".views.EditUserProfileActivity"
             android:label="@string/title_activity_edit_user_profile"
-            android:theme="@style/AppThemeCustom"/>
+            android:theme="@style/AppThemeCustom" />
         <activity
             android:name=".views.MyFavoritesActivity"
             android:label="@string/title_activity_favorite"
-            android:theme="@style/AppThemeCustom"/>
+            android:theme="@style/AppThemeCustom" />
         <activity
             android:name=".views.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
-            android:theme="@style/AppThemeCustom"/>
-
+            android:theme="@style/AppThemeCustom" />
+        <activity android:name=".views.ProfessionalProfileFreePlanActivity"></activity>
     </application>
+
 </manifest>
