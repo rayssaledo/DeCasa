@@ -67,13 +67,13 @@ public class ProfileProfessionalActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             int numAssessmentsProfessional = assessments.size();
             if (msg.what == 101) {
-                if (numAssessmentsProfessional == 1) {
-                    btn_evaluations.setText(numAssessmentsProfessional + " " +
-                            getApplication().getString(R.string.text_number_evaluation));
-                } else  {
-                    btn_evaluations.setText(numAssessmentsProfessional + " " +
-                            getApplication().getString(R.string.text_number_assessments));
-                }
+//                if (numAssessmentsProfessional == 1) {
+//                    btn_evaluations.setText(numAssessmentsProfessional + " " +
+//                            getApplication().getString(R.string.text_number_evaluation));
+//                } else  {
+//                    btn_evaluations.setText(numAssessmentsProfessional + " " +
+//                            getApplication().getString(R.string.text_number_assessments));
+//                }
             }
             if (msg.what == 104) {
                 if (assessmentsAverage != null) {

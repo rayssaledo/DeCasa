@@ -126,9 +126,8 @@
                             android:id="@+id/btn_evaluations"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/text_number_assessments"
+                            android:text="@string/btn_to_evaluate"
                             android:textAllCaps="false"
-                            android:layout_marginTop="10dp"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"
@@ -180,13 +179,31 @@
                         android:textStyle="bold"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/tv_address_professional"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/hint_address_professional"
-                        android:layout_marginTop="10dp"
-                        android:textSize="16sp" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_address_professional"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/hint_address_professional"
+                            android:layout_marginTop="10dp"
+                            android:textSize="16sp"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@+id/ib_map_professional"/>
+
+                        <ImageButton
+                            android:id="@+id/ib_map_professional"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:src="@mipmap/user_location_icon"
+                            android:background="@color/white"
+                            android:contentDescription="@string/desc_phone_professional"
+                            android:layout_alignParentEnd="true"/>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
