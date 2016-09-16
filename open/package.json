@@ -1,0 +1,44 @@
+{
+  "name": "OpenShift-Sample-App",
+  "version": "1.0.0",
+  "description": "OpenShift Sample Application",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "OpenShift",
+    "email": "ramr@example.org",
+    "url": "http://www.openshift.com/"
+  },
+  "homepage": "http://www.openshift.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openshift/origin-server"
+  },
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect-busboy": "0.0.2",
+    "connect-mongo": "0.8.2",
+    "consolidate": "^0.14.1",
+    "cookie-parser": "1.4.0",
+    "express": "^3.4.8",
+    "express-session": "1.11.3",
+    "fs-extra": "^0.30.0",
+    "moment": "^2.14.1",
+    "mongodb": "^2.2.2",
+    "multer": "^1.2.0",
+    "swig": "^1.4.2",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "private": true,
+  "main": "server.js"
+}

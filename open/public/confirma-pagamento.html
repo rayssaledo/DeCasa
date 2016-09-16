@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>DeCasa</title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+		<!-- Bootstrap Core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom Fonts -->
+		<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+		<!-- Theme CSS -->
+		<link href="css/agency.min.css" rel="stylesheet">
+		<link href="css/login.css" rel="stylesheet">
+
+		<script>
+		var app = angular.module('DeCasa', []);
+		app.controller('ConfirmController', function($scope, $location, $http) {
+			var transactionId = $location.search().transaction_id;
+			$http({
+				method: 'POST',
+				url: '/confirm-payment',
+				data: {
+					id: transactionId
+				}
+			}).then(function(data) {
+				if (data.ok) {
+					$scope.success = true;
+				} else {
+					$scope.error = true;
+				}
+			}, function(data) {
+				$scope.error = true;
+			});
+		});
+		</script>
+	</head>
+	<body ng-app="DeCasa" ng-controller="ConfirmController">
+		<div>
+			<div ng-if="!error && !success">
+				Aguarde enquanto processamos seu pagamento...
+			</div>
+			<div ng-if="error">
+				Um erro ocorreu durante o processamento do seu pagamento. Tente novamente.
+			</div>
+			<div ng-if="success">
+				Seu pagamento foi confirmado. 
+			</div>
+		</div>
+	</body>
+</html>

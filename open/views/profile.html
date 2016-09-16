@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+	<script src="js/myPayment.js"></script>
+	
+
+    <title>DeCasa</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Theme CSS -->
+    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+	
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <!--<a class="navbar-brand page-scroll" href="#page-top">DeCasa</a>-->
+                <img class="navbar-brand page-scroll" src="img/decasa.png" height="50" width="100">
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Serviços</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#profile">Minha conta</a>
+                    </li>
+					<li>
+                        <a class="page-scroll" href="#mypayments">Pagamento</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">Sobre</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#team">Equipe</a>
+                    </li>
+                    <li>                        
+                        <a class="page-scroll" href="#" id="logout">Sair</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <span class="fa-stack fa-4x">
+                    <img src="img/icon.png" height="100" width="100" style="margin: 0px 10px 10px 0">
+                </span>
+                <div class="intro-lead-in">Seja bem vindo ao DeCasa!</div>
+                <div class="intro-heading">Prazer em ter você aqui</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Serviços</h2>
+                    <h3 class="section-subheading text-muted">Serviços de reparo e consertos domésticos.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <!--<i class="fa fa-circle fa-stack-2x text-primary"></i>-->
+                        <!--<i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>-->
+                        <!--<img src="img/services/electrician.png" height="100" width="100">-->
+                        <img src="img/services/electrician.png" class="img-responsive img-circle" alt="" height="150"
+                             width="150">
+                    </span>
+                    <h4 class="service-heading">Eletricista</h4>
+                    <p class="text-muted">O profissional é responsável por serviços de instalação, manutenção e repararos de fiação elétrica em equipamentos elétricos e eletrônicos.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <!--<i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>-->
+                        <!--<img src="img/services/plumber.png" height="100" width="100">-->
+                        <img src="img/services/plumber.png" class="img-responsive img-circle" alt="" height="150"
+                             width="150">
+                    </span>
+                    <h4 class="service-heading">Encanador</h4>
+                    <p class="text-muted">O profissional é responsável por serviços de montagem, ajustes, instalações e repararos de encanamentos, tubulações e outros condutos.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <!--<i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>-->
+                        <!--<img src="img/services/fitter.png" height="100" width="100">-->
+                        <img src="img/services/fitter.png" class="img-responsive img-circle" alt="" height="150"
+                             width="150">
+                    </span>
+                    <h4 class="service-heading">Montador</h4>
+                    <p class="text-muted">O profissional é responsável por serviços de montagem e desmontagem de móveis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Minha conta</h2>
+                    <h3 class="section-subheading">Atualize os seus dados.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row" >
+                        <div class="col-lg-12">
+                            <div class="col-xs-6">
+                                <div class="service-photo" id="foto">
+                                    <img src="uploads/image.png" class="img-responsive img-circle" alt="" height="130"
+                                         width="130" align="right">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div>
+                                    <h5>
+                                        <label>Nome: </label>
+                                        <span id="tv_name"> </span>
+                                    </h5>
+                                    <h5>
+                                        <label>CPF: </label>
+                                        <span id="tv_cpf"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>Telefone: </label>
+                                        <span id="tv_telefone"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>Bairro: </label>
+                                        <span id="tv_bairro"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>Rua: </label>
+                                        <span id="tv_rua"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>Número: </label>
+                                        <span id="tv_numero"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>Site: </label>
+                                        <span id="tv_site"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>Rede social: </label>
+                                        <span id="tv_rede-social"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>Serviços: </label>
+                                        <span id="tv_all-servicos"></span>
+                                    </h5>
+                                    <h5>
+                                        <label>E-mail: </label>
+                                        <span id="tv_email"></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+							<br> <br> <br>
+                                <div id="success"></div>
+                                <button type="button" class="page-scroll btn btn-xl" data-toggle="modal" data-target="#alter-modal">
+                                Alterar dados
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="alter-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true" style="display: none;">>
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h3 class="modal-title">Dados atuais</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <form name="updateForm" id="updateForm" novalidate>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h3>Dados do profissional</h3>
+                                                            <div class="form-group">
+                                                                <label>Nome: *</label>
+                                                                <input name="name"  type="text" class="form-control" placeholder="Seu nome " id="name"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>CPF: *</label>
+                                                                <input name="cpf" type="text" class="form-control cpf" placeholder="CPF " id="cpf"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Telefone: *</label>
+                                                                <input name="phone" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone " id="phone"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Rua: *</label>
+                                                                <input name="street" type="text" class="form-control" placeholder="Rua " id="street"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Número: *</label>
+                                                                <input name="number" type="text" class="form-control" placeholder="Nº " id="number"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Bairro: *</label>
+                                                                <input name="neighborhood" type="text" class="form-control" placeholder="Bairro " id="neighborhood"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Cidade: *</label>
+                                                                <input name="city" type="text" class="form-control" placeholder="Cidade " id="city"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Estado: *</label>
+                                                                <input name="state" type="text" class="form-control" placeholder="Estado " id="state"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Site:</label>
+                                                                <input name="site" type="text" class="form-control" placeholder="Site" id="site"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Rede social:</label>
+                                                                <input name="socialNetwork" type="text" class="form-control" placeholder="Rede social" id="socialNetwork"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h3>Dados de identificação</h3>
+                                                            <div class="form-group">
+                                                                <label for="picture">Selecione uma foto do serviço: *</label>
+                                                                <input name="picture" type="file"
+                                                                       class="form-control" id="picture" required data-validation-required-message="Por favor insira sua foto."/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group" id="check-services">
+                                                                <label for="services">Escolha seu(s) serviço(s): *</label>
+                                                                <div class="controls" id="services">
+                                                                    <input name="services"  type="checkbox" value="Encanador" id="ServicePlumber" minchecked="1"
+                                                                           data-validation-minchecked-message="Escolha pelo menos um serviço"/> Encanador </br>
+                                                                    <input name="services"  type="checkbox" value="Montador" id="ServiceFitter"/> Montador </br>
+                                                                    <input name="services"  type="checkbox" value="Eletricista" id="ServiceElectrician"/> Eletricista
+                                                                    <p class="help-block text-danger"></p>
+                                                                </div>
+                                                            </div>
+                                                            <h3>Dados de acesso</h3>
+                                                            <div class="form-group">
+                                                                <label>E-mail: *</label>
+                                                                <input name="email" type="email" class="form-control"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="E-mail " id="email"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Senha: *</label>
+                                                                <input name="password" type="password" minlength="6" data-validation-minlength-message="Tamanho mínimo de 6 caracteres." class="form-control" placeholder="Senha " id="password"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Confirme a senha: *</label>
+                                                                <input type="password" class="form-control" placeholder="Confirme a senha " id="passwordRepeat" data-validation-matches-match="password" data-validation-matches-message="Senhas não coincidem"/>
+                                                                <p class="help-block text-danger"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input id="btnSubmit" type="submit" class="btn btn-primary"  value="Atualizar" form="updateForm"/>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	  <!-- Profile Section -->
+    <section id="mypayments" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Pagamento</h2>
+                    <h3 class="section-subheading">Escolha o serviços que você fornece e realize o pagamento para seu anúncio ser ativado.</h3>
+                </div>
+            </div>
+            <div class="row" ng-app="MyPayment" ng-controller="MyPaymentController" >
+				<div class="col-lg-12">
+                    <div class="row" >
+                        <div class="col-lg-12">
+                            <div class="col-xs-8">
+                                <div>
+									<h5 align="left" style="margin: 1cm;"> <img src="img/services/electrician.png" class="img-responsive img-circle" alt="" height="50" width="50" align="left" style="margin-right: 1cm;"> Eletricista  	
+									<input style="margin-left: 1cm;" name="p_services"  type="checkbox" value="Encanador" id="p_electrician" minchecked="1"  ng-click="calctotal()"/></h5>
+								
+                                </div>
+							</div>	
+						</div>		
+					</div>	
+				</div>
+				 <div class="col-lg-12">
+                    <div class="row" >
+                        <div class="col-lg-12">
+                            <div class="col-xs-8">
+                                <div>
+									<h5 align="left" style="margin: 1cm;" > <img src="img/services/fitter.png" class="img-responsive img-circle" alt="" height="50" width="50" align="left" style="margin-right: 1cm;"> Montador <input style="margin-left: 1cm;" name="p_services"  type="checkbox" value="Encanador" id="p_fitter" minchecked="1" ng-click="calctotal()" /> </h5>
+									
+                                </div>
+							</div>	
+						</div>		
+					</div>	
+				</div>
+				 <div class="col-lg-12">
+                    <div class="row" >
+                        <div class="col-lg-12">
+                            <div class="col-xs-6">
+                                <div>
+									<h5 align="left" style="margin: 1cm;"> <img src="img/services/plumber.png" class="img-responsive img-circle" alt="" height="50" width="50" align="left" style="margin-right: 1cm;"> Encanador
+									<input style="margin-left: 1cm;" name="p_services"  type="checkbox" value="Encanador" id="p_plumber" minchecked="1" ng-click="calctotal()" /></h5>
+									
+                                </div>
+							</div>	
+						</div>		
+					</div>	
+					<div class="col-lg-12 text-center">
+							<br> <br>
+							<h2>Total: {{total}}</h2>
+							<br> <br>
+							<button type="button" class="page-scroll btn btn-xl">
+								Realizar pagamento
+							</button>
+                    </div>	
+				</div>
+				
+			</div>
+		</div>	
+	</section>
+	
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Sobre</h2>
+                    <h3 class="section-subheading text-muted">O DeCasa conecta quem busca e quem oferece serviços de reparo e consertos domésticos.</h3>
+                </div>
+            </div>           
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Nossa equipe</h2>
+                    <h3 class="section-subheading text-muted">Equipe responsável pelo Desenvolvimento e Design do DeCasa.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="img/team/AndrezaRaquel.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Andreza Raquel</h4>
+                        <p class="text-muted">Desenvolvedora</p>
+                        <ul class="list-inline social-buttons">
+                           <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>-->
+                            <li><a href="https://www.facebook.com/profile.php?id=100003469382435&fref=ts"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="img/team/ErickAlcantara.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Erick Alcântara</h4>
+                        <p class="text-muted">Desenvolvedor</p>
+                        <ul class="list-inline social-buttons">
+                           <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>-->
+                            <li><a href="https://www.facebook.com/erickalcanttara?fref=ts"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="img/team/LucasMarlon.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Lucas Marlon</h4>
+                        <p class="text-muted">Desenvolvedor</p>
+                        <ul class="list-inline social-buttons">
+                          <!--  <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>-->
+                            <li><a href="https://www.facebook.com/lucasmarlonlm?fref=ts"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="https://www.linkedin.com/in/lucas-marlon-77766211b"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+				<div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="img/team/MarcosNascimento.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Marcos Nascimento</h4>
+                        <p class="text-muted">Desenvolvedor</p>
+                        <ul class="list-inline social-buttons">
+                           <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>-->
+                            <li><a href="https://www.facebook.com/marcosnascimennto?fref=ts"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+				<div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="img/team/MariaDaniela.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Maria Daniela</h4>
+                        <p class="text-muted">Desenvolvedora</p>
+                        <ul class="list-inline social-buttons">
+                           <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>-->
+                            <li><a href="https://www.facebook.com/daniela.mdch?fref=ts"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="https://www.linkedin.com/in/maria-daniela-costa-henrique-7a33b7b9"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+				<div class="col-sm-4">
+                    <div class="team-member">
+                        <img src="img/team/RayssaNaianny.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Rayssa Naianny</h4>
+                        <p class="text-muted">Desenvolvedora</p>
+                        <ul class="list-inline social-buttons">
+                           <!-- <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>-->
+                            <li><a href="https://www.facebook.com/rayssa.oliveira.7"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="https://br.linkedin.com/in/rayssa-oliveira-3709b1124"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted">Alunos dos cursos de Ciência da Computação e Design da Universidade Federal de Campina Grande - UFCG.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; DeCasa Website 2016</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Política de privacidade</a>
+                        </li>
+                        <li><a href="#">Termos de uso</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
+
+    <!-- Portfolio Modal 1 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/portfolio/roundicons-free.png" alt="">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                            <p>
+                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
+                            <ul class="list-inline">
+                                <li>Date: July 2014</li>
+                                <li>Client: Round Icons</li>
+                                <li>Category: Graphic Design</li>
+                            </ul>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 2 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Project Heading</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/portfolio/startup-framework-preview.png" alt="">
+                            <p><a href="http://designmodo.com/startup/?u=787">Startup Framework</a> is a website builder for professionals. Startup Framework contains components and complex blocks (PSD+HTML Bootstrap themes and templates) which can easily be integrated into almost any design. All of these components are made in the same style, and can easily be integrated into projects, allowing you to create hundreds of solutions for your future projects.</p>
+                            <p>You can preview Startup Framework <a href="http://designmodo.com/startup/?u=787">here</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 3 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/portfolio/treehouse-preview.png" alt="">
+                            <p>Treehouse is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. This is bright and spacious design perfect for people or startup companies looking to showcase their apps or other projects.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/treehouse-free-psd-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 4 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/portfolio/golden-preview.png" alt="">
+                            <p>Start Bootstrap's Agency theme is based on Golden, a free PSD website template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Golden is a modern and clean one page web template that was made exclusively for Best PSD Freebies. This template has a great portfolio, timeline, and meet your team sections that can be easily modified to fit your needs.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/golden-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 5 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/portfolio/escape-preview.png" alt="">
+                            <p>Escape is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Escape is a one page web template that was designed with agencies in mind. This template is ideal for those looking for a simple one page solution to describe your business and offer your services.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/escape-one-page-psd-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Modal 6 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="img/portfolio/dreams-preview.png" alt="">
+                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+		
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+	
+	<script src="js/jquerymask.js"></script>
+	
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<!-- Plugin Angular -->
+	
+
+	<!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/logout.js"></script>
+	
+    <!-- Theme JavaScript -->
+    <script src="js/agency.min.js"></script>
+	
+	<script src="js/getProfessional.js"> </script>
+    <script src="js/updateProfessional.js"></script>
+
+
+</body>
+
+</html>
