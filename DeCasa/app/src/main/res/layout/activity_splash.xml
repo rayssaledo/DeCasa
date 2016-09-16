@@ -12,7 +12,6 @@
     android:gravity="center_horizontal"
     tools:context="projeto1.ufcg.edu.decasa.views.SplashActivity">
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
