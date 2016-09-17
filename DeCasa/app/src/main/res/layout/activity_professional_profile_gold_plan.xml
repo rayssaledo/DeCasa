@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="projeto1.ufcg.edu.decasa.views.ProfileProfessionalActivity">
+    tools:context=".views.ProfessionalProfileGoldPlanActivity">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -115,12 +115,28 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true">
 
-                        <ImageButton
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/ic_person_black_24dp"
-                            android:background="@color/white"
-                            android:contentDescription="@string/desc_evaluators"/>
+                            android:layout_marginTop="10dp">
+
+                            <ImageButton
+                                android:id="@+id/ib_evaluation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/ic_person_black_24dp"
+                                android:background="@color/white"
+                                android:contentDescription="@string/desc_evaluators"/>
+
+                            <TextView
+                                android:id="@+id/tv_number_assessments"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/number_assessments"
+                                android:textSize="16sp"
+                                android:layout_toEndOf="@+id/ib_evaluation"/>
+
+                        </RelativeLayout>
 
                         <Button
                             android:id="@+id/btn_evaluations"

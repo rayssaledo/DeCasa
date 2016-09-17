@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -94,7 +93,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_fitter.getItem(position);
                     Intent intent = new Intent(MyFavoritesActivity.this,
-                            ProfileProfessionalActivity.class);
+                            ProfessionalProfileGoldPlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
             }
@@ -105,7 +104,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_plumber.getItem(position);
                 Intent intent = new Intent(MyFavoritesActivity.this,
-                        ProfileProfessionalActivity.class);
+                        ProfessionalProfileGoldPlanActivity.class);
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
             }
@@ -116,7 +115,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_electrictian.getItem(position);
                 Intent intent = new Intent(MyFavoritesActivity.this,
-                        ProfileProfessionalActivity.class);
+                        ProfessionalProfileGoldPlanActivity.class);
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
             }

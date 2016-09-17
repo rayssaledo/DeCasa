@@ -55,19 +55,22 @@ public class ProfessionalsAdapter extends BaseAdapter {
         Professional item = items.get(position);
         convertView = mInflater.inflate(R.layout.my_item_professional, null);
 
-        String address = item.getNeighborhood() + " - " + item.getCity() ;
+        if (!item.getPlan().equals("free")) {
+            String address = item.getNeighborhood() + " - " + item.getCity() ;
+            ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
+        }
 
         ((TextView) convertView.findViewById(R.id.tv_name)).setText(item.getName());
-        ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
-       ((RatingBar) convertView.findViewById(R.id.rb_evaluation_professionals)).
-                setRating(item.getEvaluationsAverage());
+        ((RatingBar) convertView.findViewById(R.id.rb_evaluation_professionals)).
+                setRating(item.getAvg());
+
         CircularImageView iv_professional = ((CircularImageView) convertView.findViewById(R.id.iv_professional));
 
-        if (item.getNamePicture() != null && !item.getNamePicture().equals("null")) {
-            File f = new File(DownloadFile.getPathDownload() + item.getNamePicture());
-            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
-            iv_professional.setImageBitmap(bmp);
-        }
+//        if (item.getNamePicture() != null && !item.getNamePicture().equals("null")) {
+//            File f = new File(DownloadFile.getPathDownload() + item.getNamePicture());
+//            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+//            iv_professional.setImageBitmap(bmp);
+//        }
 
         return convertView;
     }

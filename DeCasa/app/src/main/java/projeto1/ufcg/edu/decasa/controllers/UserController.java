@@ -255,7 +255,7 @@ public class UserController {
                                      final String services, final String service,
                                      final Handler handler) {
 
-        //ProfileProfessionalActivity.loading.setVisibility(View.VISIBLE);
+        //ProfessionalProfileGoldPlanActivity.loading.setVisibility(View.VISIBLE);
         final List<Integer> list_is_favorite = new ArrayList<>();
         String rout_add_favorite = url + "add-favorite";
         final JSONObject json = new JSONObject();
@@ -326,7 +326,7 @@ public class UserController {
     }
 
     public void removeFavorite(final String username,final String email_professional, final String service, final Handler handler) {
-        //ProfileProfessionalActivity.loading.setVisibility(View.VISIBLE);
+        //ProfessionalProfileGoldPlanActivity.loading.setVisibility(View.VISIBLE);
         final List<Integer> list_remove_favorite = new ArrayList<>();
         String rout_add_favorite = url + "remove-favorite";
         final JSONObject json = new JSONObject();
@@ -452,14 +452,14 @@ public class UserController {
 
                             float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
-                                Professional professional = new Professional(name, cpf, phone,
-                                        street, number, neighborhood, city, state, site, socialNetwork,
-                                        email, listServices);
-                                professional.setEvaluationsAverage(evaluationAverage);
-                                professional.setLocation(new Location(street + ", " + number + " " +
-                                        city + " " + state));
-
-                                professionals.add(professional);
+//                                Professional professional = new Professional(name, cpf, phone,
+//                                        street, number, neighborhood, city, state, site, socialNetwork,
+//                                        email, listServices);
+//                                professional.setEvaluationsAverage(evaluationAverage);
+//                                professional.setLocation(new Location(street + ", " + number + " " +
+//                                        city + " " + state));
+//
+//                                professionals.add(professional);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -538,14 +538,14 @@ public class UserController {
 
                             float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
-                                Professional professional = new Professional(name, cpf, phone,
-                                        street, number, neighborhood, city, state, site, socialNetwork,
-                                        email, listServices);
-                                professional.setEvaluationsAverage(evaluationAverage);
-                                professional.setLocation(new Location(street + ", " + number + " " +
-                                        city + " " + state));
-
-                                professionals.add(professional);
+//                                Professional professional = new Professional(name, cpf, phone,
+//                                        street, number, neighborhood, city, state, site, socialNetwork,
+//                                        email, listServices);
+//                                professional.setEvaluationsAverage(evaluationAverage);
+//                                professional.setLocation(new Location(street + ", " + number + " " +
+//                                        city + " " + state));
+//
+//                                professionals.add(professional);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -625,14 +625,14 @@ public class UserController {
 
                             float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
                             try {
-                                Professional professional = new Professional(name, cpf, phone,
-                                        street, number, neighborhood, city, state, site, socialNetwork,
-                                        email, listServices);
-                                professional.setEvaluationsAverage(evaluationAverage);
-                                professional.setLocation(new Location(street + ", " + number + " " +
-                                        city + " " + state));
-
-                                professionals.add(professional);
+//                                Professional professional = new Professional(name, cpf, phone,
+//                                        street, number, neighborhood, city, state, site, socialNetwork,
+//                                        email, listServices);
+//                                professional.setEvaluationsAverage(evaluationAverage);
+//                                professional.setLocation(new Location(street + ", " + number + " " +
+//                                        city + " " + state));
+//
+//                                professionals.add(professional);
 
                             } catch (Exception e) {
                                 e.printStackTrace();

@@ -139,4 +139,5 @@
     <string name="title_activity_user_profile">My profile</string>
     <string name="text_my_location">My location</string>
     <string name="edit_evaluation">Edit evaluation</string>
-</resources>
+    <string name="number_assessments">0</string>
+    </resources>
