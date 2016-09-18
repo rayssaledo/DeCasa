@@ -169,15 +169,16 @@ public class EvaluationController {
                                                            final Handler handler) {
         final List<Float> assessmentsAverageList = new ArrayList<Float>();
 
-        String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
+        String urlAssessmentsAverageByProfessional = url + "/get-avg-professional?email=" +
                 professionalEmail + "&service=" + service;
-        mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
+        mHttp.get(urlAssessmentsAverageByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
+                    JSONArray result = response.getJSONArray("result");
+                    JSONObject avg = result.getJSONObject(0);
                     try{
-                        float assessmentsAverageFloat = Float.valueOf(response.
-                                getString("avg"));
+                        float assessmentsAverageFloat = Float.parseFloat(avg.getString("avg"));
                         assessmentsAverageList.add(assessmentsAverageFloat);
                     } catch (Exception e) {
                         e.printStackTrace();

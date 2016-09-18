@@ -49,7 +49,6 @@ public class ProfessionalController {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    Log.d("Passou","ok");
                     JSONArray jsonArray = response.getJSONArray("result");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonProfessional = jsonArray.getJSONObject(i);
@@ -75,12 +74,11 @@ public class ProfessionalController {
                         String avg = jsonProfessional.getString("avg");
                         String picture = null;
                         try {
-                           picture  =jsonProfessional.getString("picture");
+                           picture = jsonProfessional.getString("picture");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                         String plan = jsonProfessional.getString("plan");
-                        Log.d("Passou","dados");
                         try {
                             float avgFloat = Float.parseFloat(avg);
                             Professional professional = new Professional(name, businessName, cpf,
