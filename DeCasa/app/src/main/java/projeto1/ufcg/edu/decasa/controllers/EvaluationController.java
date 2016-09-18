@@ -54,9 +54,7 @@ public class EvaluationController {
         mHttp.post(urlAddEvaluation, json.toString(), new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException{
-                Log.d("Evaluation", "passou aqui");
                 if (result.getInt("ok") == 0) {
-                    Log.d("Evaluation", "entrou no IF");
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
                             .setMessage(result.getString("msg")) //TODO internacionalizar
@@ -105,32 +103,33 @@ public class EvaluationController {
         });
     }
 
-    public List<Evaluation> getEvaluationsByProfessional(final String professionalEmail,
+    public List<Evaluation> getAssessmentsByProfessional(final String professionalEmail,
                                                          final String service,
                                                          final Handler handler) {
 
-        final List<Evaluation> evaluationsList = new ArrayList<Evaluation>();
-        String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
+        final List<Evaluation> assessmentsList = new ArrayList<Evaluation>();
+        String urlAssessmentsByProfessional = url + "get-evaluations-professional?email=" +
                 professionalEmail + "&service=" + service;
-        mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
+        mHttp.get(urlAssessmentsByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    JSONArray jsonArrayEvaluation = response.getJSONArray("avaliacoes");
-                    for (int i = 0; i < jsonArrayEvaluation.length(); i++) {
-                        JSONObject jsonEvaluation = jsonArrayEvaluation.getJSONObject(i);
-                        String usernameValuer = jsonEvaluation.getString("emailAvaliador");
-                        String evaluationValue = jsonEvaluation.getString("avaliacao");
-                        String comment = jsonEvaluation.getString("comentario");
-                        String date = jsonEvaluation.getString("data");
-                        String photo = jsonEvaluation.getString("fotoUsuario");
-                        String service = jsonEvaluation.getString("service");
+                    JSONArray result = response.getJSONArray("result");
+                    JSONObject jsonObject = result.getJSONObject(0);
+                    JSONArray jsonArray = jsonObject.getJSONArray("evaluations");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonEvaluation = jsonArray.getJSONObject(i);
+                        Log.d("Evaluation", jsonEvaluation.toString());
+                        String usernameValuer = jsonEvaluation.getString("emailValuer");
+                        String evaluationValue = jsonEvaluation.getString("evaluation");
+                        String comment = jsonEvaluation.getString("comment");
+                        String date = jsonEvaluation.getString("date");
+                        String photo = jsonEvaluation.getString("userPhoto");
                         try{
                             float evaluationValueFloat = Float.valueOf(evaluationValue);
                             Evaluation evaluation = new Evaluation(professionalEmail,
-                                    usernameValuer, evaluationValueFloat, comment, date, photo,
-                                    service);
-                            evaluationsList.add(evaluation);
+                                    usernameValuer, evaluationValueFloat, comment, date, photo);
+                            assessmentsList.add(evaluation);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -162,7 +161,7 @@ public class EvaluationController {
             }
         });
 
-        return evaluationsList;
+        return assessmentsList;
     }
 
     public List<Float> getAssessmentsAverageByProfessional(final String professionalEmail,

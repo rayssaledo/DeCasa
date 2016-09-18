@@ -199,7 +199,7 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         } else {
             service = "Montador";
         }
-        assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(),
+        assessments = evaluationController.getAssessmentsByProfessional(professional.getEmail(),
                 service, handler);
         assessmentsAverage = evaluationController.getAssessmentsAverageByProfessional(professional.
                 getEmail(), service, handler);
