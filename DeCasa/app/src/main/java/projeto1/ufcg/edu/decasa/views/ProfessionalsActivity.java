@@ -93,7 +93,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
                 Professional professional = (Professional) professionalsAdapter.getItem(position);
 
                 if (mySharedPreferences.isUserLoggedIn()) {
-                    if (professional.getPlan().equals("gold")){
+                    if (professional.getPlan().toLowerCase().equals("gold")){
                         Intent intent = new Intent(ProfessionalsActivity.this,
                                 ProfessionalProfileGoldPlanActivity.class);
                         intent.putExtra("PROFESSIONAL", professional);

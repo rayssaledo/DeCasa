@@ -32,21 +32,21 @@ public class EvaluationController {
         url = "http://decasa-decasa.rhcloud.com/";
     }
 
-    public void addEvaluation(final String professionalValued, final String usernameValuer,
-                              final String evaluationValue, final String comment,
-                              final String date, final String photo, final String service,
+    public void addEvaluation(final String emailProfessional, final String emailUser,
+                              final String evaluation, final String comment,
+                              final String date, final String userPhoto, final String service,
                               final Class classDest, final Professional professional) {
 
         EvaluationProfessionalActivity.mLoadingEvaluation.setVisibility(View.VISIBLE);
-        String urlAddEvaluation = url + "/add-avaliacao";
+        String urlAddEvaluation = url + "add-evaluation";
         JSONObject json = new JSONObject();
         try {
-            json.put("emailProfissional", professionalValued);
-            json.put("emailUsuario", usernameValuer);
-            json.put("avaliacao", evaluationValue);
-            json.put("comentario", comment);
-            json.put("data", date);
-            json.put("fotoUsuario", photo);
+            json.put("emailProfessional", emailProfessional);
+            json.put("emailUser", emailUser);
+            json.put("evaluation", evaluation);
+            json.put("comment", comment);
+            json.put("date", date);
+            json.put("userPhoto", userPhoto);
             json.put("service", service);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -54,7 +54,9 @@ public class EvaluationController {
         mHttp.post(urlAddEvaluation, json.toString(), new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException{
+                Log.d("Evaluation", "passou aqui");
                 if (result.getInt("ok") == 0) {
+                    Log.d("Evaluation", "entrou no IF");
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
                             .setMessage(result.getString("msg")) //TODO internacionalizar
@@ -68,6 +70,7 @@ public class EvaluationController {
                             .create()
                             .show();
                 } else {
+                    Log.d("Evaluation", "entrou no ELSE");
                     new AlertDialog.Builder(mActivity)
                             .setMessage(mActivity.getString(R.string.
                                     text_successfully_completed_evaluation))

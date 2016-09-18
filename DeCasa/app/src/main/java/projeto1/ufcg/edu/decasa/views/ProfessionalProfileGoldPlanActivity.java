@@ -235,7 +235,7 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
 //            }
 //        }
         tv_services.setText(professional.getService());
-        rb_evaluation.setRating(assessmentsAverageValue);
+        rb_evaluation.setRating(professional.getAvg());
     }
 
     @Override
