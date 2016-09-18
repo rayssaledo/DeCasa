@@ -73,7 +73,12 @@ public class ProfessionalController {
                         String email = jsonProfessional.getString("email");
                         String password = jsonProfessional.getString("password");
                         String avg = jsonProfessional.getString("avg");
-                        String picture = jsonProfessional.getString("picture");
+                        String picture = null;
+                        try {
+                           picture  =jsonProfessional.getString("picture");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         String plan = jsonProfessional.getString("plan");
                         Log.d("Passou","dados");
                         try {
