@@ -402,11 +402,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        int id = item.getItemId();
-        if (id == R.id.action_settings){
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
