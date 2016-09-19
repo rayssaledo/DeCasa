@@ -104,16 +104,16 @@ public class AssessmentsActivity extends AppCompatActivity {
         super.onResume();
         tv_no_assessments.setVisibility(View.GONE);
         listViewAssessments.setVisibility(View.VISIBLE);
-        String service = mySharedPreferences.getService();
-        if (service.equals(getApplication().getString(R.string.title_electricians))){
-            service = "Eletricista";
-        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
-            service = "Encanador";
-        } else {
-            service = "Montador";
-        }
+//        String service = mySharedPreferences.getService();
+//        if (service.equals(getApplication().getString(R.string.title_electricians))){
+//            service = "Eletricista";
+//        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
+//            service = "Encanador";
+//        } else {
+//            service = "Montador";
+//        }
         assessments = evaluationController.getAssessmentsByProfessional(professional.getEmail(),
-                service, handler);
+                handler);
     }
 
     @Override

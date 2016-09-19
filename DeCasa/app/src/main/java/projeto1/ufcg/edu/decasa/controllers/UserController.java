@@ -251,13 +251,11 @@ public class UserController {
                                      final String cpf, final String phone, final String street,
                                      final String number, final String neighborhood,
                                      final String city, final String state, final String site,
-                                     final String social_network, final String avg,
-                                     final String services, final String service,
-                                     final Handler handler) {
+                                     final String socialNetwork, final String avg,
+                                     final String service, final Handler handler) {
 
-        //ProfessionalProfileGoldPlanActivity.loading.setVisibility(View.VISIBLE);
-        final List<Integer> list_is_favorite = new ArrayList<>();
-        String rout_add_favorite = url + "add-favorite";
+        final List<Integer> listIsFavorite = new ArrayList<>();
+        String urlAddFavorite = url + "add-favorite";
         final JSONObject json = new JSONObject();
         try {
             json.put("username", login_user);
@@ -271,33 +269,31 @@ public class UserController {
             json.put("cityProfessional", city);
             json.put("stateProfessional", state);
             json.put("siteProfessional", site);
-            json.put("socialNetworkProfessional", social_network);
+            json.put("socialNetworkProfessional", socialNetwork);
             json.put("serviceProfessional", service);
             json.put("avgProfessional", avg);
-            json.put("servicesProfessional", services);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mHttp.post(rout_add_favorite, json.toString(), new HttpListener() {
+        mHttp.post(urlAddFavorite, json.toString(), new HttpListener() {
             @Override
             public void onSucess(JSONObject result) {
                 try {
                     if (result.getInt("ok") == 0) {
                         new AlertDialog.Builder(mActivity)
                                 .setTitle("Erro")
-                                .setMessage("Usuário não cadastrado") //TODO internacionalizar
+                                .setMessage(result.getString("msg")) //TODO internacionalizar
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                       // LoginActivity.loading.setVisibility(View.GONE);
                                     }
                                 })
                                 .create()
                                 .show();
 
                     } else {
-                        list_is_favorite.add(1);
+                        listIsFavorite.add(1);
                         Message message = new Message();
                         message.what = 105;
                         handler.sendMessage(message);
@@ -322,13 +318,12 @@ public class UserController {
                         .show();
             }
         });
-        return  list_is_favorite;
+        return  listIsFavorite;
     }
 
     public void removeFavorite(final String username,final String email_professional, final String service, final Handler handler) {
-        //ProfessionalProfileGoldPlanActivity.loading.setVisibility(View.VISIBLE);
-        final List<Integer> list_remove_favorite = new ArrayList<>();
-        String rout_add_favorite = url + "remove-favorite";
+
+        String urlRemoveFavorite = url + "remove-favorite";
         final JSONObject json = new JSONObject();
         try {
             json.put("username", username);
@@ -337,18 +332,18 @@ public class UserController {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mHttp.post(rout_add_favorite, json.toString(), new HttpListener() {
+        mHttp.post(urlRemoveFavorite, json.toString(), new HttpListener() {
             @Override
             public void onSucess(JSONObject result) {
                 try {
                     if (result.getInt("ok") == 0) {
                         new AlertDialog.Builder(mActivity)
                                 .setTitle("Erro")
-                                .setMessage("Usuário não cadastrado") //TODO internacionalizar
+                                .setMessage(result.getString("msg")) //TODO internacionalizar
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        // LoginActivity.loading.setVisibility(View.GONE);
+
                                     }
                                 })
                                 .create()
@@ -381,18 +376,18 @@ public class UserController {
         });
     }
 
-    public List<Integer> getIsFavorite(final String login, final String email_professional,
+    public List<Integer> getIsFavorite(final String username, final String email_professional,
                                        final String service, final Handler handler){
-        final List<Integer> list_is_favorite = new ArrayList<>();
-        String urlGetUser = "http://decasa-decasa.rhcloud.com/get-is-favorite?username=" + login +
+        final List<Integer> listIsFavorite = new ArrayList<>();
+        String urlGetUser = "http://decasa-decasa.rhcloud.com/get-is-favorite?username=" + username +
                 "&emailProfessional=" + email_professional + "&serviceProfessional=" + service ;
         mHttp.get(urlGetUser, new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException {
                 if (result.getInt("ok") == 1) {
-                    list_is_favorite.add(1);
+                    listIsFavorite.add(1);
                 } else {
-                    list_is_favorite.add(0);
+                    listIsFavorite.add(0);
                 }
                 Message message = new Message();
                 message.what = 106;
@@ -407,7 +402,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
+
                             }
                         })
                         .create()
@@ -415,7 +410,7 @@ public class UserController {
             }
         });
 
-        return list_is_favorite;
+        return listIsFavorite;
     }
 
     public List<Professional> getFavoritesPlumbersUser(final String login, final Handler handler){

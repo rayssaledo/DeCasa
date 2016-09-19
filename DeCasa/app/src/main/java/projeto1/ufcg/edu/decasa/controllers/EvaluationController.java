@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,7 +67,6 @@ public class EvaluationController {
                             .create()
                             .show();
                 } else {
-                    Log.d("Evaluation", "entrou no ELSE");
                     new AlertDialog.Builder(mActivity)
                             .setMessage(mActivity.getString(R.string.
                                     text_successfully_completed_evaluation))
@@ -104,12 +102,11 @@ public class EvaluationController {
     }
 
     public List<Evaluation> getAssessmentsByProfessional(final String professionalEmail,
-                                                         final String service,
                                                          final Handler handler) {
 
         final List<Evaluation> assessmentsList = new ArrayList<Evaluation>();
         String urlAssessmentsByProfessional = url + "get-evaluations-professional?email=" +
-                professionalEmail + "&service=" + service;
+                professionalEmail;
         mHttp.get(urlAssessmentsByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
@@ -119,7 +116,6 @@ public class EvaluationController {
                     JSONArray jsonArray = jsonObject.getJSONArray("evaluations");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonEvaluation = jsonArray.getJSONObject(i);
-                        Log.d("Evaluation", jsonEvaluation.toString());
                         String usernameValuer = jsonEvaluation.getString("emailValuer");
                         String evaluationValue = jsonEvaluation.getString("evaluation");
                         String comment = jsonEvaluation.getString("comment");
@@ -165,12 +161,11 @@ public class EvaluationController {
     }
 
     public List<Float> getAssessmentsAverageByProfessional(final String professionalEmail,
-                                                           final String service,
                                                            final Handler handler) {
         final List<Float> assessmentsAverageList = new ArrayList<Float>();
 
         String urlAssessmentsAverageByProfessional = url + "/get-avg-professional?email=" +
-                professionalEmail + "&service=" + service;
+                professionalEmail;
         mHttp.get(urlAssessmentsAverageByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {

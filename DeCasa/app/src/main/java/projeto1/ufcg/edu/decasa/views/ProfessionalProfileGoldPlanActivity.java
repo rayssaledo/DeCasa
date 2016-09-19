@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -42,13 +41,11 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
     private List<Float> assessmentsAverage;
     private float assessmentsAverageValue;
     private UserController userController;
-    private  List<Integer> list_favorite;
+    private  List<Integer> listFavorite;
     private MySharedPreferences mySharedPreferences;
     private String username;
     private  ImageButton ib_favorite;
-    private List<Integer> list_is_favorite;
-    private String service;
-    private String myService;
+    private List<Integer> listIsFavorite;
     private Button btn_evaluations;
     private CircularImageView iv_professional;
 
@@ -69,14 +66,15 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
                 }
             }
             if (msg.what == 105) {
-                if (list_favorite.size() == 1 && list_favorite.get(0) == 1){
+                if (listFavorite.size() == 1 && listFavorite.get(0) == 1){
                     Toast.makeText(ProfessionalProfileGoldPlanActivity.this, getApplication().getString(
-                            R.string.add_favorite), Toast.LENGTH_LONG).show();
+                            R.string.add_favorite),
+                            Toast.LENGTH_LONG).show();
                     ib_favorite.setImageResource(R.mipmap.ic_favorite_red_24dp);
                 }
             }
             if (msg.what == 106) {
-                if (list_is_favorite.size() == 1 && list_is_favorite.get(0) == 1){
+                if (listIsFavorite.size() == 1 && listIsFavorite.get(0) == 1){
                     ib_favorite.setImageResource(R.mipmap.ic_favorite_red_24dp);
                 } else {
                     ib_favorite.setImageResource(R.mipmap.ic_favorite_border_black_24dp);
@@ -84,7 +82,8 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
             }
             if (msg.what == 107) {
                 Toast.makeText(ProfessionalProfileGoldPlanActivity.this,getApplication().getString(
-                        R.string.remove_favorite), Toast.LENGTH_LONG).show();
+                        R.string.remove_favorite),
+                        Toast.LENGTH_LONG).show();
                 ib_favorite.setImageResource(R.mipmap.ic_favorite_border_black_24dp);
             }
         }
@@ -112,18 +111,9 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         Intent it = getIntent();
         professional = it.getParcelableExtra("PROFESSIONAL");
 
-        service = mySharedPreferences.getService();
-        if (service.equals(getApplication().getString(R.string.title_electricians))){
-            service = "Electrician";
-        } else if (service.equals(getApplication().getString(R.string.title_plumbers))){
-            service = "Plumber";
-        } else if (service.equals(getApplication().getString(R.string.title_fitters))){
-            service = "Fitter";
-        }
-
-        Log.d("Service", service);
-        list_is_favorite = new ArrayList<>();
-        list_is_favorite = userController.getIsFavorite(username, professional.getEmail(), service, handler);
+        listIsFavorite = new ArrayList<>();
+        listIsFavorite = userController.getIsFavorite(username, professional.getEmail(),
+                professional.getService(), handler);
 
 
         setTitle(professional.getName());
@@ -147,19 +137,19 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         ib_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(list_is_favorite.size() != 0 && list_is_favorite.get(0) == 0) {
-//                   list_favorite = userController.addFavorite(username, professional.getEmail(),
-//                           professional.getName(), professional.getCpf(), professional.getPhone(),
-//                           professional.getStreet(), professional.getNumber(),
-//                           professional.getNeighborhood(), professional.getCity(),
-//                           professional.getState(), professional.getSite(),
-//                           professional.getSocialNetwork(),
-//                           String.valueOf(professional.getEvaluationsAverage()),
-//                           professional.getServices().toString(), service , handler);
-//                   list_is_favorite.add(0,1);
-               } else if (list_is_favorite.size() != 0 && list_is_favorite.get(0) == 1) {
-                   userController.removeFavorite(username, professional.getEmail(),service, handler);
-                   list_is_favorite.add(0,0);
+               if(listIsFavorite.size() != 0 && listIsFavorite.get(0) == 0) {
+                   listFavorite = userController.addFavorite(username, professional.getEmail(),
+                           professional.getName(), professional.getCpf(), professional.getPhone1(),
+                           professional.getStreet(), professional.getNumber(),
+                           professional.getNeighborhood(), professional.getCity(),
+                           professional.getState(), professional.getSite(),
+                           professional.getSocialNetwork1(), String.valueOf(professional.getAvg()),
+                           professional.getService(), handler);
+                   listIsFavorite.add(0,1);
+               } else if (listIsFavorite.size() != 0 && listIsFavorite.get(0) == 1) {
+                   userController.removeFavorite(username, professional.getEmail(),
+                           professional.getService(), handler);
+                   listIsFavorite.add(0,0);
                }
             }
         });
@@ -179,8 +169,6 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        Log.d("professional", professional.toString()+"");
-
 //        if (professional.getNamePicture() != null) {
 //            File f = new File(DownloadFile.getPathDownload() + File.separator + professional.getNamePicture());
 //            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
@@ -191,18 +179,10 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        String service = mySharedPreferences.getService();
-        if (service.equals(getApplication().getString(R.string.title_electricians))){
-            service = "Eletricista";
-        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
-            service = "Encanador";
-        } else {
-            service = "Montador";
-        }
         assessments = evaluationController.getAssessmentsByProfessional(professional.getEmail(),
-                service, handler);
+                handler);
         assessmentsAverage = evaluationController.getAssessmentsAverageByProfessional(professional.
-                getEmail(), service, handler);
+                getEmail(), handler);
 
     }
 
@@ -226,14 +206,6 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
         }
-
-//        String services = "";
-//        for (int i = 0; i < professional.getServices().length ; i++) {
-//            services += professional.getServices()[i];
-//            if(i != professional.getServices().length - 1){
-//                services += ", ";
-//            }
-//        }
         tv_services.setText(professional.getService());
         rb_evaluation.setRating(professional.getAvg());
     }
