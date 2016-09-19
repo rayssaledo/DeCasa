@@ -1,11 +1,11 @@
 package projeto1.ufcg.edu.decasa.views;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -130,9 +130,15 @@ public class MyFavoritesActivity extends AppCompatActivity {
     }
 
     public void setList(){
-        list_fitter_professionals = userController.getFavoritesFittersUser(username, handler);
-        list_plumber_professionals = userController.getFavoritesPlumbersUser(username, handler);
-        list_electrician_professionals = userController.getFavoritesElectriciansUser(username, handler);
+        list_fitter_professionals = userController.getFavoritesUserByService(username, "Montador",
+                handler);
+        Log.d("FavoritesTest", "Listar montadores");
+        list_plumber_professionals = userController.getFavoritesUserByService(username, "Encanador",
+                handler);
+        Log.d("FavoritesTest", "Listar encanadores");
+        list_electrician_professionals = userController.getFavoritesUserByService(username,
+                "Eletricista", handler);
+        Log.d("FavoritesTest", "Listar eletricistas");
 
         if (list_fitter_professionals.size() != 0){
             adapter_fitter = new ProfessionalsAdapter(getApplicationContext(),
