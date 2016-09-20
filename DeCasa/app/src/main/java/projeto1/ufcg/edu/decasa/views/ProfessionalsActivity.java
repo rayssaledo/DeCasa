@@ -40,7 +40,6 @@ import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class ProfessionalsActivity extends AppCompatActivity {
 
-
     private ListView listViewProfessionals;
     private ProfessionalsAdapter professionalsAdapter;
     private ProfessionalController professionalController;
@@ -51,7 +50,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
     private MySharedPreferences mySharedPreferences;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private RelativeLayout mDrawerPane;
     private List<Professional> listProfessionals;
     private String service;
 
@@ -98,6 +96,11 @@ public class ProfessionalsActivity extends AppCompatActivity {
                                 ProfessionalProfileGoldPlanActivity.class);
                         intent.putExtra("PROFESSIONAL", professional);
                         startActivity(intent);
+                    } else if (professional.getPlan().toLowerCase().equals("free")){
+                        Intent intent = new Intent(ProfessionalsActivity.this,
+                                ProfessionalProfileFreePlanActivity.class);
+                        intent.putExtra("PROFESSIONAL", professional);
+                        startActivity(intent);
                     }
                 } else {
                     Intent intent = new Intent(ProfessionalsActivity.this,
@@ -116,7 +119,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         });
 
     }
-
 
     @Override
     protected void onResume() {
@@ -242,7 +244,6 @@ public class ProfessionalsActivity extends AppCompatActivity {
         });
 
         final Button btn_cancel = (Button) dialogAddress.findViewById(R.id.btn_cancel);
-
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -295,7 +296,7 @@ public class ProfessionalsActivity extends AppCompatActivity {
     public void setmDrawer(ArrayList<NavItem> mNavItems) {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
+        RelativeLayout mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
         final ListView mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter2);

@@ -14,6 +14,8 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -28,6 +30,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +38,7 @@ import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.ProfessionalController;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.DownloadFile;
 import projeto1.ufcg.edu.decasa.utils.MainMapFragment;
 import projeto1.ufcg.edu.decasa.utils.MapWrapperLayout;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
@@ -233,13 +237,16 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                     infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.
                             infowindow_professional, null);
 
-                    iv_professional = (CircularImageView) infoWindow.findViewById(R.id.iv_professional);
-                    //Log.d("IMAGEVIEW", professionalInfo.getNamePicture()+"");
-//                    if (professionalInfo.getNamePicture() != null && !professionalInfo.getNamePicture().equals("null")) {
-//                        File f = new File(DownloadFile.getPathDownload() + File.separator + professionalInfo.getNamePicture());
-//                        Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
-//                        iv_professional.setImageBitmap(bmp);
-//                    }
+                    iv_professional = (CircularImageView) infoWindow.
+                            findViewById(R.id.iv_professional);
+
+                    if (professionalInfo.getPicture() != null &&
+                            !professionalInfo.getPicture().equals("null")) {
+                        File f = new File(DownloadFile.getPathDownload() + File.separator +
+                                professionalInfo.getPicture());
+                        Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+                        iv_professional.setImageBitmap(bmp);
+                    }
 
                     tv_profession = (TextView) infoWindow.findViewById(R.id.tv_profession);
                     service = mySharedPreferences.getService();
@@ -257,7 +264,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
                     rb_evaluation = (RatingBar) infoWindow.findViewById(R.id.
                             rb_evaluation_infowindow);
-                    //rb_evaluation.setRating(professionalInfo.getEvaluationsAverage());
+                    rb_evaluation.setRating(professionalInfo.getAvg());
 
                     btn_more_information = (Button) infoWindow.findViewById(R.id.
                             btn_more_information);

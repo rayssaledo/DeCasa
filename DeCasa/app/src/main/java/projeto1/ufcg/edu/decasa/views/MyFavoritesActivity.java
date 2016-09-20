@@ -40,7 +40,6 @@ public class MyFavoritesActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 108) {
-
                 adapter_fitter = new ProfessionalsAdapter(MyFavoritesActivity.this,
                         list_fitter_professionals);
                 lv_fitter.setAdapter(adapter_fitter);
@@ -87,15 +86,21 @@ public class MyFavoritesActivity extends AppCompatActivity {
         lv_plumber = (ListView) findViewById(R.id.lvf_plumber);
         lv_electrician = (ListView) findViewById(R.id.lvf_electrician);
 
-
         lv_fitter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_fitter.getItem(position);
+                if (professional.getPlan().toLowerCase().equals("gold")){
                     Intent intent = new Intent(MyFavoritesActivity.this,
                             ProfessionalProfileGoldPlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
+                } else if (professional.getPlan().toLowerCase().equals("free")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileFreePlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -103,10 +108,17 @@ public class MyFavoritesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_plumber.getItem(position);
-                Intent intent = new Intent(MyFavoritesActivity.this,
-                        ProfessionalProfileGoldPlanActivity.class);
-                intent.putExtra("PROFESSIONAL", professional);
-                startActivity(intent);
+                if (professional.getPlan().toLowerCase().equals("gold")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileGoldPlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else if (professional.getPlan().toLowerCase().equals("free")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileFreePlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -114,13 +126,19 @@ public class MyFavoritesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_electrictian.getItem(position);
-                Intent intent = new Intent(MyFavoritesActivity.this,
-                        ProfessionalProfileGoldPlanActivity.class);
-                intent.putExtra("PROFESSIONAL", professional);
-                startActivity(intent);
+                if (professional.getPlan().toLowerCase().equals("gold")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileGoldPlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else if (professional.getPlan().toLowerCase().equals("free")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileFreePlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                }
             }
         });
-
 
         setList();
 

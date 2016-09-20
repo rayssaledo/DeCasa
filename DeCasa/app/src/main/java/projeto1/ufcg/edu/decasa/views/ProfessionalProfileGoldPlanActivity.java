@@ -1,6 +1,8 @@
 package projeto1.ufcg.edu.decasa.views;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import com.pkmmte.view.CircularImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
@@ -23,6 +26,7 @@ import projeto1.ufcg.edu.decasa.controllers.EvaluationController;
 import projeto1.ufcg.edu.decasa.controllers.UserController;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.utils.DownloadFile;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 
 public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
@@ -40,14 +44,11 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
     private RatingBar rb_evaluation;
     private List<Evaluation> assessments;
     private List<Float> assessmentsAverage;
-    private float assessmentsAverageValue;
     private UserController userController;
     private  List<Integer> listFavorite;
-    private MySharedPreferences mySharedPreferences;
     private String username;
     private  ImageButton ib_favorite;
     private List<Integer> listIsFavorite;
-    private Button btn_evaluations;
     private CircularImageView iv_professional;
 
     public static View mLoadingProfileProfessional;
@@ -56,13 +57,13 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
 
         @Override
         public void handleMessage(Message msg) {
-            //int numAssessmentsProfessional = assessments.size();
+            int numAssessmentsProfessional = assessments.size();
             if (msg.what == 101) {
-                //tv_number_assessments.setText(numAssessmentsProfessional);
+                tv_number_assessments.setText(String.valueOf(numAssessmentsProfessional));
             }
             if (msg.what == 104) {
                 if (assessmentsAverage != null) {
-                    assessmentsAverageValue = assessmentsAverage.get(0);
+                    float assessmentsAverageValue = assessmentsAverage.get(0);
                     rb_evaluation.setRating(assessmentsAverageValue);
                 }
             }
@@ -96,7 +97,7 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_professional_profile_gold_plan);
 
         mLoadingProfileProfessional =  findViewById(R.id.loadingProfileProfessional);
-        mySharedPreferences = new MySharedPreferences(getApplicationContext());
+        MySharedPreferences mySharedPreferences = new MySharedPreferences(getApplicationContext());
         evaluationController = new EvaluationController(ProfessionalProfileGoldPlanActivity.this);
         userController = new UserController(ProfessionalProfileGoldPlanActivity.this);
         tv_professional_name = (TextView) findViewById(R.id.tv_professional_name);
@@ -108,6 +109,7 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         tv_website = (TextView) findViewById(R.id.tv_website);
         rb_evaluation = (RatingBar) findViewById(R.id.rb_evaluation);
         tv_number_assessments = (TextView) findViewById(R.id.tv_number_assessments);
+        iv_professional = (CircularImageView) findViewById(R.id.iv_professional);
 
         username = mySharedPreferences.getUserLogged();
         Intent it = getIntent();
@@ -116,10 +118,6 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         listIsFavorite = new ArrayList<>();
         listIsFavorite = userController.getIsFavorite(username, professional.getEmail(),
                 professional.getService(), handler);
-
-
-        setTitle(professional.getName());
-        setProfile();
 
         ImageButton ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);
         ib_call.setOnClickListener(new View.OnClickListener() {
@@ -132,8 +130,6 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        iv_professional = (CircularImageView) findViewById(R.id.iv_professional);
 
         ib_favorite = (ImageButton) findViewById(R.id.ib_favorite);
         ib_favorite.setOnClickListener(new View.OnClickListener() {
@@ -160,8 +156,7 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
             }
         });
 
-
-        btn_evaluations = (Button) findViewById(R.id.btn_evaluations);
+        Button btn_evaluations = (Button) findViewById(R.id.btn_evaluations);
         btn_evaluations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,27 +167,21 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
             }
         });
 
+        setTitle(professional.getName());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-//        if (professional.getNamePicture() != null) {
-//            File f = new File(DownloadFile.getPathDownload() + File.separator + professional.getNamePicture());
-//            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
-//            iv_professional.setImageBitmap(bmp);
-//        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        setProfile();
         assessments = evaluationController.getAssessmentsByProfessional(professional.getEmail(),
                 handler);
         assessmentsAverage = evaluationController.getAssessmentsAverageByProfessional(professional.
                 getEmail(), handler);
-
     }
-
-
 
     private void setProfile() {
         String address = professional.getStreet() + ", " + professional.getNumber() + ", " +
@@ -207,7 +196,8 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         } else {
             tv_website.setVisibility(View.INVISIBLE);
         }
-        if(professional.getSocialNetwork1() != null && !professional.getSocialNetwork1().equals("")){
+        if(professional.getSocialNetwork1() != null &&
+                !professional.getSocialNetwork1().equals("")){
             tv_social_network.setText(professional.getSocialNetwork1());
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
@@ -215,6 +205,12 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         tv_service.setText(professional.getService());
         tv_description.setText(professional.getDescription());
         rb_evaluation.setRating(professional.getAvg());
+        if (professional.getPicture() != null) {
+            File f = new File(DownloadFile.getPathDownload() + File.separator +
+                    professional.getPicture());
+            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+            iv_professional.setImageBitmap(bmp);
+        }
     }
 
     @Override

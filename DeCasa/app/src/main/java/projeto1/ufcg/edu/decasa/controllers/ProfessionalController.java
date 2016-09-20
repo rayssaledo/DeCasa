@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Professional;
 import projeto1.ufcg.edu.decasa.utils.DownloadFile;
@@ -22,7 +21,6 @@ import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 
 public class ProfessionalController {
@@ -86,11 +84,11 @@ public class ProfessionalController {
                                     description, email, avgFloat, picture, plan);
                             professional.setLocation(new Location(street + ", " + number + " " +
                                     city + " " + state));
-//                            if (picture != null && !picture.equals("null")) {
-//                                new DownloadFile(picture).
-//                                        execute("http://decasa-decasa.rhcloud.com/uploads/" +
-//                                                picture);
-//                            }
+                            if (picture != null && !picture.equals("null")) {
+                                new DownloadFile(picture).
+                                        execute("http://decasa-decasa.rhcloud.com/uploads/" +
+                                                picture);
+                            }
                             professionals.add(professional);
                         } catch (Exception e) {
                             e.printStackTrace();
