@@ -32,22 +32,23 @@ public class ProfessionalProfileFreePlanActivity extends AppCompatActivity {
     private MySharedPreferences mySharedPreferences;
     private CircularImageView iv_professional;
     private TextView tv_professional_name;
-    private RatingBar rb_evaluation;
     private TextView tv_service;
     private TextView tv_description;
     private TextView tv_phone_professional;
-    private  ImageButton ib_favorite;
+    private TextView tv_number_assessments;
+    private RatingBar rb_evaluation;
+    private ImageButton ib_favorite;
     private Button btn_evaluations;
 
-    private String service;
     private List<Evaluation> assessments;
     private List<Float> assessmentsAverage;
-    private  List<Integer> list_favorite;
+    private List<Integer> list_favorite;
     private List<Integer> list_is_favorite;
-    private float assessmentsAverageValue;
     private EvaluationController evaluationController;
     private UserController userController;
     private String username;
+    private String service;
+    private float assessmentsAverageValue;
 
     private Handler handler = new Handler() {
 
@@ -98,6 +99,7 @@ public class ProfessionalProfileFreePlanActivity extends AppCompatActivity {
         userController = new UserController(ProfessionalProfileFreePlanActivity.this);
         iv_professional = (CircularImageView) findViewById(R.id.iv_professional);
         tv_professional_name = (TextView) findViewById(R.id.tv_professional_name);
+        //tv_number_assessments = (TextView) findViewById(R.id.tv_number_assessments);
         rb_evaluation = (RatingBar) findViewById(R.id.rb_evaluation);
         tv_service = (TextView) findViewById(R.id.tv_service);
         tv_description = (TextView) findViewById(R.id.tv_description);

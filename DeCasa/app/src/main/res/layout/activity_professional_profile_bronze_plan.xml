@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="projeto1.ufcg.edu.decasa.views.ProfessionalProfileFreePlanActivity">
+    tools:context="projeto1.ufcg.edu.decasa.views.ProfessionalProfileBronzePlanActivity">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -188,7 +188,7 @@
                         android:text="@string/tv_description"
                         android:layout_marginTop="10dp"
                         android:textSize="16sp"
-                        android:maxLength="50"/>
+                        android:maxLength="100"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -223,6 +223,24 @@
                             android:contentDescription="@string/desc_phone_professional"/>
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/text_social_network"/>
+
+                    <TextView
+                        android:id="@+id/tv_social_network"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        android:hint="@string/hint_social_network" />
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -247,4 +265,5 @@
     </RelativeLayout>
 
 </LinearLayout>
+
 

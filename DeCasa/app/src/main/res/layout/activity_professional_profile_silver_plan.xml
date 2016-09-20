@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="projeto1.ufcg.edu.decasa.views.ProfessionalProfileFreePlanActivity">
+    tools:context=".views.ProfessionalProfileSilverPlanActivity">
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -65,7 +65,6 @@
                         android:layout_alignEnd="@+id/tv_professional_name"
                         android:background="@color/white"
                         android:contentDescription="@string/desc_favorite" />
-
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
@@ -130,12 +129,12 @@
                                 android:contentDescription="@string/desc_evaluators"/>
 
                             <!--<TextView-->
-                            <!--android:id="@+id/tv_number_assessments"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:text="@string/number_assessments"-->
-                            <!--android:textSize="16sp"-->
-                            <!--android:layout_toEndOf="@+id/ib_evaluation"/>-->
+                                <!--android:id="@+id/tv_number_assessments"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="match_parent"-->
+                                <!--android:text="@string/number_assessments"-->
+                                <!--android:textSize="16sp"-->
+                                <!--android:layout_toEndOf="@+id/ib_evaluation"/>-->
 
                         </RelativeLayout>
 
@@ -188,7 +187,41 @@
                         android:text="@string/tv_description"
                         android:layout_marginTop="10dp"
                         android:textSize="16sp"
-                        android:maxLength="50"/>
+                        android:maxLength="100"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/text_address_professional"
+                        android:layout_marginTop="20dp"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_address_professional"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/hint_address_professional"
+                            android:layout_marginTop="10dp"
+                            android:textSize="16sp"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@+id/ib_map_professional"/>
+
+                        <ImageButton
+                            android:id="@+id/ib_map_professional"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:src="@mipmap/user_location_icon"
+                            android:background="@color/white"
+                            android:contentDescription="@string/desc_phone_professional"
+                            android:layout_alignParentEnd="true"/>
+
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -223,6 +256,40 @@
                             android:contentDescription="@string/desc_phone_professional"/>
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/text_social_network"/>
+
+                    <TextView
+                        android:id="@+id/tv_social_network"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        android:hint="@string/hint_social_network" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/text_website"/>
+
+                    <TextView
+                        android:id="@+id/tv_website"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        android:hint="@string/hint_website" />
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -247,4 +314,3 @@
     </RelativeLayout>
 
 </LinearLayout>
-

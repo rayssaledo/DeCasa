@@ -98,7 +98,9 @@
             android:name=".views.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppThemeCustom" />
-        <activity android:name=".views.ProfessionalProfileFreePlanActivity"></activity>
+        <activity android:name=".views.ProfessionalProfileFreePlanActivity" />
+        <activity android:name=".views.ProfessionalProfileSilverPlanActivity" />
+        <activity android:name=".views.ProfessionalProfileBronzePlanActivity"></activity>
     </application>
 
 </manifest>
