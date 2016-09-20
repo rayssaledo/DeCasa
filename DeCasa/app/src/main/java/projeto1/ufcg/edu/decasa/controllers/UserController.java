@@ -247,31 +247,51 @@ public class UserController {
     }
 
 
-    public List<Integer> addFavorite(final String username,final String email, final String name,
-                                     final String cpf, final String phone, final String street,
-                                     final String number, final String neighborhood,
-                                     final String city, final String state, final String site,
-                                     final String socialNetwork, final String avg,
-                                     final String service, final Handler handler) {
+    public List<Integer> addFavorite(final String username, final String nameProfessional,
+                                     final String businessNameProfessional,
+                                     final String cpfProfessional, final String phoneProfessional1,
+                                     final String phoneProfessional2,
+                                     final String phoneProfessional3,
+                                     final String phoneProfessional4,
+                                     final String streetProfessional,
+                                     final String numberProfessional,
+                                     final String neighborhoodProfessional,
+                                     final String cityProfessional, final String stateProfessional,
+                                     final String siteProfessional,
+                                     final String socialNetworkProfessional1,
+                                     final String socialNetworkProfessional2,
+                                     final String serviceProfessional,
+                                     final String descriptionProfessional,
+                                     final String emailProfessional, final String avgProfessional,
+                                     final String plan, final String picture,
+                                     final Handler handler) {
 
         final List<Integer> listIsFavorite = new ArrayList<>();
         String urlAddFavorite = url + "add-favorite";
         final JSONObject json = new JSONObject();
         try {
             json.put("username", username);
-            json.put("emailProfessional", email);
-            json.put("nameProfessional", name);
-            json.put("cpfProfessional", cpf);
-            json.put("phoneProfessional", phone);
-            json.put("streetProfessional", street);
-            json.put("numberProfessional", number);
-            json.put("neighborhoodProfessional", neighborhood);
-            json.put("cityProfessional", city);
-            json.put("stateProfessional", state);
-            json.put("siteProfessional", site);
-            json.put("socialNetworkProfessional", socialNetwork);
-            json.put("serviceProfessional", service);
-            json.put("avgProfessional", avg);
+            json.put("nameProfessional", nameProfessional);
+            json.put("businessNameProfessional", businessNameProfessional);
+            json.put("cpfProfessional", cpfProfessional);
+            json.put("phoneProfessional1", phoneProfessional1);
+            json.put("phoneProfessional2", phoneProfessional2);
+            json.put("phoneProfessional3", phoneProfessional3);
+            json.put("phoneProfessional4", phoneProfessional4);
+            json.put("streetProfessional", streetProfessional);
+            json.put("numberProfessional", numberProfessional);
+            json.put("neighborhoodProfessional", neighborhoodProfessional);
+            json.put("cityProfessional", cityProfessional);
+            json.put("stateProfessional", stateProfessional);
+            json.put("siteProfessional", siteProfessional);
+            json.put("socialNetworkProfessional1", socialNetworkProfessional1);
+            json.put("socialNetworkProfessional2", socialNetworkProfessional2);
+            json.put("serviceProfessional", serviceProfessional);
+            json.put("descriptionProfessional", descriptionProfessional);
+            json.put("emailProfessional", emailProfessional);
+            json.put("avgProfessional", avgProfessional);
+            json.put("plan", plan);
+            json.put("picture", picture);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -420,38 +440,45 @@ public class UserController {
         String urlFavoritesUserByService = url + "get-favorites-user-by-service?username=" +
                 username + "&service=" + service ;
 
-        Log.d("FavoritesTest", "Entrou no método");
         mHttp.get(urlFavoritesUserByService, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    Log.d("FavoritesTest", "Entrou no IF");
                     JSONArray jsonArray = response.getJSONArray("result");
-                    Log.d("FavoritesTest", jsonArray.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonFavorites = jsonArray.getJSONObject(i);
                         String favorites = jsonFavorites.getString("list");
                         JSONArray jsonArrayFavorites = new JSONArray(favorites);
                         for (int j = 0; j < jsonArrayFavorites.length(); j++) {
                             JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
-                            Log.d("FavoritesTest", jsonFavorite.toString());
                             String name = jsonFavorite.getString("name");
+                            String businessName = jsonFavorite.getString("businessName");
                             String cpf = jsonFavorite.getString("cpf");
-                            String phone = jsonFavorite.getString("phone");
+                            String phone1 = jsonFavorite.getString("phone1");
+                            String phone2 = jsonFavorite.getString("phone2");
+                            String phone3 = jsonFavorite.getString("phone3");
+                            String phone4 = jsonFavorite.getString("phone4");
                             String street = jsonFavorite.getString("street");
                             String number = jsonFavorite.getString("number");
                             String neighborhood = jsonFavorite.getString("neighborhood");
                             String city = jsonFavorite.getString("city");
                             String state = jsonFavorite.getString("state");
                             String site = jsonFavorite.getString("site");
-                            String socialNetwork = jsonFavorite.getString("socialNetwork");
+                            String socialNetwork1 = jsonFavorite.getString("socialNetwork1");
+                            String socialNetwork2 = jsonFavorite.getString("socialNetwork2");
                             String service = jsonFavorite.getString("service");
-                            String email = jsonFavorite.getString("email");
+                            String description = jsonFavorite.getString("description");
                             float avg = Float.valueOf(jsonFavorite.getString("avg"));
+                            String email = jsonFavorite.getString("email");
+                            String picture = jsonFavorite.getString("picture");
+                            String plan = jsonFavorite.getString("plan");
+
                             try {
-                                Professional professional = new Professional(name, cpf, phone,
-                                        street, number, neighborhood, city, state, site,
-                                        socialNetwork,service, email, avg);
+                                Professional professional = new Professional(name, businessName,
+                                        cpf, phone1, phone2, phone3, phone4, street, number,
+                                        neighborhood, city, state, site, socialNetwork1,
+                                        socialNetwork2, service, description, email, avg, picture,
+                                        plan);
                                 professional.setLocation(new Location(street + ", " + number + " " +
                                         city + " " + state));
                                 professionals.add(professional);
@@ -465,7 +492,6 @@ public class UserController {
                     message.what = 108;
                     handler.sendMessage(message);
                 } else {
-                    Log.d("FavoritesTest", "Entrou no ELSE");
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
                             .setMessage(response.getString("msg")) //TODO internacionalizar

@@ -173,17 +173,18 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_service"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/text_services"
+                        android:text="Serviço"
                         android:textStyle="bold"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/tv_services"
+                        android:id="@+id/tv_description"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="@string/hint_services"
+                        android:text="Descrição do serviço"
                         android:layout_marginTop="10dp"
                         android:textSize="16sp"/>
 
@@ -270,6 +271,9 @@
                         android:layout_marginEnd="30dp"
                         android:layout_marginTop="10dp"
                         android:textSize="16sp"
+                        android:linksClickable="true"
+                        android:autoLink="web"
+                        android:textColorLink="@color/colorPrimaryDark"
                         android:hint="@string/hint_social_network" />
 
                     <TextView
@@ -286,6 +290,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
                         android:textSize="16sp"
+                        android:linksClickable="true"
+                        android:autoLink="web"
+                        android:textColorLink="@color/colorPrimaryDark"
                         android:hint="@string/hint_website" />
 
                 </LinearLayout>

@@ -24,7 +24,6 @@ public class Professional implements Parcelable {
     private String service;
     private String description;
     private String email;
-    private String password;
     private String picture;
     private String plan;
     private float avg;
@@ -35,74 +34,7 @@ public class Professional implements Parcelable {
                          String phone3, String phone4, String street, String number,
                          String neighborhood, String city, String state, String site,
                          String socialNetwork1, String socialNetwork2, String service,
-                         String description, String email, String password, float avg,
-                         String picture, String plan) throws Exception {
-
-        if(name == null || name.equals("")){
-            throw new Exception("Professional name is invalid.");
-        }
-        if(cpf == null || cpf.equals("")){
-            throw new Exception("CPF is invalid.");
-        }
-        if(phone1 == null || phone1.equals("")){
-            throw new Exception("Phone1  is invalid.");
-        }
-        if(street == null || street.equals("")){
-            throw new Exception("Street is invalid.");
-        }
-        if(number == null || number.equals("")){
-            throw new Exception("Number is invalid.");
-        }
-        if(neighborhood == null || neighborhood.equals("")){
-            throw new Exception("Neighborhood is invalid.");
-        }
-        if(city == null || city.equals("")){
-            throw new Exception("City is invalid.");
-        }
-        if(state == null || state.equals("")){
-            throw new Exception("State is invalid.");
-        }
-        if(service == null || service.equals("")){
-            throw new Exception("Service is invalid.");
-        }
-        if(email == null || email.equals("")){
-            throw new Exception("Email is invalid.");
-        }
-        if(password == null || password.equals("")){
-            throw new Exception("Password is invalid.");
-        }
-        if(plan == null || plan.equals("")){
-            throw new Exception("Plan is invalid.");
-        }
-
-        this.name = name;
-        this.businessName = businessName;
-        this.cpf = cpf;
-        this.phone1 = phone1;
-        this.phone2 = phone2;
-        this.phone3 = phone3;
-        this.phone4 = phone4;
-        this.street = street;
-        this.number = number;
-        this.neighborhood = neighborhood;
-        this.city = city;
-        this.state = state;
-        this.site = site;
-        this.socialNetwork1 = socialNetwork1;
-        this.socialNetwork2 = socialNetwork2;
-        this.service = service;
-        this.description = description;
-        this.email = email;
-        this.password = password;
-        this.avg = avg;
-        this.picture = picture;
-        this.plan = plan;
-
-    }
-
-    public Professional (String name, String cpf, String phone1, String street, String number,
-                         String neighborhood, String city, String state, String site,
-                         String socialNetwork1, String service, String email,float avg)
+                         String description, String email, float avg, String picture, String plan)
             throws Exception {
 
         if(name == null || name.equals("")){
@@ -135,10 +67,17 @@ public class Professional implements Parcelable {
         if(email == null || email.equals("")){
             throw new Exception("Email is invalid.");
         }
+        if(plan == null || plan.equals("")){
+            throw new Exception("Plan is invalid.");
+        }
 
         this.name = name;
+        this.businessName = businessName;
         this.cpf = cpf;
         this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.phone3 = phone3;
+        this.phone4 = phone4;
         this.street = street;
         this.number = number;
         this.neighborhood = neighborhood;
@@ -146,9 +85,13 @@ public class Professional implements Parcelable {
         this.state = state;
         this.site = site;
         this.socialNetwork1 = socialNetwork1;
+        this.socialNetwork2 = socialNetwork2;
         this.service = service;
+        this.description = description;
         this.email = email;
         this.avg = avg;
+        this.picture = picture;
+        this.plan = plan;
 
     }
 
@@ -171,7 +114,6 @@ public class Professional implements Parcelable {
         service = in.readString();
         description = in.readString();
         email = in.readString();
-        password = in.readString();
         picture = in.readString();
         plan = in.readString();
         avg = in.readFloat();
@@ -335,14 +277,6 @@ public class Professional implements Parcelable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPicture() {
         return picture;
     }
@@ -408,7 +342,6 @@ public class Professional implements Parcelable {
         parcel.writeString(service);
         parcel.writeString(description);
         parcel.writeString(email);
-        parcel.writeString(password);
         parcel.writeString(picture);
         parcel.writeString(plan);
         parcel.writeFloat(avg);

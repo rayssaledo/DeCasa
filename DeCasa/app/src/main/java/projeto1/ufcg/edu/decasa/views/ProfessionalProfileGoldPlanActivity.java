@@ -30,7 +30,8 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
     private EvaluationController evaluationController;
     private Professional professional;
     private TextView tv_professional_name;
-    private TextView tv_services;
+    private TextView tv_service;
+    private TextView tv_description;
     private TextView tv_address_professional;
     private TextView tv_phone_professional;
     private TextView tv_social_network;
@@ -99,7 +100,8 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         evaluationController = new EvaluationController(ProfessionalProfileGoldPlanActivity.this);
         userController = new UserController(ProfessionalProfileGoldPlanActivity.this);
         tv_professional_name = (TextView) findViewById(R.id.tv_professional_name);
-        tv_services = (TextView) findViewById(R.id.tv_services);
+        tv_service = (TextView) findViewById(R.id.tv_service);
+        tv_description = (TextView) findViewById(R.id.tv_description);
         tv_address_professional = (TextView) findViewById(R.id.tv_address_professional);
         tv_phone_professional = (TextView) findViewById(R.id.tv_phone_professional);
         tv_social_network = (TextView) findViewById(R.id.tv_social_network);
@@ -138,13 +140,17 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                if(listIsFavorite.size() != 0 && listIsFavorite.get(0) == 0) {
-                   listFavorite = userController.addFavorite(username, professional.getEmail(),
-                           professional.getName(), professional.getCpf(), professional.getPhone1(),
+                   listFavorite = userController.addFavorite(username, professional.getName(),
+                           professional.getBusinessName(), professional.getCpf(),
+                           professional.getPhone1(), professional.getPhone2(),
+                           professional.getPhone3(), professional.getPhone4(),
                            professional.getStreet(), professional.getNumber(),
                            professional.getNeighborhood(), professional.getCity(),
                            professional.getState(), professional.getSite(),
-                           professional.getSocialNetwork1(), String.valueOf(professional.getAvg()),
-                           professional.getService(), handler);
+                           professional.getSocialNetwork1(), professional.getSocialNetwork2(),
+                           professional.getService(), professional.getDescription(),
+                           professional.getEmail(), String.valueOf(professional.getAvg()),
+                           professional.getPlan(), professional.getPicture(), handler);
                    listIsFavorite.add(0,1);
                } else if (listIsFavorite.size() != 0 && listIsFavorite.get(0) == 1) {
                    userController.removeFavorite(username, professional.getEmail(),
@@ -206,7 +212,8 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
         }
-        tv_services.setText(professional.getService());
+        tv_service.setText(professional.getService());
+        tv_description.setText(professional.getDescription());
         rb_evaluation.setRating(professional.getAvg());
     }
 

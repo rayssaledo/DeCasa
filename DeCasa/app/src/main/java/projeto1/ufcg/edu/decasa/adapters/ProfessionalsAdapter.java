@@ -55,10 +55,12 @@ public class ProfessionalsAdapter extends BaseAdapter {
         Professional item = items.get(position);
         convertView = mInflater.inflate(R.layout.my_item_professional, null);
 
-//        if (!item.getPlan().equals("free")) {
-//            String address = item.getNeighborhood() + " - " + item.getCity() ;
-//            ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
-//        }
+        if (!item.getPlan().equals("free")) {
+            String address = item.getNeighborhood() + " - " + item.getCity() ;
+            ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
+        }
+
+        Log.d("NAME", item.getName());
 
         ((TextView) convertView.findViewById(R.id.tv_name)).setText(item.getName());
         ((RatingBar) convertView.findViewById(R.id.rb_evaluation_professionals)).
