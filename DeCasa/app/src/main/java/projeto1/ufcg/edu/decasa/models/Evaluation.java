@@ -11,10 +11,10 @@ public class Evaluation implements Parcelable{
     private String comment;
     private String date;
     private String photo;
-    private String service;
+    //private String service;
 
     public Evaluation(String professionalValued, String usernameValuer, float evaluationValue,
-                      String comment, String date, String photo, String service) throws Exception {
+                      String comment, String date, String photo) throws Exception {
 
         if(professionalValued == null || professionalValued.equals("")){
             throw new Exception("Professional valued is invalid.");
@@ -31,9 +31,9 @@ public class Evaluation implements Parcelable{
         if(photo == null || photo.equals("")){
             throw new Exception("Photo is invalid.");
         }
-        if(service == null || service.equals("")){
-            throw new Exception("Service is invalid.");
-        }
+//        if(service == null || service.equals("")){
+//            throw new Exception("Service is invalid.");
+//        }
 
         this.professionalValued = professionalValued;
         this.usernameValuer = usernameValuer;
@@ -41,7 +41,7 @@ public class Evaluation implements Parcelable{
         this.comment = comment;
         this.date = date;
         this.photo = photo;
-        this.service = service;
+        //this.service = service;
     }
 
     protected Evaluation(Parcel in) {
@@ -51,7 +51,7 @@ public class Evaluation implements Parcelable{
         comment = in.readString();
         date = in.readString();
         photo = in.readString();
-        service = in.readString();
+        //service = in.readString();
     }
 
     public static final Creator<Evaluation> CREATOR = new Creator<Evaluation>() {
@@ -129,16 +129,16 @@ public class Evaluation implements Parcelable{
         this.photo = photo;
     }
 
-    public String gerService() {
-        return service;
-    }
-
-    public void serService(String service) throws Exception {
-        if(service == null || service.equals("")){
-            throw new Exception("Service is invalid.");
-        }
-        this.service = service;
-    }
+//    public String gerService() {
+//        return service;
+//    }
+//
+//    public void serService(String service) throws Exception {
+//        if(service == null || service.equals("")){
+//            throw new Exception("Service is invalid.");
+//        }
+//        this.service = service;
+//    }
 
     @Override
     public int describeContents() {
@@ -153,6 +153,6 @@ public class Evaluation implements Parcelable{
         parcel.writeString(comment);
         parcel.writeString(date);
         parcel.writeString(photo);
-        parcel.writeString(service);
+        //parcel.writeString(service);
     }
 }

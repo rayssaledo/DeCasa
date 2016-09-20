@@ -277,7 +277,7 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
                         state, photo, username, password, MainActivity.class, professional);
             } else {
                 userController.cadastre(name, birthDate, gender, street, number, neighborhood, city,
-                        state, photo, username, password, ProfileProfessionalActivity.class,
+                        state, photo, username, password, ProfessionalProfileGoldPlanActivity.class,
                         professional);
             }
         } else if (!validateName()) {

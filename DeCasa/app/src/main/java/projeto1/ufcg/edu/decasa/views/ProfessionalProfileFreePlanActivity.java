@@ -176,7 +176,7 @@ public class ProfessionalProfileFreePlanActivity extends AppCompatActivity {
 //        assessments = evaluationController.getAssessmentsByProfessional(professional.getEmail(),
 //                service, handler);
         assessmentsAverage = evaluationController.getAssessmentsAverageByProfessional(professional.
-                getEmail(), service, handler);
+                getEmail(), handler);
 
     }
 

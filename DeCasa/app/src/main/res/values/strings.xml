@@ -141,4 +141,5 @@
     <string name="edit_evaluation">Edit evaluation</string>
     <string name="tv_service">Service</string>
     <string name="tv_description">Description</string>
+    <string name="number_assessments">0</string>
 </resources>

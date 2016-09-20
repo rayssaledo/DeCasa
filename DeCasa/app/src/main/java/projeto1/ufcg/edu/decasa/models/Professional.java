@@ -4,43 +4,47 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Arrays;
-
 public class Professional implements Parcelable {
 
     private String name;
+    private String businessName;
     private String cpf;
-    private String phone;
-    private String neighborhood;
+    private String phone1;
+    private String phone2;
+    private String phone3;
+    private String phone4;
     private String street;
     private String number;
+    private String neighborhood;
     private String city;
     private String state;
     private String site;
-    private String socialNetwork;
-    private String namePicture;
+    private String socialNetwork1;
+    private String socialNetwork2;
+    private String service;
+    private String description;
     private String email;
-    private String password;
-    private String[] services;
-    private Location location;
-    private float evaluationsAverage;
+    private String picture;
+    private String plan;
+    private float avg;
     private int numberAssessments;
+    private Location location;
 
-    public Professional(String name, String cpf, String phone, String street, String number,
-                        String neighborhood, String city, String state, String site,
-                        String socialNetwork, String email, String password,
-                        String[] services, String NamePicture) throws Exception {
+    public Professional (String name, String businessName, String cpf, String phone1, String phone2,
+                         String phone3, String phone4, String street, String number,
+                         String neighborhood, String city, String state, String site,
+                         String socialNetwork1, String socialNetwork2, String service,
+                         String description, String email, float avg, String picture, String plan)
+            throws Exception {
+
         if(name == null || name.equals("")){
             throw new Exception("Professional name is invalid.");
         }
         if(cpf == null || cpf.equals("")){
             throw new Exception("CPF is invalid.");
         }
-        if(phone == null || phone.equals("")){
-            throw new Exception("Phone is invalid.");
-        }
-        if(neighborhood == null || neighborhood.equals("")){
-            throw new Exception("Neighborhood is invalid.");
+        if(phone1 == null || phone1.equals("")){
+            throw new Exception("Phone1  is invalid.");
         }
         if(street == null || street.equals("")){
             throw new Exception("Street is invalid.");
@@ -48,107 +52,73 @@ public class Professional implements Parcelable {
         if(number == null || number.equals("")){
             throw new Exception("Number is invalid.");
         }
-//        if(pictury == null || pictury.equals("")){
-//            throw new Exception("Pictury is invalid.");
-//        }
-        if(email == null || email.equals("")){
-            throw new Exception("Email is invalid.");
-        }
-        if(password == null || password.equals("")){
-            throw new Exception("Password is invalid.");
-        }
-        if(city == null || city.equals("")){
-            throw new Exception("City is invalid.");
-        }
-        if(state == null || state.equals("")){
-            throw new Exception("State is invalid.");
-        }
-        this.name = name;
-        this.cpf = cpf;
-        this.phone = phone;
-        this.neighborhood = neighborhood;
-        this.street = street;
-        this.number = number;
-        this.city = city;
-        this.state = state;
-        this.site = site;
-        this.socialNetwork = socialNetwork;
-        this.namePicture = NamePicture;
-        this.email = email;
-        this.password = password;
-        this.services = services;
-    }
-
-    public Professional(String name, String cpf, String phone, String street, String number,
-                        String neighborhood, String city, String state, String site,
-                        String socialNetwork, String email, String[] services) throws Exception {
-        if(name == null || name.equals("")){
-            throw new Exception("Professional name is invalid.");
-        }
-        if(cpf == null || cpf.equals("")){
-            throw new Exception("CPF is invalid.");
-        }
-        if(phone == null || phone.equals("")){
-            throw new Exception("Phone is invalid.");
-        }
         if(neighborhood == null || neighborhood.equals("")){
             throw new Exception("Neighborhood is invalid.");
         }
-        if(street == null || street.equals("")){
-            throw new Exception("Street is invalid.");
-        }
-        if(number == null || number.equals("")){
-            throw new Exception("Number is invalid.");
-        }
-//        if(pictury == null || pictury.equals("")){
-//            throw new Exception("Pictury is invalid.");
-//        }
-        if(email == null || email.equals("")){
-            throw new Exception("Email is invalid.");
-        }
-       // if(password == null || password.equals("")){
-         //   throw new Exception("Password is invalid.");
-       // }
         if(city == null || city.equals("")){
             throw new Exception("City is invalid.");
         }
         if(state == null || state.equals("")){
             throw new Exception("State is invalid.");
         }
+        if(service == null || service.equals("")){
+            throw new Exception("Service is invalid.");
+        }
+        if(email == null || email.equals("")){
+            throw new Exception("Email is invalid.");
+        }
+        if(plan == null || plan.equals("")){
+            throw new Exception("Plan is invalid.");
+        }
+
         this.name = name;
+        this.businessName = businessName;
         this.cpf = cpf;
-        this.phone = phone;
-        this.neighborhood = neighborhood;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.phone3 = phone3;
+        this.phone4 = phone4;
         this.street = street;
         this.number = number;
+        this.neighborhood = neighborhood;
         this.city = city;
         this.state = state;
         this.site = site;
-        this.socialNetwork = socialNetwork;
-        //this.pictury = pictury;
+        this.socialNetwork1 = socialNetwork1;
+        this.socialNetwork2 = socialNetwork2;
+        this.service = service;
+        this.description = description;
         this.email = email;
-        //this.password = password;
-         this.services = services;
+        this.avg = avg;
+        this.picture = picture;
+        this.plan = plan;
+
     }
 
     protected Professional(Parcel in) {
         name = in.readString();
+        businessName = in.readString();
         cpf = in.readString();
-        phone = in.readString();
+        phone1 = in.readString();
+        phone2 = in.readString();
+        phone3 = in.readString();
+        phone4 = in.readString();
         street = in.readString();
         number = in.readString();
         neighborhood = in.readString();
         city = in.readString();
         state = in.readString();
         site = in.readString();
-        socialNetwork = in.readString();
+        socialNetwork1 = in.readString();
+        socialNetwork2 = in.readString();
+        service = in.readString();
+        description = in.readString();
         email = in.readString();
-        password = in.readString();
-        namePicture = in.readString();
-        services = in.createStringArray();
-        location = in.readParcelable(Location.class.getClassLoader());
-        evaluationsAverage = in.readFloat();
+        picture = in.readString();
+        plan = in.readString();
+        avg = in.readFloat();
         numberAssessments = in.readInt();
+        location = in.readParcelable(Location.class.getClassLoader());
     }
 
     public static final Creator<Professional> CREATOR = new Creator<Professional>() {
@@ -163,56 +133,67 @@ public class Professional implements Parcelable {
         }
     };
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) throws Exception {
-        if(name == null || name.equals("")){
-            throw new Exception("Professional name is invalid.");
-        }
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) throws Exception {
-        if(cpf == null || cpf.equals("")){
-            throw new Exception("CPF is invalid.");
-        }
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhone1() {
+        return phone1;
     }
 
-    public void setPhone(String phone) throws Exception {
-        if(phone == null || phone.equals("")){
-            throw new Exception("Phone is invalid.");
-        }
-        this.phone = phone;
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
     }
 
-    public String getNeighborhood() {
-        return neighborhood;
+    public String getPhone2() {
+        return phone2;
     }
 
-    public void setNeighborhood(String neighborhood) throws Exception {
-        if(neighborhood == null || neighborhood.equals("")){
-            throw new Exception("Neighborhood is invalid.");
-        }
-        this.neighborhood = neighborhood;
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
+    }
+
+    public String getPhone3() {
+        return phone3;
+    }
+
+    public void setPhone3(String phone3) {
+        this.phone3 = phone3;
+    }
+
+    public String getPhone4() {
+        return phone4;
+    }
+
+    public void setPhone4(String phone4) {
+        this.phone4 = phone4;
     }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) throws Exception {
-        if(street == null || street.equals("")){
-            throw new Exception("Street is invalid.");
-        }
+    public void setStreet(String street) {
         this.street = street;
     }
 
@@ -220,28 +201,31 @@ public class Professional implements Parcelable {
         return number;
     }
 
-    public void setNumber(String number) throws Exception {
-        if(number == null || number.equals("")){
-            throw new Exception("Number is invalid.");
-        }
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public String getCity() { return city; }
+    public String getNeighborhood() {
+        return neighborhood;
+    }
 
-    public void setCity(String city) throws Exception {
-        if(city == null || city.equals("")){
-            throw new Exception("City is invalid.");
-        }
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public String getState() { return state; }
+    public String getState() {
+        return state;
+    }
 
-    public void setState(String state) throws Exception {
-        if(state == null || state.equals("")){
-            throw new Exception("State is invalid.");
-        }
+    public void setState(String state) {
         this.state = state;
     }
 
@@ -249,79 +233,72 @@ public class Professional implements Parcelable {
         return site;
     }
 
-    public void setSite(String site) throws Exception {
-        if(site == null || site.equals("")){
-            throw new Exception("Site is invalid.");
-        }
+    public void setSite(String site) {
         this.site = site;
     }
 
-    public String getSocialNetwork() {
-        return socialNetwork;
+    public String getSocialNetwork1() {
+        return socialNetwork1;
     }
 
-    public void setSocialNetwork(String socialNetwork) throws Exception {
-        if(socialNetwork == null || socialNetwork.equals("")){
-            throw new Exception("Social network is invalid.");
-        }
-        this.socialNetwork = socialNetwork;
+    public void setSocialNetwork1(String socialNetwork1) {
+        this.socialNetwork1 = socialNetwork1;
     }
 
-//    public String getPictury() {
-//        return pictury;
-//    }
-//
-//    public void setPictury(String pictury) throws Exception {
-//        if(pictury == null || pictury.equals("")){
-//            throw new Exception("Pictury is invalid.");
-//        }
-//        this.pictury = pictury;
-//    }
+    public String getSocialNetwork2() {
+        return socialNetwork2;
+    }
+
+    public void setSocialNetwork2(String socialNetwork2) {
+        this.socialNetwork2 = socialNetwork2;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) throws Exception {
-        if(email == null || email.equals("")){
-            throw new Exception("Email is invalid.");
-        }
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPassword(String password) throws Exception {
-        if(password == null || password.equals("")){
-            throw new Exception("Password is invalid.");
-        }
-        this.password = password;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
-    public String[] getServices() {
-        return services;
+    public String getPlan() {
+        return plan;
     }
 
-    public void setServices(String[] services) {
-        this.services = services;
+    public void setPlan(String plan) {
+        this.plan = plan;
     }
 
-    public Location getLocation() {
-        return location;
+    public float getAvg() {
+        return avg;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public float getEvaluationsAverage() {
-        return evaluationsAverage;
-    }
-
-    public void setEvaluationsAverage(float evaluationsAverage) {
-        this.evaluationsAverage = evaluationsAverage;
+    public void setAvg(float avg) {
+        this.avg = avg;
     }
 
     public int getNumberAssessments() {
@@ -332,12 +309,12 @@ public class Professional implements Parcelable {
         this.numberAssessments = numberAssessments;
     }
 
-    public String getNamePicture() {
-        return this.namePicture;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setNamePicture(String namePicture) {
-        this.namePicture = namePicture;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Override
@@ -348,44 +325,28 @@ public class Professional implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
+        parcel.writeString(businessName);
         parcel.writeString(cpf);
-        parcel.writeString(phone);
+        parcel.writeString(phone1);
+        parcel.writeString(phone2);
+        parcel.writeString(phone3);
+        parcel.writeString(phone4);
         parcel.writeString(street);
         parcel.writeString(number);
         parcel.writeString(neighborhood);
         parcel.writeString(city);
         parcel.writeString(state);
         parcel.writeString(site);
-        parcel.writeString(socialNetwork);
+        parcel.writeString(socialNetwork1);
+        parcel.writeString(socialNetwork2);
+        parcel.writeString(service);
+        parcel.writeString(description);
         parcel.writeString(email);
-        parcel.writeString(password);
-        parcel.writeString(namePicture);
-        parcel.writeStringArray(services);
-        parcel.writeParcelable(location, i);
-        parcel.writeFloat(evaluationsAverage);
+        parcel.writeString(picture);
+        parcel.writeString(plan);
+        parcel.writeFloat(avg);
         parcel.writeInt(numberAssessments);
+        parcel.writeParcelable(location, i);
     }
 
-    @Override
-    public String toString() {
-        return "Professional{" +
-                "name='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", phone='" + phone + '\'' +
-                ", neighborhood='" + neighborhood + '\'' +
-                ", street='" + street + '\'' +
-                ", number='" + number + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", site='" + site + '\'' +
-                ", socialNetwork='" + socialNetwork + '\'' +
-                ", namePicture='" + namePicture + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", services=" + Arrays.toString(services) +
-                ", location=" + location +
-                ", evaluationsAverage=" + evaluationsAverage +
-                ", numberAssessments=" + numberAssessments +
-                '}';
-    }
 }
