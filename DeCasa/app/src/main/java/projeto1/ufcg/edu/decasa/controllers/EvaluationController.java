@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,21 +31,21 @@ public class EvaluationController {
         url = "http://decasa-decasa.rhcloud.com/";
     }
 
-    public void addEvaluation(final String professionalValued, final String usernameValuer,
-                              final String evaluationValue, final String comment,
-                              final String date, final String photo, final String service,
+    public void addEvaluation(final String emailProfessional, final String emailUser,
+                              final String evaluation, final String comment,
+                              final String date, final String userPhoto, final String service,
                               final Class classDest, final Professional professional) {
 
         EvaluationProfessionalActivity.mLoadingEvaluation.setVisibility(View.VISIBLE);
-        String urlAddEvaluation = url + "/add-avaliacao";
+        String urlAddEvaluation = url + "add-evaluation";
         JSONObject json = new JSONObject();
         try {
-            json.put("emailProfissional", professionalValued);
-            json.put("emailUsuario", usernameValuer);
-            json.put("avaliacao", evaluationValue);
-            json.put("comentario", comment);
-            json.put("data", date);
-            json.put("fotoUsuario", photo);
+            json.put("emailProfessional", emailProfessional);
+            json.put("emailUser", emailUser);
+            json.put("evaluation", evaluation);
+            json.put("comment", comment);
+            json.put("date", date);
+            json.put("userPhoto", userPhoto);
             json.put("service", service);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -102,32 +101,31 @@ public class EvaluationController {
         });
     }
 
-    public List<Evaluation> getEvaluationsByProfessional(final String professionalEmail,
-                                                         final String service,
+    public List<Evaluation> getAssessmentsByProfessional(final String professionalEmail,
                                                          final Handler handler) {
 
-        final List<Evaluation> evaluationsList = new ArrayList<Evaluation>();
-        String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
-                professionalEmail + "&service=" + service;
-        mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
+        final List<Evaluation> assessmentsList = new ArrayList<Evaluation>();
+        String urlAssessmentsByProfessional = url + "get-evaluations-professional?email=" +
+                professionalEmail;
+        mHttp.get(urlAssessmentsByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    JSONArray jsonArrayEvaluation = response.getJSONArray("avaliacoes");
-                    for (int i = 0; i < jsonArrayEvaluation.length(); i++) {
-                        JSONObject jsonEvaluation = jsonArrayEvaluation.getJSONObject(i);
-                        String usernameValuer = jsonEvaluation.getString("emailAvaliador");
-                        String evaluationValue = jsonEvaluation.getString("avaliacao");
-                        String comment = jsonEvaluation.getString("comentario");
-                        String date = jsonEvaluation.getString("data");
-                        String photo = jsonEvaluation.getString("fotoUsuario");
-                        String service = jsonEvaluation.getString("service");
+                    JSONArray result = response.getJSONArray("result");
+                    JSONObject jsonObject = result.getJSONObject(0);
+                    JSONArray jsonArray = jsonObject.getJSONArray("evaluations");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonEvaluation = jsonArray.getJSONObject(i);
+                        String usernameValuer = jsonEvaluation.getString("emailValuer");
+                        String evaluationValue = jsonEvaluation.getString("evaluation");
+                        String comment = jsonEvaluation.getString("comment");
+                        String date = jsonEvaluation.getString("date");
+                        String photo = jsonEvaluation.getString("userPhoto");
                         try{
                             float evaluationValueFloat = Float.valueOf(evaluationValue);
                             Evaluation evaluation = new Evaluation(professionalEmail,
-                                    usernameValuer, evaluationValueFloat, comment, date, photo,
-                                    service);
-                            evaluationsList.add(evaluation);
+                                    usernameValuer, evaluationValueFloat, comment, date, photo);
+                            assessmentsList.add(evaluation);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -159,23 +157,23 @@ public class EvaluationController {
             }
         });
 
-        return evaluationsList;
+        return assessmentsList;
     }
 
     public List<Float> getAssessmentsAverageByProfessional(final String professionalEmail,
-                                                           final String service,
                                                            final Handler handler) {
         final List<Float> assessmentsAverageList = new ArrayList<Float>();
 
-        String urlEvaluationsByProfessional = url + "/get-avaliacoes-profissional?email=" +
-                professionalEmail + "&service=" + service;
-        mHttp.get(urlEvaluationsByProfessional, new HttpListener() {
+        String urlAssessmentsAverageByProfessional = url + "/get-avg-professional?email=" +
+                professionalEmail;
+        mHttp.get(urlAssessmentsAverageByProfessional, new HttpListener() {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
+                    JSONArray result = response.getJSONArray("result");
+                    JSONObject avg = result.getJSONObject(0);
                     try{
-                        float assessmentsAverageFloat = Float.valueOf(response.
-                                getString("avg"));
+                        float assessmentsAverageFloat = Float.parseFloat(avg.getString("avg"));
                         assessmentsAverageList.add(assessmentsAverageFloat);
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -42,7 +42,7 @@
             android:name=".views.ProfessionalsActivity"
             android:label="@string/title_activity_professionals"
             android:theme="@style/AppThemeCustom" />
-        <activity android:name=".views.ProfileProfessionalActivity" />
+        <activity android:name=".views.ProfessionalProfileGoldPlanActivity" />
         <activity
             android:name=".views.MapsActivity"
             android:label="@string/title_activity_maps"

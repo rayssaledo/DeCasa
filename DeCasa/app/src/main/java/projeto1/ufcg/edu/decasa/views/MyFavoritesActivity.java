@@ -1,6 +1,5 @@
 package projeto1.ufcg.edu.decasa.views;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -94,7 +93,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_fitter.getItem(position);
                     Intent intent = new Intent(MyFavoritesActivity.this,
-                            ProfileProfessionalActivity.class);
+                            ProfessionalProfileGoldPlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
             }
@@ -105,7 +104,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_plumber.getItem(position);
                 Intent intent = new Intent(MyFavoritesActivity.this,
-                        ProfileProfessionalActivity.class);
+                        ProfessionalProfileGoldPlanActivity.class);
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
             }
@@ -116,7 +115,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Professional professional = (Professional) adapter_electrictian.getItem(position);
                 Intent intent = new Intent(MyFavoritesActivity.this,
-                        ProfileProfessionalActivity.class);
+                        ProfessionalProfileGoldPlanActivity.class);
                 intent.putExtra("PROFESSIONAL", professional);
                 startActivity(intent);
             }
@@ -131,9 +130,15 @@ public class MyFavoritesActivity extends AppCompatActivity {
     }
 
     public void setList(){
-        list_fitter_professionals = userController.getFavoritesFittersUser(username, handler);
-        list_plumber_professionals = userController.getFavoritesPlumbersUser(username, handler);
-        list_electrician_professionals = userController.getFavoritesElectriciansUser(username, handler);
+        list_fitter_professionals = userController.getFavoritesUserByService(username, "Montador",
+                handler);
+        Log.d("FavoritesTest", "Listar montadores");
+        list_plumber_professionals = userController.getFavoritesUserByService(username, "Encanador",
+                handler);
+        Log.d("FavoritesTest", "Listar encanadores");
+        list_electrician_professionals = userController.getFavoritesUserByService(username,
+                "Eletricista", handler);
+        Log.d("FavoritesTest", "Listar eletricistas");
 
         if (list_fitter_professionals.size() != 0){
             adapter_fitter = new ProfessionalsAdapter(getApplicationContext(),

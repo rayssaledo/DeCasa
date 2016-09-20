@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -105,16 +104,16 @@ public class AssessmentsActivity extends AppCompatActivity {
         super.onResume();
         tv_no_assessments.setVisibility(View.GONE);
         listViewAssessments.setVisibility(View.VISIBLE);
-        String service = mySharedPreferences.getService();
-        if (service.equals(getApplication().getString(R.string.title_electricians))){
-            service = "Eletricista";
-        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
-            service = "Encanador";
-        } else {
-            service = "Montador";
-        }
-        assessments = evaluationController.getEvaluationsByProfessional(professional.getEmail(),
-                service, handler);
+//        String service = mySharedPreferences.getService();
+//        if (service.equals(getApplication().getString(R.string.title_electricians))){
+//            service = "Eletricista";
+//        } else  if (service.equals(getApplication().getString(R.string.title_plumbers))){
+//            service = "Encanador";
+//        } else {
+//            service = "Montador";
+//        }
+        assessments = evaluationController.getAssessmentsByProfessional(professional.getEmail(),
+                handler);
     }
 
     @Override

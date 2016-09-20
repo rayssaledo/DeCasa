@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (professional == null){
                         userController.login(username, password, MainActivity.class, null);
                     } else {
-                        userController.login(username, password, ProfileProfessionalActivity.class,
+                        userController.login(username, password, ProfessionalProfileGoldPlanActivity.class,
                                 professional);
                     }
                 } else if (!validateUsername()){

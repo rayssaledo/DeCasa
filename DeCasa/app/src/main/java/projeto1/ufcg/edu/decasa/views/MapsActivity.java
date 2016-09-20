@@ -14,12 +14,9 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.media.Rating;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -28,11 +25,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +35,6 @@ import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.controllers.ProfessionalController;
 import projeto1.ufcg.edu.decasa.models.Professional;
-import projeto1.ufcg.edu.decasa.utils.DownloadFile;
 import projeto1.ufcg.edu.decasa.utils.MainMapFragment;
 import projeto1.ufcg.edu.decasa.utils.MapWrapperLayout;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
@@ -240,12 +234,12 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                             infowindow_professional, null);
 
                     iv_professional = (CircularImageView) infoWindow.findViewById(R.id.iv_professional);
-                    Log.d("IMAGEVIEW", professionalInfo.getNamePicture()+"");
-                    if (professionalInfo.getNamePicture() != null && !professionalInfo.getNamePicture().equals("null")) {
-                        File f = new File(DownloadFile.getPathDownload() + File.separator + professionalInfo.getNamePicture());
-                        Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
-                        iv_professional.setImageBitmap(bmp);
-                    }
+                    //Log.d("IMAGEVIEW", professionalInfo.getNamePicture()+"");
+//                    if (professionalInfo.getNamePicture() != null && !professionalInfo.getNamePicture().equals("null")) {
+//                        File f = new File(DownloadFile.getPathDownload() + File.separator + professionalInfo.getNamePicture());
+//                        Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+//                        iv_professional.setImageBitmap(bmp);
+//                    }
 
                     tv_profession = (TextView) infoWindow.findViewById(R.id.tv_profession);
                     service = mySharedPreferences.getService();
@@ -263,7 +257,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
 
                     rb_evaluation = (RatingBar) infoWindow.findViewById(R.id.
                             rb_evaluation_infowindow);
-                    rb_evaluation.setRating(professionalInfo.getEvaluationsAverage());
+                    //rb_evaluation.setRating(professionalInfo.getEvaluationsAverage());
 
                     btn_more_information = (Button) infoWindow.findViewById(R.id.
                             btn_more_information);
@@ -274,7 +268,7 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                         protected void onClickConfirmed(View v, Marker marker) {
                             if (mySharedPreferences.isUserLoggedIn()) {
                                 Intent intent = new Intent(MapsActivity.this,
-                                        ProfileProfessionalActivity.class);
+                                        ProfessionalProfileGoldPlanActivity.class);
                                 intent.putExtra("PROFESSIONAL", professionalInfo);
                                 startActivity(intent);
                             } else {
@@ -291,9 +285,9 @@ public class MapsActivity extends Activity implements GoogleApiClient.Connection
                         @Override
                         protected void onClickConfirmed(View view, Marker marker) {
                             if (mySharedPreferences.isUserLoggedIn()) {
-                                String phone = professionalInfo.getPhone().substring(1, 3) +
-                                        professionalInfo.getPhone().
-                                        substring(4, 9) + professionalInfo.getPhone().substring(9);
+                                String phone = professionalInfo.getPhone1().substring(1, 3) +
+                                        professionalInfo.getPhone1().
+                                        substring(4, 9) + professionalInfo.getPhone1().substring(9);
                                 Uri uri = Uri.parse("tel:" + phone);
                                 Intent intent = new Intent(Intent.ACTION_DIAL, uri);
                                 startActivity(intent);
