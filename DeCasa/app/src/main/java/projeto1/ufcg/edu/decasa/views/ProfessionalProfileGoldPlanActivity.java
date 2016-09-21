@@ -169,6 +169,17 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
 
         setTitle(professional.getName());
 
+        ImageButton ib_map_professional = (ImageButton) findViewById(R.id.ib_map_professional);
+        ib_map_professional.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfessionalProfileGoldPlanActivity.this,
+                        ProfessionalMapActivity.class);
+                intent.putExtra("PROFESSIONALMAP", professional);
+                startActivity(intent);
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }

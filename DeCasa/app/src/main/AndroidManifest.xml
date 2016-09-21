@@ -100,7 +100,12 @@
             android:theme="@style/AppThemeCustom" />
         <activity android:name=".views.ProfessionalProfileFreePlanActivity" />
         <activity android:name=".views.ProfessionalProfileSilverPlanActivity" />
-        <activity android:name=".views.ProfessionalProfileBronzePlanActivity"></activity>
+        <activity android:name=".views.ProfessionalProfileBronzePlanActivity" />
+        <activity
+            android:name=".views.ProfessionalMapActivity"
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

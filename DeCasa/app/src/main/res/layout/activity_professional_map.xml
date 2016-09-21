@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="projeto1.ufcg.edu.decasa.views.ProfessionalMapActivity">
+
+    <projeto1.ufcg.edu.decasa.utils.MapWrapperLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="projeto.emp.dcasa.views.MainActivity"
+        android:layout_below="@+id/tb_main">
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.MapFragment" />
+
+    </projeto1.ufcg.edu.decasa.utils.MapWrapperLayout>
+
+</android.support.design.widget.CoordinatorLayout>
