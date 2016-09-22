@@ -26,6 +26,8 @@ import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
 import projeto1.ufcg.edu.decasa.views.EditUserProfileActivity;
 import projeto1.ufcg.edu.decasa.views.LoginActivity;
 import projeto1.ufcg.edu.decasa.views.MainActivity;
+import projeto1.ufcg.edu.decasa.views.MyFavoritesActivity;
+import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
 import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
 
 public class UserController {
@@ -436,6 +438,7 @@ public class UserController {
 
     public List<Professional> getFavoritesUserByService(final String username, final String service,
                                                         final Handler handler) {
+        MyFavoritesActivity.mLoadingMyFavorites.setVisibility(View.VISIBLE);
         final List<Professional> professionals = new ArrayList<>();
         String urlFavoritesUserByService = url + "get-favorites-user-by-service?username=" +
                 username + "&service=" + service ;
@@ -451,42 +454,93 @@ public class UserController {
                         JSONArray jsonArrayFavorites = new JSONArray(favorites);
                         for (int j = 0; j < jsonArrayFavorites.length(); j++) {
                             JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
-                            String name = jsonFavorite.getString("name");
-                            String businessName = jsonFavorite.getString("businessName");
-                            String cpf = jsonFavorite.getString("cpf");
-                            String phone1 = jsonFavorite.getString("phone1");
-                            String phone2 = jsonFavorite.getString("phone2");
-                            String phone3 = jsonFavorite.getString("phone3");
-                            String phone4 = jsonFavorite.getString("phone4");
-                            String street = jsonFavorite.getString("street");
-                            String number = jsonFavorite.getString("number");
-                            String neighborhood = jsonFavorite.getString("neighborhood");
-                            String city = jsonFavorite.getString("city");
-                            String state = jsonFavorite.getString("state");
-                            String site = jsonFavorite.getString("site");
-                            String socialNetwork1 = jsonFavorite.getString("socialNetwork1");
-                            String socialNetwork2 = jsonFavorite.getString("socialNetwork2");
-                            String service = jsonFavorite.getString("service");
-                            String description = jsonFavorite.getString("description");
-                            float avg = Float.valueOf(jsonFavorite.getString("avg"));
                             String email = jsonFavorite.getString("email");
-                            String picture = jsonFavorite.getString("picture");
-                            String plan = jsonFavorite.getString("plan");
 
-                            try {
-                                Professional professional = new Professional(name, businessName,
-                                        cpf, phone1, phone2, phone3, phone4, street, number,
-                                        neighborhood, city, state, site, socialNetwork1,
-                                        socialNetwork2, service, description, email, avg, picture,
-                                        plan);
-                                professional.setLocation(new Location(street + ", " + number + " " +
-                                        city + " " + state));
-                                professionals.add(professional);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            mHttp.get(url + "get-professional?email=" + email, new HttpListener() {
+                                @Override
+                                public void onSucess(JSONObject response) throws JSONException {
+                                    if (response.getInt("ok") == 1) {
+                                        JSONObject jsonObject = response.getJSONObject("result");
+                                        Log.d("SCRIPT", jsonObject.toString());
+                                        String name = jsonObject.getString("name");
+                                        String businessName = jsonObject.getString("businessName");
+                                        String cpf = jsonObject.getString("cpf");
+                                        String phone1 = jsonObject.getString("phone1");
+                                        String phone2 = jsonObject.getString("phone2");
+                                        String phone3 = jsonObject.getString("phone3");
+                                        String phone4 = jsonObject.getString("phone4");
+                                        String street = jsonObject.getString("street");
+                                        String number = jsonObject.getString("number");
+                                        String neighborhood = jsonObject.getString("neighborhood");
+                                        String city = jsonObject.getString("city");
+                                        String state = jsonObject.getString("state");
+                                        String site = jsonObject.getString("site");
+                                        String socialNetwork1 = jsonObject.
+                                                getString("socialNetwork1");
+                                        String socialNetwork2 = jsonObject.
+                                                getString("socialNetwork2");
+                                        String service = jsonObject.getString("service");
+                                        String description = jsonObject.getString("description");
+                                        float avg = Float.valueOf(jsonObject.getString("avg"));
+                                        String email = jsonObject.getString("email");
+                                        String picture = jsonObject.getString("picture");
+                                        String plan = jsonObject.getString("plan");
+                                        try {
+                                            Professional professional = new Professional(name,
+                                                    businessName, cpf, phone1, phone2, phone3,
+                                                    phone4, street, number, neighborhood, city,
+                                                    state, site, socialNetwork1, socialNetwork2,
+                                                    service, description, email, avg, picture,
+                                                    plan);
+                                            professional.setLocation(new Location(street + ", " +
+                                                    number + " " + city + " " + state));
+                                            professionals.add(professional);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        Message message = new Message();
+                                        message.what = 108;
+                                        handler.sendMessage(message);
+                                    } else {
+                                        new AlertDialog.Builder(mActivity)
+                                                .setTitle("Erro")
+                                                .setMessage(response.getString("msg")) //TODO internacionalizar
+                                                .setNeutralButton("OK", new DialogInterface.
+                                                        OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface
+                                                                                dialogInterface,
+                                                                        int i) {
 
+                                                    }
+                                                })
+                                                .create()
+                                                .show();
+                                    }
+                                }
+
+                                @Override
+                                public void onTimeout() {
+                                    new AlertDialog.Builder(mActivity)
+                                            .setTitle("Erro")
+                                            .setMessage(mActivity.getString(R.
+                                                    string.err_unavailable_connection))
+                                            .setNeutralButton("OK", new DialogInterface.
+                                                    OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface
+                                                                            dialogInterface,
+                                                                    int i) {
+
+                                                }
+                                            })
+                                            .create()
+                                            .show();
+
+                                }
+                            });
                         }
+                        MyFavoritesActivity.mLoadingMyFavorites.setVisibility(View.GONE);
                     }
                     Message message = new Message();
                     message.what = 108;
@@ -498,7 +552,8 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                                    MyFavoritesActivity.mLoadingMyFavorites.
+                                            setVisibility(View.GONE);
                                 }
                             })
                             .create()
@@ -514,7 +569,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                MyFavoritesActivity.mLoadingMyFavorites.setVisibility(View.GONE);
                             }
                         })
                         .create()
@@ -525,270 +580,8 @@ public class UserController {
         return professionals;
     }
 
-//    public List<Professional> getFavoritesPlumbersUser(final String login, final Handler handler){
-//        final List<Professional> professionals = new ArrayList<>();
-//        String urlGetFavorites = "http://decasa-decasa.rhcloud.com/get-favoritesPlumbers-user?username=" + login;
-//        mHttp.get(urlGetFavorites, new HttpListener() {
-//            @Override
-//            public void onSucess(JSONObject response) throws JSONException {
-//                if (response.getInt("ok") == 1) {
-//                  JSONArray  jsonArray = response.getJSONArray("result");
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject jsonFavorites = jsonArray.getJSONObject(i);
-//                        String favorites = jsonFavorites.getString("favoritesPlumbers");
-//                        JSONArray jsonArrayFavorites = new JSONArray(favorites);
-//                        for (int j = 0; j < jsonArrayFavorites.length(); j++) {
-//                            JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
-//                            String name = jsonFavorite.getString("name");
-//                            String cpf = jsonFavorite.getString("cpf");
-//                            String phone = jsonFavorite.getString("phone");
-//                            String street = jsonFavorite.getString("street");
-//                            String number = jsonFavorite.getString("number");
-//                            String neighborhood = jsonFavorite.getString("neighborhood");
-//                            String city = jsonFavorite.getString("city");
-//                            String state = jsonFavorite.getString("state");
-//                            String site = jsonFavorite.getString("site");
-//                            String socialNetwork = jsonFavorite.getString("socialNetwork");
-//                            //String pictury = jsonProfessional.getString("pictury");
-//                            String email = jsonFavorite.getString("email");
-//                            String services = jsonFavorite.getString("services");
-//                            services = services.replace("[", "");
-//                            services = services.replace("]", "");
-//                            services = services.replaceAll("\"", "");
-//                            String[] listServices = services.split(",");
-//
-//                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
-//                            try {
-////                                Professional professional = new Professional(name, cpf, phone,
-////                                        street, number, neighborhood, city, state, site, socialNetwork,
-////                                        email, listServices);
-////                                professional.setEvaluationsAverage(evaluationAverage);
-////                                professional.setLocation(new Location(street + ", " + number + " " +
-////                                        city + " " + state));
-////
-////                                professionals.add(professional);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        }
-//                    }
-//                    Message message = new Message();
-//                    message.what = 108;
-//                    handler.sendMessage(message);
-//                } else {
-//                    new AlertDialog.Builder(mActivity)
-//                            .setTitle("Erro")
-//                            .setMessage(response.getString("msg")) //TODO internacionalizar
-//                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                    //  mActivity.mLoadingLogin.setVisibility(View.GONE);
-//                                }
-//                            })
-//                            .create()
-//                            .show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onTimeout() {
-//                new AlertDialog.Builder(mActivity)
-//                        .setTitle("Erro")
-//                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
-//                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
-//                            }
-//                        })
-//                        .create()
-//                        .show();
-//            }
-//        });
-//
-//        return professionals;
-//    }
-//
-//    public List<Professional> getFavoritesFittersUser(final String login, final Handler handler){
-//        final List<Professional> professionals = new ArrayList<>();
-//        String urlGetFavorites = "http://decasa-decasa.rhcloud.com/get-favoritesFitters-user?username=" + login;
-//        mHttp.get(urlGetFavorites, new HttpListener() {
-//            @Override
-//            public void onSucess(JSONObject response) throws JSONException {
-//                if (response.getInt("ok") == 1) {
-//                    JSONArray  jsonArray = response.getJSONArray("result");
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject jsonFavorites = jsonArray.getJSONObject(i);
-//                        String favorites = jsonFavorites.getString("favoritesFitters");
-//                        JSONArray jsonArrayFavorites = new JSONArray(favorites);
-//                        for (int j = 0; j < jsonArrayFavorites.length(); j++) {
-//                            JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
-//                            String name = jsonFavorite.getString("name");
-//                            String cpf = jsonFavorite.getString("cpf");
-//                            String phone = jsonFavorite.getString("phone");
-//                            String street = jsonFavorite.getString("street");
-//                            String number = jsonFavorite.getString("number");
-//                            String neighborhood = jsonFavorite.getString("neighborhood");
-//                            String city = jsonFavorite.getString("city");
-//                            String state = jsonFavorite.getString("state");
-//                            String site = jsonFavorite.getString("site");
-//                            String socialNetwork = jsonFavorite.getString("socialNetwork");
-//                            //String pictury = jsonProfessional.getString("pictury");
-//                            String email = jsonFavorite.getString("email");
-//                            String services = jsonFavorite.getString("services");
-//                            services = services.replace("[", "");
-//                            services = services.replace("]", "");
-//                            services = services.replaceAll("\"", "");
-//                            String[] listServices = services.split(",");
-//
-//                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
-//                            try {
-////                                Professional professional = new Professional(name, cpf, phone,
-////                                        street, number, neighborhood, city, state, site, socialNetwork,
-////                                        email, listServices);
-////                                professional.setEvaluationsAverage(evaluationAverage);
-////                                professional.setLocation(new Location(street + ", " + number + " " +
-////                                        city + " " + state));
-////
-////                                professionals.add(professional);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//
-//                    }
-//                    Message message = new Message();
-//                    message.what = 108;
-//                    handler.sendMessage(message);
-//
-//                } else {
-//                    new AlertDialog.Builder(mActivity)
-//                            .setTitle("Erro")
-//                            .setMessage(response.getString("msg")) //TODO internacionalizar
-//                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                    //  mActivity.mLoadingLogin.setVisibility(View.GONE);
-//                                }
-//                            })
-//                            .create()
-//                            .show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onTimeout() {
-//                new AlertDialog.Builder(mActivity)
-//                        .setTitle("Erro")
-//                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
-//                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
-//                            }
-//                        })
-//                        .create()
-//                        .show();
-//            }
-//        });
-//
-//        return professionals;
-//    }
-//
-//    public List<Professional> getFavoritesElectriciansUser(final String login, final Handler handler){
-//        final List<Professional> professionals = new ArrayList<>();
-//        String urlGetFavorites = "http://decasa-decasa.rhcloud.com/get-favoritesElectricians-user?username=" + login;
-//        mHttp.get(urlGetFavorites, new HttpListener() {
-//            @Override
-//            public void onSucess(JSONObject response) throws JSONException {
-//                if (response.getInt("ok") == 1) {
-//                    JSONArray  jsonArray = response.getJSONArray("result");
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject jsonFavorites = jsonArray.getJSONObject(i);
-//                        String favorites = jsonFavorites.getString("favoritesElectricians");
-//                        JSONArray jsonArrayFavorites = new JSONArray(favorites);
-//                        for (int j = 0; j < jsonArrayFavorites.length(); j++) {
-//                            JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
-//                            String name = jsonFavorite.getString("name");
-//                            String cpf = jsonFavorite.getString("cpf");
-//                            String phone = jsonFavorite.getString("phone");
-//                            String street = jsonFavorite.getString("street");
-//                            String number = jsonFavorite.getString("number");
-//                            String neighborhood = jsonFavorite.getString("neighborhood");
-//                            String city = jsonFavorite.getString("city");
-//                            String state = jsonFavorite.getString("state");
-//                            String site = jsonFavorite.getString("site");
-//                            String socialNetwork = jsonFavorite.getString("socialNetwork");
-//                            //String pictury = jsonProfessional.getString("pictury");
-//                            String email = jsonFavorite.getString("email");
-//                            String services = jsonFavorite.getString("services");
-//                            services = services.replace("[", "");
-//                            services = services.replace("]", "");
-//                            services = services.replaceAll("\"", "");
-//                            String[] listServices = services.split(",");
-//
-//                            float evaluationAverage = Float.valueOf(jsonFavorite.getString("avg"));
-//                            try {
-////                                Professional professional = new Professional(name, cpf, phone,
-////                                        street, number, neighborhood, city, state, site, socialNetwork,
-////                                        email, listServices);
-////                                professional.setEvaluationsAverage(evaluationAverage);
-////                                professional.setLocation(new Location(street + ", " + number + " " +
-////                                        city + " " + state));
-////
-////                                professionals.add(professional);
-//
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                        }
-//                        Message message = new Message();
-//                        message.what = 108;
-//                        handler.sendMessage(message);
-//                    }
-//
-//                } else {
-//                    new AlertDialog.Builder(mActivity)
-//                            .setTitle("Erro")
-//                            .setMessage(response.getString("msg")) //TODO internacionalizar
-//                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                    //  mActivity.mLoadingLogin.setVisibility(View.GONE);
-//                                }
-//                            })
-//                            .create()
-//                            .show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onTimeout() {
-//                new AlertDialog.Builder(mActivity)
-//                        .setTitle("Erro")
-//                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
-//                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                //  mActivity.mLoadingLogin.setVisibility(View.GONE);
-//                            }
-//                        })
-//                        .create()
-//                        .show();
-//            }
-//        });
-//
-//        return professionals;
-//    }
-
-
     public List<User> getUser(final String login, final Handler handler){
-        //UserProfileActivity.loadingUserProfile.setVisibility(View.VISIBLE);
+
         final List<User> userList = new ArrayList<>();
         String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
         mHttp.get(urlGetUser, new HttpListener() {
@@ -824,7 +617,7 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //UserProfileActivity.loadingUserProfile.setVisibility(View.GONE);
+
                                 }
                             })
                             .create()
@@ -840,7 +633,6 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //UserProfileActivity.loadingUserProfile.setVisibility(View.GONE);
                             }
                         })
                         .create()

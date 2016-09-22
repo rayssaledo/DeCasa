@@ -35,6 +35,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
     private ProfessionalsAdapter adapter_plumber;
     private ProfessionalsAdapter adapter_electrictian;
 
+    public static View mLoadingMyFavorites;
 
     private Handler handler = new Handler() {
         @Override
@@ -59,6 +60,8 @@ public class MyFavoritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_favorites);
+
+        mLoadingMyFavorites = findViewById(R.id.rl_loading_my_favorites);
 
         userController = new UserController(MyFavoritesActivity.this);
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
@@ -145,6 +148,12 @@ public class MyFavoritesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setList();
     }
 
     public void setList(){
