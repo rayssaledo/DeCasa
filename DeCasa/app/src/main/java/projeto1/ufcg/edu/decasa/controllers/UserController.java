@@ -438,7 +438,7 @@ public class UserController {
 
     public List<Professional> getFavoritesUserByService(final String username, final String service,
                                                         final Handler handler) {
-        MyFavoritesActivity.mLoadingMyFavorites.setVisibility(View.VISIBLE);
+
         final List<Professional> professionals = new ArrayList<>();
         String urlFavoritesUserByService = url + "get-favorites-user-by-service?username=" +
                 username + "&service=" + service ;
@@ -540,7 +540,6 @@ public class UserController {
                                 }
                             });
                         }
-                        MyFavoritesActivity.mLoadingMyFavorites.setVisibility(View.GONE);
                     }
                     Message message = new Message();
                     message.what = 108;
@@ -552,8 +551,7 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    MyFavoritesActivity.mLoadingMyFavorites.
-                                            setVisibility(View.GONE);
+
                                 }
                             })
                             .create()
@@ -569,7 +567,7 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                MyFavoritesActivity.mLoadingMyFavorites.setVisibility(View.GONE);
+
                             }
                         })
                         .create()
@@ -583,7 +581,7 @@ public class UserController {
     public List<User> getUser(final String login, final Handler handler){
 
         final List<User> userList = new ArrayList<>();
-        String urlGetUser = "http://decasa-decasa.rhcloud.com/get-user?username=" + login ;
+        String urlGetUser = url + "get-user?username=" + login ;
         mHttp.get(urlGetUser, new HttpListener() {
             @Override
             public void onSucess(JSONObject result) throws JSONException {

@@ -15,8 +15,10 @@ import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
+import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
+import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
 import projeto1.ufcg.edu.decasa.views.EvaluationProfessionalActivity;
 
 public class EvaluationController {
@@ -104,6 +106,10 @@ public class EvaluationController {
     public List<Evaluation> getAssessmentsByProfessional(final String professionalEmail,
                                                          final Handler handler) {
 
+        if (AssessmentsActivity.mLoadingAssessments != null) {
+            AssessmentsActivity.mLoadingAssessments.setVisibility(View.VISIBLE);
+        }
+
         final List<Evaluation> assessmentsList = new ArrayList<Evaluation>();
         String urlAssessmentsByProfessional = url + "get-evaluations-professional?email=" +
                 professionalEmail;
@@ -111,34 +117,89 @@ public class EvaluationController {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
-                    JSONArray result = response.getJSONArray("result");
+                    final JSONArray result = response.getJSONArray("result");
                     JSONObject jsonObject = result.getJSONObject(0);
                     JSONArray jsonArray = jsonObject.getJSONArray("evaluations");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonEvaluation = jsonArray.getJSONObject(i);
-                        String usernameValuer = jsonEvaluation.getString("emailValuer");
-                        String evaluationValue = jsonEvaluation.getString("evaluation");
-                        String comment = jsonEvaluation.getString("comment");
-                        String date = jsonEvaluation.getString("date");
-                        String photo = jsonEvaluation.getString("userPhoto");
-                        try{
-                            float evaluationValueFloat = Float.valueOf(evaluationValue);
-                            Evaluation evaluation = new Evaluation(professionalEmail,
-                                    usernameValuer, evaluationValueFloat, comment, date, photo);
-                            assessmentsList.add(evaluation);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        final String usernameValuer = jsonEvaluation.getString("emailValuer");
+                        final String evaluationValue = jsonEvaluation.getString("evaluation");
+                        final String comment = jsonEvaluation.getString("comment");
+                        final String date = jsonEvaluation.getString("date");
+                        mHttp.get(url + "get-user?username=" + usernameValuer, new HttpListener() {
+                            @Override
+                            public void onSucess(JSONObject response) throws JSONException {
+                                if (response.getInt("ok") == 1) {
+                                    JSONObject jsonResult = response.getJSONObject("result");
+                                    String photo = jsonResult.getString("photo");
+                                    try{
+                                        float evaluationValueFloat = Float.valueOf(evaluationValue);
+                                        Evaluation evaluation = new Evaluation(professionalEmail,
+                                                usernameValuer, evaluationValueFloat, comment, date,
+                                                photo);
+                                        assessmentsList.add(evaluation);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    Message message = new Message();
+                                    message.what = 101;
+                                    handler.sendMessage(message);
+                                } else {
+                                    new AlertDialog.Builder(mActivity)
+                                            .setTitle("Erro")
+                                            .setMessage(response.getString("msg")) //TODO internacionalizar com mensagem certa
+                                            .setNeutralButton("OK", new DialogInterface.
+                                                    OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface,
+                                                                    int i) {
+                                                }
+                                            })
+                                            .create()
+                                            .show();
+                                }
+                            }
+
+                            @Override
+                            public void onTimeout() {
+                                new AlertDialog.Builder(mActivity)
+                                        .setTitle("Erro")
+                                        .setMessage(mActivity.getString(R.string.
+                                                err_unavailable_connection))
+                                        .setNeutralButton("OK", new DialogInterface.
+                                                OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface,
+                                                                int i) {
+                                            }
+                                        })
+                                        .create()
+                                        .show();
+                            }
+                        });
                     }
                     Message message = new Message();
                     message.what = 101;
                     handler.sendMessage(message);
+                    if (AssessmentsActivity.mLoadingAssessments != null) {
+                        AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
+                    }
                 } else {
-
+                    new AlertDialog.Builder(mActivity)
+                            .setTitle("Erro")
+                            .setMessage(response.getString("msg")) //TODO internacionalizar com mensagem certa
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if (AssessmentsActivity.mLoadingAssessments != null) {
+                                        AssessmentsActivity.mLoadingAssessments.setVisibility(View.
+                                                GONE);
+                                    }
+                                }
+                            })
+                            .create()
+                            .show();
                 }
-                Message message = new Message();
-                message.what = 101;
-                handler.sendMessage(message);
             }
 
             @Override
@@ -149,6 +210,7 @@ public class EvaluationController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
                                 mActivity.finish();
                             }
                         })
@@ -156,7 +218,6 @@ public class EvaluationController {
                         .show();
             }
         });
-
         return assessmentsList;
     }
 
