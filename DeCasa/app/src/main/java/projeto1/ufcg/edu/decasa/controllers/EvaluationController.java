@@ -15,7 +15,6 @@ import java.util.List;
 import projeto1.ufcg.edu.decasa.R;
 import projeto1.ufcg.edu.decasa.models.Evaluation;
 import projeto1.ufcg.edu.decasa.models.Professional;
-import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
@@ -109,7 +108,6 @@ public class EvaluationController {
         if (AssessmentsActivity.mLoadingAssessments != null) {
             AssessmentsActivity.mLoadingAssessments.setVisibility(View.VISIBLE);
         }
-
         final List<Evaluation> assessmentsList = new ArrayList<Evaluation>();
         String urlAssessmentsByProfessional = url + "get-evaluations-professional?email=" +
                 professionalEmail;
@@ -119,13 +117,16 @@ public class EvaluationController {
                 if (response.getInt("ok") == 1) {
                     final JSONArray result = response.getJSONArray("result");
                     JSONObject jsonObject = result.getJSONObject(0);
-                    JSONArray jsonArray = jsonObject.getJSONArray("evaluations");
+                    final JSONArray jsonArray = jsonObject.getJSONArray("evaluations");
+                    boolean noAssessments = true;
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonEvaluation = jsonArray.getJSONObject(i);
                         final String usernameValuer = jsonEvaluation.getString("emailValuer");
                         final String evaluationValue = jsonEvaluation.getString("evaluation");
                         final String comment = jsonEvaluation.getString("comment");
                         final String date = jsonEvaluation.getString("date");
+                        final int finalI = i;
+                        noAssessments = false;
                         mHttp.get(url + "get-user?username=" + usernameValuer, new HttpListener() {
                             @Override
                             public void onSucess(JSONObject response) throws JSONException {
@@ -140,6 +141,11 @@ public class EvaluationController {
                                         assessmentsList.add(evaluation);
                                     } catch (Exception e) {
                                         e.printStackTrace();
+                                    }
+                                    if (AssessmentsActivity.mLoadingAssessments != null &&
+                                            finalI == jsonArray.length() - 1) {
+                                        AssessmentsActivity.mLoadingAssessments.setVisibility(View.
+                                                GONE);
                                     }
                                     Message message = new Message();
                                     message.what = 101;
@@ -178,11 +184,11 @@ public class EvaluationController {
                             }
                         });
                     }
-                    Message message = new Message();
-                    message.what = 101;
-                    handler.sendMessage(message);
-                    if (AssessmentsActivity.mLoadingAssessments != null) {
+                    if (AssessmentsActivity.mLoadingAssessments != null && noAssessments) {
                         AssessmentsActivity.mLoadingAssessments.setVisibility(View.GONE);
+                        Message message = new Message();
+                        message.what = 101;
+                        handler.sendMessage(message);
                     }
                 } else {
                     new AlertDialog.Builder(mActivity)
