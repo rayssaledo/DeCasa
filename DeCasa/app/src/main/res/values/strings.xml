@@ -142,4 +142,8 @@
     <string name="tv_service">Service</string>
     <string name="tv_description">Description</string>
     <string name="number_assessments">0</string>
+    <string name="no_plumber_as_favorite">No plumber as favorite</string>
+    <string name="no_fitter_as_favorite">No fitter as favorite</string>
+    <string name="no_electrician_as_favorite">No electrician as favorite</string>
+
 </resources>

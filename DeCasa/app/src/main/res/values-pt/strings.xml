@@ -130,4 +130,7 @@
     <string name="edit_evaluation">Editar avaliação</string>
     <string name="tv_service">Serviço</string>
     <string name="tv_description">Descriçao</string>
+    <string name="no_plumber_as_favorite">Nenhum encanador como favorito</string>
+    <string name="no_fitter_as_favorite">Nenhum montador como favorito</string>
+    <string name="no_electrician_as_favorite">Nenhum eletricista como favorito</string>
 </resources>

@@ -39,10 +39,21 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/tab_plumber"
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent">
+
+                        <TextView
+                            android:id="@+id/tv_no_plumber_as_favorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_plumber_as_favorite"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"/>
 
                         <ListView
                             android:id="@+id/lvf_plumber"
@@ -51,12 +62,23 @@
                             android:layout_marginTop="10dp">
                         </ListView>
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/tab_electrician"
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent">
+
+                        <TextView
+                            android:id="@+id/tv_no_electrician_as_favorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_electrician_as_favorite"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"/>
 
                         <ListView
                             android:id="@+id/lvf_electrician"
@@ -65,12 +87,23 @@
                             android:layout_marginTop="10dp">
                         </ListView>
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/tab_fitter"
                         android:layout_width="match_parent"
                         android:layout_height="fill_parent">
+
+                        <TextView
+                            android:id="@+id/tv_no_fitter_as_favorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_fitter_as_favorite"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"/>
 
                         <ListView
                             android:id="@+id/lvf_fitter"
@@ -79,7 +112,7 @@
                             android:layout_marginTop="10dp">
                         </ListView>
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
                 </FrameLayout>
 

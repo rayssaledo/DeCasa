@@ -3,6 +3,7 @@ package projeto1.ufcg.edu.decasa.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +55,14 @@ public class ProfessionalsAdapter extends BaseAdapter {
 
         if (!item.getPlan().equals("free")) {
             String address = item.getNeighborhood() + " - " + item.getCity() ;
-            ((TextView) convertView.findViewById(R.id.tv_address)).setText(address);
+            TextView tv_address = (TextView) convertView.findViewById(R.id.tv_address);
+            tv_address.setText(address);
+            tv_address.setTextColor(Color.BLACK);
         }
 
-        ((TextView) convertView.findViewById(R.id.tv_name)).setText(item.getName());
+        TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
+        tv_name.setText(item.getName());
+        tv_name.setTextColor(Color.BLACK);
         ((RatingBar) convertView.findViewById(R.id.rb_evaluation_professionals)).
                 setRating(item.getAvg());
 

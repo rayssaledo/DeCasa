@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -25,11 +25,13 @@ public class MyFavoritesActivity extends AppCompatActivity {
     private ListView lv_fitter;
     private ListView lv_plumber;
     private ListView lv_electrician;
+    private TextView tv_no_plumber_as_favorite;
+    private TextView tv_no_electrician_as_favorite;
+    private TextView tv_no_fitter_as_favorite;
     private List<Professional> list_fitter_professionals;
     private List<Professional> list_plumber_professionals;
     private List<Professional> list_electrician_professionals;
     private UserController userController;
-    private MySharedPreferences mySharedPreferences;
     private String username;
     private ProfessionalsAdapter adapter_fitter;
     private ProfessionalsAdapter adapter_plumber;
@@ -39,17 +41,38 @@ public class MyFavoritesActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 108) {
-                adapter_fitter = new ProfessionalsAdapter(MyFavoritesActivity.this,
-                        list_fitter_professionals);
-                lv_fitter.setAdapter(adapter_fitter);
+                if (list_fitter_professionals.size() != 0){
+                    adapter_fitter = new ProfessionalsAdapter(getApplicationContext(),
+                            list_fitter_professionals);
+                    lv_fitter.setAdapter(adapter_fitter);
+                    lv_fitter.setVisibility(View.VISIBLE);
+                    tv_no_fitter_as_favorite.setVisibility(View.GONE);
+                } else {
+                    lv_fitter.setVisibility(View.GONE);
+                    tv_no_fitter_as_favorite.setVisibility(View.VISIBLE);
+                }
 
-                adapter_plumber = new ProfessionalsAdapter(MyFavoritesActivity.this,
-                        list_plumber_professionals);
-                lv_plumber.setAdapter(adapter_plumber);
+                if (list_plumber_professionals.size() != 0){
+                    adapter_plumber = new ProfessionalsAdapter(getApplicationContext(),
+                            list_plumber_professionals);
+                    lv_plumber.setAdapter(adapter_plumber);
+                    lv_plumber.setVisibility(View.VISIBLE);
+                    tv_no_plumber_as_favorite.setVisibility(View.GONE);
+                } else {
+                    lv_plumber.setVisibility(View.GONE);
+                    tv_no_plumber_as_favorite.setVisibility(View.VISIBLE);
+                }
 
-                adapter_electrictian = new ProfessionalsAdapter(MyFavoritesActivity.this,
-                        list_electrician_professionals);
-                lv_electrician.setAdapter(adapter_electrictian);
+                if (list_electrician_professionals.size() != 0){
+                    adapter_electrictian = new ProfessionalsAdapter(getApplicationContext(),
+                            list_electrician_professionals);
+                    lv_electrician.setAdapter(adapter_electrictian);
+                    lv_electrician.setVisibility(View.VISIBLE);
+                    tv_no_electrician_as_favorite.setVisibility(View.GONE);
+                } else {
+                    lv_electrician.setVisibility(View.GONE);
+                    tv_no_electrician_as_favorite.setVisibility(View.VISIBLE);
+                }
             }
         }
     };
@@ -60,7 +83,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_favorites);
 
         userController = new UserController(MyFavoritesActivity.this);
-        mySharedPreferences = new MySharedPreferences(getApplicationContext());
+        MySharedPreferences mySharedPreferences = new MySharedPreferences(getApplicationContext());
         username = mySharedPreferences.getUserLogged();
 
         TabHost mTabHost = (TabHost) findViewById(R.id.tabHost);
@@ -82,8 +105,11 @@ public class MyFavoritesActivity extends AppCompatActivity {
         mTabHost.addTab(descritor);
 
         lv_fitter = (ListView) findViewById(R.id.lvf_fitter);
+        tv_no_fitter_as_favorite = (TextView) findViewById(R.id.tv_no_fitter_as_favorite);
         lv_plumber = (ListView) findViewById(R.id.lvf_plumber);
+        tv_no_plumber_as_favorite = (TextView) findViewById(R.id.tv_no_plumber_as_favorite);
         lv_electrician = (ListView) findViewById(R.id.lvf_electrician);
+        tv_no_electrician_as_favorite = (TextView) findViewById(R.id.tv_no_electrician_as_favorite);
 
         lv_fitter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,7 +120,17 @@ public class MyFavoritesActivity extends AppCompatActivity {
                             ProfessionalProfileGoldPlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
-                } else if (professional.getPlan().toLowerCase().equals("free")){
+                } else if (professional.getPlan().toLowerCase().equals("silver")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileSilverPlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else if (professional.getPlan().toLowerCase().equals("bronze")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileBronzePlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else {
                     Intent intent = new Intent(MyFavoritesActivity.this,
                             ProfessionalProfileFreePlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
@@ -112,7 +148,17 @@ public class MyFavoritesActivity extends AppCompatActivity {
                             ProfessionalProfileGoldPlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
-                } else if (professional.getPlan().toLowerCase().equals("free")){
+                } else if (professional.getPlan().toLowerCase().equals("silver")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileSilverPlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else if (professional.getPlan().toLowerCase().equals("bronze")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileBronzePlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else {
                     Intent intent = new Intent(MyFavoritesActivity.this,
                             ProfessionalProfileFreePlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
@@ -130,7 +176,17 @@ public class MyFavoritesActivity extends AppCompatActivity {
                             ProfessionalProfileGoldPlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
                     startActivity(intent);
-                } else if (professional.getPlan().toLowerCase().equals("free")){
+                } else if (professional.getPlan().toLowerCase().equals("silver")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileSilverPlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else if (professional.getPlan().toLowerCase().equals("bronze")){
+                    Intent intent = new Intent(MyFavoritesActivity.this,
+                            ProfessionalProfileBronzePlanActivity.class);
+                    intent.putExtra("PROFESSIONAL", professional);
+                    startActivity(intent);
+                } else {
                     Intent intent = new Intent(MyFavoritesActivity.this,
                             ProfessionalProfileFreePlanActivity.class);
                     intent.putExtra("PROFESSIONAL", professional);
@@ -155,29 +211,10 @@ public class MyFavoritesActivity extends AppCompatActivity {
     public void setList(){
         list_fitter_professionals = userController.getFavoritesUserByService(username, "Montador",
                 handler);
-        Log.d("FavoritesTest", "Listar montadores");
         list_plumber_professionals = userController.getFavoritesUserByService(username, "Encanador",
                 handler);
-        Log.d("FavoritesTest", "Listar encanadores");
         list_electrician_professionals = userController.getFavoritesUserByService(username,
                 "Eletricista", handler);
-        Log.d("FavoritesTest", "Listar eletricistas");
-
-        if (list_fitter_professionals.size() != 0){
-            adapter_fitter = new ProfessionalsAdapter(getApplicationContext(),
-                    list_fitter_professionals);
-            lv_fitter.setAdapter(adapter_fitter);
-        }
-        if (list_plumber_professionals.size() != 0){
-            adapter_plumber = new ProfessionalsAdapter(getApplicationContext(),
-                    list_plumber_professionals);
-            lv_plumber.setAdapter(adapter_plumber);
-        }
-        if (list_electrician_professionals.size() != 0){
-            adapter_electrictian = new ProfessionalsAdapter(getApplicationContext(),
-                    list_electrician_professionals);
-            lv_electrician.setAdapter(adapter_electrictian);
-        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
