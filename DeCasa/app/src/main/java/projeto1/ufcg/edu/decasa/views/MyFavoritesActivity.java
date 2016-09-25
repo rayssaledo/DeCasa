@@ -37,6 +37,8 @@ public class MyFavoritesActivity extends AppCompatActivity {
     private ProfessionalsAdapter adapter_plumber;
     private ProfessionalsAdapter adapter_electrictian;
 
+    public static View mLoadingFavorites;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -82,6 +84,7 @@ public class MyFavoritesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_favorites);
 
+        mLoadingFavorites =  findViewById(R.id.loading_favorites);
         userController = new UserController(MyFavoritesActivity.this);
         MySharedPreferences mySharedPreferences = new MySharedPreferences(getApplicationContext());
         username = mySharedPreferences.getUserLogged();

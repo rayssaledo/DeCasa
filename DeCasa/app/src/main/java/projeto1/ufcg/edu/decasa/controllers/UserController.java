@@ -23,6 +23,7 @@ import projeto1.ufcg.edu.decasa.models.User;
 import projeto1.ufcg.edu.decasa.utils.HttpListener;
 import projeto1.ufcg.edu.decasa.utils.HttpUtils;
 import projeto1.ufcg.edu.decasa.utils.MySharedPreferences;
+import projeto1.ufcg.edu.decasa.views.AssessmentsActivity;
 import projeto1.ufcg.edu.decasa.views.EditUserProfileActivity;
 import projeto1.ufcg.edu.decasa.views.LoginActivity;
 import projeto1.ufcg.edu.decasa.views.MainActivity;
@@ -439,6 +440,9 @@ public class UserController {
     public List<Professional> getFavoritesUserByService(final String username, final String service,
                                                         final Handler handler) {
 
+
+        MyFavoritesActivity.mLoadingFavorites.setVisibility(View.VISIBLE);
+
         final List<Professional> professionals = new ArrayList<>();
         String urlFavoritesUserByService = url + "get-favorites-user-by-service?username=" +
                 username + "&service=" + service ;
@@ -498,6 +502,8 @@ public class UserController {
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
+                                        MyFavoritesActivity.mLoadingFavorites.setVisibility(View.
+                                                GONE);
                                         Message message = new Message();
                                         message.what = 108;
                                         handler.sendMessage(message);
