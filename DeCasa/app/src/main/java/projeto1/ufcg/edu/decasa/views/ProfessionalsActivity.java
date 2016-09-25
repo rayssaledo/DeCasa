@@ -96,7 +96,17 @@ public class ProfessionalsActivity extends AppCompatActivity {
                                 ProfessionalProfileGoldPlanActivity.class);
                         intent.putExtra("PROFESSIONAL", professional);
                         startActivity(intent);
-                    } else if (professional.getPlan().toLowerCase().equals("free")){
+                    } else if (professional.getPlan().toLowerCase().equals("silver")){
+                        Intent intent = new Intent(ProfessionalsActivity.this,
+                                ProfessionalProfileSilverPlanActivity.class);
+                        intent.putExtra("PROFESSIONAL", professional);
+                        startActivity(intent);
+                    } else if (professional.getPlan().toLowerCase().equals("bronze")){
+                        Intent intent = new Intent(ProfessionalsActivity.this,
+                                ProfessionalProfileBronzePlanActivity.class);
+                        intent.putExtra("PROFESSIONAL", professional);
+                        startActivity(intent);
+                    } else {
                         Intent intent = new Intent(ProfessionalsActivity.this,
                                 ProfessionalProfileFreePlanActivity.class);
                         intent.putExtra("PROFESSIONAL", professional);

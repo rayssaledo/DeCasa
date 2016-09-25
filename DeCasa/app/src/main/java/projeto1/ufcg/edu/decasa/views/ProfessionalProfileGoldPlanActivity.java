@@ -96,10 +96,16 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professional_profile_gold_plan);
 
+        Intent it = getIntent();
+        professional = it.getParcelableExtra("PROFESSIONAL");
+        setTitle(professional.getName());
+
         mLoadingProfileProfessional =  findViewById(R.id.loadingProfileProfessional);
         MySharedPreferences mySharedPreferences = new MySharedPreferences(getApplicationContext());
+
         evaluationController = new EvaluationController(ProfessionalProfileGoldPlanActivity.this);
         userController = new UserController(ProfessionalProfileGoldPlanActivity.this);
+
         tv_professional_name = (TextView) findViewById(R.id.tv_professional_name);
         tv_service = (TextView) findViewById(R.id.tv_service);
         tv_description = (TextView) findViewById(R.id.tv_description);
@@ -112,24 +118,10 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         iv_professional = (CircularImageView) findViewById(R.id.iv_professional);
 
         username = mySharedPreferences.getUserLogged();
-        Intent it = getIntent();
-        professional = it.getParcelableExtra("PROFESSIONAL");
 
         listIsFavorite = new ArrayList<>();
         listIsFavorite = userController.getIsFavorite(username, professional.getEmail(),
                 professional.getService(), handler);
-
-        ImageButton ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);
-        ib_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String phone = professional.getPhone1().substring(1,3) + professional.getPhone1().
-                        substring(4,9) + professional.getPhone1().substring(9);
-                Uri uri = Uri.parse("tel:" + phone);
-                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                startActivity(intent);
-            }
-        });
 
         ib_favorite = (ImageButton) findViewById(R.id.ib_favorite);
         ib_favorite.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +159,17 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
             }
         });
 
-        setTitle(professional.getName());
+        ImageButton ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);
+        ib_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phone = professional.getPhone1().substring(1,3) + professional.getPhone1().
+                        substring(4,9) + professional.getPhone1().substring(9);
+                Uri uri = Uri.parse("tel:" + phone);
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                startActivity(intent);
+            }
+        });
 
         ImageButton ib_map_professional = (ImageButton) findViewById(R.id.ib_map_professional);
         ib_map_professional.setOnClickListener(new View.OnClickListener() {
@@ -195,11 +197,19 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
     }
 
     private void setProfile() {
+        tv_professional_name.setText(professional.getName());
+        rb_evaluation.setRating(professional.getAvg());
+        if (professional.getPicture() != null) {
+            File f = new File(DownloadFile.getPathDownload() + File.separator +
+                    professional.getPicture());
+            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+            iv_professional.setImageBitmap(bmp);
+        }
+        tv_service.setText(professional.getService());
+        tv_description.setText(professional.getDescription());
         String address = professional.getStreet() + ", " + professional.getNumber() + ", " +
                 professional.getNeighborhood()
                 + " " + professional.getCity() + " - " + professional.getState();
-
-        tv_professional_name.setText(professional.getName());
         tv_address_professional.setText(address);
         tv_phone_professional.setText(professional.getPhone1());
         if(professional.getSite() != null && !professional.getSite().equals("")){
@@ -212,15 +222,6 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
             tv_social_network.setText(professional.getSocialNetwork1());
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
-        }
-        tv_service.setText(professional.getService());
-        tv_description.setText(professional.getDescription());
-        rb_evaluation.setRating(professional.getAvg());
-        if (professional.getPicture() != null) {
-            File f = new File(DownloadFile.getPathDownload() + File.separator +
-                    professional.getPicture());
-            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
-            iv_professional.setImageBitmap(bmp);
         }
     }
 
