@@ -194,6 +194,10 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
                 cadastreUser(name_user, date_birth_user, gender_user, street_user, number_user,
                         neighborhood_user, city_user, state_user, photo_user, username_user,
                         password_user);
+
+                if (MainActivity.mMainActivity != null){
+                    MainActivity.mMainActivity.finish();
+                }
             }
         });
 

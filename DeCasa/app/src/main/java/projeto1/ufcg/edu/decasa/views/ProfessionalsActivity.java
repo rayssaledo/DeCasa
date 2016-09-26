@@ -327,6 +327,10 @@ public class ProfessionalsActivity extends AppCompatActivity {
                     if (position == 0) { // Home
                         mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, MainActivity.class);
+                        if (MainActivity.mMainActivity != null){
+                            MainActivity.mMainActivity.finish();
+                        }
+                        finish();
                     } else if (position == 1) { // My favorites
                         mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, MyFavoritesActivity.class);
@@ -356,6 +360,10 @@ public class ProfessionalsActivity extends AppCompatActivity {
                     if (position == 0) { //Home
                         mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, MainActivity.class);
+                        if (MainActivity.mMainActivity != null){
+                            MainActivity.mMainActivity.finish();
+                        }
+                        finish();
                     } else if (position == 1) { // About
                         mDrawerLayout.closeDrawers();
                         setView(ProfessionalsActivity.this, AboutActivity.class);
