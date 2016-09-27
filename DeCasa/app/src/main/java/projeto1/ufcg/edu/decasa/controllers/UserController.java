@@ -30,6 +30,7 @@ import projeto1.ufcg.edu.decasa.views.MainActivity;
 import projeto1.ufcg.edu.decasa.views.MyFavoritesActivity;
 import projeto1.ufcg.edu.decasa.views.ProfessionalsActivity;
 import projeto1.ufcg.edu.decasa.views.UserCadastreActivity;
+import projeto1.ufcg.edu.decasa.views.UserProfileActivity;
 
 public class UserController {
 
@@ -586,6 +587,9 @@ public class UserController {
 
     public List<User> getUser(final String login, final Handler handler){
 
+        if (UserProfileActivity.mLoadingUserProfile != null) {
+            UserProfileActivity.mLoadingUserProfile.setVisibility(View.VISIBLE);
+        }
         final List<User> userList = new ArrayList<>();
         String urlGetUser = url + "get-user?username=" + login ;
         mHttp.get(urlGetUser, new HttpListener() {
@@ -611,6 +615,9 @@ public class UserController {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    if (UserProfileActivity.mLoadingUserProfile != null) {
+                        UserProfileActivity.mLoadingUserProfile.setVisibility(View.GONE);
+                    }
                     Message message = new Message();
                     message.what = 103;
                     handler.sendMessage(message);
@@ -621,7 +628,10 @@ public class UserController {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                                    if (UserProfileActivity.mLoadingUserProfile != null) {
+                                        UserProfileActivity.mLoadingUserProfile.setVisibility(View.
+                                                GONE);
+                                    }
                                 }
                             })
                             .create()
@@ -637,6 +647,10 @@ public class UserController {
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                if (UserProfileActivity.mLoadingUserProfile != null) {
+                                    UserProfileActivity.mLoadingUserProfile.setVisibility(View.
+                                            GONE);
+                                }
                             }
                         })
                         .create()

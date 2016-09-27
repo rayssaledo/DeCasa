@@ -33,7 +33,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private List<User> userList;
     private User user;
 
-    public static View loadingUserProfile;
+    public static View mLoadingUserProfile;
 
     private Handler handler = new Handler() {
         @Override
@@ -52,7 +52,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        loadingUserProfile =  findViewById(R.id.rl_loading_user_profile);
+        mLoadingUserProfile =  findViewById(R.id.rl_loading_user_profile);
 
         userController = new UserController(UserProfileActivity.this);
         mySharedPreferences = new MySharedPreferences(getApplicationContext());
