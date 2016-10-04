@@ -187,6 +187,7 @@ public class ProfessionalProfileBronzePlanActivity extends AppCompatActivity {
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
         }
+        iv_professional.setImageResource(R.drawable.photo_default);
     }
 
     @Override

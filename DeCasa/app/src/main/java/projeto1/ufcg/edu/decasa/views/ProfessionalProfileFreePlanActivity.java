@@ -173,12 +173,8 @@ public class ProfessionalProfileFreePlanActivity extends AppCompatActivity {
         tv_service.setText(professional.getService());
         rb_evaluation.setRating(professional.getAvg());
         tv_description.setText(professional.getDescription());
-        if (professional.getPicture() != null) {
-            File f = new File(DownloadFile.getPathDownload() + File.separator +
-                    professional.getPicture());
-            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
-            iv_professional.setImageBitmap(bmp);
-        }
+        iv_professional.setImageResource(R.drawable.photo_default);
+
     }
 
     @Override
