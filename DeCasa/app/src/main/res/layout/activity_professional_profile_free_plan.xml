@@ -214,14 +214,6 @@
                             android:gravity="center"
                             android:text="@string/hint_phone_professional"/>
 
-                        <ImageButton
-                            android:id="@+id/ib_phone_professional"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="12dp"
-                            android:src="@mipmap/ic_call"
-                            android:background="@color/white"
-                            android:contentDescription="@string/desc_phone_professional"/>
                     </LinearLayout>
 
                 </LinearLayout>

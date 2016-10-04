@@ -125,18 +125,6 @@ public class ProfessionalProfileFreePlanActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton ib_call = (ImageButton) findViewById(R.id.ib_phone_professional);
-        ib_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String phone = professional.getPhone1().substring(1,3) + professional.getPhone1().
-                        substring(4,9) + professional.getPhone1().substring(9);
-                Uri uri = Uri.parse("tel:" + phone);
-                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                startActivity(intent);
-            }
-        });
-
         ib_favorite = (ImageButton) findViewById(R.id.ib_favorite);
         ib_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +161,6 @@ public class ProfessionalProfileFreePlanActivity extends AppCompatActivity {
         tv_service.setText(professional.getService());
         rb_evaluation.setRating(professional.getAvg());
         tv_description.setText(professional.getDescription());
-        iv_professional.setImageResource(R.drawable.photo_default);
 
     }
 

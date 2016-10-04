@@ -53,7 +53,7 @@ public class ProfessionalsAdapter extends BaseAdapter {
         Professional item = items.get(position);
         convertView = mInflater.inflate(R.layout.my_item_professional, null);
 
-        if (!item.getPlan().equals("free")) {
+        if (!item.getPlan().equals("free") && !item.getPlan().equals("bronze")) {
             String address = item.getNeighborhood() + " - " + item.getCity() ;
             TextView tv_address = (TextView) convertView.findViewById(R.id.tv_address);
             tv_address.setText(address);

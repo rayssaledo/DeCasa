@@ -172,12 +172,6 @@ public class ProfessionalProfileBronzePlanActivity extends AppCompatActivity {
     private void setProfile() {
         tv_professional_name.setText(professional.getName());
         rb_evaluation.setRating(professional.getAvg());
-        if (professional.getPicture() != null) {
-            File f = new File(DownloadFile.getPathDownload() + File.separator +
-                    professional.getPicture());
-            Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
-            iv_professional.setImageBitmap(bmp);
-        }
         tv_service.setText(professional.getService());
         tv_description.setText(professional.getDescription());
         tv_phone_professional.setText(professional.getPhone1());
@@ -187,7 +181,6 @@ public class ProfessionalProfileBronzePlanActivity extends AppCompatActivity {
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
         }
-        iv_professional.setImageResource(R.drawable.photo_default);
     }
 
     @Override
