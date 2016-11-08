@@ -1,11 +1,18 @@
 package projeto1.ufcg.edu.decasa.views;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -175,10 +182,19 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         ib_map_professional.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfessionalProfileGoldPlanActivity.this,
-                        ProfessionalMapActivity.class);
-                intent.putExtra("PROFESSIONALMAP", professional);
-                startActivity(intent);
+                LocationManager manager = (LocationManager) getSystemService(Context.
+                        LOCATION_SERVICE);
+                boolean isOn = manager.isProviderEnabled( LocationManager.GPS_PROVIDER);
+                if(isOn) {
+                    Intent intent = new Intent(ProfessionalProfileGoldPlanActivity.this,
+                            ProfessionalMapActivity.class);
+                    intent.putExtra("PROFESSIONALMAP", professional);
+                    startActivity(intent);
+                } else {
+                    displayPromptForEnablingGPS(ProfessionalProfileGoldPlanActivity.this,
+                            getApplication().getString(R.string.message_dialog_gps),
+                            getApplication().getString(R.string.cancel));
+                }
             }
         });
 
@@ -223,6 +239,29 @@ public class ProfessionalProfileGoldPlanActivity extends AppCompatActivity {
         } else {
             tv_social_network.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public static void displayPromptForEnablingGPS(final Activity activity, String message,
+                                                   String cancel) {
+
+        final AlertDialog.Builder builder =  new AlertDialog.Builder(activity);
+        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+
+        builder.setMessage(message)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface d, int id) {
+                                activity.startActivity(new Intent(action));
+                                d.dismiss();
+                            }
+                        })
+                .setNegativeButton(cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface d, int id) {
+                                d.cancel();
+                            }
+                        });
+        builder.create().show();
     }
 
     @Override
