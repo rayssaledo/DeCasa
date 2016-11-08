@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+	<script src="js/myPayment.js"></script>
+	
+
+    <title>DeCasa</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Theme CSS -->
+    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+	
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <!--<a class="navbar-brand page-scroll" href="#page-top">DeCasa</a>-->
+                <img class="navbar-brand page-scroll" src="img/decasa.png" height="50" width="100">
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>                        
+                        <a style="color:#2dabea;background:none" href="#" id="logout">Sair</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+      
+    </header>
+	<section >
+	 <div class="container fonte-sans">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="sidebar-nav">
+					<div class="navbar navbar-default" role="navigation">
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						  </button>
+						  <span class="visible-xs navbar-brand">Minha conta</span>
+						</div>
+						<div class="navbar-collapse collapse sidebar-navbar-collapse">
+						  <ul class="nav nav-pills " >
+							<li class="active" ><a onclick="load('/my-profile')" href="#">Meu perfil</a></li>
+							<li><a onclick="load('/change-password')" href="#">Alterar senha</a></li>
+							<li><a onclick="load('/edit-register')" href="#">Editar anúncio</a></li>
+							<li><a onclick="load('/delete-account')" href="#">Excluir anúncio</a></li>
+							<li><a onclick="load('/my-plan')" href="#">Meu plano</a></li>
+							<li><a onclick="load('/change-my-plan')"href="#">Mudar de plano</a></li>
+						  </ul>
+						</div><!--/.nav-collapse -->
+					</div>
+				</div>
+			</div>
+			<div id="my-content" class="col-sm-9" style="background-color:#ecf0f1;min-height:30%" >
+				<div class="row">
+					<br><br>
+					<h3 align="center"> Meu perfil</h3>
+					<br>
+					<div class="col-sm-3" style="text-align: center">
+						<div class="profile-pic">
+							<img src="uploads/profile_default.jpg" class="img-responsive img-circle" alt="" align="left" >	
+						</div>
+					</div>
+					
+					<div class="col-md-9">
+						<div style="float:left">
+							<label>Nome:</label>
+							<p id="tv_name"></p>
+							<label>E-mail:</label>
+							<p id="tv_email"></p>
+							<label>CPF:</label>
+							<p id="tv_cpf"></p>
+							<br><br>
+						</div>
+						<div class="emptyBox20"></div>
+					</div>	
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	 
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; DeCasa Website 2016</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Política de privacidade</a>
+                        </li>
+                        <li><a href="#">Termos de uso</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  
+		
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+	
+	<script src="js/jquerymask.js"></script>
+	
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<!-- Plugin Angular -->
+	
+
+	<!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/logout.js"></script>
+	
+    <!-- Theme JavaScript -->
+    <script src="js/agency.min.js"></script>
+	
+	<script src="js/getProfessional.js"> </script>
+    <script src="js/updateProfessional.js"></script>
+
+	<script>
+		function load(page){
+			$("#my-content").load(page);
+		}
+		
+		$("ul.nav li").click(function(){
+
+		$("ul.nav li").removeClass("active");
+		$(this).addClass("active");
+		});
+	</script>
+
+	<style>
+	    
+		@media (min-width: 768px) {
+		  .sidebar-nav .navbar .navbar-collapse {
+			padding: 0;
+			max-height: none;
+		  }
+		  .sidebar-nav .navbar ul {
+			float: none;
+		  }
+		  .sidebar-nav .navbar ul:not {
+			display: block;
+		  }
+		  .sidebar-nav .navbar li {
+			float: none;
+			display: block;
+		  }
+		  .sidebar-nav .navbar li a {
+			padding-top: 12px;
+			padding-bottom: 12px;
+		  }
+		}
+	</style>
+</body>
+
+</html>

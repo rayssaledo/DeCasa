@@ -1,48 +1,52 @@
 module.exports = function(mongodb, app, userCollection) {
 
-	app.post("/addUser", function (req, res){
-		var login = req.body.login;
-		var pass = req.body.pass;
+	app.post("/add-user", function (req, res){
 		var name = req.body.name;
-		var state = req.body.state;
-		var city = req.body.city;
 		var birthDate= req.body.birthDate;
 		var gender = req.body.gender;
-		var bloodType = req.body.bloodType;
-		var lastDonation = req.body.lastDonation;
-		var canDonate = req.body.canDonate;
+		var street = req.body.street;
+		var number = req.body.number;
+		var neighborhood= req.body.neighborhood;
+		var city = req.body.city;
+		var state = req.body.state;
+		var photo = req.body.photo;
+		var favorites = [];
+		var username = req.body.username;
+		var password = req.body.password;
 		
-		var inconsistency = checkInconsistency(login, pass, name, state, city, birthDate);
+		var inconsistency = checkInconsistency(name, birthDate, gender, street, number, neighborhood, city, state, username, password);
 
 		if (inconsistency) {
 			res.send(inconsistency);
 		} else {
 			userCollection.find({
-				login: login,
-				pass: pass
+				username: username,
+				password: password
 				
 			}).toArray(function(err, array){
 				if (array.length > 0) {
-					res.json({ "ok" : 0, "msg" : "Usuário já cadastrado" });
+					res.json({ "ok" : 0, "msg" : "User already exists." });
 				} else {
 					
 					userCollection.insert({
-						login: login,
-						pass: pass,
 						name: name,
-						state: state,
-						city: city,
 						birthDate: birthDate,
 						gender: gender,
-						bloodType: bloodType,
-						lastDonation: lastDonation,
-						canDonate: canDonate
+						street: street,
+						number: number,
+						neighborhood: neighborhood,
+						city: city,
+						state: state,
+						photo: photo,
+						favorites: favorites,
+						username: username,
+						password: password
 						
 					}, function (err, doc) {
 						if(err){
 							res.json({ "ok" : 0, "msg" : err });
 						} else {
-							res.json({"ok": 1, "msg": "Cadastro realizado com sucesso!"});	
+							res.json({"ok": 1, "msg": "Success on register!"});	
 						}
 					});
 				}
@@ -50,27 +54,262 @@ module.exports = function(mongodb, app, userCollection) {
 		}
 	});
 	
-	app.post("/checkLogin", function(req, res) {
-		var login = req.body.login;
-		var pass = req.body.pass;
+	app.post("/update-user", function (req, res){
+		var name = req.body.name;
+		var birthDate= req.body.birthDate;
+		var gender = req.body.gender;
+		var street = req.body.street;
+		var number = req.body.number;
+		var neighborhood= req.body.neighborhood;
+		var city = req.body.city;
+		var state = req.body.state;
+		var photo = req.body.photo;
 		
-		var inconsistency = checkInconsistencyLogin(login, pass);
+		var username = req.body.username;
+		var password = req.body.password;
+		
+		var inconsistency = checkInconsistency(name, birthDate, gender, street, number, neighborhood, city, state, username, password);
+
+		if (inconsistency) {
+			res.send(inconsistency);
+		} else {
+			userCollection.find({
+				username: username
+				
+			}).toArray(function(err, array){
+				if (array.length == 0) {
+					res.json({ "ok" : 0, "msg" : "User not found!" });
+				} else {
+					
+					userCollection.update({						
+						username: username						
+					},
+					{ $set: {
+						name: name,
+						birthDate: birthDate,
+						gender: gender,
+						street: street,
+						number: number,
+						neighborhood: neighborhood,
+						city: city,
+						state: state,
+						photo: photo,						
+						password: password
+					}
+						
+					}, function (err, doc) {
+						if(err){
+							res.json({ "ok" : 0, "msg" : err });
+						} else {
+							res.json({"ok": 1, "msg": "Success on update!"});	
+						}
+					});
+				}
+			});
+		}
+	});
+	
+	app.post("/add-favorite", function(req, res) {
+		var username = req.body.username;
+		var name = req.body.nameProfessional;
+		var businessName = req.body.businessNameProfessional;
+		var cpf = req.body.cpfProfessional;
+		var phone1 = req.body.phoneProfessional1;
+		var phone2 = req.body.phoneProfessional2;
+		var phone3 = req.body.phoneProfessional3;
+		var phone4 = req.body.phoneProfessional4;
+		var street = req.body.streetProfessional;
+		var number = req.body.numberProfessional;
+		var neighborhood = req.body.neighborhoodProfessional;
+		var city = req.body.cityProfessional;
+		var state = req.body.stateProfessional;					
+		var site = req.body.siteProfessional;		
+		var socialNetwork1 = req.body.socialNetworkProfessional1;
+		var socialNetwork2 = req.body.socialNetworkProfessional2;
+		var service = req.body.serviceProfessional;	
+		var description = req.body.descriptionProfessional;
+		var email = req.body.emailProfessional;	
+		var avg = req.body.avgProfessional;	
+		var plan = req.body.plan;
+		var picture = req.body.picture;
+		
+		if (!username) {
+			res.json({"ok": 0, "msg": "Username not informed!"});
+		} else {
+			userCollection.find({
+				username: username
+				
+			}).toArray(function(err, array){
+				if (array.length == 0) {
+					res.json({ "ok" : 0, "msg" : "User not found!" });
+				} else {										
+					userCollection.update({						
+						username: username						
+					},
+					{ $push: { 
+						favorites : {								
+							name: name,
+							businessName: businessName,
+							cpf: cpf, 
+							phone1: phone1,
+							phone2: phone2,
+							phone3: phone3,
+							phone4: phone4,
+							street: street,
+							number: number,
+							neighborhood: neighborhood,
+							city: city,
+							state: state,
+							site: site,
+							socialNetwork1: socialNetwork1,
+							socialNetwork2: socialNetwork2,	
+							service: service,	
+							description: description,
+							avg: avg,
+							email: email,	
+							picture: picture,
+							plan : plan
+			
+						} 
+					}							
+					}, function (err, doc) {
+						if(err){
+							res.json({ "ok" : 0, "msg" : err });
+						} else {
+							res.json({"ok": 1, "msg": "Success!"});	
+						}
+					});
+					
+				}
+			});
+		}	
+		
+	});
+	
+	
+
+	app.post("/remove-favorite", function(req, res) {
+		var username = req.body.username;				
+		var email = req.body.emailProfessional;	
+		var service = req.body.serviceProfessional;
+		
+		if (!username) {
+			res.json({"ok": 0, "msg": "Username not informed!"});
+		} else {
+			userCollection.find({
+				username: username
+				
+			}).toArray(function(err, array){
+				if (array.length == 0) {
+					res.json({ "ok" : 0, "msg" : "User not found!" });
+				} else {				
+					
+					userCollection.update({						
+						username: username						
+					},
+					{
+						$pull : {
+							"favorites": {email : email, service: service}
+						}
+					
+					}, function (err, doc) {
+						if(err){
+							res.json({ "ok" : 0, "msg" : err });
+						} else {
+							res.json({"ok": 1, "msg": "Success!"});	
+						}
+					});
+					
+				}
+			});
+		}	
+		
+	});
+	
+	app.get("/get-is-favorite", function(req, res) {
+		var username = req.query.username;
+		var email = req.query.emailProfessional;
+		var service = req.query.serviceProfessional;
+				
+		if (!username) {
+			res.json({"ok": 0, "msg": "Username not informed!"});
+		}  else if (!email) {
+			res.json({"ok": 0, "msg": "Email not informed!"});
+		} else {
+			
+			userCollection.find({
+					username: username,
+					"favorites.email" : email,
+					"favorites.service": service
+				}).toArray(function(err, array){
+					if (array.length == 1) {
+						res.json({ "ok" : 1, "msg" : "Professional is on the list." });
+					} else {
+						res.json({ "ok" : 0, "msg" : "Professional is not on the list." });	
+					}
+				});
+			
+		}	
+	});
+	
+	
+	app.get("/get-favorites-user-by-service", function (req, res) {
+		var username = req.query.username;
+		var service = req.query.service;
+		
+		 if (!username) {
+			res.json({"ok": 0, "msg": "Username must be informed!"});
+		} else if (!service) {
+			res.json({"ok": 0, "msg": "Service must be informed!"});
+		} else {
+			userCollection.find({
+				username: username
+				
+			}).toArray(function(err, array){
+				if (array.length < 1) {
+					res.json({ "ok" : 0, "msg" : "User not found!" });
+				} else {					
+					
+					userCollection.aggregate( [ 
+							{ $match: { username: username } },
+							{ $unwind: '$favorites' },
+							{ $match: { 'favorites.service': service } },
+							{ $group: { _id: '$_id', list: { $push: '$favorites' } } }
+					   ], function(err, result) {
+						   if (err){
+							   res.json({ "ok" : 0, "msg" : err });
+						   } else {							   
+							   res.json({ "ok" : 1, "result" : result });
+						   }
+					   }
+					);
+				}
+			});			
+		}			
+	});
+	
+	
+	app.post("/check-login", function(req, res) {
+		var username = req.body.username;
+		var password = req.body.password;
+		
+		var inconsistency = checkInconsistencyUsername(username, password);
 		
 		if (inconsistency) {
 			res.send(inconsistency);
 		} else {
 			userCollection.find({
-				login: login,
-				pass: pass
+				username: username,
+				password: password
 				
 			}).toArray(function(err, array){
 				if(err) {
 					res.json({ "ok" : 0, "msg" : err });
 				} else {					
 					if(array.length < 1) {						
-						res.json({ "ok" : 0, "msg" : "Usuário não é cadastrado" });
+						res.json({ "ok" : 0, "msg" : "User or password invalid!" });
 					} else {
-						res.json({ "ok" : 1, "msg" : "Usuário é cadastrado" });
+						res.json({ "ok" : 1, "msg" : "User already exists." });
 					}
 				}
 				
@@ -78,15 +317,15 @@ module.exports = function(mongodb, app, userCollection) {
 		}
 		
 	});
-	
-	app.get("/getUser", function(req, res) {
-		var login = req.query.login;
+		
+	app.get("/get-user", function(req, res) {
+		var username = req.query.username;
 				
-		if (!login) {
-			res.json({"ok": 0, "msg": "Login do usuário não informado!"});
+		if (!username) {
+			res.json({"ok": 0, "msg": "Username not informed!"});
 		} else {
 			userCollection.findOne({
-				login: login
+				username: username
 				
 			}, function(err, doc){
 				if(err){
@@ -99,13 +338,13 @@ module.exports = function(mongodb, app, userCollection) {
 		
 	});
 	
-	app.get("/getAllUsers", function(req, res){
+	app.get("/get-all-users", function(req, res){
 		userCollection.find({}).toArray(function(err, array){
 			if(err) {
 				res.json({ "ok" : 0, "msg" : err });
 			} else {					
 				if(array.length < 1) {						
-					res.json({ "ok" : 0, "msg" : "Nenhum usuário cadastrado!" });
+					res.json({ "ok" : 0, "msg" : "None user registred!" });
 				} else {
 					res.json({ "ok" : 1, "result" : array });
 				}
@@ -114,191 +353,58 @@ module.exports = function(mongodb, app, userCollection) {
 		});
 	});	
 	
-	app.post("/updateLastDonation", function(req, res) {
-		var login = req.body.login;
-		var lastDonation = req.body.lastDonation;
-		
-		if (!login) {
-			res.json({"ok": 0, "msg": "Login do usuário não informado!"});
-		} else if (!lastDonation) {		
-			res.json({"ok": 0, "msg": "Data não informada!"});
-		} else {
-			userCollection.find({
-				login: login
-				
-			}).toArray(function(err, array){
-				if(err) {
-					res.json({ "ok" : 0, "msg" : err });
-				} else {					
-					if(array.length < 1) {						
-						res.json({ "ok" : 0, "msg" : "Usuário não encontrado!" });
-					} else {
-						userCollection.update({
-							login: login
-						},
-						{ $set: {"lastDonation": lastDonation}
-						
-						},function(err, doc){
-							if(err){
-								res.json({"ok" : 0, "msg" : err });
-							} else {
-								res.json({"ok": 1, "msg": "Data atualizada!"});	
-								
-							}
-						});
-					}
-				}				
-			});
-		}		
-	});
-	
-	app.get("/getUsersByBloodType", function(req, res){		
-		var bloodType = req.query.bloodType;
-		
-		if (!bloodType) {
-			res.json({"ok": 0, "msg": "Tipo de sangue não informado!"});
-		} else {
-			userCollection.find({
-				bloodType: bloodType
-			}).toArray(function(err, array){
-				if(err) {
-					res.json({ "ok" : 0, "msg" : err });
-				} else {					
-					if(array.length < 1) {						
-						res.json({ "ok" : 0, "msg" : "Nenhum usuário com o tipo "+ bloodType +" cadastrado!" });
-					} else {
-						res.json({ "ok" : 1, "result" : array });
-					}
-				}
-				
-			});
-		}
-		
-	});	
-	
-	app.post("/addForm", function(req, res){
-		var login = req.body.login;
-		var patientName = req.body.patientName;
-		var hospitalName = req.body.hospitalName;
-		var city = req.body.city;
-		var state = req.body.state;
-		var bloodType = req.body.bloodType;
-		var deadline = req.body.deadline;
-		
-		var inconsistency = checkInconsistencyForm(login, patientName, hospitalName, city, state, bloodType, deadline);
-		
-		if (inconsistency) {
-			res.send(inconsistency);
-		} else {
-			userCollection.find({
-				login: login
-			}).toArray(function(err, array){
-				if(err) {
-					res.json({ "ok" : 0, "msg" : err });
-				} else {					
-					if(array.length < 1) {						
-						res.json({ "ok" : 0, "msg" : "Usuário não encontrado!"});
-					} else {
-						userCollection.update({
-							login: login
-						},
-						{ 
-							$push: { 
-								forms: {								
-									patientName: patientName, 
-									hospitalName: hospitalName, 
-									city: city, 
-									state: state,
-									bloodType: bloodType, 
-									deadline: deadline								
-								} 
-							}	
-						},function(err, doc){
-							if(err){
-								res.json({"ok" : 0, "msg" : err });
-							} else {
-								res.json({"ok": 1, "msg": "Form Criado!"});	
-								
-							}
-						});
-					}
-				}
-				
-			});			
-		}
-	});		
-		
-	function checkInconsistencyForm(login, patientName, hospitalName, city, state, bloodType, deadline) {
-		if (!login) {
-			return '{ "ok" : 0, "msg" : "Login do usuário não informado!" }';
-		}
-		
-		if (!patientName) {
-			return '{ "ok" : 0, "msg" : "Nome do paciente não informado!" }';
-		}
-		
-		if (!hospitalName) {
-			return '{ "ok" : 0, "msg" : "Hospital não informado!" }';
-		}
-		
-		if (!city) {
-			return '{ "ok" : 0, "msg" : "Cidade não informada!" }';
-		}
-		
-		if (!state) {
-			return '{ "ok" : 0, "msg" : "Estado não informado!" }';
-		}
-		
-		if (!bloodType) {
-			return '{ "ok" : 0, "msg" : "Tipo de sangue não informado!" }';
-		}
-		
-		if (!deadline) {
-			return '{ "ok" : 0, "msg" : "Data limite não informada!" }';
-		}
-		
-	}
-	
-	
-	function checkInconsistencyLogin(login, pass) {
-		if (!login) {
-			return '{ "ok" : 0, "msg" : "Login do usuário não informado!" }';
-		}
-		
-		if (!pass) {
-			return '{ "ok" : 0, "msg" : "Senha não informada!" }';	
-		}
-	}
-	
-	function checkInconsistency(login, pass, name, state, city, birthDate) {
-		if (!login) {
-			return '{ "ok" : 0, "msg" : "Login do usuário não informado!" }';
-		}
-		
-		if (!pass) {
-			return '{ "ok" : 0, "msg" : "Senha não informada!" }';			
-		}
-
-		if (pass.length < 6) {
-			return '{ "ok" : 0, "msg" : "A senha deve conter pelo menos 6 caracteres!" }';
-		} 
-		
+	function checkInconsistency(name, birthDate, gender, street, number, neighborhood, city, state, username, password) {
 		if (!name) {
-			return '{ "ok" : 0, "msg" : "Nome do usuário não informado!" }';
+			return '{ "ok" : 0, "msg" : "Name not informed!" }';
+		}
+		
+		if (!birthDate) {
+			return '{ "ok" : 0, "msg" : "Birthdate not informed!" }';
+		}
+		
+		if (!gender) {
+			return '{ "ok" : 0, "msg" : "Gender not informed!" }';
+		}
+		
+		if (!street) {
+			return '{ "ok" : 0, "msg" : "Street not informed!" }';
+		}
+				
+		
+		if (!number) {
+			return '{ "ok" : 0, "msg" : "Number not informed!" }';
+		}
+		
+		if (!neighborhood) {
+			return '{ "ok" : 0, "msg" : "Neighborhood not informed!" }';
+		}
+		
+		if (!city) {
+			return '{ "ok" : 0, "msg" : "City not informed!" }';
 		}
 		
 		if (!state) {
-			return '{ "ok" : 0, "msg" : "Estado não infomado!" }';
+			return '{ "ok" : 0, "msg" : "State not informed!" }';
 		}
-			
-		if (!city) {
-			return '{ "ok" : 0, "msg" : "Cidade não infomada!" }';
+		
+		if (!username) {
+			return '{ "ok" : 0, "msg" : "Username not informed!" }';
 		}
-			
-		if (!birthDate) {
-			return '{ "ok" : 0, "msg" : "Data de nascimento não informada!" }';
+		
+		if (!password) {
+			return '{ "ok" : 0, "msg" : "Password not informed!" }';
 		}
-		return;
+		
+	}
+	
+	function checkInconsistencyUsername(username, password) {
+		if (!username) {
+			return '{ "ok" : 0, "msg" : "Username not informed!" }';
+		}
+		
+		if (!password) {
+			return '{ "ok" : 0, "msg" : "Password not informed!" }';	
+		}
 	}
 
 	return this;

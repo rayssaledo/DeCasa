@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		 <meta charset="utf-8">
+	</head>
+	<body>
+		<div class="row text-center">
+			<br><br>
+			<h3>Editar Anúncio</h3>
+			<br>
+		</div>
+		
+		<div class="col-md-2">
+			<div class="emptyBox20"></div>
+		</div>
+		<div class="col-lg-8">
+			<form id="form-free" name="form-free" novalidate class="form">
+				<div class="form-group">
+					<label>Nome do negócio </label>
+					<input name="businessName" type="text" class="form-control" placeholder="Seu nome " id="business_free"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Serviço </label>
+					<select class="form-control" name="service" id="service">
+                       <option value="Encanador" id="ServicePlumber" >Encanador</option>
+                        <option value="Montador" id="ServiceFitter">Montador</option>
+                        <option value="Eletricista" id="ServiceElectrician">Eletricista</option>
+					 </select>
+					 <p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label for="tv_description">Descrição </label>
+					<textarea class="form-control" maxlength="50" id="description_free"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Telefone </label>
+					<input name="phone" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone " id="phone1_free" required data-validation-required-message="Por favor insira seu número de telefone."/>
+					<p class="help-block text-danger"></p>
+                </div>
+				
+				<div class="text-center">
+					<div class="clearfix"></div>
+					<div id="success"></div>
+					<input id="btnSubmit" type="submit" class="btn "  value="Alterar" />
+					<br><br>
+				</div>
+			</form>
+			<form id="form-gold" name="form-gold" novalidate class="form">
+				<div class="form-group">
+					<label>Nome do negócio </label>
+					<input name="tv_businessName"  type="text" class="form-control" placeholder="Seu nome " id="business_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Serviço </label>
+					<select class="form-control" name="service" id="service" >
+                       <option value="Encanador" id="ServicePlumber" >Encanador</option>
+                        <option value="Montador" id="ServiceFitter">Montador</option>
+                        <option value="Eletricista" id="ServiceElectrician">Eletricista</option>
+					  </select>
+					  <p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+                    <label>Rua </label>
+                    <input name="street" type="text" class="form-control" placeholder="Rua " id="street_gold" required data-validation-required-message="Por favor insira sua rua."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Número </label>
+					<input name="number" type="text" class="form-control" placeholder="Nº " id="number_gold" required data-validation-required-message="Por favor insira o número."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Bairro</label>
+					<input name="neighborhood" type="text" class="form-control" placeholder="Bairro " id="neighborhood_gold" required data-validation-required-message="Por favor insira seu bairro."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Cidade</label>
+					<input name="city" type="text" class="form-control" placeholder="Cidade " id="city_gold" required data-validation-required-message="Por favor insira sua cidade."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Estado</label>
+					<input name="state" type="text" class="form-control" placeholder="Estado " id="state_gold" required data-validation-required-message="Por favor insira seu estado."/>
+					<p class="help-block text-danger"></p>
+				</div>
+		
+				<div class="form-group">
+					<label>Telefone 1</label>
+					<input name="phone1" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 1" id="phone1_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Telefone 2 </label>
+					<input name="phone2" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 2" id="phone2_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Telefone 3 </label>
+					<input name="phone3" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 3" id="phone3_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Telefone 4 </label>
+					<input name="phone4" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 4 " id="phone4_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label for="description">Descrição</label>
+					<textarea class="form-control" maxlength="200" id="description_gold"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Rede social 1</label>
+					<input name="socialNetwork1" type="text" class="form-control" placeholder="Rede social 1" id="socialNetwork1_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Rede social 2</label>
+					<input name="socialNetwork2" type="text" class="form-control" placeholder="Rede social 2" id="socialNetwork2_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Site</label>
+					<input name="site" type="text" class="form-control" placeholder="Site" id="site_gold"/>
+					<p class="help-block text-danger"></p>
+				</div>
+
+				<div class="text-center">
+					<div class="clearfix"></div>
+					<div id="success_gold"></div>
+					<input id="btnSubmit" type="submit" class="btn "  value="Alterar" />
+					<br><br>
+				</div>
+			</form>
+				
+			<form id="form-silver" name="form-silver" novalidate class="form">
+				<div class="form-group">
+					<label>Nome do negócio </label>
+					<input name="tv_businessName"  type="text" class="form-control" placeholder="Seu nome " id="business_silver"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Serviço </label>
+					<select class="form-control" name="service" id="service_silver">
+                       <option value="Encanador" id="ServicePlumber" >Encanador</option>
+                        <option value="Montador" id="ServiceFitter">Montador</option>
+                        <option value="Eletricista" id="ServiceElectrician">Eletricista</option>
+					  </select>
+					  <p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+                    <label>Rua </label>
+                    <input name="street" type="text" class="form-control" placeholder="Rua " id="street_silver" required data-validation-required-message="Por favor insira sua rua."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Número </label>
+					<input name="number" type="text" class="form-control" placeholder="Nº " id="number_silver" required data-validation-required-message="Por favor insira o número."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Bairro</label>
+					<input name="neighborhood" type="text" class="form-control" placeholder="Bairro " id="neighborhood_silver" required data-validation-required-message="Por favor insira seu bairro."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Cidade</label>
+					<input name="city" type="text" class="form-control" placeholder="Cidade " id="city_silver" required data-validation-required-message="Por favor insira sua cidade."/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Estado</label>
+					<input name="state" type="text" class="form-control" placeholder="Estado " id="state_silver" required data-validation-required-message="Por favor insira seu estado."/>
+					<p class="help-block text-danger"></p>
+				</div>
+		
+				<div class="form-group">
+					<label>Telefone 1</label>
+					<input name="phone1" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 1" id="phone1_silver"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Telefone 2 </label>
+					<input name="phone2" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 2" id="phone2_silver"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Telefone 3 </label>
+					<input name="phone3" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 3" id="phone3_silver"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label for="description">Descrição</label>
+					<textarea class="form-control" maxlength="200" id="description_silver"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Rede social 1</label>
+					<input name="socialNetwork1" type="text" class="form-control" placeholder="Rede social 1" id="socialNetwork1_silver"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Site</label>
+					<input name="site" type="text" class="form-control" placeholder="Site" id="site_silver"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="text-center">
+					<div class="clearfix"></div>
+					<div id="success_silver"></div>
+					<input id="btnSubmit" type="submit" class="btn"  value="Alterar" />
+					<br><br>
+                </div>
+			</form>
+			
+			<form id="form-bronze" name="form-bronze" novalidate class="form">
+				<div class="form-group">
+					<label>Nome do negócio </label>
+					<input name="tv_businessName"  type="text" class="form-control" placeholder="Seu nome " id="business_bronze"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Serviço </label>
+					<select class="form-control" name="service" id="service_bronze">
+                       <option value="Encanador" id="ServicePlumber" >Encanador</option>
+                        <option value="Montador" id="ServiceFitter">Montador</option>
+                        <option value="Eletricista" id="ServiceElectrician">Eletricista</option>
+					  </select>
+					  <p class="help-block text-danger"></p>
+				</div>
+			
+				<div class="form-group">
+					<label>Telefone 1</label>
+					<input name="phone1" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 1" id="phone1_bronze"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label>Telefone 2 </label>
+					<input name="phone2" type="tel" class="form-control phone" maxlength="15"  placeholder="Telefone 2" id="phone2_bronze"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="form-group">
+					<label for="description">Descrição</label>
+					<textarea class="form-control" maxlength="200" id="description_bronze"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Rede social 1</label>
+					<input name="socialNetwork1" type="text" class="form-control" placeholder="Rede social 1" id="socialNetwork1_bronze"/>
+					<p class="help-block text-danger"></p>
+				</div>
+				<div class="col-lg-12 text-center">
+					<div id="success_bronze"></div>
+					<input id="btnSubmit" type="submit" class="btn"  value="Alterar" />
+					<br><br>
+                </div>
+			</form>
+			
+		</div>
+		<div class="col-md-2">
+			<div class="emptyBox20"></div>
+		</div>
+	
+		<script src="js/getProfessional.js"> </script>
+        <script src="js/editRegister.js"> </script>
+    </body>
+</html>
+
+

@@ -605,7 +605,7 @@ section#contact :-ms-input-placeholder {
   font-weight: 700;
   color: #eeeeee;
 }
-section#contact .text-danger {
+section#contact{
   color: #e74c3c;
 }
 footer {

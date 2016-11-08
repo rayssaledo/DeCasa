@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		 <meta charset="utf-8">
+	</head>
+	<body>
+		<div class="col-lg-12 text-center">
+			<br><br>
+			<h3 align="center">Mudar de plano</h3>
+			<br>
+			<div >
+					<label>PLANO ATUAL:</label>
+					<p id="plan_name"><p>
+					<br><br>
+			</div>
+			<p class="container-margin">Ao mudar de plano seus benefícios serão atualizados para os do novo plano. Não haverá devolução de pagamento caso seu anúncio esteja ativo e houve pagamento.</p>
+			<br>
+			<br>
+			<p>Escolha um novo plano</p>
+			<br>
+			
+			<div class="row">
+				<div class="container-margin">
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="card-mini">
+							<img src="img/plans/medal_gold.png" alt="Plano Ouro">
+							<span class="titulo">Plano Ouro</span>
+							<form method="get" action="/change-to-gold">
+								<button type="submit" class="btn btn-primary btn-block">R$ 59,90/mês</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="card-mini">
+							<img src="img/plans/medal_silver.png" alt="Plano Prata">
+							<span class="titulo">Plano Prata</span>
+							<form method="get" action="/change-to-silver">
+								<button type="submit" class="btn btn-primary btn-block">R$ 39,90/mês</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="card-mini">
+							<img src="img/plans/medal_bronze.png" alt="Plano Bronze">
+							<span class="titulo">Plano Bronze</span>
+							<form method="get" action="/change-to-bronze">
+								<button type="submit" class="btn btn-primary btn-block">R$ 19,90/mês</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6 col-xs-12">
+						<div class="card-mini">
+							<img src="img/plans/medal_free.png" alt="Plano Gratuito">
+							<span class="titulo">Plano Gratuito</span>
+							<form method="get" action="/change-to-free">
+								<button type="submit" class="btn btn-primary btn-block">Grátis</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/getPlan.js"> </script>
+	</body>
+</html>
+
+
