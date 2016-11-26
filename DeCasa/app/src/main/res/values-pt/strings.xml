@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">DeCasa</string>
+    <string name="action_settings">Configurações</string>
     <string name="btn_register">Cadastre-se</string>
     <string name="btn_login">Login</string>
     <string name="text_welcome">Seja bem-vindo(a).\nEscolha aqui o serviço que deseja.</string>
@@ -14,6 +16,7 @@
     <string name="desc_evaluators">ícone avaliadores</string>
     <string name="desc_phone_professional">Ícone telefone</string>
     <string name="desc_decasa">Imagem slogan</string>
+    <string name="desc_slogan">Imagem slogan</string>
     <string name="desc_decasa_icon">Ícone app</string>
     <string name="desc_cam">Ícone câmera</string>
     <string name="desc_gallery">Ícone galeria</string>
@@ -26,9 +29,13 @@
     <string name="text_address_professional">Endereço</string>
     <string name="text_phone_professional">Telefone</string>
     <string name="text_website">Site</string>
-    <string name="text_developers">Desenvolvedores</string>
     <string name="text_social_network">Rede social</string>
-    <string name="text_first_evaluate">No evaluate.\nBe the first to evaluate.</string>
+    <string name="text_evaluations">Avaliações</string>
+    <string name="text_designer">Designer</string>
+    <string name="text_designer_name">Kaio Cordeiro</string>
+    <string name="text_developers">Desenvolvedores</string>
+    <string name="text_developers_name">Andreza Raquel\nErick Alcântara\nLucas Marlon\nMarcos Antônio\nMaria Daniela\nRayssa Naianny</string>
+    <string name="text_first_evaluate">Nenhuma avaliação.\nSeja o primeiro ao avaliar.</string>
     <string name="text_call">Ligar</string>
     <string name="text_version">Versão 1.0</string>
     <string name="hint_item">Item</string>
@@ -126,10 +133,16 @@
     <string name="add_favorite">Adicionado aos seus favoritos</string>
     <string name="remove_favorite">Removido dos seus favoritos</string>
     <string name="title_activity_user_profile">Meu perfil</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_cadastre_or_login">CadastreOrLoginActivity</string>
+    <string name="title_activity_user_cadastre">UserCadastreActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
     <string name="text_my_location">Minha localização</string>
     <string name="edit_evaluation">Editar avaliação</string>
     <string name="tv_service">Serviço</string>
-    <string name="tv_description">Descriçao</string>
+    <string name="tv_description">Descrição</string>
+    <string name="number_assessments">0</string>
     <string name="no_plumber_as_favorite">Nenhum encanador como favorito</string>
     <string name="no_fitter_as_favorite">Nenhum montador como favorito</string>
     <string name="no_electrician_as_favorite">Nenhum eletricista como favorito</string>
