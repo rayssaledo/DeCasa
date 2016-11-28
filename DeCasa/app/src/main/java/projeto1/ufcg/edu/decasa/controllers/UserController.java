@@ -452,12 +452,14 @@ public class UserController {
             @Override
             public void onSucess(JSONObject response) throws JSONException {
                 if (response.getInt("ok") == 1) {
+                    boolean _favorites = false;
                     JSONArray jsonArray = response.getJSONArray("result");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonFavorites = jsonArray.getJSONObject(i);
                         String favorites = jsonFavorites.getString("list");
                         JSONArray jsonArrayFavorites = new JSONArray(favorites);
                         for (int j = 0; j < jsonArrayFavorites.length(); j++) {
+                            _favorites = true;
                             JSONObject jsonFavorite = jsonArrayFavorites.getJSONObject(j);
                             String email = jsonFavorite.getString("email");
 
@@ -547,6 +549,10 @@ public class UserController {
                                 }
                             });
                         }
+                    }
+                    if (!_favorites){
+                        MyFavoritesActivity.mLoadingFavorites.setVisibility(View.
+                                GONE);
                     }
                     Message message = new Message();
                     message.what = 108;
