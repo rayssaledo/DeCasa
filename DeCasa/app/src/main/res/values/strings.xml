@@ -23,17 +23,18 @@
     <string name="text_evaluation_type">Service</string>
     <string name="text_number_evaluation">Evaluation</string>
     <string name="text_number_assessments">Assessments</string>
+    <string name="text_see_evaluations">See evaluations</string>
     <string name="text_services">Services</string>
     <string name="text_address_professional">Address</string>
     <string name="text_phone_professional">Telephone</string>
     <string name="text_website">Website</string>
     <string name="text_social_network">Social network</string>
     <string name="text_evaluations">Evaluations</string>
-    <string name="text_see_evaluations">See evaluations</string>
-    <string name="text_developers">Developers</string>
     <string name="text_designer">Designer</string>
     <string name="text_designer_name">Kaio Cordeiro</string>
+    <string name="text_developers">Developers</string>
     <string name="text_developers_name">Andreza Raquel\nErick Alcântara\nLucas Marlon\nMarcos Antônio\nMaria Daniela\nRayssa Naianny</string>
+    <string name="text_first_evaluate">No evaluation.\nBe the first to evaluation.</string>
     <string name="text_call">Call</string>
     <string name="text_version">Version 1.0</string>
     <string name="hint_item">Item</string>
@@ -131,7 +132,6 @@
     <string name="begin_welcome_male">Welcome</string>
     <string name="end_welcome">\nChoose here the service you want.</string>
     <string name="title_activity_edit_user_profile">Editing profile</string>
-    <string name="text_first_evaluate">No evaluation.\nBe the first to evaluation.</string>
     <string name="title_activity_favorite">My favorites</string>
     <string name="btn_edit">Edit</string>
     <string name="crop_your_picture">Crop your picture</string>
@@ -146,5 +146,4 @@
     <string name="no_plumber_as_favorite">No plumber as favorite</string>
     <string name="no_fitter_as_favorite">No fitter as favorite</string>
     <string name="no_electrician_as_favorite">No electrician as favorite</string>
-
 </resources>
