@@ -187,7 +187,7 @@ public class UserCadastreActivity extends AppCompatActivity implements PicModeSe
                 neighborhood_user = mInput_neighborhood.getText().toString();
                 street_user = mInput_street.getText().toString();
                 number_user = mInput_number.getText().toString();
-                username_user = mInput_username.getText().toString();
+                username_user = mInput_username.getText().toString().trim().replace(" ", "").toLowerCase();
                 password_user = mInput_password.getText().toString();
                 password_confirm_user = mInput_password_confirm.getText().toString();
 

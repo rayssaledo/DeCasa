@@ -76,7 +76,7 @@ public class UserController {
                 if (result.getInt("ok") == 0) {
                     new AlertDialog.Builder(mActivity)
                             .setTitle("Erro")
-                            .setMessage(result.getString("msg")) //TODO internacionalizar
+                            .setMessage(mActivity.getString(R.string.username_already_exists))
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -87,7 +87,7 @@ public class UserController {
                             .show();
                 } else {
                     new AlertDialog.Builder(mActivity)
-                            .setMessage("Cadastro realizado com sucesso") //TODO internacionalizar
+                            .setMessage(mActivity.getString(R.string.msg_success_register))
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -109,7 +109,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível") //TODO intercionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -178,7 +178,7 @@ public class UserController {
             public void onTimeout() {
                 new AlertDialog.Builder(mActivity)
                         .setTitle("Erro")
-                        .setMessage("Conexão não disponível") //TODO intercionalizar
+                        .setMessage(mActivity.getString(R.string.err_unavailable_connection))
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -209,7 +209,7 @@ public class UserController {
                     if (result.getInt("ok") == 0) {
                         new AlertDialog.Builder(mActivity)
                                 .setTitle("Erro")
-                                .setMessage("Usuário não cadastrado") //TODO internacionalizar
+                                .setMessage(mActivity.getString(R.string.msg_err_register))
                                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
