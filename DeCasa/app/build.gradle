@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "projeto1.ufcg.edu.decasa"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -29,6 +29,8 @@ dependencies {
     compile 'br.com.jansenfelipe:androidmask:1.0.1'
     compile 'com.albinmathew:photo-crop-library:1.0.3'
     testCompile 'junit:junit:4.12'
+    compile 'me.drakeet.materialdialog:library:1.2.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
 
 
