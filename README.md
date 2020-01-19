@@ -1,8 +1,7 @@
 <snippet>
 
 ## DeCasa
-Often people need to contact professionals who perform repairs and home repairs such as changing a lock, 
-mount / unmount a mobile, make a new electrical installation etc. The problem is that contact with these professionals is not so easy, because everything is very dispersed. An alternative to this would be a place where contact these professionals to be centered and possible find them through your location for added convenience.
+Often people need to contact professionals who perform home repairs such as changing a lock, mounting/unmounting a mobile, making a new electrical installation, etc. The problem is that to contact those professionals is not so easy, because their information may be very dispersed. An alternative to this would be a place to contact these professionals to be centered and possibly find them through your location for added convenience.
 
 ## Contributing
 Andreza Raquel Monteiro de Queiroz (Stakeholder)<br>
